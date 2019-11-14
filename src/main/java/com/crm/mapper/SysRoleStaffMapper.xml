@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.SysRoleStaffMapper">
+  <resultMap id="BaseResultMap" type="com.crm.bean.SysRoleStaff">
+    <id column="srl_id" jdbcType="INTEGER" property="srlId" />
+    <result column="sys_staff_id" jdbcType="INTEGER" property="sysStaffId" />
+    <result column="sys_role_id" jdbcType="INTEGER" property="sysRoleId" />
+    <result column="oper_id" jdbcType="INTEGER" property="operId" />
+    <result column="ltime" jdbcType="TIMESTAMP" property="ltime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    srl_id, sys_staff_id, sys_role_id, oper_id, ltime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_staff
+    where srl_id = #{srlId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_role_staff
+    where srl_id = #{srlId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SysRoleStaff">
+    insert into sys_role_staff (srl_id, sys_staff_id, sys_role_id, 
+      oper_id, ltime)
+    values (#{srlId,jdbcType=INTEGER}, #{sysStaffId,jdbcType=INTEGER}, #{sysRoleId,jdbcType=INTEGER}, 
+      #{operId,jdbcType=INTEGER}, #{ltime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SysRoleStaff">
+    insert into sys_role_staff
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="srlId != null">
+        srl_id,
+      </if>
+      <if test="sysStaffId != null">
+        sys_staff_id,
+      </if>
+      <if test="sysRoleId != null">
+        sys_role_id,
+      </if>
+      <if test="operId != null">
+        oper_id,
+      </if>
+      <if test="ltime != null">
+        ltime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="srlId != null">
+        #{srlId,jdbcType=INTEGER},
+      </if>
+      <if test="sysStaffId != null">
+        #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="sysRoleId != null">
+        #{sysRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="operId != null">
+        #{operId,jdbcType=INTEGER},
+      </if>
+      <if test="ltime != null">
+        #{ltime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysRoleStaff">
+    update sys_role_staff
+    <set>
+      <if test="sysStaffId != null">
+        sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="sysRoleId != null">
+        sys_role_id = #{sysRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="operId != null">
+        oper_id = #{operId,jdbcType=INTEGER},
+      </if>
+      <if test="ltime != null">
+        ltime = #{ltime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where srl_id = #{srlId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysRoleStaff">
+    update sys_role_staff
+    set sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
+      sys_role_id = #{sysRoleId,jdbcType=INTEGER},
+      oper_id = #{operId,jdbcType=INTEGER},
+      ltime = #{ltime,jdbcType=TIMESTAMP}
+    where srl_id = #{srlId,jdbcType=INTEGER}
+  </update>
+  <select id="getPermissionByStaffId" resultMap="per_rol">
+	SELECT * from sys_role_staff srt INNER JOIN sys_role sr
+	ON sr.sys_role_id = srt.sys_role_id
+	INNER JOIN sys_per_role spr ON 
+	sr.sys_role_id = srt.sys_role_id INNER JOIN sys_permission sp
+	ON sp.sys_permission_id = spr.per_id
+	WHERE srt.sys_role_id = #{staffId}  
+  </select>
+  
+  <resultMap type="com.crm.bean.SysRoleStaff" id="per_rol">
+  	<id column="srl_id" jdbcType="INTEGER" property="srlId" />
+    <result column="sys_staff_id" jdbcType="INTEGER" property="sysStaffId" />
+    <result column="sys_role_id" jdbcType="INTEGER" property="sysRoleId" />
+    <result column="oper_id" jdbcType="INTEGER" property="operId" />
+    <result column="ltime" jdbcType="TIMESTAMP" property="ltime" />
+  	<collection property="sysRoleList" column="sys_role_id" ofType="com.crm.bean.SysRole">
+  		<id column="sys_role_id" property="sysRoleId" jdbcType="INTEGER" />
+	    <result column="sys_role_name" property="sysRoleName" jdbcType="VARCHAR" />
+	    <result column="sys_role_del" property="sysRoleDel" jdbcType="VARCHAR" />
+	    <result column="sys_role_last" property="sysRoleLast" jdbcType="VARCHAR" />
+	    <result column="sys_role_oper" property="sysRoleOper" jdbcType="VARCHAR" />
+	    <result column="sys_role_time" property="sysRoleTime" jdbcType="TIMESTAMP" />
+	    <collection property="sysPerList" column="sys_permission_id" ofType="com.crm.bean.SysPermission" >
+	    	<id column="sys_permission_id" property="sysPermissionId" jdbcType="INTEGER" />
+		    <result column="sys_permission_name" property="sysPermissionName" jdbcType="VARCHAR" />
+		    <result column="sys_permission_type" property="sysPermissionType" jdbcType="VARCHAR" />
+		    <result column="sys_permission_url" property="sysPermissionUrl" jdbcType="VARCHAR" />
+		    <result column="sys_permission_percode" property="sysPermissionPercode" jdbcType="VARCHAR" />
+		    <result column="sys_per_parentid" property="sysPerParentid" jdbcType="INTEGER" />
+		    <result column="sys_per_parentids" property="sysPerParentids" jdbcType="VARCHAR" />
+		    <result column="sys_permission_remark" property="sysPermissionRemark" jdbcType="VARCHAR" />
+		    <result column="sys_permission_time" property="sysPermissionTime" jdbcType="TIMESTAMP" />
+	  </collection>  	
+	    </collection>
+  </resultMap>
+</mapper>

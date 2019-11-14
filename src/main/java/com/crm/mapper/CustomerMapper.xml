@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.CustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.Customer" >
+    <id column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="copany_name" property="copanyName" jdbcType="VARCHAR" />
+    <result column="copany_adress" property="copanyAdress" jdbcType="VARCHAR" />
+    <result column="copany_code" property="copanyCode" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_emal" property="customerEmal" jdbcType="VARCHAR" />
+    <result column="customer_iphone" property="customerIphone" jdbcType="VARCHAR" />
+    <result column="customer_state" property="customerState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customer_id, copany_name, copany_adress, copany_code, customer_name, customer_emal, 
+    customer_iphone, customer_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from customer
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.Customer" >
+    insert into customer (customer_id, copany_name, copany_adress, 
+      copany_code, customer_name, customer_emal, 
+      customer_iphone, customer_state)
+    values (#{customerId,jdbcType=INTEGER}, #{copanyName,jdbcType=VARCHAR}, #{copanyAdress,jdbcType=VARCHAR}, 
+      #{copanyCode,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{customerEmal,jdbcType=VARCHAR}, 
+      #{customerIphone,jdbcType=VARCHAR}, #{customerState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.Customer" >
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="copanyName != null" >
+        copany_name,
+      </if>
+      <if test="copanyAdress != null" >
+        copany_adress,
+      </if>
+      <if test="copanyCode != null" >
+        copany_code,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="customerEmal != null" >
+        customer_emal,
+      </if>
+      <if test="customerIphone != null" >
+        customer_iphone,
+      </if>
+      <if test="customerState != null" >
+        customer_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="copanyName != null" >
+        #{copanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="copanyAdress != null" >
+        #{copanyAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="copanyCode != null" >
+        #{copanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerEmal != null" >
+        #{customerEmal,jdbcType=VARCHAR},
+      </if>
+      <if test="customerIphone != null" >
+        #{customerIphone,jdbcType=VARCHAR},
+      </if>
+      <if test="customerState != null" >
+        #{customerState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.Customer" >
+    update customer
+    <set >
+      <if test="copanyName != null" >
+        copany_name = #{copanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="copanyAdress != null" >
+        copany_adress = #{copanyAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="copanyCode != null" >
+        copany_code = #{copanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerEmal != null" >
+        customer_emal = #{customerEmal,jdbcType=VARCHAR},
+      </if>
+      <if test="customerIphone != null" >
+        customer_iphone = #{customerIphone,jdbcType=VARCHAR},
+      </if>
+      <if test="customerState != null" >
+        customer_state = #{customerState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.Customer" >
+    update customer
+    set copany_name = #{copanyName,jdbcType=VARCHAR},
+      copany_adress = #{copanyAdress,jdbcType=VARCHAR},
+      copany_code = #{copanyCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_emal = #{customerEmal,jdbcType=VARCHAR},
+      customer_iphone = #{customerIphone,jdbcType=VARCHAR},
+      customer_state = #{customerState,jdbcType=VARCHAR}
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </update>
+</mapper>

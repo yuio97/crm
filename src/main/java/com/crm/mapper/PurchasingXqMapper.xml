@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.PurchasingXqMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.PurchasingXq" >
+    <id column="px_id" property="pxId" jdbcType="INTEGER" />
+    <result column="porder_id" property="porderId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+    <result column="goods_price" property="goodsPrice" jdbcType="REAL" />
+    <result column="sys_staff_id" property="sysStaffId" jdbcType="INTEGER" />
+    <result column="px_massage" property="pxMassage" jdbcType="VARCHAR" />
+    <result column="gs_id" property="gsId" jdbcType="INTEGER" />
+    <result column="px_last_time" property="pxLastTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    px_id, porder_id, goods_id, goods_num, goods_price, sys_staff_id, px_massage, gs_id, 
+    px_last_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchasing-xq
+    where px_id = #{pxId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchasing-xq
+    where px_id = #{pxId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.PurchasingXq" >
+    insert into purchasing-xq (px_id, porder_id, goods_id, 
+      goods_num, goods_price, sys_staff_id, 
+      px_massage, gs_id, px_last_time
+      )
+    values (#{pxId,jdbcType=INTEGER}, #{porderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
+      #{goodsNum,jdbcType=INTEGER}, #{goodsPrice,jdbcType=REAL}, #{sysStaffId,jdbcType=INTEGER}, 
+      #{pxMassage,jdbcType=VARCHAR}, #{gsId,jdbcType=INTEGER}, #{pxLastTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.PurchasingXq" >
+    insert into purchasing-xq
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pxId != null" >
+        px_id,
+      </if>
+      <if test="porderId != null" >
+        porder_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsNum != null" >
+        goods_num,
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price,
+      </if>
+      <if test="sysStaffId != null" >
+        sys_staff_id,
+      </if>
+      <if test="pxMassage != null" >
+        px_massage,
+      </if>
+      <if test="gsId != null" >
+        gs_id,
+      </if>
+      <if test="pxLastTime != null" >
+        px_last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pxId != null" >
+        #{pxId,jdbcType=INTEGER},
+      </if>
+      <if test="porderId != null" >
+        #{porderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNum != null" >
+        #{goodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null" >
+        #{goodsPrice,jdbcType=REAL},
+      </if>
+      <if test="sysStaffId != null" >
+        #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="pxMassage != null" >
+        #{pxMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        #{gsId,jdbcType=INTEGER},
+      </if>
+      <if test="pxLastTime != null" >
+        #{pxLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.PurchasingXq" >
+    update purchasing-xq
+    <set >
+      <if test="porderId != null" >
+        porder_id = #{porderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNum != null" >
+        goods_num = #{goodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price = #{goodsPrice,jdbcType=REAL},
+      </if>
+      <if test="sysStaffId != null" >
+        sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="pxMassage != null" >
+        px_massage = #{pxMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        gs_id = #{gsId,jdbcType=INTEGER},
+      </if>
+      <if test="pxLastTime != null" >
+        px_last_time = #{pxLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where px_id = #{pxId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.PurchasingXq" >
+    update purchasing-xq
+    set porder_id = #{porderId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      goods_num = #{goodsNum,jdbcType=INTEGER},
+      goods_price = #{goodsPrice,jdbcType=REAL},
+      sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
+      px_massage = #{pxMassage,jdbcType=VARCHAR},
+      gs_id = #{gsId,jdbcType=INTEGER},
+      px_last_time = #{pxLastTime,jdbcType=TIMESTAMP}
+    where px_id = #{pxId,jdbcType=INTEGER}
+  </update>
+</mapper>

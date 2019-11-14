@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.SysPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.SysPermission" >
+    <id column="sys_permission_id" property="sysPermissionId" jdbcType="INTEGER" />
+    <result column="sys_permission_name" property="sysPermissionName" jdbcType="VARCHAR" />
+    <result column="sys_permission_type" property="sysPermissionType" jdbcType="VARCHAR" />
+    <result column="sys_permission_url" property="sysPermissionUrl" jdbcType="VARCHAR" />
+    <result column="sys_permission_percode" property="sysPermissionPercode" jdbcType="VARCHAR" />
+    <result column="sys_per_parentid" property="sysPerParentid" jdbcType="INTEGER" />
+    <result column="sys_per_parentids" property="sysPerParentids" jdbcType="VARCHAR" />
+    <result column="sys_permission_remark" property="sysPermissionRemark" jdbcType="VARCHAR" />
+    <result column="sys_permission_time" property="sysPermissionTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sys_permission_id, sys_permission_name, sys_permission_type, sys_permission_url, 
+    sys_permission_percode, sys_per_parentid, sys_per_parentids, sys_permission_remark, 
+    sys_permission_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_permission
+    where sys_permission_id = #{sysPermissionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_permission
+    where sys_permission_id = #{sysPermissionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SysPermission" >
+    insert into sys_permission (sys_permission_id, sys_permission_name, 
+      sys_permission_type, sys_permission_url, sys_permission_percode, 
+      sys_per_parentid, sys_per_parentids, sys_permission_remark, 
+      sys_permission_time)
+    values (#{sysPermissionId,jdbcType=INTEGER}, #{sysPermissionName,jdbcType=VARCHAR}, 
+      #{sysPermissionType,jdbcType=VARCHAR}, #{sysPermissionUrl,jdbcType=VARCHAR}, #{sysPermissionPercode,jdbcType=VARCHAR}, 
+      #{sysPerParentid,jdbcType=INTEGER}, #{sysPerParentids,jdbcType=VARCHAR}, #{sysPermissionRemark,jdbcType=VARCHAR}, 
+      #{sysPermissionTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SysPermission" >
+    insert into sys_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysPermissionId != null" >
+        sys_permission_id,
+      </if>
+      <if test="sysPermissionName != null" >
+        sys_permission_name,
+      </if>
+      <if test="sysPermissionType != null" >
+        sys_permission_type,
+      </if>
+      <if test="sysPermissionUrl != null" >
+        sys_permission_url,
+      </if>
+      <if test="sysPermissionPercode != null" >
+        sys_permission_percode,
+      </if>
+      <if test="sysPerParentid != null" >
+        sys_per_parentid,
+      </if>
+      <if test="sysPerParentids != null" >
+        sys_per_parentids,
+      </if>
+      <if test="sysPermissionRemark != null" >
+        sys_permission_remark,
+      </if>
+      <if test="sysPermissionTime != null" >
+        sys_permission_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysPermissionId != null" >
+        #{sysPermissionId,jdbcType=INTEGER},
+      </if>
+      <if test="sysPermissionName != null" >
+        #{sysPermissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionType != null" >
+        #{sysPermissionType,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionUrl != null" >
+        #{sysPermissionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionPercode != null" >
+        #{sysPermissionPercode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPerParentid != null" >
+        #{sysPerParentid,jdbcType=INTEGER},
+      </if>
+      <if test="sysPerParentids != null" >
+        #{sysPerParentids,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionRemark != null" >
+        #{sysPermissionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionTime != null" >
+        #{sysPermissionTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysPermission" >
+    update sys_permission
+    <set >
+      <if test="sysPermissionName != null" >
+        sys_permission_name = #{sysPermissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionType != null" >
+        sys_permission_type = #{sysPermissionType,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionUrl != null" >
+        sys_permission_url = #{sysPermissionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionPercode != null" >
+        sys_permission_percode = #{sysPermissionPercode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPerParentid != null" >
+        sys_per_parentid = #{sysPerParentid,jdbcType=INTEGER},
+      </if>
+      <if test="sysPerParentids != null" >
+        sys_per_parentids = #{sysPerParentids,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionRemark != null" >
+        sys_permission_remark = #{sysPermissionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionTime != null" >
+        sys_permission_time = #{sysPermissionTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sys_permission_id = #{sysPermissionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysPermission" >
+    update sys_permission
+    set sys_permission_name = #{sysPermissionName,jdbcType=VARCHAR},
+      sys_permission_type = #{sysPermissionType,jdbcType=VARCHAR},
+      sys_permission_url = #{sysPermissionUrl,jdbcType=VARCHAR},
+      sys_permission_percode = #{sysPermissionPercode,jdbcType=VARCHAR},
+      sys_per_parentid = #{sysPerParentid,jdbcType=INTEGER},
+      sys_per_parentids = #{sysPerParentids,jdbcType=VARCHAR},
+      sys_permission_remark = #{sysPermissionRemark,jdbcType=VARCHAR},
+      sys_permission_time = #{sysPermissionTime,jdbcType=TIMESTAMP}
+    where sys_permission_id = #{sysPermissionId,jdbcType=INTEGER}
+  </update>
+</mapper>

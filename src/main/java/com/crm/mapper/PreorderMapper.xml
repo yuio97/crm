@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.PreorderMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.Preorder" >
+    <id column="preorder_id" property="preorderId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="preorder_note" property="preorderNote" jdbcType="VARCHAR" />
+    <result column="pay_case" property="payCase" jdbcType="VARCHAR" />
+    <result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP" />
+    <result column="delivery_place" property="deliveryPlace" jdbcType="VARCHAR" />
+    <result column="sys_account_id" property="sysAccountId" jdbcType="INTEGER" />
+    <result column="preorder_tme" property="preorderTme" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    preorder_id, customer_id, preorder_note, pay_case, delivery_time, delivery_place, 
+    sys_account_id, preorder_tme
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from preorder
+    where preorder_id = #{preorderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from preorder
+    where preorder_id = #{preorderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.Preorder" >
+    insert into preorder (preorder_id, customer_id, preorder_note, 
+      pay_case, delivery_time, delivery_place, 
+      sys_account_id, preorder_tme)
+    values (#{preorderId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{preorderNote,jdbcType=VARCHAR}, 
+      #{payCase,jdbcType=VARCHAR}, #{deliveryTime,jdbcType=TIMESTAMP}, #{deliveryPlace,jdbcType=VARCHAR}, 
+      #{sysAccountId,jdbcType=INTEGER}, #{preorderTme,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.Preorder" >
+    insert into preorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="preorderId != null" >
+        preorder_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="preorderNote != null" >
+        preorder_note,
+      </if>
+      <if test="payCase != null" >
+        pay_case,
+      </if>
+      <if test="deliveryTime != null" >
+        delivery_time,
+      </if>
+      <if test="deliveryPlace != null" >
+        delivery_place,
+      </if>
+      <if test="sysAccountId != null" >
+        sys_account_id,
+      </if>
+      <if test="preorderTme != null" >
+        preorder_tme,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="preorderId != null" >
+        #{preorderId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="preorderNote != null" >
+        #{preorderNote,jdbcType=VARCHAR},
+      </if>
+      <if test="payCase != null" >
+        #{payCase,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null" >
+        #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryPlace != null" >
+        #{deliveryPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="sysAccountId != null" >
+        #{sysAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="preorderTme != null" >
+        #{preorderTme,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.Preorder" >
+    update preorder
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="preorderNote != null" >
+        preorder_note = #{preorderNote,jdbcType=VARCHAR},
+      </if>
+      <if test="payCase != null" >
+        pay_case = #{payCase,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null" >
+        delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryPlace != null" >
+        delivery_place = #{deliveryPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="sysAccountId != null" >
+        sys_account_id = #{sysAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="preorderTme != null" >
+        preorder_tme = #{preorderTme,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where preorder_id = #{preorderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.Preorder" >
+    update preorder
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      preorder_note = #{preorderNote,jdbcType=VARCHAR},
+      pay_case = #{payCase,jdbcType=VARCHAR},
+      delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      delivery_place = #{deliveryPlace,jdbcType=VARCHAR},
+      sys_account_id = #{sysAccountId,jdbcType=INTEGER},
+      preorder_tme = #{preorderTme,jdbcType=TIMESTAMP}
+    where preorder_id = #{preorderId,jdbcType=INTEGER}
+  </update>
+</mapper>

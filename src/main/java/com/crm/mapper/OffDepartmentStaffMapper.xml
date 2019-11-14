@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.OffDepartmentStaffMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.OffDepartmentStaff" >
+    <id column="off_staff_id" property="offStaffId" jdbcType="INTEGER" />
+    <result column="off_id" property="offId" jdbcType="INTEGER" />
+    <result column="s_task_situation" property="sTaskSituation" jdbcType="VARCHAR" />
+    <result column="s_time" property="sTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    off_staff_id, off_id, s_task_situation, s_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from off_department_staff
+    where off_staff_id = #{offStaffId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from off_department_staff
+    where off_staff_id = #{offStaffId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.OffDepartmentStaff" >
+    insert into off_department_staff (off_staff_id, off_id, s_task_situation, 
+      s_time)
+    values (#{offStaffId,jdbcType=INTEGER}, #{offId,jdbcType=INTEGER}, #{sTaskSituation,jdbcType=VARCHAR}, 
+      #{sTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.OffDepartmentStaff" >
+    insert into off_department_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="offStaffId != null" >
+        off_staff_id,
+      </if>
+      <if test="offId != null" >
+        off_id,
+      </if>
+      <if test="sTaskSituation != null" >
+        s_task_situation,
+      </if>
+      <if test="sTime != null" >
+        s_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="offStaffId != null" >
+        #{offStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="offId != null" >
+        #{offId,jdbcType=INTEGER},
+      </if>
+      <if test="sTaskSituation != null" >
+        #{sTaskSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="sTime != null" >
+        #{sTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.OffDepartmentStaff" >
+    update off_department_staff
+    <set >
+      <if test="offId != null" >
+        off_id = #{offId,jdbcType=INTEGER},
+      </if>
+      <if test="sTaskSituation != null" >
+        s_task_situation = #{sTaskSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="sTime != null" >
+        s_time = #{sTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where off_staff_id = #{offStaffId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.OffDepartmentStaff" >
+    update off_department_staff
+    set off_id = #{offId,jdbcType=INTEGER},
+      s_task_situation = #{sTaskSituation,jdbcType=VARCHAR},
+      s_time = #{sTime,jdbcType=TIMESTAMP}
+    where off_staff_id = #{offStaffId,jdbcType=INTEGER}
+  </update>
+</mapper>

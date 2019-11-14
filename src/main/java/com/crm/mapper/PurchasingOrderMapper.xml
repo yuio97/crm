@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.PurchasingOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.PurchasingOrder" >
+    <id column="porder_id" property="porderId" jdbcType="INTEGER" />
+    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="pay" property="pay" jdbcType="REAL" />
+    <result column="pay_qk" property="payQk" jdbcType="VARCHAR" />
+    <result column="porder_jz" property="porderJz" jdbcType="VARCHAR" />
+    <result column="porder_time" property="porderTime" jdbcType="TIMESTAMP" />
+    <result column="jh_time" property="jhTime" jdbcType="TIMESTAMP" />
+    <result column="jh_address" property="jhAddress" jdbcType="VARCHAR" />
+    <result column="sys_staff_id" property="sysStaffId" jdbcType="INTEGER" />
+    <result column="p_massage" property="pMassage" jdbcType="VARCHAR" />
+    <result column="gs_id" property="gsId" jdbcType="INTEGER" />
+    <result column="p_last_time" property="pLastTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    porder_id, supplier_id, pay, pay_qk, porder_jz, porder_time, jh_time, jh_address, 
+    sys_staff_id, p_massage, gs_id, p_last_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchasing-order
+    where porder_id = #{porderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchasing-order
+    where porder_id = #{porderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.PurchasingOrder" >
+    insert into purchasing-order (porder_id, supplier_id, pay, 
+      pay_qk, porder_jz, porder_time, 
+      jh_time, jh_address, sys_staff_id, 
+      p_massage, gs_id, p_last_time
+      )
+    values (#{porderId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, #{pay,jdbcType=REAL}, 
+      #{payQk,jdbcType=VARCHAR}, #{porderJz,jdbcType=VARCHAR}, #{porderTime,jdbcType=TIMESTAMP}, 
+      #{jhTime,jdbcType=TIMESTAMP}, #{jhAddress,jdbcType=VARCHAR}, #{sysStaffId,jdbcType=INTEGER}, 
+      #{pMassage,jdbcType=VARCHAR}, #{gsId,jdbcType=INTEGER}, #{pLastTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.PurchasingOrder" >
+    insert into purchasing-order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="porderId != null" >
+        porder_id,
+      </if>
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="pay != null" >
+        pay,
+      </if>
+      <if test="payQk != null" >
+        pay_qk,
+      </if>
+      <if test="porderJz != null" >
+        porder_jz,
+      </if>
+      <if test="porderTime != null" >
+        porder_time,
+      </if>
+      <if test="jhTime != null" >
+        jh_time,
+      </if>
+      <if test="jhAddress != null" >
+        jh_address,
+      </if>
+      <if test="sysStaffId != null" >
+        sys_staff_id,
+      </if>
+      <if test="pMassage != null" >
+        p_massage,
+      </if>
+      <if test="gsId != null" >
+        gs_id,
+      </if>
+      <if test="pLastTime != null" >
+        p_last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="porderId != null" >
+        #{porderId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="pay != null" >
+        #{pay,jdbcType=REAL},
+      </if>
+      <if test="payQk != null" >
+        #{payQk,jdbcType=VARCHAR},
+      </if>
+      <if test="porderJz != null" >
+        #{porderJz,jdbcType=VARCHAR},
+      </if>
+      <if test="porderTime != null" >
+        #{porderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jhTime != null" >
+        #{jhTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jhAddress != null" >
+        #{jhAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffId != null" >
+        #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="pMassage != null" >
+        #{pMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        #{gsId,jdbcType=INTEGER},
+      </if>
+      <if test="pLastTime != null" >
+        #{pLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.PurchasingOrder" >
+    update purchasing-order
+    <set >
+      <if test="supplierId != null" >
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="pay != null" >
+        pay = #{pay,jdbcType=REAL},
+      </if>
+      <if test="payQk != null" >
+        pay_qk = #{payQk,jdbcType=VARCHAR},
+      </if>
+      <if test="porderJz != null" >
+        porder_jz = #{porderJz,jdbcType=VARCHAR},
+      </if>
+      <if test="porderTime != null" >
+        porder_time = #{porderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jhTime != null" >
+        jh_time = #{jhTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jhAddress != null" >
+        jh_address = #{jhAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffId != null" >
+        sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="pMassage != null" >
+        p_massage = #{pMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        gs_id = #{gsId,jdbcType=INTEGER},
+      </if>
+      <if test="pLastTime != null" >
+        p_last_time = #{pLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where porder_id = #{porderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.PurchasingOrder" >
+    update purchasing-order
+    set supplier_id = #{supplierId,jdbcType=INTEGER},
+      pay = #{pay,jdbcType=REAL},
+      pay_qk = #{payQk,jdbcType=VARCHAR},
+      porder_jz = #{porderJz,jdbcType=VARCHAR},
+      porder_time = #{porderTime,jdbcType=TIMESTAMP},
+      jh_time = #{jhTime,jdbcType=TIMESTAMP},
+      jh_address = #{jhAddress,jdbcType=VARCHAR},
+      sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
+      p_massage = #{pMassage,jdbcType=VARCHAR},
+      gs_id = #{gsId,jdbcType=INTEGER},
+      p_last_time = #{pLastTime,jdbcType=TIMESTAMP}
+    where porder_id = #{porderId,jdbcType=INTEGER}
+  </update>
+</mapper>

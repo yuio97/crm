@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.RkMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.Rk" >
+    <id column="rk_id" property="rkId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="rk_num" property="rkNum" jdbcType="INTEGER" />
+    <result column="rk_time" property="rkTime" jdbcType="TIMESTAMP" />
+    <result column="rk_massage" property="rkMassage" jdbcType="VARCHAR" />
+    <result column="rk_last_time" property="rkLastTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rk_id, goods_id, goods_name, rk_num, rk_time, rk_massage, rk_last_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rk
+    where rk_id = #{rkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rk
+    where rk_id = #{rkId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.Rk" >
+    insert into rk (rk_id, goods_id, goods_name, 
+      rk_num, rk_time, rk_massage, 
+      rk_last_time)
+    values (#{rkId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
+      #{rkNum,jdbcType=INTEGER}, #{rkTime,jdbcType=TIMESTAMP}, #{rkMassage,jdbcType=VARCHAR}, 
+      #{rkLastTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.Rk" >
+    insert into rk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rkId != null" >
+        rk_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="rkNum != null" >
+        rk_num,
+      </if>
+      <if test="rkTime != null" >
+        rk_time,
+      </if>
+      <if test="rkMassage != null" >
+        rk_massage,
+      </if>
+      <if test="rkLastTime != null" >
+        rk_last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rkId != null" >
+        #{rkId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="rkNum != null" >
+        #{rkNum,jdbcType=INTEGER},
+      </if>
+      <if test="rkTime != null" >
+        #{rkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rkMassage != null" >
+        #{rkMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="rkLastTime != null" >
+        #{rkLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.Rk" >
+    update rk
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="rkNum != null" >
+        rk_num = #{rkNum,jdbcType=INTEGER},
+      </if>
+      <if test="rkTime != null" >
+        rk_time = #{rkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rkMassage != null" >
+        rk_massage = #{rkMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="rkLastTime != null" >
+        rk_last_time = #{rkLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rk_id = #{rkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.Rk" >
+    update rk
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      rk_num = #{rkNum,jdbcType=INTEGER},
+      rk_time = #{rkTime,jdbcType=TIMESTAMP},
+      rk_massage = #{rkMassage,jdbcType=VARCHAR},
+      rk_last_time = #{rkLastTime,jdbcType=TIMESTAMP}
+    where rk_id = #{rkId,jdbcType=INTEGER}
+  </update>
+</mapper>

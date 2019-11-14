@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.PreorderDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.PreorderDetails" >
+    <id column="preorder_details_id" property="preorderDetailsId" jdbcType="INTEGER" />
+    <result column="preorder_id" property="preorderId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="kgoods_id" property="kgoodsId" jdbcType="INTEGER" />
+    <result column="sys_account_id" property="sysAccountId" jdbcType="VARCHAR" />
+    <result column="kc_num_sell" property="kcNumSell" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    preorder_details_id, preorder_id, customer_id, kgoods_id, sys_account_id, kc_num_sell
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from preorder_details
+    where preorder_details_id = #{preorderDetailsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from preorder_details
+    where preorder_details_id = #{preorderDetailsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.PreorderDetails" >
+    insert into preorder_details (preorder_details_id, preorder_id, customer_id, 
+      kgoods_id, sys_account_id, kc_num_sell
+      )
+    values (#{preorderDetailsId,jdbcType=INTEGER}, #{preorderId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, 
+      #{kgoodsId,jdbcType=INTEGER}, #{sysAccountId,jdbcType=VARCHAR}, #{kcNumSell,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.PreorderDetails" >
+    insert into preorder_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="preorderDetailsId != null" >
+        preorder_details_id,
+      </if>
+      <if test="preorderId != null" >
+        preorder_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="kgoodsId != null" >
+        kgoods_id,
+      </if>
+      <if test="sysAccountId != null" >
+        sys_account_id,
+      </if>
+      <if test="kcNumSell != null" >
+        kc_num_sell,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="preorderDetailsId != null" >
+        #{preorderDetailsId,jdbcType=INTEGER},
+      </if>
+      <if test="preorderId != null" >
+        #{preorderId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="kgoodsId != null" >
+        #{kgoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="sysAccountId != null" >
+        #{sysAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="kcNumSell != null" >
+        #{kcNumSell,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.PreorderDetails" >
+    update preorder_details
+    <set >
+      <if test="preorderId != null" >
+        preorder_id = #{preorderId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="kgoodsId != null" >
+        kgoods_id = #{kgoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="sysAccountId != null" >
+        sys_account_id = #{sysAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="kcNumSell != null" >
+        kc_num_sell = #{kcNumSell,jdbcType=INTEGER},
+      </if>
+    </set>
+    where preorder_details_id = #{preorderDetailsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.PreorderDetails" >
+    update preorder_details
+    set preorder_id = #{preorderId,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      kgoods_id = #{kgoodsId,jdbcType=INTEGER},
+      sys_account_id = #{sysAccountId,jdbcType=VARCHAR},
+      kc_num_sell = #{kcNumSell,jdbcType=INTEGER}
+    where preorder_details_id = #{preorderDetailsId,jdbcType=INTEGER}
+  </update>
+</mapper>

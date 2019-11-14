@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.AddGoodMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.AddGood" >
+    <id column="addg_id" property="addgId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="addg_time" property="addgTime" jdbcType="TIMESTAMP" />
+    <result column="addg_state" property="addgState" jdbcType="VARCHAR" />
+    <result column="sys_staff_id" property="sysStaffId" jdbcType="INTEGER" />
+    <result column="addg_massage" property="addgMassage" jdbcType="VARCHAR" />
+    <result column="gs_id" property="gsId" jdbcType="INTEGER" />
+    <result column="addg_last_time" property="addgLastTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    addg_id, goods_id, addg_time, addg_state, sys_staff_id, addg_massage, gs_id, addg_last_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from add_goods
+    where addg_id = #{addgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from add_goods
+    where addg_id = #{addgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.AddGood" >
+    insert into add_goods (addg_id, goods_id, addg_time, 
+      addg_state, sys_staff_id, addg_massage, 
+      gs_id, addg_last_time)
+    values (#{addgId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{addgTime,jdbcType=TIMESTAMP}, 
+      #{addgState,jdbcType=VARCHAR}, #{sysStaffId,jdbcType=INTEGER}, #{addgMassage,jdbcType=VARCHAR}, 
+      #{gsId,jdbcType=INTEGER}, #{addgLastTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.AddGood" >
+    insert into add_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="addgId != null" >
+        addg_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="addgTime != null" >
+        addg_time,
+      </if>
+      <if test="addgState != null" >
+        addg_state,
+      </if>
+      <if test="sysStaffId != null" >
+        sys_staff_id,
+      </if>
+      <if test="addgMassage != null" >
+        addg_massage,
+      </if>
+      <if test="gsId != null" >
+        gs_id,
+      </if>
+      <if test="addgLastTime != null" >
+        addg_last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="addgId != null" >
+        #{addgId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="addgTime != null" >
+        #{addgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addgState != null" >
+        #{addgState,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffId != null" >
+        #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="addgMassage != null" >
+        #{addgMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        #{gsId,jdbcType=INTEGER},
+      </if>
+      <if test="addgLastTime != null" >
+        #{addgLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.AddGood" >
+    update add_goods
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="addgTime != null" >
+        addg_time = #{addgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addgState != null" >
+        addg_state = #{addgState,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffId != null" >
+        sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="addgMassage != null" >
+        addg_massage = #{addgMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        gs_id = #{gsId,jdbcType=INTEGER},
+      </if>
+      <if test="addgLastTime != null" >
+        addg_last_time = #{addgLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where addg_id = #{addgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.AddGood" >
+    update add_goods
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      addg_time = #{addgTime,jdbcType=TIMESTAMP},
+      addg_state = #{addgState,jdbcType=VARCHAR},
+      sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
+      addg_massage = #{addgMassage,jdbcType=VARCHAR},
+      gs_id = #{gsId,jdbcType=INTEGER},
+      addg_last_time = #{addgLastTime,jdbcType=TIMESTAMP}
+    where addg_id = #{addgId,jdbcType=INTEGER}
+  </update>
+</mapper>

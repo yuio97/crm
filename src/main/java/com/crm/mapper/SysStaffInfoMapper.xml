@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.SysStaffInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.SysStaffInfo" >
+    <id column="sys_staff_id" property="sysStaffId" jdbcType="INTEGER" />
+    <result column="sys_staff_name" property="sysStaffName" jdbcType="VARCHAR" />
+    <result column="sys_staff_sex" property="sysStaffSex" jdbcType="VARCHAR" />
+    <result column="sys_staff_photo" property="sysStaffPhoto" jdbcType="VARCHAR" />
+    <result column="sys_staff_identity" property="sysStaffIdentity" jdbcType="VARCHAR" />
+    <result column="sys_staff_address" property="sysStaffAddress" jdbcType="VARCHAR" />
+    <result column="sys_staff_naddress" property="sysStaffNaddress" jdbcType="VARCHAR" />
+    <result column="sys_staff_edu" property="sysStaffEdu" jdbcType="VARCHAR" />
+    <result column="sys_staff_pol" property="sysStaffPol" jdbcType="VARCHAR" />
+    <result column="sys_staff_school" property="sysStaffSchool" jdbcType="VARCHAR" />
+    <result column="sys_staff_tel" property="sysStaffTel" jdbcType="VARCHAR" />
+    <result column="sys_staff_ontel" property="sysStaffOntel" jdbcType="VARCHAR" />
+    <result column="sys_staff_check" property="sysStaffCheck" jdbcType="VARCHAR" />
+    <result column="sys_duty_id" property="sysDutyId" jdbcType="VARCHAR" />
+    <result column="sys_staff_sta" property="sysStaffSta" jdbcType="VARCHAR" />
+    <result column="sys_staff_remark" property="sysStaffRemark" jdbcType="VARCHAR" />
+    <result column="sys_company_id" property="sysCompanyId" jdbcType="VARCHAR" />
+    <result column="sys_staff_time" property="sysStaffTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sys_staff_id, sys_staff_name, sys_staff_sex, sys_staff_photo, sys_staff_identity, 
+    sys_staff_address, sys_staff_naddress, sys_staff_edu, sys_staff_pol, sys_staff_school, 
+    sys_staff_tel, sys_staff_ontel, sys_staff_check, sys_duty_id, sys_staff_sta, sys_staff_remark, 
+    sys_company_id, sys_staff_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_staff_info
+    where sys_staff_id = #{sysStaffId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_staff_info
+    where sys_staff_id = #{sysStaffId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SysStaffInfo" >
+    insert into sys_staff_info (sys_staff_id, sys_staff_name, sys_staff_sex, 
+      sys_staff_photo, sys_staff_identity, sys_staff_address, 
+      sys_staff_naddress, sys_staff_edu, sys_staff_pol, 
+      sys_staff_school, sys_staff_tel, sys_staff_ontel, 
+      sys_staff_check, sys_duty_id, sys_staff_sta, 
+      sys_staff_remark, sys_company_id, sys_staff_time
+      )
+    values (#{sysStaffId,jdbcType=INTEGER}, #{sysStaffName,jdbcType=VARCHAR}, #{sysStaffSex,jdbcType=VARCHAR}, 
+      #{sysStaffPhoto,jdbcType=VARCHAR}, #{sysStaffIdentity,jdbcType=VARCHAR}, #{sysStaffAddress,jdbcType=VARCHAR}, 
+      #{sysStaffNaddress,jdbcType=VARCHAR}, #{sysStaffEdu,jdbcType=VARCHAR}, #{sysStaffPol,jdbcType=VARCHAR}, 
+      #{sysStaffSchool,jdbcType=VARCHAR}, #{sysStaffTel,jdbcType=VARCHAR}, #{sysStaffOntel,jdbcType=VARCHAR}, 
+      #{sysStaffCheck,jdbcType=VARCHAR}, #{sysDutyId,jdbcType=VARCHAR}, #{sysStaffSta,jdbcType=VARCHAR}, 
+      #{sysStaffRemark,jdbcType=VARCHAR}, #{sysCompanyId,jdbcType=VARCHAR}, #{sysStaffTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SysStaffInfo" >
+    insert into sys_staff_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysStaffId != null" >
+        sys_staff_id,
+      </if>
+      <if test="sysStaffName != null" >
+        sys_staff_name,
+      </if>
+      <if test="sysStaffSex != null" >
+        sys_staff_sex,
+      </if>
+      <if test="sysStaffPhoto != null" >
+        sys_staff_photo,
+      </if>
+      <if test="sysStaffIdentity != null" >
+        sys_staff_identity,
+      </if>
+      <if test="sysStaffAddress != null" >
+        sys_staff_address,
+      </if>
+      <if test="sysStaffNaddress != null" >
+        sys_staff_naddress,
+      </if>
+      <if test="sysStaffEdu != null" >
+        sys_staff_edu,
+      </if>
+      <if test="sysStaffPol != null" >
+        sys_staff_pol,
+      </if>
+      <if test="sysStaffSchool != null" >
+        sys_staff_school,
+      </if>
+      <if test="sysStaffTel != null" >
+        sys_staff_tel,
+      </if>
+      <if test="sysStaffOntel != null" >
+        sys_staff_ontel,
+      </if>
+      <if test="sysStaffCheck != null" >
+        sys_staff_check,
+      </if>
+      <if test="sysDutyId != null" >
+        sys_duty_id,
+      </if>
+      <if test="sysStaffSta != null" >
+        sys_staff_sta,
+      </if>
+      <if test="sysStaffRemark != null" >
+        sys_staff_remark,
+      </if>
+      <if test="sysCompanyId != null" >
+        sys_company_id,
+      </if>
+      <if test="sysStaffTime != null" >
+        sys_staff_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysStaffId != null" >
+        #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="sysStaffName != null" >
+        #{sysStaffName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffSex != null" >
+        #{sysStaffSex,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffPhoto != null" >
+        #{sysStaffPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffIdentity != null" >
+        #{sysStaffIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffAddress != null" >
+        #{sysStaffAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffNaddress != null" >
+        #{sysStaffNaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffEdu != null" >
+        #{sysStaffEdu,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffPol != null" >
+        #{sysStaffPol,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffSchool != null" >
+        #{sysStaffSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffTel != null" >
+        #{sysStaffTel,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffOntel != null" >
+        #{sysStaffOntel,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffCheck != null" >
+        #{sysStaffCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="sysDutyId != null" >
+        #{sysDutyId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffSta != null" >
+        #{sysStaffSta,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffRemark != null" >
+        #{sysStaffRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCompanyId != null" >
+        #{sysCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffTime != null" >
+        #{sysStaffTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysStaffInfo" >
+    update sys_staff_info
+    <set >
+      <if test="sysStaffName != null" >
+        sys_staff_name = #{sysStaffName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffSex != null" >
+        sys_staff_sex = #{sysStaffSex,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffPhoto != null" >
+        sys_staff_photo = #{sysStaffPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffIdentity != null" >
+        sys_staff_identity = #{sysStaffIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffAddress != null" >
+        sys_staff_address = #{sysStaffAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffNaddress != null" >
+        sys_staff_naddress = #{sysStaffNaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffEdu != null" >
+        sys_staff_edu = #{sysStaffEdu,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffPol != null" >
+        sys_staff_pol = #{sysStaffPol,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffSchool != null" >
+        sys_staff_school = #{sysStaffSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffTel != null" >
+        sys_staff_tel = #{sysStaffTel,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffOntel != null" >
+        sys_staff_ontel = #{sysStaffOntel,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffCheck != null" >
+        sys_staff_check = #{sysStaffCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="sysDutyId != null" >
+        sys_duty_id = #{sysDutyId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffSta != null" >
+        sys_staff_sta = #{sysStaffSta,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffRemark != null" >
+        sys_staff_remark = #{sysStaffRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCompanyId != null" >
+        sys_company_id = #{sysCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStaffTime != null" >
+        sys_staff_time = #{sysStaffTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sys_staff_id = #{sysStaffId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysStaffInfo" >
+    update sys_staff_info
+    set sys_staff_name = #{sysStaffName,jdbcType=VARCHAR},
+      sys_staff_sex = #{sysStaffSex,jdbcType=VARCHAR},
+      sys_staff_photo = #{sysStaffPhoto,jdbcType=VARCHAR},
+      sys_staff_identity = #{sysStaffIdentity,jdbcType=VARCHAR},
+      sys_staff_address = #{sysStaffAddress,jdbcType=VARCHAR},
+      sys_staff_naddress = #{sysStaffNaddress,jdbcType=VARCHAR},
+      sys_staff_edu = #{sysStaffEdu,jdbcType=VARCHAR},
+      sys_staff_pol = #{sysStaffPol,jdbcType=VARCHAR},
+      sys_staff_school = #{sysStaffSchool,jdbcType=VARCHAR},
+      sys_staff_tel = #{sysStaffTel,jdbcType=VARCHAR},
+      sys_staff_ontel = #{sysStaffOntel,jdbcType=VARCHAR},
+      sys_staff_check = #{sysStaffCheck,jdbcType=VARCHAR},
+      sys_duty_id = #{sysDutyId,jdbcType=VARCHAR},
+      sys_staff_sta = #{sysStaffSta,jdbcType=VARCHAR},
+      sys_staff_remark = #{sysStaffRemark,jdbcType=VARCHAR},
+      sys_company_id = #{sysCompanyId,jdbcType=VARCHAR},
+      sys_staff_time = #{sysStaffTime,jdbcType=TIMESTAMP}
+    where sys_staff_id = #{sysStaffId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getInfoByStaffName" resultMap="BaseResultMap">
+  	select * from sys_staff_info where sys_staff_name=#{name}
+  </select>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.OffTaskReleaseMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.OffTaskRelease" >
+    <id column="mission_id" property="missionId" jdbcType="INTEGER" />
+    <result column="off_id" property="offId" jdbcType="INTEGER" />
+    <result column="off_content" property="offContent" jdbcType="VARCHAR" />
+    <result column="sys_dept_id" property="sysDeptId" jdbcType="INTEGER" />
+    <result column="off_receive_status" property="offReceiveStatus" jdbcType="VARCHAR" />
+    <result column="off_time" property="offTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mission_id, off_id, off_content, sys_dept_id, off_receive_status, off_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from off_task_release
+    where mission_id = #{missionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from off_task_release
+    where mission_id = #{missionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.OffTaskRelease" >
+    insert into off_task_release (mission_id, off_id, off_content, 
+      sys_dept_id, off_receive_status, off_time
+      )
+    values (#{missionId,jdbcType=INTEGER}, #{offId,jdbcType=INTEGER}, #{offContent,jdbcType=VARCHAR}, 
+      #{sysDeptId,jdbcType=INTEGER}, #{offReceiveStatus,jdbcType=VARCHAR}, #{offTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.OffTaskRelease" >
+    insert into off_task_release
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="missionId != null" >
+        mission_id,
+      </if>
+      <if test="offId != null" >
+        off_id,
+      </if>
+      <if test="offContent != null" >
+        off_content,
+      </if>
+      <if test="sysDeptId != null" >
+        sys_dept_id,
+      </if>
+      <if test="offReceiveStatus != null" >
+        off_receive_status,
+      </if>
+      <if test="offTime != null" >
+        off_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="missionId != null" >
+        #{missionId,jdbcType=INTEGER},
+      </if>
+      <if test="offId != null" >
+        #{offId,jdbcType=INTEGER},
+      </if>
+      <if test="offContent != null" >
+        #{offContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sysDeptId != null" >
+        #{sysDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="offReceiveStatus != null" >
+        #{offReceiveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="offTime != null" >
+        #{offTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.OffTaskRelease" >
+    update off_task_release
+    <set >
+      <if test="offId != null" >
+        off_id = #{offId,jdbcType=INTEGER},
+      </if>
+      <if test="offContent != null" >
+        off_content = #{offContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sysDeptId != null" >
+        sys_dept_id = #{sysDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="offReceiveStatus != null" >
+        off_receive_status = #{offReceiveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="offTime != null" >
+        off_time = #{offTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where mission_id = #{missionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.OffTaskRelease" >
+    update off_task_release
+    set off_id = #{offId,jdbcType=INTEGER},
+      off_content = #{offContent,jdbcType=VARCHAR},
+      sys_dept_id = #{sysDeptId,jdbcType=INTEGER},
+      off_receive_status = #{offReceiveStatus,jdbcType=VARCHAR},
+      off_time = #{offTime,jdbcType=TIMESTAMP}
+    where mission_id = #{missionId,jdbcType=INTEGER}
+  </update>
+</mapper>

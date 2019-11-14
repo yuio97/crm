@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.CustomerFeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.CustomerFeedback" >
+    <id column="customer_feedback_id" property="customerFeedbackId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="kgoods_id" property="kgoodsId" jdbcType="INTEGER" />
+    <result column="customer_feedback_details" property="customerFeedbackDetails" jdbcType="VARCHAR" />
+    <result column="customer_feedback_time" property="customerFeedbackTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customer_feedback_id, customer_id, kgoods_id, customer_feedback_details, customer_feedback_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_feedback
+    where customer_feedback_id = #{customerFeedbackId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from customer_feedback
+    where customer_feedback_id = #{customerFeedbackId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.CustomerFeedback" >
+    insert into customer_feedback (customer_feedback_id, customer_id, kgoods_id, 
+      customer_feedback_details, customer_feedback_time
+      )
+    values (#{customerFeedbackId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{kgoodsId,jdbcType=INTEGER}, 
+      #{customerFeedbackDetails,jdbcType=VARCHAR}, #{customerFeedbackTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.CustomerFeedback" >
+    insert into customer_feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerFeedbackId != null" >
+        customer_feedback_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="kgoodsId != null" >
+        kgoods_id,
+      </if>
+      <if test="customerFeedbackDetails != null" >
+        customer_feedback_details,
+      </if>
+      <if test="customerFeedbackTime != null" >
+        customer_feedback_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerFeedbackId != null" >
+        #{customerFeedbackId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="kgoodsId != null" >
+        #{kgoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="customerFeedbackDetails != null" >
+        #{customerFeedbackDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="customerFeedbackTime != null" >
+        #{customerFeedbackTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.CustomerFeedback" >
+    update customer_feedback
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="kgoodsId != null" >
+        kgoods_id = #{kgoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="customerFeedbackDetails != null" >
+        customer_feedback_details = #{customerFeedbackDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="customerFeedbackTime != null" >
+        customer_feedback_time = #{customerFeedbackTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where customer_feedback_id = #{customerFeedbackId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.CustomerFeedback" >
+    update customer_feedback
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      kgoods_id = #{kgoodsId,jdbcType=INTEGER},
+      customer_feedback_details = #{customerFeedbackDetails,jdbcType=VARCHAR},
+      customer_feedback_time = #{customerFeedbackTime,jdbcType=TIMESTAMP}
+    where customer_feedback_id = #{customerFeedbackId,jdbcType=INTEGER}
+  </update>
+</mapper>

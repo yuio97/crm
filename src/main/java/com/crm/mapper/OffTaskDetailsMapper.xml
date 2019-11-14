@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.OffTaskDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.OffTaskDetails" >
+    <id column="off_id" property="offId" jdbcType="INTEGER" />
+    <result column="det_task_status" property="detTaskStatus" jdbcType="VARCHAR" />
+    <result column="off_promulgator_id" property="offPromulgatorId" jdbcType="INTEGER" />
+    <result column="det_time" property="detTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    off_id, det_task_status, off_promulgator_id, det_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from off_task_details
+    where off_id = #{offId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from off_task_details
+    where off_id = #{offId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.OffTaskDetails" >
+    insert into off_task_details (off_id, det_task_status, off_promulgator_id, 
+      det_time)
+    values (#{offId,jdbcType=INTEGER}, #{detTaskStatus,jdbcType=VARCHAR}, #{offPromulgatorId,jdbcType=INTEGER}, 
+      #{detTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.OffTaskDetails" >
+    insert into off_task_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="offId != null" >
+        off_id,
+      </if>
+      <if test="detTaskStatus != null" >
+        det_task_status,
+      </if>
+      <if test="offPromulgatorId != null" >
+        off_promulgator_id,
+      </if>
+      <if test="detTime != null" >
+        det_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="offId != null" >
+        #{offId,jdbcType=INTEGER},
+      </if>
+      <if test="detTaskStatus != null" >
+        #{detTaskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="offPromulgatorId != null" >
+        #{offPromulgatorId,jdbcType=INTEGER},
+      </if>
+      <if test="detTime != null" >
+        #{detTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.OffTaskDetails" >
+    update off_task_details
+    <set >
+      <if test="detTaskStatus != null" >
+        det_task_status = #{detTaskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="offPromulgatorId != null" >
+        off_promulgator_id = #{offPromulgatorId,jdbcType=INTEGER},
+      </if>
+      <if test="detTime != null" >
+        det_time = #{detTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where off_id = #{offId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.OffTaskDetails" >
+    update off_task_details
+    set det_task_status = #{detTaskStatus,jdbcType=VARCHAR},
+      off_promulgator_id = #{offPromulgatorId,jdbcType=INTEGER},
+      det_time = #{detTime,jdbcType=TIMESTAMP}
+    where off_id = #{offId,jdbcType=INTEGER}
+  </update>
+</mapper>

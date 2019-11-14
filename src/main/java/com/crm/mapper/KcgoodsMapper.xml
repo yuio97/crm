@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.KcgoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.Kcgoods" >
+    <id column="kcgoods_id" property="kcgoodsId" jdbcType="INTEGER" />
+    <result column="warehouse_id" property="warehouseId" jdbcType="INTEGER" />
+    <result column="kgoods_name" property="kgoodsName" jdbcType="VARCHAR" />
+    <result column="kgoods_sm" property="kgoodsSm" jdbcType="VARCHAR" />
+    <result column="kc_num" property="kcNum" jdbcType="INTEGER" />
+    <result column="danwei" property="danwei" jdbcType="VARCHAR" />
+    <result column="cbj" property="cbj" jdbcType="REAL" />
+    <result column="lsj" property="lsj" jdbcType="REAL" />
+    <result column="jxj" property="jxj" jdbcType="REAL" />
+    <result column="kc_massage" property="kcMassage" jdbcType="VARCHAR" />
+    <result column="gs_id" property="gsId" jdbcType="INTEGER" />
+    <result column="kgoods_last_date" property="kgoodsLastDate" jdbcType="TIMESTAMP" />
+    <result column="kgoods_id" property="kgoodsId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    kcgoods_id, warehouse_id, kgoods_name, kgoods_sm, kc_num, danwei, cbj, lsj, jxj, 
+    kc_massage, gs_id, kgoods_last_date, kgoods_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from kc-goods
+    where kcgoods_id = #{kcgoodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from kc-goods
+    where kcgoods_id = #{kcgoodsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.Kcgoods" >
+    insert into kc-goods (kcgoods_id, warehouse_id, kgoods_name, 
+      kgoods_sm, kc_num, danwei, 
+      cbj, lsj, jxj, kc_massage, 
+      gs_id, kgoods_last_date, kgoods_id
+      )
+    values (#{kcgoodsId,jdbcType=INTEGER}, #{warehouseId,jdbcType=INTEGER}, #{kgoodsName,jdbcType=VARCHAR}, 
+      #{kgoodsSm,jdbcType=VARCHAR}, #{kcNum,jdbcType=INTEGER}, #{danwei,jdbcType=VARCHAR}, 
+      #{cbj,jdbcType=REAL}, #{lsj,jdbcType=REAL}, #{jxj,jdbcType=REAL}, #{kcMassage,jdbcType=VARCHAR}, 
+      #{gsId,jdbcType=INTEGER}, #{kgoodsLastDate,jdbcType=TIMESTAMP}, #{kgoodsId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.Kcgoods" >
+    insert into kc-goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="kcgoodsId != null" >
+        kcgoods_id,
+      </if>
+      <if test="warehouseId != null" >
+        warehouse_id,
+      </if>
+      <if test="kgoodsName != null" >
+        kgoods_name,
+      </if>
+      <if test="kgoodsSm != null" >
+        kgoods_sm,
+      </if>
+      <if test="kcNum != null" >
+        kc_num,
+      </if>
+      <if test="danwei != null" >
+        danwei,
+      </if>
+      <if test="cbj != null" >
+        cbj,
+      </if>
+      <if test="lsj != null" >
+        lsj,
+      </if>
+      <if test="jxj != null" >
+        jxj,
+      </if>
+      <if test="kcMassage != null" >
+        kc_massage,
+      </if>
+      <if test="gsId != null" >
+        gs_id,
+      </if>
+      <if test="kgoodsLastDate != null" >
+        kgoods_last_date,
+      </if>
+      <if test="kgoodsId != null" >
+        kgoods_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="kcgoodsId != null" >
+        #{kcgoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null" >
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="kgoodsName != null" >
+        #{kgoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="kgoodsSm != null" >
+        #{kgoodsSm,jdbcType=VARCHAR},
+      </if>
+      <if test="kcNum != null" >
+        #{kcNum,jdbcType=INTEGER},
+      </if>
+      <if test="danwei != null" >
+        #{danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="cbj != null" >
+        #{cbj,jdbcType=REAL},
+      </if>
+      <if test="lsj != null" >
+        #{lsj,jdbcType=REAL},
+      </if>
+      <if test="jxj != null" >
+        #{jxj,jdbcType=REAL},
+      </if>
+      <if test="kcMassage != null" >
+        #{kcMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        #{gsId,jdbcType=INTEGER},
+      </if>
+      <if test="kgoodsLastDate != null" >
+        #{kgoodsLastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kgoodsId != null" >
+        #{kgoodsId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.Kcgoods" >
+    update kc-goods
+    <set >
+      <if test="warehouseId != null" >
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="kgoodsName != null" >
+        kgoods_name = #{kgoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="kgoodsSm != null" >
+        kgoods_sm = #{kgoodsSm,jdbcType=VARCHAR},
+      </if>
+      <if test="kcNum != null" >
+        kc_num = #{kcNum,jdbcType=INTEGER},
+      </if>
+      <if test="danwei != null" >
+        danwei = #{danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="cbj != null" >
+        cbj = #{cbj,jdbcType=REAL},
+      </if>
+      <if test="lsj != null" >
+        lsj = #{lsj,jdbcType=REAL},
+      </if>
+      <if test="jxj != null" >
+        jxj = #{jxj,jdbcType=REAL},
+      </if>
+      <if test="kcMassage != null" >
+        kc_massage = #{kcMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        gs_id = #{gsId,jdbcType=INTEGER},
+      </if>
+      <if test="kgoodsLastDate != null" >
+        kgoods_last_date = #{kgoodsLastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kgoodsId != null" >
+        kgoods_id = #{kgoodsId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where kcgoods_id = #{kcgoodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.Kcgoods" >
+    update kc-goods
+    set warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      kgoods_name = #{kgoodsName,jdbcType=VARCHAR},
+      kgoods_sm = #{kgoodsSm,jdbcType=VARCHAR},
+      kc_num = #{kcNum,jdbcType=INTEGER},
+      danwei = #{danwei,jdbcType=VARCHAR},
+      cbj = #{cbj,jdbcType=REAL},
+      lsj = #{lsj,jdbcType=REAL},
+      jxj = #{jxj,jdbcType=REAL},
+      kc_massage = #{kcMassage,jdbcType=VARCHAR},
+      gs_id = #{gsId,jdbcType=INTEGER},
+      kgoods_last_date = #{kgoodsLastDate,jdbcType=TIMESTAMP},
+      kgoods_id = #{kgoodsId,jdbcType=INTEGER}
+    where kcgoods_id = #{kcgoodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

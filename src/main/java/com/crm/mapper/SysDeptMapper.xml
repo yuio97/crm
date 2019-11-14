@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.SysDeptMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.SysDept" >
+    <id column="sys_dept_id" property="sysDeptId" jdbcType="INTEGER" />
+    <result column="sys_dept_name" property="sysDeptName" jdbcType="VARCHAR" />
+    <result column="sys_dept_remark" property="sysDeptRemark" jdbcType="VARCHAR" />
+    <result column="sys_company_id" property="sysCompanyId" jdbcType="INTEGER" />
+    <result column="sys_dept_time" property="sysDeptTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sys_dept_id, sys_dept_name, sys_dept_remark, sys_company_id, sys_dept_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dept
+    where sys_dept_id = #{sysDeptId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_dept
+    where sys_dept_id = #{sysDeptId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SysDept" >
+    insert into sys_dept (sys_dept_id, sys_dept_name, sys_dept_remark, 
+      sys_company_id, sys_dept_time)
+    values (#{sysDeptId,jdbcType=INTEGER}, #{sysDeptName,jdbcType=VARCHAR}, #{sysDeptRemark,jdbcType=VARCHAR}, 
+      #{sysCompanyId,jdbcType=INTEGER}, #{sysDeptTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SysDept" >
+    insert into sys_dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysDeptId != null" >
+        sys_dept_id,
+      </if>
+      <if test="sysDeptName != null" >
+        sys_dept_name,
+      </if>
+      <if test="sysDeptRemark != null" >
+        sys_dept_remark,
+      </if>
+      <if test="sysCompanyId != null" >
+        sys_company_id,
+      </if>
+      <if test="sysDeptTime != null" >
+        sys_dept_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysDeptId != null" >
+        #{sysDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="sysDeptName != null" >
+        #{sysDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysDeptRemark != null" >
+        #{sysDeptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCompanyId != null" >
+        #{sysCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="sysDeptTime != null" >
+        #{sysDeptTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysDept" >
+    update sys_dept
+    <set >
+      <if test="sysDeptName != null" >
+        sys_dept_name = #{sysDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysDeptRemark != null" >
+        sys_dept_remark = #{sysDeptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCompanyId != null" >
+        sys_company_id = #{sysCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="sysDeptTime != null" >
+        sys_dept_time = #{sysDeptTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sys_dept_id = #{sysDeptId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysDept" >
+    update sys_dept
+    set sys_dept_name = #{sysDeptName,jdbcType=VARCHAR},
+      sys_dept_remark = #{sysDeptRemark,jdbcType=VARCHAR},
+      sys_company_id = #{sysCompanyId,jdbcType=INTEGER},
+      sys_dept_time = #{sysDeptTime,jdbcType=TIMESTAMP}
+    where sys_dept_id = #{sysDeptId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.SysDutyMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.SysDuty" >
+    <id column="sys_duty_id" property="sysDutyId" jdbcType="INTEGER" />
+    <result column="sys_duty_name" property="sysDutyName" jdbcType="VARCHAR" />
+    <result column="sys_company_dept" property="sysCompanyDept" jdbcType="INTEGER" />
+    <result column="sys_duty_remark" property="sysDutyRemark" jdbcType="VARCHAR" />
+    <result column="sys_company_id" property="sysCompanyId" jdbcType="INTEGER" />
+    <result column="sys_duty_time" property="sysDutyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sys_duty_id, sys_duty_name, sys_company_dept, sys_duty_remark, sys_company_id, sys_duty_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_duty
+    where sys_duty_id = #{sysDutyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_duty
+    where sys_duty_id = #{sysDutyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SysDuty" >
+    insert into sys_duty (sys_duty_id, sys_duty_name, sys_company_dept, 
+      sys_duty_remark, sys_company_id, sys_duty_time
+      )
+    values (#{sysDutyId,jdbcType=INTEGER}, #{sysDutyName,jdbcType=VARCHAR}, #{sysCompanyDept,jdbcType=INTEGER}, 
+      #{sysDutyRemark,jdbcType=VARCHAR}, #{sysCompanyId,jdbcType=INTEGER}, #{sysDutyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SysDuty" >
+    insert into sys_duty
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysDutyId != null" >
+        sys_duty_id,
+      </if>
+      <if test="sysDutyName != null" >
+        sys_duty_name,
+      </if>
+      <if test="sysCompanyDept != null" >
+        sys_company_dept,
+      </if>
+      <if test="sysDutyRemark != null" >
+        sys_duty_remark,
+      </if>
+      <if test="sysCompanyId != null" >
+        sys_company_id,
+      </if>
+      <if test="sysDutyTime != null" >
+        sys_duty_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysDutyId != null" >
+        #{sysDutyId,jdbcType=INTEGER},
+      </if>
+      <if test="sysDutyName != null" >
+        #{sysDutyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCompanyDept != null" >
+        #{sysCompanyDept,jdbcType=INTEGER},
+      </if>
+      <if test="sysDutyRemark != null" >
+        #{sysDutyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCompanyId != null" >
+        #{sysCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="sysDutyTime != null" >
+        #{sysDutyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysDuty" >
+    update sys_duty
+    <set >
+      <if test="sysDutyName != null" >
+        sys_duty_name = #{sysDutyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCompanyDept != null" >
+        sys_company_dept = #{sysCompanyDept,jdbcType=INTEGER},
+      </if>
+      <if test="sysDutyRemark != null" >
+        sys_duty_remark = #{sysDutyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCompanyId != null" >
+        sys_company_id = #{sysCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="sysDutyTime != null" >
+        sys_duty_time = #{sysDutyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sys_duty_id = #{sysDutyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysDuty" >
+    update sys_duty
+    set sys_duty_name = #{sysDutyName,jdbcType=VARCHAR},
+      sys_company_dept = #{sysCompanyDept,jdbcType=INTEGER},
+      sys_duty_remark = #{sysDutyRemark,jdbcType=VARCHAR},
+      sys_company_id = #{sysCompanyId,jdbcType=INTEGER},
+      sys_duty_time = #{sysDutyTime,jdbcType=TIMESTAMP}
+    where sys_duty_id = #{sysDutyId,jdbcType=INTEGER}
+  </update>
+</mapper>

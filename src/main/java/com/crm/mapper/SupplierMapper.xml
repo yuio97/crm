@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.SupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.Supplier" >
+    <id column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="supeople" property="supeople" jdbcType="VARCHAR" />
+    <result column="supplier_tel" property="supplierTel" jdbcType="VARCHAR" />
+    <result column="supplier_address" property="supplierAddress" jdbcType="VARCHAR" />
+    <result column="supplier_email" property="supplierEmail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    supplier_id, supplier_name, supeople, supplier_tel, supplier_address, supplier_email
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.Supplier" >
+    insert into supplier (supplier_id, supplier_name, supeople, 
+      supplier_tel, supplier_address, supplier_email
+      )
+    values (#{supplierId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR}, #{supeople,jdbcType=VARCHAR}, 
+      #{supplierTel,jdbcType=VARCHAR}, #{supplierAddress,jdbcType=VARCHAR}, #{supplierEmail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.Supplier" >
+    insert into supplier
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="supplierName != null" >
+        supplier_name,
+      </if>
+      <if test="supeople != null" >
+        supeople,
+      </if>
+      <if test="supplierTel != null" >
+        supplier_tel,
+      </if>
+      <if test="supplierAddress != null" >
+        supplier_address,
+      </if>
+      <if test="supplierEmail != null" >
+        supplier_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierName != null" >
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supeople != null" >
+        #{supeople,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierTel != null" >
+        #{supplierTel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null" >
+        #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierEmail != null" >
+        #{supplierEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.Supplier" >
+    update supplier
+    <set >
+      <if test="supplierName != null" >
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supeople != null" >
+        supeople = #{supeople,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierTel != null" >
+        supplier_tel = #{supplierTel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null" >
+        supplier_address = #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierEmail != null" >
+        supplier_email = #{supplierEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.Supplier" >
+    update supplier
+    set supplier_name = #{supplierName,jdbcType=VARCHAR},
+      supeople = #{supeople,jdbcType=VARCHAR},
+      supplier_tel = #{supplierTel,jdbcType=VARCHAR},
+      supplier_address = #{supplierAddress,jdbcType=VARCHAR},
+      supplier_email = #{supplierEmail,jdbcType=VARCHAR}
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+</mapper>
