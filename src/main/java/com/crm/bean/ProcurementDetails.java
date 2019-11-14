@@ -11,6 +11,8 @@ public class ProcurementDetails {
 
     private Integer sysAccountId;
 
+    private  Kcgoods kcgoods;
+    
     public Integer getProcurementDetailsId() {
         return procurementDetailsId;
     }
@@ -50,4 +52,14 @@ public class ProcurementDetails {
     public void setSysAccountId(Integer sysAccountId) {
         this.sysAccountId = sysAccountId;
     }
+
+	public Kcgoods getKcgoods() {
+		return kcgoods;
+	}
+
+	public void setKcgoods(Kcgoods kcgoods) {
+		this.kcgoods = kcgoods;
+	}
+    
+    
 }

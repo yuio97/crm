@@ -90,4 +90,32 @@
       sys_account_id = #{sysAccountId,jdbcType=INTEGER}
     where procurement_id = #{procurementId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getProcurements" resultMap="ProcurementsResultMap">
+  	SELECT 
+	p.*,pd.kgoods_id,pd.procurement_details_id,kc.jxj,kc.kgoods_name,pd.sys_account_id as procurement_details_num
+	FROM procurement p INNER JOIN procurement_details pd
+	ON p.procurement_id =  pd.procurement_id
+	INNER JOIN kc_goods kc ON kc.kcgoods_id = pd.kgoods_id
+	WHERE p.customer_id = #{clientId}
+  </select>
+  
+   <resultMap id="ProcurementsResultMap" type="com.crm.bean.Procurement" >
+    <id column="procurement_id" property="procurementId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="procurement_case" property="procurementCase" jdbcType="VARCHAR" />
+    <result column="preorder_id" property="preorderId" jdbcType="INTEGER" />
+    <result column="sys_account_id" property="sysAccountId" jdbcType="INTEGER" />
+    <collection property="proDetaList" column="procurement_id" ofType="com.crm.bean.ProcurementDetails" >
+    	<id column="procurement_details_id" jdbcType="INTEGER" property="procurementDetailsId" />
+	    <result column="procurement_details_num" jdbcType="INTEGER" property="sysAccountId" />
+	    <association property="kcgoods" column="kgoods_id" javaType="com.crm.bean.Kcgoods" >
+	    	<id column="kcgoods_id" property="kcgoodsId" jdbcType="INTEGER" />
+		    <result column="kgoods_name" property="kgoodsName" jdbcType="VARCHAR" />
+		    <result column="jxj" property="jxj" jdbcType="REAL" />
+	    </association>
+    </collection>
+  </resultMap>
+  
+  
 </mapper>

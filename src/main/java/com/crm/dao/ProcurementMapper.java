@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.crm.bean.Procurement;
 
 public interface ProcurementMapper {
@@ -14,4 +16,6 @@ public interface ProcurementMapper {
     int updateByPrimaryKeySelective(Procurement record);
 
     int updateByPrimaryKey(Procurement record);
+    
+    int getProcurements(@Param("clientId") Integer clientId);
 }
