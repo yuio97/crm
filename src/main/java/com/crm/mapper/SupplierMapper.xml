@@ -103,4 +103,7 @@
       supplier_email = #{supplierEmail,jdbcType=VARCHAR}
     where supplier_id = #{supplierId,jdbcType=INTEGER}
   </update>
+  <select id="getSupplierList" resultMap="BaseResultMap">
+  select * from supplier
+  </select>
 </mapper>

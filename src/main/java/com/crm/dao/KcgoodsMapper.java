@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import com.crm.bean.Kcgoods;
 
 public interface KcgoodsMapper {
@@ -14,4 +16,7 @@ public interface KcgoodsMapper {
     int updateByPrimaryKeySelective(Kcgoods record);
 
     int updateByPrimaryKey(Kcgoods record);
+   
+
+	List<Kcgoods> getKcgoodsList();
 }

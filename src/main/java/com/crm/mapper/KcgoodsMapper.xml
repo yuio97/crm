@@ -23,15 +23,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from kc-goods
+    from kc_goods
     where kcgoods_id = #{kcgoodsId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from kc-goods
+    delete from kc_goods
     where kcgoods_id = #{kcgoodsId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.crm.bean.Kcgoods" >
-    insert into kc-goods (kcgoods_id, warehouse_id, kgoods_name, 
+    insert into kc_goods (kcgoods_id, warehouse_id, kgoods_name, 
       kgoods_sm, kc_num, danwei, 
       cbj, lsj, jxj, kc_massage, 
       gs_id, kgoods_last_date, kgoods_id
@@ -43,7 +43,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.crm.bean.Kcgoods" >
-    insert into kc-goods
+    insert into kc_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="kcgoodsId != null" >
         kcgoods_id,
@@ -128,7 +128,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.Kcgoods" >
-    update kc-goods
+    update kc_goods
     <set >
       <if test="warehouseId != null" >
         warehouse_id = #{warehouseId,jdbcType=INTEGER},
@@ -170,7 +170,7 @@
     where kcgoods_id = #{kcgoodsId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.crm.bean.Kcgoods" >
-    update kc-goods
+    update kc_goods
     set warehouse_id = #{warehouseId,jdbcType=INTEGER},
       kgoods_name = #{kgoodsName,jdbcType=VARCHAR},
       kgoods_sm = #{kgoodsSm,jdbcType=VARCHAR},
@@ -185,4 +185,8 @@
       kgoods_id = #{kgoodsId,jdbcType=INTEGER}
     where kcgoods_id = #{kcgoodsId,jdbcType=INTEGER}
   </update>
+  <select id="getKcgoodsList" resultMap="BaseResultMap">
+  select * from kc_goods
+  
+  </select>
 </mapper>

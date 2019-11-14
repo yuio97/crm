@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import com.crm.bean.Supplier;
 
 public interface SupplierMapper {
@@ -14,4 +16,6 @@ public interface SupplierMapper {
     int updateByPrimaryKeySelective(Supplier record);
 
     int updateByPrimaryKey(Supplier record);
+    
+    List<Supplier> getSupplierList();
 }
