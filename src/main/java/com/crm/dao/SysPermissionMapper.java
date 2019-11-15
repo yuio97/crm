@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import com.crm.bean.SysPermission;
 
 public interface SysPermissionMapper {
@@ -14,4 +16,6 @@ public interface SysPermissionMapper {
     int updateByPrimaryKeySelective(SysPermission record);
 
     int updateByPrimaryKey(SysPermission record);
+    
+    List<SysPermission> getMenuList(int id);
 }

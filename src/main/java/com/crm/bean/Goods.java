@@ -19,6 +19,10 @@ public class Goods {
 
     private Integer goodsNum;
 
+    private Integer goodsMin;
+
+    private Integer supplierId;
+
     public Integer getGoodsId() {
         return goodsId;
     }
@@ -81,5 +85,21 @@ public class Goods {
 
     public void setGoodsNum(Integer goodsNum) {
         this.goodsNum = goodsNum;
+    }
+
+    public Integer getGoodsMin() {
+        return goodsMin;
+    }
+
+    public void setGoodsMin(Integer goodsMin) {
+        this.goodsMin = goodsMin;
+    }
+
+    public Integer getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(Integer supplierId) {
+        this.supplierId = supplierId;
     }
 }

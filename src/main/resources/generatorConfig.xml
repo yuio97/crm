@@ -5,7 +5,7 @@
 <generatorConfiguration>
 	<!-- 制度MySQL驱动包的路径，别放在中文路径 -->
 	<classPathEntry
-		location="D:\local\repo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar" />
+		location="E:\local\repo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar" />
 	<context id="context1">
 		<commentGenerator>
 			<!--是否取消注销 -->
@@ -48,8 +48,8 @@
 		<!-- 配置表信息 -->
 
 			
-		<table schema="customer_relationship" tableName="sys_permission"
-			domainObjectName="SysPermission" enableCountByExample="false"
+		<table schema="customer_relationship" tableName="goods"
+			domainObjectName="Goods" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="useActualColumnNames" value="false" />

@@ -140,4 +140,39 @@
       sys_permission_time = #{sysPermissionTime,jdbcType=TIMESTAMP}
     where sys_permission_id = #{sysPermissionId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getMenuList" resultMap="per">
+  	SELECT sp.*,spp.sys_permission_id per_id,
+	spp.sys_permission_name per_name,spp.sys_permission_percode percode,
+	spp.sys_permission_type type,spp.sys_permission_url url,
+	spp.sys_per_parentid parentid
+	FROM sys_permission sp INNER JOIN sys_permission spp
+	ON sp.sys_permission_id = spp.sys_per_parentid
+	INNER JOIN sys_per_role spr ON spr.per_id = sp.sys_permission_id
+	INNER JOIN sys_role_staff srs ON srs.sys_role_id = spr.role_id 
+	WHERE sp.sys_per_parentid = 1 AND srs.sys_staff_id = 1
+  </select>
+  
+  <resultMap type="com.crm.bean.SysPermission" id="per">
+  	<id column="sys_permission_id" property="sysPermissionId" jdbcType="INTEGER" />
+    <result column="sys_permission_name" property="sysPermissionName" jdbcType="VARCHAR" />
+    <result column="sys_permission_type" property="sysPermissionType" jdbcType="VARCHAR" />
+    <result column="sys_permission_url" property="sysPermissionUrl" jdbcType="VARCHAR" />
+    <result column="sys_permission_percode" property="sysPermissionPercode" jdbcType="VARCHAR" />
+    <result column="sys_per_parentid" property="sysPerParentid" jdbcType="INTEGER" />
+    <result column="sys_per_parentids" property="sysPerParentids" jdbcType="VARCHAR" />
+    <result column="sys_permission_remark" property="sysPermissionRemark" jdbcType="VARCHAR" />
+    <result column="sys_permission_time" property="sysPermissionTime" jdbcType="TIMESTAMP" />
+    <collection property="sonPer" column="sys_per_parentid" ofType="com.crm.bean.SysPermission">
+    	<id column="per_id" property="sysPermissionId" jdbcType="INTEGER" />
+	    <result column="per_name" property="sysPermissionName" jdbcType="VARCHAR" />
+	    <result column="type" property="sysPermissionType" jdbcType="VARCHAR" />
+	    <result column="url" property="sysPermissionUrl" jdbcType="VARCHAR" />
+	    <result column="percode" property="sysPermissionPercode" jdbcType="VARCHAR" />
+	    <result column="parentid" property="sysPerParentid" jdbcType="INTEGER" />
+	    <result column="sys_per_parentids" property="sysPerParentids" jdbcType="VARCHAR" />
+	    <result column="sys_permission_remark" property="sysPermissionRemark" jdbcType="VARCHAR" />
+	    <result column="sys_permission_time" property="sysPermissionTime" jdbcType="TIMESTAMP" />
+    </collection>
+  </resultMap>
 </mapper>
