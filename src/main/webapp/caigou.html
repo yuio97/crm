@@ -68,14 +68,14 @@
                 <tr> 
                     <th lay-data="{type:'checkbox',fixed:'left'}"></th>
                     <th lay-data="{field:'yx', align:'center',width:280}">操作</th>
-                    <th lay-data="{field:'time',align:'center', minWidth:120}">供应商编号</th>
-                    <th lay-data="{field:'www',align:'center',minWidth:260}">供应商名称</th>
-                    <th lay-data="{field:'company',align:'center',minWidth:110}">联系人</th>
-                    <th lay-data="{field:'user',align:'center',width:180}">电话</th>
-                    <th lay-data="{field:'tel',align:'center',width:150}">email</th>
-                    <th lay-data="{field:'result',align:'center',minWidth:180}">地址</th>
-                    <!-- <th lay-data="{field:'addr',align:'center',minWidth:120}">密码</th> 
-                    <th lay-data="{field:'addr1',align:'center',minWidth:120}">合同金额</th> 
+                    <th lay-data="{field:'time',align:'center', minWidth:120}">采购单编号</th>
+                    <th lay-data="{field:'www',align:'center',minWidth:260}">供应商编号</th>
+                    <th lay-data="{field:'company',align:'center',minWidth:110}">金额</th>
+                    <th lay-data="{field:'user',align:'center',width:180}">是否支付</th>
+                    <th lay-data="{field:'tel',align:'center',width:150}">采购时间</th>
+                    <th lay-data="{field:'result',align:'center',minWidth:180}">采购进展</th>
+                     <th lay-data="{field:'addr',align:'center',minWidth:120}">备注</th> 
+                    <!--<th lay-data="{field:'addr1',align:'center',minWidth:120}">合同金额</th> 
                     <th lay-data="{field:'addr2',align:'center',minWidth:120}">充值</th> 
                     <th lay-data="{field:'addr3',align:'center',minWidth:110}">联系人</th>   -->
                 </tr> 
@@ -91,6 +91,8 @@
                     <td>81048555555</td>
                     <td>2019-05-08</td>
                     <td>gzwagnid666com</td>
+                    <td>gzwagnid666com</td>
+
                     
                    
                
@@ -170,7 +172,7 @@
             // offset: 'rb', //右下角弹出
             // time: 2000, //2秒后自动关闭
             anim: 5,//动画
-            content: ['vip_list_xq.html', 'no'], //iframe的url，no代表不显示滚动条 
+            content: ['caigouxq.html', 'no'], //iframe的url，no代表不显示滚动条 
         }); 
         
     }
@@ -188,7 +190,7 @@
             // offset: 'rb', //右下角弹出
             // time: 2000, //2秒后自动关闭
             anim: 5,//动画
-            content: ['vip_list_hf.html', 'no'], //iframe的url，no代表不显示滚动条 
+            content: ['caigouxq.html', 'no'], //iframe的url，no代表不显示滚动条 
         }); 
         
     }
