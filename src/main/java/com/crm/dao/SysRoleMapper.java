@@ -16,5 +16,5 @@ public interface SysRoleMapper {
 
     int updateByPrimaryKey(SysRole record);
        
-    List<SysRole> getPerByStaffId(int id);
+    SysRole getPerByStaffId(int id);
 }

@@ -1,6 +1,8 @@
 package com.crm.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SysPermission {
     private Integer sysPermissionId;
@@ -20,6 +22,8 @@ public class SysPermission {
     private String sysPermissionRemark;
 
     private Date sysPermissionTime;
+    
+    private List<SysPermission> sonPer = new ArrayList<SysPermission>();
 
     public Integer getSysPermissionId() {
         return sysPermissionId;
@@ -92,4 +96,13 @@ public class SysPermission {
     public void setSysPermissionTime(Date sysPermissionTime) {
         this.sysPermissionTime = sysPermissionTime;
     }
+
+	public List<SysPermission> getSonPer() {
+		return sonPer;
+	}
+
+	public void setSonPer(List<SysPermission> sonPer) {
+		this.sonPer = sonPer;
+	}
+    
 }

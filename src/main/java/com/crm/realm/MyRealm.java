@@ -25,12 +25,14 @@ import com.crm.dao.SysAccountMapper;
 import com.crm.dao.SysRoleMapper;
 import com.crm.dao.SysRoleStaffMapper;
 import com.crm.dao.SysStaffInfoMapper;
+import com.crm.service.RoleService;
+import com.crm.serviceImpl.RoleServiceImpl;
 
 
 public class MyRealm extends AuthorizingRealm{
 	
 	@Resource
-	private SysRoleMapper SysRoleMapper;
+	public RoleService roleServiceImpl;
 	
 	@Resource
 	public SysStaffInfoMapper sysStaffInfoMapper;
@@ -48,24 +50,21 @@ public class MyRealm extends AuthorizingRealm{
 		SysAccount user = (SysAccount) principals.getPrimaryPrincipal();
 		
 		//存session
-//		Subject subject = SecurityUtils.getSubject();
+		Subject subject = SecurityUtils.getSubject();
 //		SysAccount user = (SysAccount) subject.getPrincipal();		
 		SysStaffInfo info = sysStaffInfoMapper.getInfoByStaffName(user.getSysAccountName()); 		
-//		subject.getSession().setAttribute("user", info);
+		subject.getSession().setAttribute("user", info);
 		
-		//根据用户信息查询角色和角色对应的权限
-//		List<SysRoleStaff> list = sysRoleStaffMapper.getPermissionByStaffId(info.getSysStaffId());
-//		for (SysRoleStaff sysRoleStaff : list) {
-//			System.out.println(sysRoleStaff.getSysRoleId());
-//			for (SysPermission dd : sysRoleStaff.getSysPerList()) {
-//				System.out.println(dd.getSysPermissionName());
-//			}
-//		}
+		//循环角色对应的权限加到授权对象
+		SysRole list = roleServiceImpl.getPermissionByStaffId(info.getSysStaffId());
+
+			authorizationInfo.addRole(list.getSysRoleName());
+			for (SysPermission sysRole2 : list.getSysPerList()) {
+				authorizationInfo.addStringPermission(sysRole2.getSysPermissionPercode());
+			}
 		
-//		for (SysRoleStaff role : list) {
-//			authorizationInfo.addRole(role);
-//		}
-//		
+		
+	
 		
 		return authorizationInfo;
 	}
@@ -82,8 +81,6 @@ public class MyRealm extends AuthorizingRealm{
 		else
 		{
 			SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(account, account.getSysAccountPass(), ByteSource.Util.bytes(account.getSysAccountSalt()),"myrealm");
-			
-			List<SysRole> perByStaffId = SysRoleMapper.getPerByStaffId(1);
 			
 			return info;
 		}
