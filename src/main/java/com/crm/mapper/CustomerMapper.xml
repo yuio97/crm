@@ -126,4 +126,11 @@
       customer_state = #{customerState,jdbcType=VARCHAR}
     where customer_id = #{customerId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectCusList" resultMap="BaseResultMap">
+  	select * from customer
+  </select>
+   
+  
+  
 </mapper>
