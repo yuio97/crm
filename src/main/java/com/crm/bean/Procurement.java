@@ -1,5 +1,7 @@
 package com.crm.bean;
 
+import java.util.List;
+
 public class Procurement {
     private Integer procurementId;
 
@@ -10,6 +12,8 @@ public class Procurement {
     private Integer preorderId;
 
     private Integer sysAccountId;
+    
+    private List<ProcurementDetails> proDetaList;
 
     public Integer getProcurementId() {
         return procurementId;
@@ -50,4 +54,14 @@ public class Procurement {
     public void setSysAccountId(Integer sysAccountId) {
         this.sysAccountId = sysAccountId;
     }
+
+	public List<ProcurementDetails> getProDetaList() {
+		return proDetaList;
+	}
+
+	public void setProDetaList(List<ProcurementDetails> proDetaList) {
+		this.proDetaList = proDetaList;
+	}
+    
+    
 }
