@@ -16,23 +16,20 @@ import com.github.pagehelper.PageInfo;
 public class SupplierServiceImpl implements SupplierService{
 	
 	@Resource
-	private SqlSessionTemplate st;
+	private SupplierMapper  supplierMapper;
 	@Override
 	public void addSupplier(Supplier supplier) {
-		SupplierMapper supp = st.getMapper(SupplierMapper.class);
-		supp.insertSelective(supplier);
+		supplierMapper.insertSelective(supplier);
 		
 	}
 	@Override
 	public void updateSupplier(Supplier supplier) {
-		SupplierMapper mapper = st.getMapper(SupplierMapper.class);
-		mapper.updateByPrimaryKey(supplier);
+		supplierMapper.updateByPrimaryKey(supplier);
 		
 	}
 	@Override
 	public void deleteSupplier(Integer supplierId) {
-		SupplierMapper mapper = st.getMapper(SupplierMapper.class);
-		mapper.deleteByPrimaryKey(supplierId);
+		supplierMapper.deleteByPrimaryKey(supplierId);
 		
 	}
 	@Override
@@ -42,9 +39,8 @@ public class SupplierServiceImpl implements SupplierService{
 	}
 	@Override
 	public PageInfo<Supplier> getSupplierList(int pn, int size) {
-		SupplierMapper mapper = st.getMapper(SupplierMapper.class);
+		List<Supplier> supplierList = supplierMapper.getSupplierList(); 
 		PageHelper.startPage(pn, size);
-		List<Supplier> supplierList = mapper.getSupplierList();
 		PageInfo<Supplier> pageInfo = new PageInfo<Supplier>(supplierList);
 		return pageInfo;
 	}

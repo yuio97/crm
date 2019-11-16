@@ -151,6 +151,6 @@
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
   <select id="getGoodsList" resultMap="BaseResultMap">
-  select * from Goods where goods_min >  goods_num
+  select * from Goods 
   </select>
 </mapper>

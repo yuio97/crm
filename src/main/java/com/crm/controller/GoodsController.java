@@ -21,20 +21,15 @@ public class GoodsController {
 	@RequestMapping("/goodsList")
 	public String getGoodsList(Map<String,Object> data){
 		List<Goods> goodsList = goodsService.getGoodsList();
+		System.out.println(goodsList);
 		data.put("goodsList", goodsList);
-		return "forward:/goods.jsp";
+		return "forward:/goods_list.jsp";
 			
 		}
 	
-	@RequestMapping("/addGoods")
-	@ResponseBody
-	public String insert(Goods goods){
-		int insertgoods = goodsService.insertSelective(goods);
-		
-			return "insertgoods";
-		
-		
-		
+	@RequestMapping("/addgoods")
+	public void insert(Goods goods){
+		goodsService.insertSelective(goods);	
 	}
 		
 	
