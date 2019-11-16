@@ -2,11 +2,14 @@ package com.crm.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Goods {
     private Integer goodsId;
 
     private String goodsName;
 
+    @DateTimeFormat(pattern="yy-mm-dd")
     private Date goodsDate;
 
     private String goodsSm;

@@ -23,7 +23,7 @@ public class SupplierController {
 	public String getSupplierList(Map<String,Object> data){
 		List<Supplier> supplierList = supplierService.getSupplierList();
 		data.put("supplierList", supplierList);
-		return "forword:/supplier_list.jsp";
+		return "forward:/goods_add.jsp";
 		
 	}
 	@RequestMapping("/addSupplier")

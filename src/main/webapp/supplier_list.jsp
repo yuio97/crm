@@ -85,20 +85,19 @@
                 </tr> 
             </thead>
             <tbody>
-            <c:forEach items="${supplierList }" var="su"></c:forEach>
+            <c:forEach items="${supplierList }" var="s">
                 <tr> 
                     <td></td>
                     <td> <a>修改</a>丨<a>添加</a>丨<a href="javascript:;" style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
-                    <td>${su.supplierId }</td>
-                    <td>${su.supplierName }</td>
-                   
-                    <td>${su.supeople }</td>
-                    <td>${su.supplierTel}</td>
-                    <td>${su.supplierEmail }</td>
-                    <td>${su.supplierAddress }</td>
+                    <td>${s.supplierId }</td>
+                    <td>${s.supplierName }</td>
+                    <td>${s.supeople }</td>
+                    <td>${s.supplierTel}</td>
+                    <td>${s.supplierEmail }</td>
+                    <td>${s.supplierAddress }</td>
                     
                    </tr>
-               
+               </c:forEach>
                 
                 
             </tbody>  

@@ -17,6 +17,7 @@ public class SupplierServiceImpl implements SupplierService{
 	
 	@Resource
 	private SupplierMapper  supplierMapper;
+	
 	@Override
 	public void addSupplier(Supplier supplier) {
 		supplierMapper.insertSelective(supplier);
@@ -34,8 +35,8 @@ public class SupplierServiceImpl implements SupplierService{
 	}
 	@Override
 	public List<Supplier> getSupplierList() {
-		 
-		return null;
+		List<Supplier> supplierList = supplierMapper.getSupplierList();
+		return supplierList;
 	}
 	@Override
 	public PageInfo<Supplier> getSupplierList(int pn, int size) {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -46,7 +47,7 @@
            
         </div>
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="goods/addgoods">
+            <form class="layui-form layui-form-pane" action="goods/addgoods" enctype="multipart/from-data" mothed="post">
             <ul> 
                   
                 <li>
@@ -55,12 +56,25 @@
                         <input type="text" name="goodsName" required lay-verify="required"  autocomplete="off" class="layui-input">   
                     </div>
                 </li>
+                 <li>
+                    <div class="left">生产日期：</div>
+                    <div class="right"> 
+                        <input type="date" name="goodsDate" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
+                 <li>
+                    <div class="left">原材料说明：</div>
+                    <div class="right"> 
+                        <input type="text" name="goodsSm" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
+                 
                 <li>
                         <div class="left">图片：</div>
                         <div class="right">
-                                <input style="margin-top: 8px;" type="file">
+                                <input style="margin-top: 8px;" type="file" name="goodsImg">
                         </div>
-                    </li>
+                    </li> 
                 <li>
                     <div class="left">数量：</div>
                     <div class="right"> 
@@ -76,11 +90,12 @@
                 </li>
                
                 <li>
-                    <div class="left">说明：</div>
+                    <div class="left">状态：</div>
                     <div class="right"> 
-                        <input type="text" name="goodsSm" required lay-verify="required"  autocomplete="off" class="layui-input">
+                        <input type="text" name="goodsState" required lay-verify="required"  autocomplete="off" class="layui-input">
                     </div>
                 </li>
+               
                 
                 <li>
                         <div class="left">警告数：</div>
@@ -91,17 +106,17 @@
                
                
                 
-                <li style="height: 38px; overflow:initial;">
+                 <li style="height: 38px; overflow:initial;">
                         <div class="left">供货商编号</div>                    
                            <div class="right"> 
                             <select name="city" lay-verify="">
-                            <c:forEach items="${supplierList}" var="su">
-                            	<option value="${su.supplierId }">${su.supplierName }</option>
+                            <c:forEach items="${supplierList}" var="s">
+                            	<option value="${s.supplierId }">${s.supplierName }</option>
                             </c:forEach>
 
                             </select> 
                         </div>
-                    </li>
+                    </li> 
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
