@@ -27,9 +27,10 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script> 
 	<!-- layui js -->
 	<script src="layui/layui.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-<div class="wangid_conbox">
+<div class="wangid_conbox" id="c">
 	<!-- 当前位置 -->
 	<div class="zy_weizhi bord_b">
 		<i class="fa fa-home fa-3x"></i>
@@ -40,10 +41,9 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 筛选 --> 
 	<div class="shuaix">
 		<div class="left" style="margin-right:10px;"> 
-			<select>   
-				<c:forEach items="${selecctCusList }" var="cu">
-					<option value="${cu.customerId }">${cu.customerName}</option>
-				</c:forEach>    
+			<select onchange="getCusId()" v-model="customerId"> 
+				<option value="-1" >请选择客户</option> 
+				<option v-for="(customer,i) in customerlist" :key="i" :value="customer.customerId" >{{customer.customerName}}</option>   
 			</select>
 		</div> 
 		<div class="right">
@@ -156,5 +156,52 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
     }
 </script> 
+
+<script>
+var v = new Vue({
+    el:'#c',
+    data:
+    {
+		customerlist:[],
+		customerId:'-1'
+    },
+	
+    methods:
+    {
+        getCusId:function()
+        {
+			var _this = this
+            $.ajax({
+				type: "GET",
+				url: "orderget/OrderList",
+				data: {clientId:_this.customerId},
+				dataType: "json",
+				success: function (response) {
+					
+				}
+			});
+
+			
+        },
+		
+    },
+    created:function(){
+		var	_this = this
+             $.ajax({
+				 type: "GET",
+				 url: "/selectcus",
+				 data: null,
+				 dataType: "json",
+				 success: function (response) {
+					 console.log(response);
+					_this.customerlist = response;
+				 }
+			 });
+		}
+
+});
+
+</script>
+
 </body>
 </html>

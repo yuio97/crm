@@ -93,11 +93,17 @@
   
   <select id="getProcurements" resultMap="ProcurementsResultMap">
   	SELECT 
-	p.*,pd.kgoods_id,pd.procurement_details_id,kc.jxj,kc.kgoods_name,pd.sys_account_id as procurement_details_num
+	p.*,c.*,pd.kgoods_id,pd.procurement_details_id,kc.jxj,kc.kgoods_name,pd.sys_account_id as procurement_details_num
 	FROM procurement p INNER JOIN procurement_details pd
 	ON p.procurement_id =  pd.procurement_id
-	INNER JOIN kc_goods kc ON kc.kcgoods_id = pd.kgoods_id
-	WHERE p.customer_id = #{clientId}
+	INNER JOIN kc_goods kc ON kc.kcgoods_id = pd.kgoods_id INNER JOIN customer AS c ON p.customer_id = c.customer_id
+	WHERE p.customer_id = '1001'
+	<where>
+		<if test="clientId != -1">
+			p.customer_id = #{clientId}
+		</if>
+	</where>
+
   </select>
   
    <resultMap id="ProcurementsResultMap" type="com.crm.bean.Procurement" >
@@ -106,6 +112,18 @@
     <result column="procurement_case" property="procurementCase" jdbcType="VARCHAR" />
     <result column="preorder_id" property="preorderId" jdbcType="INTEGER" />
     <result column="sys_account_id" property="sysAccountId" jdbcType="INTEGER" />
+    
+    <association property="customer" column="customer_id" javaType="com.crm.bean.Customer">
+    <id column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="copany_name" property="copanyName" jdbcType="VARCHAR" />
+    <result column="copany_adress" property="copanyAdress" jdbcType="VARCHAR" />
+    <result column="copany_code" property="copanyCode" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_emal" property="customerEmal" jdbcType="VARCHAR" />
+    <result column="customer_iphone" property="customerIphone" jdbcType="VARCHAR" />
+    <result column="customer_state" property="customerState" jdbcType="VARCHAR" />
+    </association>
+    
     <collection property="proDetaList" column="procurement_id" ofType="com.crm.bean.ProcurementDetails" >
     	<id column="procurement_details_id" jdbcType="INTEGER" property="procurementDetailsId" />
 	    <result column="procurement_details_num" jdbcType="INTEGER" property="sysAccountId" />

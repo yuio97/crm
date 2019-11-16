@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.crm.bean.Customer;
 import com.crm.service.CustomSelectService;
@@ -18,11 +19,11 @@ public class CustomSelectController {
 	CustomSelectService customSelectService;
 
 	@RequestMapping("/selectcus")
-	public String select(Map<String, Object> data) {
+	@ResponseBody
+	public List<Customer> select() {
 		
 		List<Customer> selecctCusList = customSelectService.selecctCusList();
-		data.put("selecctCusList", selecctCusList);
-		return "forward:/YuanGonglist_lwh.jsp";
+		return selecctCusList;
 	}
 	
 	

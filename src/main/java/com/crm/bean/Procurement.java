@@ -14,6 +14,8 @@ public class Procurement {
     private Integer sysAccountId;
     
     private List<ProcurementDetails> proDetaList;
+    
+    private Customer customer;
 
     public Integer getProcurementId() {
         return procurementId;
@@ -62,6 +64,15 @@ public class Procurement {
 	public void setProDetaList(List<ProcurementDetails> proDetaList) {
 		this.proDetaList = proDetaList;
 	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
     
+	
     
 }
