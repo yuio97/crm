@@ -19,4 +19,6 @@ public interface KcgoodsMapper {
    
 
 	List<Kcgoods> getKcgoodsList();
+
+	
 }

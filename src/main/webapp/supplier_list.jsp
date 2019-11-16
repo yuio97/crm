@@ -1,6 +1,13 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
+	<base href="<%=basepath %>" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8">
     <meta name="renderer" content="webkit"/>
     <meta name="force-rendering" content="webkit"/>
@@ -78,19 +85,19 @@
                 </tr> 
             </thead>
             <tbody>
+            <c:forEach items="${supplierList }" var="s">
                 <tr> 
                     <td></td>
                     <td> <a>修改</a>丨<a>添加</a>丨<a href="javascript:;" style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
-                    <td>190507004</td>
-                    <td>美容服务有限公司</td>
-                   
-                    <td>域名：cgqyzx.com</td>
-                    <td>81048555555</td>
-                    <td>2019-05-08</td>
-                    <td>gzwagnid666com</td>
+                    <td>${s.supplierId }</td>
+                    <td>${s.supplierName }</td>
+                    <td>${s.supeople }</td>
+                    <td>${s.supplierTel}</td>
+                    <td>${s.supplierEmail }</td>
+                    <td>${s.supplierAddress }</td>
                     
-                   
-               
+                   </tr>
+               </c:forEach>
                 
                 
             </tbody>  
@@ -192,3 +199,7 @@
  
 </script> 
 
+
+
+</body>
+</html>

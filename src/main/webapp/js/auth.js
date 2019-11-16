@@ -1,6 +1,6 @@
 var Auth = {
 	vars: {
-		lowin: document.querySelector('.lowin'),
+	lowin: document.querySelector('.lowin'),
 		lowin_brand: document.querySelector('.lowin-brand'),
 		lowin_wrapper: document.querySelector('.lowin-wrapper'),
 		lowin_login: document.querySelector('.lowin-login'),
@@ -65,7 +65,7 @@ var Auth = {
 
 		e.preventDefault();
 	},
-	loginback(e) {
+loginback(e) {
 		Auth.vars.password_group.classList.remove('lowin-animated');
 		Auth.vars.password_group.classList += ' lowin-animated-back';
 		Auth.vars.password_group.style.display = 'block';

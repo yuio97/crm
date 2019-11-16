@@ -1,9 +1,12 @@
 package com.crm.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.crm.bean.Procurement;
 import com.crm.dao.ProcurementMapper;
 
 @Service("orderService")
@@ -13,10 +16,11 @@ public class OrderServiceImpl implements OrderService{
 	private ProcurementMapper procurementMapper;
 
 	@Override
-	public void selectData(Integer clientId) {
+	public List<Procurement> selectData(Integer clientId) {
 		
-		procurementMapper.getProcurements(clientId);
-				
+		List<Procurement> procurements = procurementMapper.getProcurements(clientId);
+		
+		return procurements;
 	}
 
 	

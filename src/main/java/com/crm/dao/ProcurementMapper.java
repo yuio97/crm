@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.crm.bean.Procurement;
@@ -17,5 +19,5 @@ public interface ProcurementMapper {
 
     int updateByPrimaryKey(Procurement record);
     
-    int getProcurements(@Param("clientId") Integer clientId);
+    List<Procurement> getProcurements(@Param("clientId") Integer clientId);
 }
