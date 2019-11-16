@@ -150,4 +150,7 @@
       supplier_id = #{supplierId,jdbcType=INTEGER}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
+  <select id="getGoodsList" resultMap="BaseResultMap">
+  select * from Goods 
+  </select>
 </mapper>
