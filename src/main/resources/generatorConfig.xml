@@ -5,7 +5,7 @@
 <generatorConfiguration>
 	<!-- 制度MySQL驱动包的路径，别放在中文路径 -->
 	<classPathEntry
-		location="E:\local\repo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar" />
+		location="D:\local\repo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar" />
 	<context id="context1">
 		<commentGenerator>
 			<!--是否取消注销 -->
@@ -44,17 +44,20 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
  
- 
 		<!-- 配置表信息 -->
-
-			
-		<table schema="customer_relationship" tableName="goods"
-			domainObjectName="Goods" enableCountByExample="false"
+		<table schema="customer_relationship" tableName="off_task_details"
+			domainObjectName="OffTaskDetails" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="useActualColumnNames" value="false" />
 		</table>
 		
+		<table schema="customer_relationship" tableName="off_employee_monthly_attendance"
+			domainObjectName="OffEmployeeMonthlyAttendance" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="false" />
+		</table>
 
 	</context>
 </generatorConfiguration>

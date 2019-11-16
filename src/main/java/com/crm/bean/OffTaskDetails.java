@@ -11,6 +11,8 @@ public class OffTaskDetails {
 
     private Date detTime;
 
+    private String offContent;
+
     public Integer getOffId() {
         return offId;
     }
@@ -41,5 +43,13 @@ public class OffTaskDetails {
 
     public void setDetTime(Date detTime) {
         this.detTime = detTime;
+    }
+
+    public String getOffContent() {
+        return offContent;
+    }
+
+    public void setOffContent(String offContent) {
+        this.offContent = offContent == null ? null : offContent.trim();
     }
 }

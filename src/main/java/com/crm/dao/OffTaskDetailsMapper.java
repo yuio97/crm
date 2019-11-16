@@ -1,5 +1,9 @@
 package com.crm.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.crm.bean.OffTaskDetails;
 
 public interface OffTaskDetailsMapper {
@@ -14,4 +18,7 @@ public interface OffTaskDetailsMapper {
     int updateByPrimaryKeySelective(OffTaskDetails record);
 
     int updateByPrimaryKey(OffTaskDetails record);
+    
+    //查所有，参数：发布者id
+    List<OffTaskDetails> getAllTaskDetails(@Param("offPromulgatorId")Integer offPromulgatorId);
 }

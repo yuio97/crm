@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.OffEmployeeMonthlyAttendanceMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.OffEmployeeMonthlyAttendance" >
+    <id column="yue_task_statust_id" property="yueTaskStatustId" jdbcType="INTEGER" />
+    <result column="off_staff_id" property="offStaffId" jdbcType="INTEGER" />
+    <result column="sys_dept_id" property="sysDeptId" jdbcType="INTEGER" />
+    <result column="off_promulgator_id" property="offPromulgatorId" jdbcType="INTEGER" />
+    <result column="off_release_state" property="offReleaseState" jdbcType="VARCHAR" />
+    <result column="off_year_moon" property="offYearMoon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    yue_task_statust_id, off_staff_id, sys_dept_id, off_promulgator_id, off_release_state, 
+    off_year_moon
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from off_employee_monthly_attendance
+    where yue_task_statust_id = #{yueTaskStatustId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from off_employee_monthly_attendance
+    where yue_task_statust_id = #{yueTaskStatustId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.OffEmployeeMonthlyAttendance" >
+    insert into off_employee_monthly_attendance (yue_task_statust_id, off_staff_id, sys_dept_id, 
+      off_promulgator_id, off_release_state, off_year_moon
+      )
+    values (#{yueTaskStatustId,jdbcType=INTEGER}, #{offStaffId,jdbcType=INTEGER}, #{sysDeptId,jdbcType=INTEGER}, 
+      #{offPromulgatorId,jdbcType=INTEGER}, #{offReleaseState,jdbcType=VARCHAR}, #{offYearMoon,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.OffEmployeeMonthlyAttendance" >
+    insert into off_employee_monthly_attendance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="yueTaskStatustId != null" >
+        yue_task_statust_id,
+      </if>
+      <if test="offStaffId != null" >
+        off_staff_id,
+      </if>
+      <if test="sysDeptId != null" >
+        sys_dept_id,
+      </if>
+      <if test="offPromulgatorId != null" >
+        off_promulgator_id,
+      </if>
+      <if test="offReleaseState != null" >
+        off_release_state,
+      </if>
+      <if test="offYearMoon != null" >
+        off_year_moon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="yueTaskStatustId != null" >
+        #{yueTaskStatustId,jdbcType=INTEGER},
+      </if>
+      <if test="offStaffId != null" >
+        #{offStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="sysDeptId != null" >
+        #{sysDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="offPromulgatorId != null" >
+        #{offPromulgatorId,jdbcType=INTEGER},
+      </if>
+      <if test="offReleaseState != null" >
+        #{offReleaseState,jdbcType=VARCHAR},
+      </if>
+      <if test="offYearMoon != null" >
+        #{offYearMoon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.OffEmployeeMonthlyAttendance" >
+    update off_employee_monthly_attendance
+    <set >
+      <if test="offStaffId != null" >
+        off_staff_id = #{offStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="sysDeptId != null" >
+        sys_dept_id = #{sysDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="offPromulgatorId != null" >
+        off_promulgator_id = #{offPromulgatorId,jdbcType=INTEGER},
+      </if>
+      <if test="offReleaseState != null" >
+        off_release_state = #{offReleaseState,jdbcType=VARCHAR},
+      </if>
+      <if test="offYearMoon != null" >
+        off_year_moon = #{offYearMoon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where yue_task_statust_id = #{yueTaskStatustId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.OffEmployeeMonthlyAttendance" >
+    update off_employee_monthly_attendance
+    set off_staff_id = #{offStaffId,jdbcType=INTEGER},
+      sys_dept_id = #{sysDeptId,jdbcType=INTEGER},
+      off_promulgator_id = #{offPromulgatorId,jdbcType=INTEGER},
+      off_release_state = #{offReleaseState,jdbcType=VARCHAR},
+      off_year_moon = #{offYearMoon,jdbcType=VARCHAR}
+    where yue_task_statust_id = #{yueTaskStatustId,jdbcType=INTEGER}
+  </update>
+</mapper>

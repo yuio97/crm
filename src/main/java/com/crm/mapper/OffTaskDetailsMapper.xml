@@ -6,9 +6,10 @@
     <result column="det_task_status" property="detTaskStatus" jdbcType="VARCHAR" />
     <result column="off_promulgator_id" property="offPromulgatorId" jdbcType="INTEGER" />
     <result column="det_time" property="detTime" jdbcType="TIMESTAMP" />
+    <result column="off_content" property="offContent" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    off_id, det_task_status, off_promulgator_id, det_time
+    off_id, det_task_status, off_promulgator_id, det_time, off_content
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.crm.bean.OffTaskDetails" >
     insert into off_task_details (off_id, det_task_status, off_promulgator_id, 
-      det_time)
+      det_time, off_content)
     values (#{offId,jdbcType=INTEGER}, #{detTaskStatus,jdbcType=VARCHAR}, #{offPromulgatorId,jdbcType=INTEGER}, 
-      #{detTime,jdbcType=TIMESTAMP})
+      #{detTime,jdbcType=TIMESTAMP}, #{offContent,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.crm.bean.OffTaskDetails" >
     insert into off_task_details
@@ -41,6 +42,9 @@
       <if test="detTime != null" >
         det_time,
       </if>
+      <if test="offContent != null" >
+        off_content,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="offId != null" >
@@ -54,6 +58,9 @@
       </if>
       <if test="detTime != null" >
         #{detTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offContent != null" >
+        #{offContent,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="detTime != null" >
         det_time = #{detTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="offContent != null" >
+        off_content = #{offContent,jdbcType=VARCHAR},
+      </if>
     </set>
     where off_id = #{offId,jdbcType=INTEGER}
   </update>
@@ -76,7 +86,14 @@
     update off_task_details
     set det_task_status = #{detTaskStatus,jdbcType=VARCHAR},
       off_promulgator_id = #{offPromulgatorId,jdbcType=INTEGER},
-      det_time = #{detTime,jdbcType=TIMESTAMP}
+      det_time = #{detTime,jdbcType=TIMESTAMP},
+      off_content = #{offContent,jdbcType=VARCHAR}
     where off_id = #{offId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 新建SQL语句 -->
+  <!-- 根据发布者id查所有，id=方法名 -->
+  <select id="getAllTaskDetails" resultMap="BaseResultMap">
+  	select * from off_task_details where off_promulgator_id = #{offPromulgatorId}
+  </select>
 </mapper>
