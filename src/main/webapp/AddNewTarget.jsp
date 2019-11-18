@@ -37,7 +37,7 @@
             <p><i>温馨提示：</i>按需添加公司部门，注意数字值越小，部门就越靠前排</p>
         </div>
         <div class="kehubh_tj_k">
-            <form action="task/addTarget" class="layui-form layui-form-pane" action="">
+            <form action="task/addTarget" class="layui-form layui-form-pane" >
             <ul>   
                 <li>
                     <div class="left">添加目标：</div>

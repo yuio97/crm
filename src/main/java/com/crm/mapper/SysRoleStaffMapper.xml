@@ -99,6 +99,7 @@
 	WHERE srt.sys_role_id = #{staffId}  
   </select>
   
+  
   <resultMap type="com.crm.bean.SysRoleStaff" id="per_rol">
   	<id column="srl_id" jdbcType="INTEGER" property="srlId" />
     <result column="sys_staff_id" jdbcType="INTEGER" property="sysStaffId" />
@@ -125,4 +126,7 @@
 	  </collection>  	
 	    </collection>
   </resultMap>
+  
+  
+
 </mapper>

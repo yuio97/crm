@@ -55,8 +55,8 @@
 	             </td>
 	             <td>
 	             	<c:if test="${task.detTaskStatus == 0 }">
-	             		<!-- 传查出来的主键id，根据id修改状态 -->
-	             		<a href="task/updateDetTaskStatus?staskId=${task.offId }" class="btn btn-primary">发布</a>
+	             		<!-- task/updateDetTaskStatus?staskId=${task.offId } -->
+	             		<a href="task/selectStaff" class="btn btn-primary">发布</a>
 	             	</c:if>
 	             	<c:if test="${task.detTaskStatus == 1 }">
 						<a href="" class="btn btn-primary">查看</a>
