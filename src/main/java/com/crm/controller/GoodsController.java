@@ -30,7 +30,7 @@ public class GoodsController {
 		return "forward:/goods_list.jsp";
 			
 		}
-	@RequestMapping("/upload")
+	@RequestMapping("/addgoods")
 	public String upload(Goods goods,MultipartFile goodsImg,HttpServletRequest req) throws IllegalStateException, IOException
 	{
 		String showPath = null;
@@ -61,18 +61,40 @@ public class GoodsController {
 		
 		System.out.println(showPath);
 		System.out.println(goods.getGoodsName());
-		return "";
-	}
-	
-	
-	
-	@RequestMapping("/addgoods")
-	public void insert(Goods goods){
-		goodsService.insertSelective(goods);
+		
+		
+		
+			goodsService.insertSelective(goods);
+			
+			return "";
 		
 	}
-		
 	
+	
+	
+	
+	
+	@RequestMapping("/updategoods")
+	public void update(Goods goods){
+		goodsService.updateByPrimaryKey(goods);
+	
+	}
+	
+
+	
+	
+	@RequestMapping("/delectgoods")
+	public void delect(Integer goodsId){
+		goodsService.deleteByPrimaryKey(goodsId);
+		
+	}
+	@RequestMapping("/getGoodsId")	
+	public String selectBygoodsId(Goods goodsId,Map<String,Object> data){
+		Goods select = goodsService.select(goodsId);
+		data.put("goodslist", select); 
+		return "forward:/goods_update.jsp";
+		
+	}
 
 	
 

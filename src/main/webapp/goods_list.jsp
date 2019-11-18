@@ -60,7 +60,7 @@
 				<th lay-data="{field:'tel',align:'center',width:130}">价格</th>
 				<th lay-data="{field:'result',align:'center',minWidth:260}">警告数</th>
 				<th lay-data="{field:'addr',align:'center',minWidth:260}">供货商id</th>
-				<th lay-data="{field:'option',align:'center',width:130,toolbar:'#barDemo',fixed: 'right'}">操作</th>
+				<th lay-data="{field:'addt',align:'center',minWidth:260}">操作</th>
 			</tr> 
 		</thead>
 		<tbody>
@@ -76,6 +76,10 @@
 				<td>${g.goodsPrice }</td>
 				<td>${g.goodsMin}</td>
 				<td>${g.supplierId }</td>
+				<td>
+					<a href="/goods/getGoodsId?goodsId=${g.goodsId}" class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+					<a href="/goods/delectgoods" href="/goods/updategoods" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+				</td>
 				
 			</tr>
 			</c:forEach>
@@ -84,8 +88,8 @@
 		</tbody>  
 	</table>
 	<script type="text/html" id="barDemo">
-		<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
-		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		<a href="/goods/getgoodsId=${g.goodsId}" class="layui-btn layui-btn-xs" lay-event="edit" >修改</a>
+		<a href="/goods/delectgoods" href="/goods/updategoods"class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script> 
 </div> 
 <script type="text/javascript">

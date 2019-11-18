@@ -85,7 +85,7 @@
                     <div class="left">价格：</div>
                     
                     <div class="right"> 
-                        <input type="text" name="goodsprice" required lay-verify="required" autocomplete="off" class="layui-input">
+                        <input type="text" name="goodsPrice" required lay-verify="required" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                
@@ -120,7 +120,7 @@
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
-                        <button class="button_qr">确定添加</button>
+                        <button class="button_qr">  确定添加</button>
                     </div>
                 </li>
             </ul> 
