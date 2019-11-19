@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.crm.bean.OffTaskDetails;
+import com.crm.bean.OffTaskRelease;
 import com.crm.bean.SysAccount;
 import com.crm.dao.OffTaskDetailsMapper;
+import com.crm.dao.OffTaskReleaseMapper;
 
 @Service("taskService")
 public class TaskServiceImpl implements TaskService{
@@ -20,15 +22,18 @@ public class TaskServiceImpl implements TaskService{
 
 	@Autowired//跟@Resource一样
 	private OffTaskDetailsMapper offTaskDetailsMapper;
+	
+	@Resource
+	private OffTaskReleaseMapper offTaskReleaseMapper;
 
-	@Override
+/*	@Override
 	public void updateDetTaskStatus(int id) {
 		//逻辑
 		OffTaskDetails offTaskDetails = new OffTaskDetails();
 		offTaskDetails.setOffId(id);
 		offTaskDetails.setDetTaskStatus("1");//根据set到的当前id设置发布状态默认值为1
 		offTaskDetailsMapper.updateByPrimaryKeySelective(offTaskDetails);
-	}
+	}*/
 
 	@Override
 	public List<OffTaskDetails> getAllTaskDetails() {
@@ -45,6 +50,19 @@ public class TaskServiceImpl implements TaskService{
 		record.setOffPromulgatorId(1);
 		record.setDetTaskStatus("0");//设置3个默认值
 		int insert = offTaskDetailsMapper.insert(record);
+		return insert;
+	}
+
+	@Override
+	public OffTaskDetails selectByPrimaryKey(Integer offId) {
+		OffTaskDetails selectByPrimaryKey = offTaskDetailsMapper.selectByPrimaryKey(offId);
+//		System.out.println(selectByPrimaryKey.getOffContent());
+		return selectByPrimaryKey;
+	}
+
+	@Override
+	public int insert(OffTaskRelease record) {
+		int insert = offTaskReleaseMapper.insert(record);
 		return insert;
 	}
 
