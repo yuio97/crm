@@ -25,4 +25,20 @@ public class AccountServiceImpl implements AccountService{
 		
 	}
 
+	@Override
+	public SysAccount getAccountByAccountId(Integer id) {
+		
+		return sysAccountMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public boolean updataAccountPass(SysAccount account) {
+		if(sysAccountMapper.updateByPrimaryKeySelective(account) == 0) {
+			return false;
+		}else {
+			return true;
+		}
+		
+	}
+
 }

@@ -37,7 +37,7 @@
         </div>  
         <!-- 下面写内容 -->
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="">
+            <form onsubmit="return checkform()" id="checkformf" class="layui-form layui-form-pane" action="updateAccountPass">
             <ul> 
 <!--                 <li>
                     <div class="left">公司名称:</div>
@@ -48,32 +48,63 @@
                 <li>
                     <div class="left">原密码：</div>
                     <div class="right"> 
-                        <input type="text" name="pass" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                        <input type="text" name="pass" id="jPass" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
                     <div class="left">新密码：</div>
                     
                     <div class="right"> 
-                        <input type="text" name="sysAccountPass" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        <input type="text" name="sysAccountPass" id="newPass" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
                     <div class="left">确认新密码：</div>
                     <div class="right"> 
-                        <input type="text" name="sysAccountPass" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        <input type="text" name="checkPass" id="checkpass" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
-                        <button class="button_qr">确定添加保护</button>
+
+                        <input class="button_qr" type="submit" value="修改" >
                     </div>
                 </li>
             </ul> 
             </form>
         </div>
     </div>
+    
+    <script>
+    	function checkform(){
+           var jPass = document.getElementById('jPass').value;
+           var newPass = document.getElementById('newPass').value;
+           var checkpass = document.getElementById('checkpass').value;
+
+            
+           if(jPass == newPass){
+    
+               alert('不能修改为当前密码');
+               return false;
+           }
+           if(newPass == checkpass)
+           {
+              
+              return true;
+              
+               
+           }
+           alert('两次密码不一致')
+           
+           return false;
+           
+           
+        }
+
+        
+        
+    </script>
     <!-- layui js -->
     <script src="layui/layui.js"></script>
 </body>
