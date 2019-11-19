@@ -93,11 +93,11 @@
   
   <select id="getProcurements" resultMap="ProcurementsResultMap">
   	SELECT 
-	p.*,c.*,pd.kgoods_id,pd.procurement_details_id,kc.jxj,kc.kgoods_name,pd.sys_account_id as procurement_details_num
+	p.*,c.*,pd.kgoods_id,pd.procurement_details_id,kc.jxj,customer_name,sys_account_name,kc.kgoods_name,pd.sys_account_id as procurement_details_num
 	FROM procurement p INNER JOIN procurement_details pd
 	ON p.procurement_id =  pd.procurement_id
 	INNER JOIN kc_goods kc ON kc.kcgoods_id = pd.kgoods_id INNER JOIN customer AS c ON p.customer_id = c.customer_id
-	WHERE p.customer_id = '1001'
+	INNER JOIN sys_account s ON p.sys_account_id = s.sys_account_id
 	<where>
 		<if test="clientId != -1">
 			p.customer_id = #{clientId}
@@ -112,6 +112,7 @@
     <result column="procurement_case" property="procurementCase" jdbcType="VARCHAR" />
     <result column="preorder_id" property="preorderId" jdbcType="INTEGER" />
     <result column="sys_account_id" property="sysAccountId" jdbcType="INTEGER" />
+    <result column="sys_account_name" property="sysAccountName" jdbcType="VARCHAR" />
     
     <association property="customer" column="customer_id" javaType="com.crm.bean.Customer">
     <id column="customer_id" property="customerId" jdbcType="INTEGER" />
