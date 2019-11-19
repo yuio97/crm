@@ -96,4 +96,5 @@
   <select id="getAllTaskDetails" resultMap="BaseResultMap">
   	select * from off_task_details where off_promulgator_id = #{offPromulgatorId}
   </select>
+  
 </mapper>

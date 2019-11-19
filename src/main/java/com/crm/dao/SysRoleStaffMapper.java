@@ -18,4 +18,6 @@ public interface SysRoleStaffMapper {
     int updateByPrimaryKey(SysRoleStaff record);
     
     List<SysRoleStaff> getPermissionByStaffId(int staffId);
+    
+
 }

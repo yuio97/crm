@@ -250,4 +250,8 @@
   <select id="getInfoByStaffName" resultMap="BaseResultMap">
   	select * from sys_staff_info where sys_staff_name=#{name}
   </select>
+  
+  <select id="getAllStaff" resultMap="BaseResultMap">
+  	select * from sys_staff_info
+  </select>
 </mapper>

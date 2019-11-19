@@ -1,5 +1,8 @@
 package com.crm.dao;
 
+import java.util.List;
+
+import com.crm.bean.SysRoleStaff;
 import com.crm.bean.SysStaffInfo;
 
 public interface SysStaffInfoMapper {
@@ -16,4 +19,6 @@ public interface SysStaffInfoMapper {
     int updateByPrimaryKey(SysStaffInfo record);
     
     SysStaffInfo getInfoByStaffName(String name);
+    
+    List<SysStaffInfo> getAllStaff();
 }

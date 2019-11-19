@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.crm.bean.OffTaskDetails;
 import com.crm.bean.SysAccount;
+import com.crm.bean.SysStaffInfo;
 import com.crm.bean.s;
 import com.crm.dao.OffTaskDetailsMapper;
+import com.crm.service.StaffInfoService;
 import com.crm.service.TaskService;
 
 @Controller
@@ -26,6 +28,9 @@ public class TaskDetilController {
 	
 	@Resource
 	private TaskService taskService;//service中的id
+	
+	@Resource
+	private StaffInfoService StaffInfoService;
 	
 	@RequestMapping("/getAllTaskDetails")
 	public String getAllTaskDetl(Map<String, Object > data) {
@@ -39,6 +44,14 @@ public class TaskDetilController {
 		taskService.updateDetTaskStatus(staskId);
 		return "redirect:/task/getAllTaskDetails";
 	}
+	
+	@RequestMapping("/selectStaff")
+	public String selectStaff(Map<String, Object> data) {
+		List<SysStaffInfo> staffList = StaffInfoService.getStaffList();
+		data.put("staffList", staffList);
+		return "forward:/UpdateNewTarget.jsp";
+	}
+
 	
 	@RequestMapping("/addTarget")
 	public String addTarget(String detTaskStatus) {//这里写添加的Bean内的字段,有几个传几个(逗号分隔),

@@ -101,8 +101,8 @@
 			el:'#menuList',
 			data:
 			{
-				menuList:null,
-				user:null
+				menuList:[],
+				user:{}
 			},
 			created() {
 				//获取外部Vue对象
