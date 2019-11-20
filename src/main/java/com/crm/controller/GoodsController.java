@@ -25,7 +25,6 @@ public class GoodsController {
 	@RequestMapping("/goodsList")
 	public String getGoodsList(Map<String,Object> data){
 		List<Goods> goodsList = goodsService.getGoodsList();
-		System.out.println(goodsList);
 		data.put("goodsList", goodsList);
 		return "forward:/goods_list.jsp";
 			
@@ -61,12 +60,10 @@ public class GoodsController {
 		
 		System.out.println(showPath);
 		System.out.println(goods.getGoodsName());
-		
-		
-		
+	
 			goodsService.insertSelective(goods);
 			
-			return "";
+			return "redirect:/goods_add.jsp";
 		
 	}
 	
@@ -75,23 +72,24 @@ public class GoodsController {
 	
 	
 	@RequestMapping("/updategoods")
-	public void update(Goods goods){
+	public String update(Goods goods){
 		goodsService.updateByPrimaryKey(goods);
+		return "forward:/goods_list.jsp";
+		
 	
 	}
 	
-
-	
-	
 	@RequestMapping("/delectgoods")
-	public void delect(Integer goodsId){
+	public String delect(Integer goodsId){
 		goodsService.deleteByPrimaryKey(goodsId);
+		return "forward:/goods_list.jsp";
 		
 	}
 	@RequestMapping("/getGoodsId")	
 	public String selectBygoodsId(Goods goodsId,Map<String,Object> data){
 		Goods select = goodsService.select(goodsId);
 		data.put("goodslist", select); 
+		
 		return "forward:/goods_update.jsp";
 		
 	}

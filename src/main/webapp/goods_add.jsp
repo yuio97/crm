@@ -29,7 +29,7 @@
 
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
-    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+   
     
 </head>
 
@@ -119,8 +119,8 @@
                     </li> 
                 <li>
                     <div class="left"> &nbsp;</div>
-                    <div class="right"> 
-                        <button class="button_qr">  确定添加</button>
+                    <div class="right" id="tj"> 
+                        <button class="button_qr" @click="add">  确定添加</button>
                     </div>
                 </li>
             </ul> 
@@ -135,7 +135,19 @@
     </style>
 	
     <script src="layui/layui.js"></script>
-    
+     <script type="text/javascript" src="js/jquery-1.11.0.min.js">
+     var vm = new Vue({
+    	 el:'#tj',
+    	 data:{},
+    	 methods:{
+    		 add:function(){
+    			 alert("添加成功")
+    		 }
+    	 }
+     
+    	 
+     })
+     </script>
 </body>
 
 </html>

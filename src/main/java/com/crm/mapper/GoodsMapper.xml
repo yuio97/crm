@@ -158,4 +158,9 @@
   
    select * from Goods where goods_id=#{goodsId}
   </select>
+  
+  <select id="selectlike" resultMap="BaseResultMap">
+  
+   select * from Goods where goods_name like  %#{goodsName}%
+  </select>
 </mapper>

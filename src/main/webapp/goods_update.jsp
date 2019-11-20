@@ -40,52 +40,52 @@
            
         </div>
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="goods/updategoods" enctype="multipart/from-data" mothed="post">
+            <form class="layui-form layui-form-pane" action="goods1/updategoods" enctype="multipart/from-data" mothed="post">
             <ul> 
-                  
+                  <input type="hidden" name="goodsId" value="${goodslist.goodsId}">
                 <li>
                     <div class="left">原材料名称：</div>
                     <div class="right"> 
-                        <input type="text" value="${goodslist.goodsName}" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                        <input type="text" name="goodsName" value="${goodslist.goodsName}" required lay-verify="required"  autocomplete="off" class="layui-input">   
                     </div>
                 </li>
                  <li>
                     <div class="left">生产日期：</div>
                     <div class="right"> 
-                        <input type="date" value="${goodslist.goodsDate}" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                        <input type="date" name="goodsDate" value="${goodslist.goodsDate}" required lay-verify="required"  autocomplete="off" class="layui-input">   
                     </div>
                 </li>
                  <li>
                     <div class="left">原材料说明：</div>
                     <div class="right"> 
-                        <input type="text" value="${goodslist.goodsSm}" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                        <input type="text" name="goodsSm" value="${goodslist.goodsSm}" required lay-verify="required"  autocomplete="off" class="layui-input">   
                     </div>
                 </li>
                  
                 <li>
                         <div class="left">图片：</div>
                         <div class="right">
-                                <input style="margin-top: 8px;" type="file" value="${goodslist.goodsImg}">
+                                <input style="margin-top: 8px;" type="file" name="goodsImg" value="${goodslist.goodsImg}">
                         </div>
                     </li> 
                 <li>
                     <div class="left">数量：</div>
                     <div class="right"> 
-                        <input type="text" value="${goodslist.goodsNum}" required lay-verify="required"  autocomplete="off" class="layui-input">
+                        <input type="text" name="goodsNum" value="${goodslist.goodsNum}" required lay-verify="required"  autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
                     <div class="left">价格：</div>
                     
                     <div class="right"> 
-                        <input type="text" value="${goodslist.goodsPrice}" required lay-verify="required" autocomplete="off" class="layui-input">
+                        <input type="text" name="goodsPrice" value="${goodslist.goodsPrice}" required lay-verify="required" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                
                 <li>
                     <div class="left">状态：</div>
                     <div class="right"> 
-                        <input type="text" value="${goodslist.goodsState}" required lay-verify="required"  autocomplete="off" class="layui-input">
+                        <input type="text" name="goodsState" value="${goodslist.goodsState}" required lay-verify="required"  autocomplete="off" class="layui-input">
                     </div>
                 </li>
                
@@ -93,13 +93,13 @@
                 <li>
                         <div class="left">警告数：</div>
                         <div class="right"> 
-                            <input type="text" value="${goodslist.goodsMin}" required lay-verify="required"  autocomplete="off" class="layui-input">
+                            <input type="text" name="goodsMin" value="${goodslist.goodsMin}" required lay-verify="required"  autocomplete="off" class="layui-input">
                         </div>
                     </li>
                
                
                 
-                 <li style="height: 38px; overflow:initial;">
+                  <%-- <li style="height: 38px; overflow:initial;">
                         <div class="left">供货商编号</div>                    
                            <div class="right"> 
                             <select name="city" lay-verify="">
@@ -109,11 +109,11 @@
 
                             </select> 
                         </div>
-                    </li> 
-                <li>
+                    </li>  --%>
+                <li> 
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
-                        <button class="button_qr">  确定添加</button>
+                        <button class="button_qr">  确定修改</button>
                     </div>
                 </li>
             </ul> 
