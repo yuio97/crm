@@ -56,7 +56,7 @@
 	             <td>
 	             	<c:if test="${task.detTaskStatus == 0 }">
 	             		<!-- task/updateDetTaskStatus?staskId=${task.offId } -->
-	             		<a href="task/selectStaff" class="btn btn-primary">
+	             		<a href="task/selectStaff?staskId=${task.offId }" class="btn btn-primary">
 	             			<input type="hidden" name="offId" value="${task.offId }">
 	             			发布
 	             		</a>

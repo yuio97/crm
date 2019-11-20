@@ -14,7 +14,7 @@ public interface TaskService {
 	int insert(OffTaskDetails record);//add所有，所以是bean类型，名字自取
 	
 	//根据id修改发布状态
-//	void updateDetTaskStatus(int id);
+	void updateDetTaskStatus(int id);
 	
 	//根据id查offId和offContent和offPromulgatorId
 	OffTaskDetails selectByPrimaryKey(Integer offId);

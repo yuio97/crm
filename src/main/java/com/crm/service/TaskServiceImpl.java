@@ -26,21 +26,24 @@ public class TaskServiceImpl implements TaskService{
 	@Resource
 	private OffTaskReleaseMapper offTaskReleaseMapper;
 
-/*	@Override
+	@Override
 	public void updateDetTaskStatus(int id) {
 		//逻辑
 		OffTaskDetails offTaskDetails = new OffTaskDetails();
 		offTaskDetails.setOffId(id);
 		offTaskDetails.setDetTaskStatus("1");//根据set到的当前id设置发布状态默认值为1
 		offTaskDetailsMapper.updateByPrimaryKeySelective(offTaskDetails);
-	}*/
+	}
 
 	@Override
 	public List<OffTaskDetails> getAllTaskDetails() {
-		
 //		Subject subject = SecurityUtils.getSubject();
 //		SysAccount sysAccount = (SysAccount)subject.getPrincipal();
-		List<OffTaskDetails> allTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1);//设置默认发布者编号为1
+		Date date = new Date();
+		int month = date.getMonth()+1;//月份在eclipse中从0开始
+		int year = date.getYear()+1900;//默认从1900年开始计年
+		//设置默认发布者编号为1,时间为当前年月
+		List<OffTaskDetails> allTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year);
 		return allTaskDetails;
 	}
 
@@ -56,7 +59,6 @@ public class TaskServiceImpl implements TaskService{
 	@Override
 	public OffTaskDetails selectByPrimaryKey(Integer offId) {
 		OffTaskDetails selectByPrimaryKey = offTaskDetailsMapper.selectByPrimaryKey(offId);
-//		System.out.println(selectByPrimaryKey.getOffContent());
 		return selectByPrimaryKey;
 	}
 

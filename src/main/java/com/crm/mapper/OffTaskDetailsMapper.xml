@@ -92,9 +92,12 @@
   </update>
   
   <!-- 新建SQL语句 -->
-  <!-- 根据发布者id查所有，id=方法名 -->
+  <!-- 根据发布者id查所有，id=方法名。年和月都是@Param中的值 -->
   <select id="getAllTaskDetails" resultMap="BaseResultMap">
-  	select * from off_task_details where off_promulgator_id = #{offPromulgatorId}
+  	select * from off_task_details 
+  	where off_promulgator_id = #{offPromulgatorId} 
+  	and month(det_time) = #{month} 
+  	AND year(det_time)  = #{year}
   </select>
   
 </mapper>
