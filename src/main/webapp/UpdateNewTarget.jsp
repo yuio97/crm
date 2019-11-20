@@ -62,7 +62,7 @@
 				</c:forEach>
 			</tbody>  
 		</table>
-		<input type="hidden" name="staskId" value="1"/>
+		<input type="hidden" name="staskId" value="${staskId}"/>
 		<button style="background-color:#205B9E;width:200px;height:50px;color:white;border-radius:5px">确定发布</button>
 	</form>
 </div> 
