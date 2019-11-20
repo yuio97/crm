@@ -70,7 +70,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</thead>
 		<tbody>
 			<tr v-for="(pro,j) in prolist_num" :key="j">
-				<td><input type="cheachbox"></td>
+				<td><input type="checkbox"></td>
 				<td>{{pro.procurementId}}</td>
 				<td>{{pro.customerId}}</td>
 				<td>{{pro.procurementCase}}</td>
@@ -80,7 +80,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>{{pro.customer.copanyAdress}}</td>
 				<td>{{pro.customer.copanyCode}}</td>
                 <td>{{pro.sysAccountName}}</td>
-				<td><a style="font-size:12px">详情</a><a style="font-size:12px">删除</a></td>                
+				<td><a style="font-size:15px" :href="'/order/getOrderOne?id='+pro.procurementId">详情</a>  <a style="font-size:15px">删除</a></td>                
 			</tr> 
 		</tbody>  
 	</table>
@@ -102,25 +102,6 @@ var v = new Vue({
     {
 		customerlist:[],
 		customerId:'-1',
-		prolist:
-		{
-			procurementId:'',
-			procurementCase:'',
-			kgoodsId:'',
-			kgoodsName:'',
-			kcMassage:'',
-			jxj:'',
-			sysAccountId:'',//商品数量
-			kcNum:'',
-			customerId:'',
-			customerName:'',
-			customerEmal:'',
-			customerIphone:'',
-			copanyAdress:'',
-			copanyCode:'',
-			customerState:'',
-			sysAccountName:''
-		},
 		prolist_num:[]
 		
     },
@@ -148,7 +129,7 @@ var v = new Vue({
 		
     },
     created:function(){
-		var	_this = this
+			var	_this = this
              $.ajax({
 				 type: "GET",
 				 url: "/selectcus",
@@ -159,8 +140,8 @@ var v = new Vue({
 					_this.customerlist = response;
 				 }
 			 });
+		    this.getCusId();
 		}
-
 });
 
 </script>

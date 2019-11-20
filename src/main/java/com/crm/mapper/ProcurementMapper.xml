@@ -99,11 +99,20 @@
 	INNER JOIN kc_goods kc ON kc.kcgoods_id = pd.kgoods_id INNER JOIN customer AS c ON p.customer_id = c.customer_id
 	INNER JOIN sys_account s ON p.sys_account_id = s.sys_account_id
 	<where>
-		<if test="clientId != -1">
+		<if test="clientId != null and clientId != -1">
 			p.customer_id = #{clientId}
 		</if>
 	</where>
-
+  </select>
+  
+  <select id="getProcurementById" resultMap="ProcurementsResultMap">
+  	SELECT 
+	p.*,c.*,pd.kgoods_id,pd.procurement_details_id,kc.jxj,customer_name,sys_account_name,kc.kgoods_name,pd.sys_account_id as procurement_details_num
+	FROM procurement p INNER JOIN procurement_details pd
+	ON p.procurement_id =  pd.procurement_id
+	INNER JOIN kc_goods kc ON kc.kcgoods_id = pd.kgoods_id INNER JOIN customer AS c ON p.customer_id = c.customer_id
+	INNER JOIN sys_account s ON p.sys_account_id = s.sys_account_id
+	where p.procurement_id = #{id}
   </select>
   
    <resultMap id="ProcurementsResultMap" type="com.crm.bean.Procurement" >

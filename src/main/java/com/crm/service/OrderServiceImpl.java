@@ -23,6 +23,14 @@ public class OrderServiceImpl implements OrderService{
 		return procurements;
 	}
 
+	@Override
+	public Procurement getProcurementById(Integer id) {
+
+		Procurement procurementById = procurementMapper.getProcurementById(id);
+		
+		return procurementById;
+	}
+
 	
 
 }
