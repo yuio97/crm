@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.crm.bean.Supplier;
 import com.crm.service.SupplierService;
@@ -20,12 +21,15 @@ public class SupplierController {
 	
 	
 	@RequestMapping("/getSupplierList")
-	public String getSupplierList(Map<String,Object> data){
+	@ResponseBody
+	public List<Supplier> getSupplierList(Map<String,Object> data){
 		List<Supplier> supplierList = supplierService.getSupplierList();
 		data.put("supplierList", supplierList);
-		return "forward:/goods_add.jsp";
+		
+		return supplierList;
 		
 	}
+	
 	@RequestMapping("/addSupplier")
 	public String addSupplier(Supplier supplier){
 		supplierService.addSupplier(supplier);

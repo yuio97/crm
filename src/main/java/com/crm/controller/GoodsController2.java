@@ -30,7 +30,7 @@ public class GoodsController2 {
 		Goods select = goodsService.select(goodsId);
 		data.put("goodslist", select); 
 		
-		return "forward:/goods/delectgoods";
+		return "redirect:/goods/delectgoods";
 		
 	}
 	

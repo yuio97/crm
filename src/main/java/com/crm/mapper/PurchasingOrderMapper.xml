@@ -19,18 +19,21 @@
     porder_id, supplier_id, pay, pay_qk, porder_jz, porder_time, jh_time, jh_address, 
     sys_staff_id, p_massage, gs_id, p_last_time
   </sql>
+  <select id="getPurchasingOrderList" resultMap="BaseResultMap">
+  	select * from purchasing_order
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from purchasing-order
+    from purchasing_order
     where porder_id = #{porderId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from purchasing-order
+    delete from purchasing_order
     where porder_id = #{porderId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.crm.bean.PurchasingOrder" >
-    insert into purchasing-order (porder_id, supplier_id, pay, 
+    insert into purchasing_order (porder_id, supplier_id, pay, 
       pay_qk, porder_jz, porder_time, 
       jh_time, jh_address, sys_staff_id, 
       p_massage, gs_id, p_last_time
@@ -42,7 +45,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.crm.bean.PurchasingOrder" >
-    insert into purchasing-order
+    insert into purchasing_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="porderId != null" >
         porder_id,
@@ -121,7 +124,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.PurchasingOrder" >
-    update purchasing-order
+    update purchasing_order
     <set >
       <if test="supplierId != null" >
         supplier_id = #{supplierId,jdbcType=INTEGER},
@@ -160,7 +163,7 @@
     where porder_id = #{porderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.crm.bean.PurchasingOrder" >
-    update purchasing-order
+    update purchasing_order
     set supplier_id = #{supplierId,jdbcType=INTEGER},
       pay = #{pay,jdbcType=REAL},
       pay_qk = #{payQk,jdbcType=VARCHAR},

@@ -23,7 +23,7 @@ public class GoodsServiceImple implements GoodsService{
 
 	@Override
 	public int updateByPrimaryKey(Goods goods) {
-		return goodsMapper.updateByPrimaryKey(goods);
+		return goodsMapper.updateByPrimaryKeySelective(goods);
 		 
 	}
 

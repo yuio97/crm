@@ -29,7 +29,8 @@
 
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
-   
+    <script type="text/javascript" src="js/vue.min.js"></script>
+     <script src="js/jquery-1.11.0.min.js"></script>
     
 </head>
 
@@ -47,7 +48,7 @@
            
         </div>
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="goods/addgoods" enctype="multipart/from-data" mothed="post">
+            <form class="layui-form layui-form-pane" action="goods/addgoods" enctype="multipart/form-data" method="post">
             <ul> 
                   
                 <li>
@@ -59,7 +60,7 @@
                  <li>
                     <div class="left">生产日期：</div>
                     <div class="right"> 
-                        <input type="date" name="goodsDate" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                       <input type="text" class="layui-input"  id="test3" placeholder="yyyy-MM-dd">   
                     </div>
                 </li>
                  <li>
@@ -72,7 +73,7 @@
                 <li>
                         <div class="left">图片：</div>
                         <div class="right">
-                                <input style="margin-top: 8px;" type="file" name="goodsImg">
+                                <input style="margin-top: 8px;" type="file" name="gImg">
                         </div>
                     </li> 
                 <li>
@@ -89,14 +90,17 @@
                     </div>
                 </li>
                
-                <li>
-                    <div class="left">状态：</div>
-                    <div class="right"> 
-                        <input type="text" name="goodsState" required lay-verify="required"  autocomplete="off" class="layui-input">
-                    </div>
-                </li>
-               
-                
+                <li style="height: 38px; overflow:initial;">
+                  <div class="left">状态：</div>
+                  
+	                 <div class="right"> 
+                            <select name="city" lay-verify="">
+                                <option value="可用">1</option>
+                                <option value="不可用">0</option>
+                               
+                            </select> 
+                        </div>
+					 </li>
                 <li>
                         <div class="left">警告数：</div>
                         <div class="right"> 
@@ -104,15 +108,15 @@
                         </div>
                     </li>
                
-               
                 
                  <li style="height: 38px; overflow:initial;">
                         <div class="left">供货商编号</div>                    
-                           <div class="right"> 
+                           <div class="right" id="xz"> 
                             <select name="city" lay-verify="">
-                            <c:forEach items="${supplierList}" var="s">
+                            <option v-for="sup in supplier" >${sup.supplierId }</option>
+                            <%-- <c:forEach items="${supplierList}" var="s">
                             	<option value="${s.supplierId }">${s.supplierName }</option>
-                            </c:forEach>
+                            </c:forEach> --%>
 
                             </select> 
                         </div>
@@ -135,13 +139,13 @@
     </style>
 	
     <script src="layui/layui.js"></script>
-     <script type="text/javascript" src="js/jquery-1.11.0.min.js">
+     <script >
      var vm = new Vue({
     	 el:'#tj',
     	 data:{},
     	 methods:{
     		 add:function(){
-    			 alert("添加成功")
+    			 
     		 }
     	 }
      
@@ -151,6 +155,7 @@
 </body>
 
 </html>
+
 <script>
         layui.use(['form', 'layedit', 'laydate'], function(){
           var form = layui.form
@@ -159,7 +164,42 @@
           ,laydate = layui.laydate;
         });
         </script>
+        <script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate; 
+  
+   laydate.render({
+    elem: '#test3'
+  });
+});
+</script>
+<script>
+new Vue({
+    el:'#xz',
+    data:{
+        supplier:[]
+    },
+    methods:{
+
+    },
+    created:function(){
+    	console.log("sdfsd");
+       this_a=this
+        $.ajax({
+            type: "GET",
+            url: "/supplier/getSupplierList",
+            data: null,
+            dataType: "json",
+            success: function (response) {
+            	this_a.supplier=response;
+            	console.log(response);
+            }
+        });
+    }
 
 
+  })
+</script>
+  
 </body>
 </html>

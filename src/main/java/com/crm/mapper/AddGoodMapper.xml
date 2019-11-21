@@ -11,6 +11,9 @@
     <result column="gs_id" property="gsId" jdbcType="INTEGER" />
     <result column="addg_last_time" property="addgLastTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <select id="getAddGoodList" resultMap="BaseResultMap" >
+  select * from add_goods 
+  </select>
   <sql id="Base_Column_List" >
     addg_id, goods_id, addg_time, addg_state, sys_staff_id, addg_massage, gs_id, addg_last_time
   </sql>

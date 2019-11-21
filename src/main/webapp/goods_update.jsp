@@ -30,6 +30,7 @@
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
     
 </head>
 
@@ -52,8 +53,12 @@
                  <li>
                     <div class="left">生产日期：</div>
                     <div class="right"> 
-                        <input type="date" name="goodsDate" value="${goodslist.goodsDate}" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                       <input type="text" class="layui-input"  id="test3" value="${goodslist.goodsDate}" name="goodsDate">   
                     </div>
+                    <%-- <div class="right"> 
+                    
+                      <fmt><input type="date" value="${goodslist.goodsDate}" name="goodsDate"  >   </fmt>  
+                    </div> --%>
                 </li>
                  <li>
                     <div class="left">原材料说明：</div>
@@ -82,11 +87,16 @@
                     </div>
                 </li>
                
-                <li>
+                <li style="height: 38px; overflow:initial;">
                     <div class="left">状态：</div>
-                    <div class="right"> 
-                        <input type="text" name="goodsState" value="${goodslist.goodsState}" required lay-verify="required"  autocomplete="off" class="layui-input">
-                    </div>
+                     <div class="right"> 
+                            <select lay-verify="" name="goodsState" >
+                                <option value="1" <c:if test="${goodslist.goodsState=='1'}" ></c:if>></option>
+                                <option value="0" <c:if test="${goodslist.goodsState=='0'}" ></c:if>> </option>
+                               
+                            </select> 
+                        </div>
+                   
                 </li>
                
                 
@@ -99,17 +109,18 @@
                
                
                 
-                  <%-- <li style="height: 38px; overflow:initial;">
-                        <div class="left">供货商编号</div>                    
-                           <div class="right"> 
+                   <li style="height: 38px; overflow:initial;">
+                        <div class="left">选择供应商</div>                    
+                           <div class="right" id="xz"> 
                             <select name="city" lay-verify="">
-                            <c:forEach items="${supplierList}" var="s">
+                            <option v-for="sup in supplier" >${sup.supplierId }</option>
+                            <%-- <c:forEach items="${supplierList}" var="s">
                             	<option value="${s.supplierId }">${s.supplierName }</option>
-                            </c:forEach>
+                            </c:forEach> --%>
 
                             </select> 
                         </div>
-                    </li>  --%>
+                    </li>  
                 <li> 
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
@@ -141,6 +152,40 @@
         });
         </script>
 
+<script type="text/javascript">
+new Vue({
+    el:'#xz',
+    data:{
+        supplier:[]
+    },
+    methods:{
 
+    },
+    created:function(){
+       this_a=this
+        $.ajax({
+            type: "GET",
+            url: "/supplier/getSupplierList",
+            data: null,
+            dataType: "json",
+            success: function (response) {
+            	this_a.suppiler=response;
+            }
+        });
+    }
+
+
+  })
+ 
+</script>
+ <script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate; 
+  
+   laydate.render({
+    elem: '#test3'
+  });
+});
+</script>
 </body>
 </html>

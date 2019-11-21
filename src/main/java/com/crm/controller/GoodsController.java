@@ -30,21 +30,21 @@ public class GoodsController {
 			
 		}
 	@RequestMapping("/addgoods")
-	public String upload(Goods goods,MultipartFile goodsImg,HttpServletRequest req) throws IllegalStateException, IOException
+	public String upload(Goods goods,MultipartFile gImg,HttpServletRequest req) throws IllegalStateException, IOException
 	{
 		String showPath = null;
 		//判断文件是否存在
-		if(goodsImg != null && !goodsImg.isEmpty())
+		if(gImg != null && !gImg.isEmpty())
 		{
+		
 			String realPath = req.getServletContext().getRealPath("/upload");
 			File dir = new File(realPath);
 			if(!dir.exists())
 			{
 				dir.mkdirs();
 			}
-			
 			//获取原始文件名
-			String originalFilename = goodsImg.getOriginalFilename();
+			String originalFilename = gImg.getOriginalFilename();
 			
 			//截取出后缀名
 			String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -53,17 +53,16 @@ public class GoodsController {
 			String savePath = realPath + "/" + fileName;
 			
 			//存储文件到服务器
-			goodsImg.transferTo(new File(savePath));
+			gImg.transferTo(new File(savePath));
 			showPath = "upload/"+fileName;
 			
 		}
 		
 		System.out.println(showPath);
-		System.out.println(goods.getGoodsName());
-	
-			goodsService.insertSelective(goods);
-			
-			return "redirect:/goods_add.jsp";
+		goods.setGoodsImg(showPath);
+		goodsService.insertSelective(goods);
+		
+		return "redirect:/goods_add.jsp";
 		
 	}
 	
@@ -71,13 +70,6 @@ public class GoodsController {
 	
 	
 	
-	@RequestMapping("/updategoods")
-	public String update(Goods goods){
-		goodsService.updateByPrimaryKey(goods);
-		return "forward:/goods_list.jsp";
-		
-	
-	}
 	
 	@RequestMapping("/delectgoods")
 	public String delect(Integer goodsId){

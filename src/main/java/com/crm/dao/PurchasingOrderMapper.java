@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import com.crm.bean.PurchasingOrder;
 
 public interface PurchasingOrderMapper {
@@ -14,4 +16,6 @@ public interface PurchasingOrderMapper {
     int updateByPrimaryKeySelective(PurchasingOrder record);
 
     int updateByPrimaryKey(PurchasingOrder record);
+    
+    List<PurchasingOrder> getPurchasingOrderList();
 }

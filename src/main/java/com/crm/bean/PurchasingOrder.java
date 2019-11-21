@@ -2,6 +2,8 @@ package com.crm.bean;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class PurchasingOrder {
     private Integer porderId;
 
@@ -12,9 +14,11 @@ public class PurchasingOrder {
     private String payQk;
 
     private String porderJz;
-
+    
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date porderTime;
-
+    
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date jhTime;
 
     private String jhAddress;
@@ -24,7 +28,8 @@ public class PurchasingOrder {
     private String pMassage;
 
     private Integer gsId;
-
+    
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date pLastTime;
 
     public Integer getPorderId() {
