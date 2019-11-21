@@ -13,6 +13,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.crm.bean.OffTaskDetails;
 import com.crm.bean.OffTaskRelease;
@@ -22,6 +23,7 @@ import com.crm.bean.s;
 import com.crm.dao.OffTaskDetailsMapper;
 import com.crm.service.StaffInfoService;
 import com.crm.service.TaskService;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/task")
@@ -67,7 +69,6 @@ public class TaskDetilController {
 		return "forward:/task/updateDetTaskStatus?staskId="+staskId;
 	}
 	
-	
 	@RequestMapping("/selectStaff")
 	public String selectStaff(Map<String, Object> data,String staskId) {
 		List<SysStaffInfo> staffList = staffInfoService.getStaffList();
@@ -76,7 +77,6 @@ public class TaskDetilController {
 		return "forward:/UpdateNewTarget.jsp";
 	}
 
-	
 	@RequestMapping("/addTarget")
 	public String addTarget(String detTaskStatus) {//这里写添加的Bean内的字段,有几个传几个(逗号分隔),
 		OffTaskDetails offTaskDetails = new OffTaskDetails();
@@ -87,5 +87,26 @@ public class TaskDetilController {
 		}else {
 			return "失败";
 		}
+	}
+	
+	//目标列表
+	//分页：int一个页码pn，如果不传值默认为1也就是首页，
+	@RequestMapping("/getAllOldTaskDetails")
+	public String getAllOldTaskDetl(@RequestParam(defaultValue="1")int pn,
+			Map<String, Object > Old) {
+		//PageInfo<OffTaskDetails>拥有查询方法返回的list
+		PageInfo<OffTaskDetails> allOldTaskDetails = taskService.getAllOldTaskDetails(pn);
+		Old.put("allOldTaskDetails", allOldTaskDetails);
+		return "forward:/OldTarget.jsp";
+	}
+	
+	@RequestMapping("/getMonthToDateTaskDetails")
+	public String getMonthToDateTaskDetails(@RequestParam(defaultValue="1")int pn,Map<String, Object > OldTask,Integer year,Integer month) {
+		
+		PageInfo<OffTaskDetails> pageInfo = taskService.getMonthToDateTaskDetails(pn,year,month);
+		OldTask.put("month", month);
+		OldTask.put("year", year);
+		OldTask.put("allOldTaskDetails", pageInfo);
+		return "forward:/OldTarget.jsp";
 	}
 }

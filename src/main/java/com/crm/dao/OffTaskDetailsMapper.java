@@ -19,6 +19,9 @@ public interface OffTaskDetailsMapper {
 
     int updateByPrimaryKey(OffTaskDetails record);
     
-    //查所有，参数：发布者id、年、月
-    List<OffTaskDetails> getAllTaskDetails(@Param("offPromulgatorId")Integer offPromulgatorId,@Param("month")int month,@Param("year")int year);
+    //查(当月)所有，参数：发布者id、年、月
+    List<OffTaskDetails> getAllTaskDetails(@Param("offPromulgatorId")Integer offPromulgatorId,@Param("month")Integer month,@Param("year")Integer year);
+    
+    //查除了当月的其它数据
+    List<OffTaskDetails> getAllOldTaskDetails(@Param("offPromulgatorId")Integer offPromulgatorId);
 }
