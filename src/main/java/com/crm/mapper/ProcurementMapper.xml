@@ -138,7 +138,7 @@
     	<id column="procurement_details_id" jdbcType="INTEGER" property="procurementDetailsId" />
 	    <result column="procurement_details_num" jdbcType="INTEGER" property="sysAccountId" />
 	    <association property="kcgoods" column="kgoods_id" javaType="com.crm.bean.Kcgoods" >
-	    	<id column="kcgoods_id" property="kcgoodsId" jdbcType="INTEGER" />
+	    	<id column="kgoods_id" property="kcgoodsId" jdbcType="INTEGER" />
 		    <result column="kgoods_name" property="kgoodsName" jdbcType="VARCHAR" />
 		    <result column="jxj" property="jxj" jdbcType="REAL" />
 	    </association>

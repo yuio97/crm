@@ -31,6 +31,12 @@ public class OrderServiceImpl implements OrderService{
 		return procurementById;
 	}
 
+	@Override
+	public void del(Integer cId) {
+
+		int delById = procurementMapper.deleteByPrimaryKey(cId);
+	}
+
 	
 
 }
