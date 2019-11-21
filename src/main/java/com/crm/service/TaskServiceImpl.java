@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.crm.bean.OffTaskDetails;
+import com.crm.bean.OffTaskRelease;
 import com.crm.bean.SysAccount;
 import com.crm.dao.OffTaskDetailsMapper;
+import com.crm.dao.OffTaskReleaseMapper;
 
 @Service("taskService")
 public class TaskServiceImpl implements TaskService{
@@ -20,6 +22,9 @@ public class TaskServiceImpl implements TaskService{
 
 	@Autowired//跟@Resource一样
 	private OffTaskDetailsMapper offTaskDetailsMapper;
+	
+	@Resource
+	private OffTaskReleaseMapper offTaskReleaseMapper;
 
 	@Override
 	public void updateDetTaskStatus(int id) {
@@ -32,10 +37,13 @@ public class TaskServiceImpl implements TaskService{
 
 	@Override
 	public List<OffTaskDetails> getAllTaskDetails() {
-		
 //		Subject subject = SecurityUtils.getSubject();
 //		SysAccount sysAccount = (SysAccount)subject.getPrincipal();
-		List<OffTaskDetails> allTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1);//设置默认发布者编号为1
+		Date date = new Date();
+		int month = date.getMonth()+1;//月份在eclipse中从0开始
+		int year = date.getYear()+1900;//默认从1900年开始计年
+		//设置默认发布者编号为1,时间为当前年月
+		List<OffTaskDetails> allTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year);
 		return allTaskDetails;
 	}
 
@@ -45,6 +53,18 @@ public class TaskServiceImpl implements TaskService{
 		record.setOffPromulgatorId(1);
 		record.setDetTaskStatus("0");//设置3个默认值
 		int insert = offTaskDetailsMapper.insert(record);
+		return insert;
+	}
+
+	@Override
+	public OffTaskDetails selectByPrimaryKey(Integer offId) {
+		OffTaskDetails selectByPrimaryKey = offTaskDetailsMapper.selectByPrimaryKey(offId);
+		return selectByPrimaryKey;
+	}
+
+	@Override
+	public int insert(OffTaskRelease record) {
+		int insert = offTaskReleaseMapper.insert(record);
 		return insert;
 	}
 

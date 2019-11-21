@@ -16,6 +16,8 @@ public class Procurement {
     private List<ProcurementDetails> proDetaList;
     
     private Customer customer;
+    
+    private String sysAccountName;
 
     public Integer getProcurementId() {
         return procurementId;
@@ -71,6 +73,14 @@ public class Procurement {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public String getSysAccountName() {
+		return sysAccountName;
+	}
+
+	public void setSysAccountName(String sysAccountName) {
+		this.sysAccountName = sysAccountName;
 	}
     
 	

@@ -35,7 +35,7 @@
 		<span>发布任务</span>
 	</div>
 	<!-- 下面写内容 -->
-	<form action="task/updateDetTaskStatus" >
+	<form action="task/selectByPrimaryKey" >
 		<table class="layui-table" lay-filter="mylist" lay-size="lg">
 			<thead>
 				<tr>
@@ -51,7 +51,7 @@
 			<tbody>
 				<c:forEach items="${staffList }" var="s" >
 					<tr>
-						<td></td>
+						<td><input name="sysStaffId" value="${s.sysStaffId }" type="checkbox"></td>
 						<td>${s.sysStaffId }</td>
 						<td>${s.sysStaffName }</td>
 						<td>${s.sysStaffSex }</td>
@@ -62,80 +62,10 @@
 				</c:forEach>
 			</tbody>  
 		</table>
-		<button style="background-color:#205B9E;width:200px;height:50px;color:white;border-radius:5px">确定添加保护</button>
+		<input type="hidden" name="staskId" value="${staskId}"/>
+		<button style="background-color:#205B9E;width:200px;height:50px;color:white;border-radius:5px">确定发布</button>
 	</form>
 </div> 
 
-<script type="text/javascript">
-	//静态表格
-    layui.use('table',function(){
-    	var table = layui.table;
-		//转换静态表格
-		table.init('mylist', {
-		  height: 'full-130' //高度最大化减去差值,也可以自己设置高度值：如 height:300
-		  ,count: 50 //数据总数 服务端获得
-		  ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
-		  ,page:true //开启分页
-		  ,toolbar: 'default'//工具栏
-		  ,defaultToolbar:['filter', 'exports']
-		  ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
-		  ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
-		}); 
-		//监听行工具事件
-		table.on('tool(mylist)', function(obj){ //注：tool 是工具条事件名，mylist 是 table 原始容器的属性 lay-filter="对应的值"
-			var data = obj.data //获得当前行数据
-			,layEvent = obj.event; //获得 lay-event 对应的值
-			if(layEvent === 'del'){
-			    layer.confirm('真的删除行么', function(index){
-				    obj.del(); //删除对应行（tr）的DOM结构
-				    layer.close(index);
-				    //向服务端发送删除指令
-			    });
-			} else if(layEvent === 'edit'){
-			    layer.msg('修改操作');
-			}
-		}); 
-		//监听头工具栏事件
-		table.on('toolbar(mylist)', function(obj){
-			var checkStatus = table.checkStatus(obj.config.id)
-			,data = checkStatus.data; //获取选中的数据 
-			switch(obj.event){ 
-			case 'add': 
-				//iframe窗 
-				layer.open({
-				type: 2,//层类型
-				title: "添加信息",//标题
-				closeBtn: 1, //不显示关闭按钮
-				shade: [0.3],//遮罩
-				skin: 'demo_class_color',//iframe皮肤
-				shadeClose:Boolean,//点击遮罩关闭
-				area: ['800px', '460px'],
-				// offset: 'rb', //右下角弹出
-				// time: 2000, //2秒后自动关闭
-				anim: 5,//动画
-				content: ['guodu.html', 'no'], //iframe的url，no代表不显示滚动条 
-				});
-				// 
-			break;
-			case 'update':
-				if(data.length === 0){
-				layer.msg('请选择一行');
-				} else if(data.length > 1){
-				layer.msg('只能同时编辑一个');
-				} else {
-				layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
-				}
-			break;
-			case 'delete':
-				if(data.length === 0){
-				layer.msg('请选择一行');
-				} else {
-				layer.msg('删除');
-				}
-			break;
-			};
-		});
-	}); 
-</script> 
 </body>
 </html>

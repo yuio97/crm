@@ -20,4 +20,7 @@ public interface ProcurementMapper {
     int updateByPrimaryKey(Procurement record);
     
     List<Procurement> getProcurements(@Param("clientId") Integer clientId);
+    
+    Procurement getProcurementById(@Param("id") Integer id);
+    
 }

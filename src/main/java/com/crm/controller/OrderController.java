@@ -1,7 +1,9 @@
 package com.crm.controller;
 
 import java.lang.ProcessBuilder.Redirect;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -29,6 +31,20 @@ public class OrderController {
 		
 		
 		return selectData;
+	}
+	
+	
+	@RequestMapping("/getOrderOne")
+	public String getDeta(Integer id)
+	{
+		Procurement selectData = orderService.getProcurementById(id);
+		
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		
+		 hashMap.put("data", selectData);
+		 
+		 
+		 return "forward:/dateils_lwh.jsp";
 	}
 	
 	

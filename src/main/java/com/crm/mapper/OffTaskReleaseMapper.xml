@@ -103,4 +103,5 @@
       off_time = #{offTime,jdbcType=TIMESTAMP}
     where mission_id = #{missionId,jdbcType=INTEGER}
   </update>
+ 
 </mapper>

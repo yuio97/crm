@@ -1,6 +1,7 @@
 package com.crm.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.crm.bean.OffTaskDetails;
+import com.crm.bean.OffTaskRelease;
 import com.crm.bean.SysAccount;
 import com.crm.bean.SysStaffInfo;
 import com.crm.bean.s;
@@ -25,12 +27,12 @@ import com.crm.service.TaskService;
 @RequestMapping("/task")
 public class TaskDetilController {
 	
+	@Resource
+	private TaskService taskService;
 	
 	@Resource
-	private TaskService taskService;//service中的id
+	private StaffInfoService staffInfoService;
 	
-	@Resource
-	private StaffInfoService StaffInfoService;
 	
 	@RequestMapping("/getAllTaskDetails")
 	public String getAllTaskDetl(Map<String, Object > data) {
@@ -45,17 +47,38 @@ public class TaskDetilController {
 		return "redirect:/task/getAllTaskDetails";
 	}
 	
+	@RequestMapping("/selectByPrimaryKey")
+	public String selectByPrimaryKey(String staskId,String sysStaffId[]) {
+		OffTaskDetails selectByPrimaryKey = taskService.selectByPrimaryKey(Integer.valueOf(staskId));
+		selectByPrimaryKey.getOffId();
+		selectByPrimaryKey.getOffPromulgatorId();
+		selectByPrimaryKey.getOffContent();
+		OffTaskRelease offTaskRelease = new OffTaskRelease();
+		//用来存sysStaffId[]中的多行数据
+		for(int i = 0;i < sysStaffId.length;i++) {
+			offTaskRelease.setOffId(selectByPrimaryKey.getOffId());
+			offTaskRelease.setSysDeptId(selectByPrimaryKey.getOffPromulgatorId());
+			offTaskRelease.setOffContent(selectByPrimaryKey.getOffContent());
+			offTaskRelease.setOffTime(new Date());
+			offTaskRelease.setSysDeptId(Integer.valueOf(sysStaffId[i]));
+			offTaskRelease.setOffReceiveStatus("0");
+			taskService.insert(offTaskRelease);
+		}
+		return "forward:/task/updateDetTaskStatus?staskId="+staskId;
+	}
+	
+	
 	@RequestMapping("/selectStaff")
-	public String selectStaff(Map<String, Object> data) {
-		List<SysStaffInfo> staffList = StaffInfoService.getStaffList();
+	public String selectStaff(Map<String, Object> data,String staskId) {
+		List<SysStaffInfo> staffList = staffInfoService.getStaffList();
 		data.put("staffList", staffList);
+		data.put("staskId", staskId);
 		return "forward:/UpdateNewTarget.jsp";
 	}
 
 	
 	@RequestMapping("/addTarget")
 	public String addTarget(String detTaskStatus) {//这里写添加的Bean内的字段,有几个传几个(逗号分隔),
-		System.out.println(detTaskStatus);
 		OffTaskDetails offTaskDetails = new OffTaskDetails();
 		offTaskDetails.setOffContent(detTaskStatus);//jsp页面name名也是这个
 		int insert = taskService.insert(offTaskDetails);
