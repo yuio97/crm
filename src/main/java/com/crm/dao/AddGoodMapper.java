@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import com.crm.bean.AddGood;
 
 public interface AddGoodMapper {
@@ -14,4 +16,7 @@ public interface AddGoodMapper {
     int updateByPrimaryKeySelective(AddGood record);
 
     int updateByPrimaryKey(AddGood record);
+    
+    List<AddGood> getAddGoodList();
+    
 }

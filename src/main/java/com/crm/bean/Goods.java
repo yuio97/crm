@@ -105,4 +105,12 @@ public class Goods {
     public void setSupplierId(Integer supplierId) {
         this.supplierId = supplierId;
     }
+
+	@Override
+	public String toString() {
+		return "Goods [goodsId=" + goodsId + ", goodsName=" + goodsName + ", goodsDate=" + goodsDate + ", goodsSm="
+				+ goodsSm + ", goodsImg=" + goodsImg + ", goodsPrice=" + goodsPrice + ", goodsState=" + goodsState
+				+ ", goodsNum=" + goodsNum + ", goodsMin=" + goodsMin + ", supplierId=" + supplierId + "]";
+	}
+    
 }

@@ -18,4 +18,6 @@ public interface GoodsMapper {
     int updateByPrimaryKey(Goods record);
     
     List<Goods> getGoodsList();
+    Goods  select(Goods goodsId);
+    
 }

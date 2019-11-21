@@ -1,4 +1,4 @@
-var Auth = {
+/*var Auth = {
 	vars: {
 	lowin: document.querySelector('.lowin'),
 		lowin_brand: document.querySelector('.lowin-brand'),
@@ -133,4 +133,4 @@ loginback(e) {
 			Auth.loginback(e);
 		});
 	}
-}
+}*/

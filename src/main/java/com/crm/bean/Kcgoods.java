@@ -2,6 +2,8 @@ package com.crm.bean;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Kcgoods {
     private Integer kcgoodsId;
 
@@ -25,6 +27,7 @@ public class Kcgoods {
 
     private Integer gsId;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date kgoodsLastDate;
 
     private Integer kgoodsId;

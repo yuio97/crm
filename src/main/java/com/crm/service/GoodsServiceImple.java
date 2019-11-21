@@ -23,7 +23,7 @@ public class GoodsServiceImple implements GoodsService{
 
 	@Override
 	public int updateByPrimaryKey(Goods goods) {
-		return goodsMapper.updateByPrimaryKey(goods);
+		return goodsMapper.updateByPrimaryKeySelective(goods);
 		 
 	}
 
@@ -31,6 +31,25 @@ public class GoodsServiceImple implements GoodsService{
 	public List<Goods> getGoodsList() {
 		return  goodsMapper.getGoodsList();
 		
+	}
+
+	@Override
+	public int deleteByPrimaryKey(Integer goodsId) {
+		
+		return goodsMapper.deleteByPrimaryKey(goodsId);
+	}
+
+	@Override
+	public Goods selectByPrimaryKey(Integer goodsId) {
+		Goods selectBygoodsId = goodsMapper.selectByPrimaryKey(goodsId);
+		
+		return selectBygoodsId;
+	}
+
+	@Override
+	public Goods select(Goods goodsId) {
+		 Goods select = goodsMapper.select(goodsId);
+		return select;
 	}
 
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -54,13 +55,16 @@
 				<th lay-data="{type:'checkbox',fixed:'left'}"></th>
 				<th lay-data="{field:'yx', align:'center',width:130}">编号</th>
 				<th lay-data="{field:'time',align:'center', minWidth:170}">名称</th>
+				<th lay-data="{field:'trit',align:'center',width:170}">生产日期</th>
 				<th lay-data="{field:'www',align:'center',minWidth:130}">图片</th>
-				<th lay-data="{field:'company',align:'center',minWidth:260}">数量</th>
+				
+				<th lay-data="{field:'company',align:'center',minWidth:100}">数量</th>
 				<th lay-data="{field:'user',align:'center',width:130}">说明</th>
 				<th lay-data="{field:'tel',align:'center',width:130}">价格</th>
-				<th lay-data="{field:'result',align:'center',minWidth:260}">警告数</th>
-				<th lay-data="{field:'addr',align:'center',minWidth:260}">供货商id</th>
-				<th lay-data="{field:'option',align:'center',width:130,toolbar:'#barDemo',fixed: 'right'}">操作</th>
+
+				<th lay-data="{field:'result',align:'center',minWidth:120}">警告数</th>
+				<th lay-data="{field:'addr',align:'center',minWidth:100}">供货商id</th>
+				<th lay-data="{field:'addt',align:'center',minWidth:260}">操作</th>
 			</tr> 
 		</thead>
 		<tbody>
@@ -70,12 +74,19 @@
 				<td></td>
 				<td>${g.goodsId }</td>
 				<td>${g.goodsName }</td>
-				<td>${g.goodsImg}</td>
+				<td>
+				<fmt:formatDate pattern="yyyy-MM-dd" value="${g.goodsDate}" />
+				</td>
+				<td><img src="${g.goodsImg}"/></td>
 				<td>${g.goodsNum}</td>
 				<td>${g.goodsSm}</td>
 				<td>${g.goodsPrice }</td>
 				<td>${g.goodsMin}</td>
 				<td>${g.supplierId }</td>
+				<td>
+					<a href="/goods/getGoodsId?goodsId=${g.goodsId}" class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+					<a href="/goods1/getGoodsId?goodsId=${g.goodsId}"  class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+				</td>
 				
 			</tr>
 			</c:forEach>
@@ -84,8 +95,8 @@
 		</tbody>  
 	</table>
 	<script type="text/html" id="barDemo">
-		<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
-		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		<a href="/goods/getgoodsId=${g.goodsId}" class="layui-btn layui-btn-xs"  >修改</a>
+		<a href="/goods1/getgoodsId=${g.goodsId}" class="layui-btn layui-btn-danger layui-btn-xs" >删除</a>
 	</script> 
 </div> 
 <script type="text/javascript">
@@ -107,7 +118,7 @@
 		table.on('tool(mylist)', function(obj){ //注：tool 是工具条事件名，mylist 是 table 原始容器的属性 lay-filter="对应的值"
 			var data = obj.data //获得当前行数据
 			,layEvent = obj.event; //获得 lay-event 对应的值
-			if(layEvent === 'del'){
+			/* if(layEvent === 'del'){
 			    layer.confirm('真的删除行么', function(index){
 				    obj.del(); //删除对应行（tr）的DOM结构
 				    layer.close(index);
@@ -115,7 +126,7 @@
 			    });
 			} else if(layEvent === 'edit'){
 			    layer.msg('修改操作');
-			}
+			} */
 		}); 
 		//监听头工具栏事件
 		table.on('toolbar(mylist)', function(obj){

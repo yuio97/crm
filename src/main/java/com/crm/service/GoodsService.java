@@ -11,7 +11,12 @@ public interface GoodsService {
 
 	int updateByPrimaryKey(Goods goods);
 	
+	int deleteByPrimaryKey(Integer goodsId);
+	
 	List<Goods> getGoodsList();
 	
+	Goods selectByPrimaryKey(Integer goodsId);
+	
+	Goods select(Goods goodsId);
 
 }

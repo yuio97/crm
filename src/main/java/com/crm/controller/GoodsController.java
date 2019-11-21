@@ -25,27 +25,26 @@ public class GoodsController {
 	@RequestMapping("/goodsList")
 	public String getGoodsList(Map<String,Object> data){
 		List<Goods> goodsList = goodsService.getGoodsList();
-		System.out.println(goodsList);
 		data.put("goodsList", goodsList);
 		return "forward:/goods_list.jsp";
 			
 		}
-	@RequestMapping("/upload")
-	public String upload(Goods goods,MultipartFile goodsImg,HttpServletRequest req) throws IllegalStateException, IOException
+	@RequestMapping("/addgoods")
+	public String upload(Goods goods,MultipartFile gImg,HttpServletRequest req) throws IllegalStateException, IOException
 	{
 		String showPath = null;
 		//判断文件是否存在
-		if(goodsImg != null && !goodsImg.isEmpty())
+		if(gImg != null && !gImg.isEmpty())
 		{
+		
 			String realPath = req.getServletContext().getRealPath("/upload");
 			File dir = new File(realPath);
 			if(!dir.exists())
 			{
 				dir.mkdirs();
 			}
-			
 			//获取原始文件名
-			String originalFilename = goodsImg.getOriginalFilename();
+			String originalFilename = gImg.getOriginalFilename();
 			
 			//截取出后缀名
 			String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -54,25 +53,38 @@ public class GoodsController {
 			String savePath = realPath + "/" + fileName;
 			
 			//存储文件到服务器
-			goodsImg.transferTo(new File(savePath));
+			gImg.transferTo(new File(savePath));
 			showPath = "upload/"+fileName;
 			
 		}
 		
 		System.out.println(showPath);
-		System.out.println(goods.getGoodsName());
-		return "";
-	}
-	
-	
-	
-	@RequestMapping("/addgoods")
-	public void insert(Goods goods){
+		goods.setGoodsImg(showPath);
 		goodsService.insertSelective(goods);
 		
-	}
+		return "redirect:/goods_add.jsp";
 		
+	}
 	
+	
+	
+	
+	
+	
+	@RequestMapping("/delectgoods")
+	public String delect(Integer goodsId){
+		goodsService.deleteByPrimaryKey(goodsId);
+		return "forward:/goods_list.jsp";
+		
+	}
+	@RequestMapping("/getGoodsId")	
+	public String selectBygoodsId(Goods goodsId,Map<String,Object> data){
+		Goods select = goodsService.select(goodsId);
+		data.put("goodslist", select); 
+		
+		return "forward:/goods_update.jsp";
+		
+	}
 
 	
 
