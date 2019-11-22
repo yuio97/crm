@@ -89,24 +89,46 @@ public class TaskDetilController {
 		}
 	}
 	
+	@RequestMapping("/selUpdateContent")
+	public String selUpdateContent(Map<String, Object> selUp,String offId) {
+		OffTaskDetails selectByPrimaryKey = taskService.selectByPrimaryKey(Integer.valueOf(offId));
+		selUp.put("selectByPrimaryKey", selectByPrimaryKey);
+		return "forward:/updateContent.jsp";
+	}
+	
+	@RequestMapping("/updateContent")
+	public String updateContent(String offId,String content) {
+		OffTaskDetails offTaskDetails = new OffTaskDetails();
+		offTaskDetails.setOffContent(content);
+		offTaskDetails.setOffId(Integer.valueOf(offId));
+		taskService.updateByPrimaryKeySelective(offTaskDetails);
+		return "redirect:/task/getAllTaskDetails";
+	}
+	
+	//查已发布任务
+	@RequestMapping("/selectPublishedTask")
+	public String selectPublishedTask(Map<String, Object> data,String staskId) {
+		System.out.println(staskId);
+		List<OffTaskRelease> list = taskService.selectPublishedTask(Integer.valueOf(staskId));
+		data.put("staffList", list);
+		System.out.println();
+		return "forward:/publishedTask.jsp";
+	}
+	
 	//目标列表
 	//分页：int一个页码pn，如果不传值默认为1也就是首页，
 	@RequestMapping("/getAllOldTaskDetails")
-	public String getAllOldTaskDetl(@RequestParam(defaultValue="1")int pn,
-			Map<String, Object > Old) {
+	public String getAllOldTaskDetl(@RequestParam(defaultValue="1")int pn,Integer year,Integer month,Map<String, Object > Old) {
 		//PageInfo<OffTaskDetails>拥有查询方法返回的list
-		PageInfo<OffTaskDetails> allOldTaskDetails = taskService.getAllOldTaskDetails(pn);
+		PageInfo<OffTaskDetails> allOldTaskDetails = taskService.getAllOldTaskDetails(pn,year,month);
 		Old.put("allOldTaskDetails", allOldTaskDetails);
+		Old.put("month", month);
+		Old.put("year", year);
 		return "forward:/OldTarget.jsp";
 	}
 	
-	@RequestMapping("/getMonthToDateTaskDetails")
-	public String getMonthToDateTaskDetails(@RequestParam(defaultValue="1")int pn,Map<String, Object > OldTask,Integer year,Integer month) {
-		
-		PageInfo<OffTaskDetails> pageInfo = taskService.getMonthToDateTaskDetails(pn,year,month);
-		OldTask.put("month", month);
-		OldTask.put("year", year);
-		OldTask.put("allOldTaskDetails", pageInfo);
-		return "forward:/OldTarget.jsp";
-	}
+	
+	
+	
+	
 }

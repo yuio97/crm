@@ -70,25 +70,30 @@ public class TaskServiceImpl implements TaskService{
 		int insert = offTaskReleaseMapper.insert(record);
 		return insert;
 	}
+	
+	@Override
+	public int updateByPrimaryKeySelective(OffTaskDetails record) {
+		return offTaskDetailsMapper.updateByPrimaryKeySelective(record);
+	}
+	
+	@Override
+	public List<OffTaskRelease> selectPublishedTask(Integer offId) {
+		List<OffTaskRelease> publicTaskByOffId = offTaskReleaseMapper.publicTaskByOffId(Integer.valueOf(offId));
+		return publicTaskByOffId;
+	}
+	
 
 	@Override
-	public PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn) {
+	public PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn,Integer year, Integer month) {
 		//PageInfo<OffTaskDetails>类中的PageHelper有个startPage方法，俩参数分别为(页码/每页多少条)
 		PageHelper.startPage(pn, 10);
-		List<OffTaskDetails> allOldTaskDetails = offTaskDetailsMapper.getAllOldTaskDetails(1);
+		List<OffTaskDetails> allOldTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year);
 		//new一个PageInfo<>的方法、类型为list的类型OffTaskDetails、参数为查询的list
 		PageInfo<OffTaskDetails> pageInfo = new PageInfo<OffTaskDetails>(allOldTaskDetails);
 		return pageInfo;
 	}
 
-	@Override
-	public PageInfo<OffTaskDetails> getMonthToDateTaskDetails(int pn,Integer year, Integer month) {
-		PageHelper.startPage(pn, 10);
-		List<OffTaskDetails> allTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year);
-		PageInfo<OffTaskDetails> pageInfo = new PageInfo<OffTaskDetails>(allTaskDetails);
-		return pageInfo;
-	}
-
 	
-
+	
+	
 }

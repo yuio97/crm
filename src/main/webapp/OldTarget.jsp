@@ -22,6 +22,20 @@
     <link rel="stylesheet" href="layui/css/layui.css">
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/vue.min.js"></script>
+    
+    <script type="text/javascript">
+    	function getData(pn)
+    	{
+    		//发送请求
+    		if(pn == undefined)
+    		{
+    			pn = 1;
+    		}
+    		var year = $('#test2').val();
+    		var month = $('#test3').val();
+    		location.href = "task/getAllOldTaskDetails?year="+year+"&month="+month+"&pn="+pn;
+    	}
+    </script>
 </head>
 <body>
 <div class="wangid_conbox">
@@ -33,22 +47,20 @@
             <span>目标列表</span>
         </div>
         <!-- 筛选 --> 
-        <form action="task/getMonthToDateTaskDetails" method="post">
     	<div id="app" class="shuaix">
 	         <div class="layui-input-inline">
-	             <input type="text" id="test2" placeholder="请输入年月查询：" disabled style="border:1px solid white;width:110px"> 
+	             <input type="text"  placeholder="请输入年月查询：" disabled style="border:1px solid white;width:110px"> 
 	         </div>
 	         <div class="layui-input-inline">
-	             <input type="text"  name="year" class="layui-input" id="test2" placeholder="请输入年"> 
+	             <input type="text"  name="year" value="${year }" class="layui-input" id="test2" placeholder="请输入年"> 
 	         </div>
 	         <div class="layui-input-inline">
-	             <input type="text"  name="month" class="layui-input" id="test3" placeholder="请输入月">
+	             <input type="text"  name="month" value="${month }" class="layui-input" id="test3" placeholder="请输入月">
 	         </div>
 	         <div class="selec"  style="margin-right:30px;"> 
-	             <input type="submit" value="查询">
+	             <input type="button" value="查询" onclick="getData()">
 	         </div>
         </div>
-        </form>
         <!-- 下面写内容 -->
         <table class="layui-table" lay-filter="mylist" lay-size="lg">
             <thead>
@@ -78,15 +90,15 @@
             <tfoot>
             	<tr>
             		<td colspan="4">
-            			<a href="task/getAllOldTaskDetails?year=${year}&month=${month}">首页</a>
-            			<!-- hasPreviousPage用于判断有没有上一页，hasNextPage用于判断有没有下一页 -->
+            			<a href="javascript:getData(1)">首页</a>
+            			<!-- hasPreviousPage没有上一页生效，hasNextPage没有下一页生效 -->
             			<c:if test="${allOldTaskDetails.hasPreviousPage }">
-            				<a href="task/getAllOldTaskDetails?pn=${allOldTaskDetails.prePage }&year=${year}&month=${month}">上一页</a>
+            				<a href="javascript:getData(${allOldTaskDetails.prePage })">上一页</a>
             			</c:if>
             			<c:if test="${allOldTaskDetails.hasNextPage }">
-            				<a href="task/getAllOldTaskDetails?pn=${allOldTaskDetails.nextPage }&year=${year}&month=${month}">下一页</a>
+            				<a href="javascript:getData(${allOldTaskDetails.nextPage })">下一页</a>
             			</c:if>
-            			<a href="task/getAllOldTaskDetails?pn=${allOldTaskDetails.pages }&year=${year}&month=${month}">尾页</a>
+            			<a href="javascript:getData(${allOldTaskDetails.pages })">尾页</a>
             		</td>
             	</tr>
             </tfoot>

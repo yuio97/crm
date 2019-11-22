@@ -31,45 +31,35 @@
 		<i class="fa fa-home fa-3x"></i>
 		<a>首页</a>
 		<a>目标管理</a>
-		<span>新建目标</span>
-		<a href="AddNewTarget.jsp" style="float:right;color:white;margin-top:12px" class="layui-btn layui-btn-sm">添加目标</a>
+		<span>任务查询</span>
 	</div>
 	<!-- 下面写内容 -->
+	<form action="task/selectPublishedTask" >
 	<table class="layui-table" lay-filter="mylist" lay-size="lg">
 		<thead>
            <tr>
-             <th>内容</th>
-             <th>时间</th>
-             <th>状态</th>
-             <th>操作</th>
+             <th>员工编号</th>
+             <th>任务内容</th>
+             <th>任务发布时间</th>
+             <th>任务接收状态</th>
            </tr>
          </thead>
          <tbody>
-         	<c:forEach items="${allTaskDetails }" var="task" >
+         	<c:forEach items="${staffList }" var="pub" >
            	<tr>
-	             <td>${task.offContent }</td>
-	             <td><fmt:formatDate value="${task.detTime }" pattern="yyyy-MM-dd" /> </td>
+	             <td>${pub.sysDeptId }</td>
+	             <td>${pub.offContent }</td>
+	             <td><fmt:formatDate value="${pub.offTime }" pattern="yyyy-MM-dd" /> </td>
 	             <td>
-	             	<c:if test="${task.detTaskStatus == 0 }">未发布</c:if>
-	             	<c:if test="${task.detTaskStatus == 1 }">已发布</c:if>
-	             </td>
-	             <td>
-	             	<c:if test="${task.detTaskStatus == 0 }">
-	             		<!-- task/updateDetTaskStatus?staskId=${task.offId } -->
-	             		<a href="task/selectStaff?staskId=${task.offId }" class="btn btn-primary">
-	             			<input type="hidden" name="offId" value="${task.offId }">
-	             			发布
-	             		</a>
-	             		<a href="task/selUpdateContent?offId=${task.offId }" class="btn btn-primary">修改</a>
-	             	</c:if>
-	             	<c:if test="${task.detTaskStatus == 1 }">
-						<a href="task/selectPublishedTask?staskId=${task.offId }" class="btn btn-primary">查询</a>
-					</c:if>
+	             	<c:if test="${pub.offReceiveStatus == 0 }">未接收</c:if>
+	             	<c:if test="${pub.offReceiveStatus == 1 }">已接收</c:if>
 	             </td>
            	</tr>
+        	<input type="hidden" name="offId" value="${pub.offId }" >
            	</c:forEach>
         </tbody>
 	</table>
+	</form>
 </div> 
 </body>
 </html>

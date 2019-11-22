@@ -103,9 +103,6 @@
   		AND year(det_time)  = #{year}
   	</if> 
   </select>
-  <!-- 目标列表 -->
-  <select id="getAllOldTaskDetails" resultMap="BaseResultMap">
-  	select * from off_task_details 
-  	where off_promulgator_id = #{offPromulgatorId}
-  </select>
+  
+  
 </mapper>
