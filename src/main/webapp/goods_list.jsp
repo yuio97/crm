@@ -101,7 +101,7 @@
 </div> 
 <script type="text/javascript">
 	//静态表格
-    layui.use('table',function(){
+     layui.use('table',function(){
     	var table = layui.table;
 		//转换静态表格
 		table.init('mylist', {
@@ -109,15 +109,15 @@
 		  ,count: 50 //数据总数 服务端获得
 		  ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
 		  ,page:true //开启分页
-		  ,toolbar: 'default'//工具栏
-		  ,defaultToolbar:['filter', 'exports']
+		  ,//toolbar: 'default'//工具栏
+		  defaultToolbar:['filter', 'exports']
 		  ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
 		  ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
-		}); 
+		});  
 		//监听行工具事件
-		table.on('tool(mylist)', function(obj){ //注：tool 是工具条事件名，mylist 是 table 原始容器的属性 lay-filter="对应的值"
+	table.on('tool(mylist)', function(obj){ //注：tool 是工具条事件名，mylist 是 table 原始容器的属性 lay-filter="对应的值"
 			var data = obj.data //获得当前行数据
-			,layEvent = obj.event; //获得 lay-event 对应的值
+			,layEvent = obj.event; //获得 lay-event 对应的值 
 			/* if(layEvent === 'del'){
 			    layer.confirm('真的删除行么', function(index){
 				    obj.del(); //删除对应行（tr）的DOM结构

@@ -9,9 +9,6 @@
 <head>
 	<base href="<%=basepath %>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<!DOCTYPE html>
-<html>
-<head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit"/>
     <meta name="force-rendering" content="webkit"/>
@@ -55,10 +52,6 @@
                     <div class="right"> 
                        <input type="text" class="layui-input"  id="test3" value="${goodslist.goodsDate}" name="goodsDate">   
                     </div>
-                    <%-- <div class="right"> 
-                    
-                      <fmt><input type="date" value="${goodslist.goodsDate}" name="goodsDate"  >   </fmt>  
-                    </div> --%>
                 </li>
                  <li>
                     <div class="left">原材料说明：</div>
@@ -70,7 +63,7 @@
                 <li>
                         <div class="left">图片：</div>
                         <div class="right">
-                                <input style="margin-top: 8px;" type="file" name="goodsImg" value="${goodslist.goodsImg}">
+                                <input style="margin-top: 8px;" type="file" name="gImg" value="${goodslist.goodsImg}">
                         </div>
                     </li> 
                 <li>
@@ -91,8 +84,8 @@
                     <div class="left">状态：</div>
                      <div class="right"> 
                             <select lay-verify="" name="goodsState" >
-                                <option value="1" <c:if test="${goodslist.goodsState=='1'}" ></c:if>></option>
-                                <option value="0" <c:if test="${goodslist.goodsState=='0'}" ></c:if>> </option>
+                                <option value="1" ${goodslist.goodsState=='1'?'selected':''} >可用</option>
+                                <option value="0" ${goodslist.goodsState=='0'?'selected':''} >不可用</option>
                                
                             </select> 
                         </div>
@@ -112,8 +105,8 @@
                    <li style="height: 38px; overflow:initial;">
                         <div class="left">选择供应商</div>                    
                            <div class="right" id="xz"> 
-                            <select name="city" lay-verify="">
-                            <option v-for="sup in supplier" >${sup.supplierId }</option>
+                            <select name="supplier" lay-verify="">
+                            <option v-for="sup in supplier"  >{{sup.supplierId}}</option>
                             <%-- <c:forEach items="${supplierList}" var="s">
                             	<option value="${s.supplierId }">${s.supplierName }</option>
                             </c:forEach> --%>

@@ -19,15 +19,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from purchasing-xq
+    from purchasing_xq
     where px_id = #{pxId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from purchasing-xq
+    delete from purchasing_xq
     where px_id = #{pxId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.crm.bean.PurchasingXq" >
-    insert into purchasing-xq (px_id, porder_id, goods_id, 
+    insert into purchasing_xq (px_id, porder_id, goods_id, 
       goods_num, goods_price, sys_staff_id, 
       px_massage, gs_id, px_last_time
       )
@@ -37,7 +37,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.crm.bean.PurchasingXq" >
-    insert into purchasing-xq
+    insert into purchasing_xq
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="pxId != null" >
         px_id,
@@ -98,7 +98,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.PurchasingXq" >
-    update purchasing-xq
+    update purchasing_xq
     <set >
       <if test="porderId != null" >
         porder_id = #{porderId,jdbcType=INTEGER},
@@ -128,7 +128,7 @@
     where px_id = #{pxId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.crm.bean.PurchasingXq" >
-    update purchasing-xq
+    update purchasing_xq
     set porder_id = #{porderId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},
       goods_num = #{goodsNum,jdbcType=INTEGER},

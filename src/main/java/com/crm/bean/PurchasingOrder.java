@@ -2,6 +2,8 @@ package com.crm.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PurchasingOrder {
@@ -15,9 +17,11 @@ public class PurchasingOrder {
 
     private String porderJz;
     
+
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date porderTime;
     
+
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date jhTime;
 
@@ -29,6 +33,7 @@ public class PurchasingOrder {
 
     private Integer gsId;
     
+    @DateTimeFormat(pattern="yy-mm-dd")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date pLastTime;
 

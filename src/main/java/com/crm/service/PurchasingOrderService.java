@@ -7,5 +7,10 @@ import com.crm.bean.PurchasingOrder;
 public interface PurchasingOrderService {
 	
 	List<PurchasingOrder> getPurchasingOrderList();
+	 
+	int insertSelective(PurchasingOrder record);
+	
+	int updateByPrimaryKeySelective(PurchasingOrder record);
+	PurchasingOrder selectByPrimaryKey(Integer porderId);
 
 }

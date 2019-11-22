@@ -25,6 +25,7 @@ public class Goods {
     private Integer goodsMin;
 
     private Integer supplierId;
+    
 
     public Integer getGoodsId() {
         return goodsId;

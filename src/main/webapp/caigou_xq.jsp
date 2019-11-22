@@ -7,16 +7,14 @@
 <html>
 <head>
 	<base href="<%=basepath %>" />
-	<!DOCTYPE html>
-<html>
-<head>
+
 	<meta charset="utf-8">
 	<meta name="renderer" content="webkit"/>
 	<meta name="force-rendering" content="webkit"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="名榜,wangid">
-	<title>cg</title>
+	<title>xq</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="css/style.css">
@@ -41,19 +39,47 @@
             <td class="td_1">原材料名称</td>
             <td  class="td_1">购买的数量</td>  
             <td  class="td_1">原材料的价格</td>
+            <td  class="td_1">供货商名称</td>
            
         </tr>
-        <tr>
-	   		 <td>2019-05-08</td>
-	       	 <td>2019-05-08</td>
-	       	 <td>2019-05-08</td>
+        <tr id="xs">
+	   		 <td> </td>
+	       	 <td> </td>
+	       	 <td> </td>
         </tr>
        
     </tbody>
     </table>
 </div>
 <script type="text/javascript">
+	 new Vue({
+		 el:"#xs",
+	 	data:{
+	 		
+	 		
+	 			
+	 	},
+	 methods:{
+		 
+	 },
 	 
+		    created:function(){
+		    	console.log("sdfsd");
+		       this_a=this
+		        $.ajax({
+		            type: "GET",
+		            url: "/purchasingOrder/getpurchasingxqList",
+		            data: null,
+		            dataType: "json",
+		            success: function (response) {
+		            	this_a.supplier=response;
+		            	console.log(response);
+		            }
+		        });
+		    }
+
+
+		  })
 </script> 
 </body>
 
