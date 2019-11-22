@@ -1,5 +1,9 @@
 package com.crm.dao;
 
+
+
+import java.util.List;
+
 import com.crm.bean.SysAccount;
 
 public interface SysAccountMapper {
@@ -16,4 +20,6 @@ public interface SysAccountMapper {
     int updateByPrimaryKey(SysAccount record);
     
     SysAccount getAccountByUserName(String name);
+    
+    List<SysAccount> getAccountList(); 
 }

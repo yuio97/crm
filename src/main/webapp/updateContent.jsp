@@ -20,6 +20,7 @@
 
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 </head>
 <body>
 	<div class="wangid_conbox">
@@ -29,25 +30,28 @@
             <a>首页</a>
             <a>目标管理</a>
 			<a>新建目标</a>
-			<span>添加目标</span>
+			<span>修改内容</span>
         </div>
         <!-- 内容 -->    
         <div class="wenxts_ke">
             <p><i>温馨提示：</i>按需添加公司部门，注意数字值越小，部门就越靠前排</p>
         </div>
         <div class="kehubh_tj_k">
-            <form action="task/addTarget" class="layui-form layui-form-pane" >
+            <form action="task/updateContent" class="layui-form layui-form-pane" >
             <ul>   
                 <li>
-                    <div class="left">添加目标：</div>
+                    <div class="left">修改内容：</div>
                     <div class="right"> 
-                        <textarea name="detTaskStatus" required lay-verify="required" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea name="content" required lay-verify="required" placeholder="请修改内容" class="layui-textarea">
+                        	${selectByPrimaryKey.offContent }
+                        </textarea>
+               			<input type="hidden" name="offId" value="${selectByPrimaryKey.offId }" >
                     </div>
                 </li> 
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
-                        <button class="button_qr">确定添加</button>
+                        <button class="button_qr">确定修改</button>
                     </div>
                 </li>
             </ul> 

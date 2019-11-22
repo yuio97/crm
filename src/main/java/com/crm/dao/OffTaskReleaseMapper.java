@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import com.crm.bean.OffTaskRelease;
 
 public interface OffTaskReleaseMapper {
@@ -14,4 +16,6 @@ public interface OffTaskReleaseMapper {
     int updateByPrimaryKeySelective(OffTaskRelease record);
 
     int updateByPrimaryKey(OffTaskRelease record);
+    
+    List<OffTaskRelease> publicTaskByOffId (Integer offId);
 }
