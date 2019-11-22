@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.crm.bean.OffTaskDetails;
 import com.crm.bean.OffTaskRelease;
+import com.github.pagehelper.PageInfo;
 
 public interface TaskService {
 	
@@ -21,5 +22,13 @@ public interface TaskService {
 	
 	//添加OffTaskRelease
 	int insert(OffTaskRelease record);
+	
+	
+	//目标列表
+	//参数：页码。PageInfo<OffTaskDetails>与Controller中返回的类型对应
+	PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn);
+	
+	//根据年月查询数据
+	PageInfo<OffTaskDetails> getMonthToDateTaskDetails(int pn,Integer year, Integer month);
 
 }

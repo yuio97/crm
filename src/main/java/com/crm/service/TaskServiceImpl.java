@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.type.InstantTypeHandler;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,11 @@ import com.crm.bean.OffTaskRelease;
 import com.crm.bean.SysAccount;
 import com.crm.dao.OffTaskDetailsMapper;
 import com.crm.dao.OffTaskReleaseMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service("taskService")
 public class TaskServiceImpl implements TaskService{
-	
 
 	@Autowired//跟@Resource一样
 	private OffTaskDetailsMapper offTaskDetailsMapper;
@@ -26,6 +28,7 @@ public class TaskServiceImpl implements TaskService{
 	@Resource
 	private OffTaskReleaseMapper offTaskReleaseMapper;
 
+	
 	@Override
 	public void updateDetTaskStatus(int id) {
 		//逻辑
@@ -40,7 +43,7 @@ public class TaskServiceImpl implements TaskService{
 //		Subject subject = SecurityUtils.getSubject();
 //		SysAccount sysAccount = (SysAccount)subject.getPrincipal();
 		Date date = new Date();
-		int month = date.getMonth()+1;//月份在eclipse中从0开始
+		int month = date.getMonth()+1;//月份从0开始
 		int year = date.getYear()+1900;//默认从1900年开始计年
 		//设置默认发布者编号为1,时间为当前年月
 		List<OffTaskDetails> allTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year);
@@ -67,5 +70,25 @@ public class TaskServiceImpl implements TaskService{
 		int insert = offTaskReleaseMapper.insert(record);
 		return insert;
 	}
+
+	@Override
+	public PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn) {
+		//PageInfo<OffTaskDetails>类中的PageHelper有个startPage方法，俩参数分别为(页码/每页多少条)
+		PageHelper.startPage(pn, 10);
+		List<OffTaskDetails> allOldTaskDetails = offTaskDetailsMapper.getAllOldTaskDetails(1);
+		//new一个PageInfo<>的方法、类型为list的类型OffTaskDetails、参数为查询的list
+		PageInfo<OffTaskDetails> pageInfo = new PageInfo<OffTaskDetails>(allOldTaskDetails);
+		return pageInfo;
+	}
+
+	@Override
+	public PageInfo<OffTaskDetails> getMonthToDateTaskDetails(int pn,Integer year, Integer month) {
+		PageHelper.startPage(pn, 10);
+		List<OffTaskDetails> allTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year);
+		PageInfo<OffTaskDetails> pageInfo = new PageInfo<OffTaskDetails>(allTaskDetails);
+		return pageInfo;
+	}
+
+	
 
 }
