@@ -48,7 +48,7 @@ public class OrderController {
 	public List<Procurement> del(Integer cId)
 	{
 		
-		 orderService.del(cId);
+		 orderService.update(cId);
 		 List<Procurement> selectData = orderService.selectData(Integer.valueOf("-1"));
 		 return selectData;
 	}

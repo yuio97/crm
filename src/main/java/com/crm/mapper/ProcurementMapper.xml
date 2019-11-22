@@ -91,18 +91,27 @@
     where procurement_id = #{procurementId,jdbcType=INTEGER}
   </update>
   
+  <update id="updateByPrimary" >
+  UPDATE procurement_details pd set pd.customer_id = '0' where pd.procurement_id = #{cId}
+  
+  </update>
+  
+  
+  
+  
+  
+  
   <select id="getProcurements" resultMap="ProcurementsResultMap">
   	SELECT 
-	p.*,c.*,pd.kgoods_id,pd.procurement_details_id,kc.jxj,customer_name,sys_account_name,kc.kgoods_name,pd.sys_account_id as procurement_details_num
+	p.*,c.*,pd.kgoods_id,pd.procurement_details_id,kc.jxj,sys_account_name,kc.kgoods_name,pd.sys_account_id as procurement_details_num,pd.customer_id AS state
 	FROM procurement p INNER JOIN procurement_details pd
 	ON p.procurement_id =  pd.procurement_id
 	INNER JOIN kc_goods kc ON kc.kcgoods_id = pd.kgoods_id INNER JOIN customer AS c ON p.customer_id = c.customer_id
 	INNER JOIN sys_account s ON p.sys_account_id = s.sys_account_id
-	<where>
+	where  pd.customer_id != '0'
 		<if test="clientId != null and clientId != -1">
-			p.customer_id = #{clientId}
+			and p.customer_id = #{clientId} 
 		</if>
-	</where>
   </select>
   
   <select id="getProcurementById" resultMap="ProcurementsResultMap">

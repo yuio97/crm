@@ -10,5 +10,5 @@ public interface OrderService {
 	
 	public Procurement getProcurementById(Integer id);
 	
-	public void del(Integer cId);
+	public void update(Integer cId);
 }

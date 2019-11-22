@@ -22,5 +22,7 @@ public interface ProcurementMapper {
     List<Procurement> getProcurements(@Param("clientId") Integer clientId);
     
     Procurement getProcurementById(@Param("id") Integer id);
+
+	void updateByPrimary(@Param("cId") Integer cId);
     
 }
