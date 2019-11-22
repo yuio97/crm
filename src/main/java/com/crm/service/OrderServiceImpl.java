@@ -31,6 +31,12 @@ public class OrderServiceImpl implements OrderService{
 		return procurementById;
 	}
 
+	@Override
+	public void update(Integer cId) {
+
+		procurementMapper.updateByPrimary(cId);
+	}
+
 	
 
 }

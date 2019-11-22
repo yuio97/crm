@@ -1,6 +1,5 @@
 package com.crm.Util;
 
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.crypto.hash.Md5Hash;
 
 public class TestMd5 {

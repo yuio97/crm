@@ -13,6 +13,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.crm.bean.OffTaskDetails;
 import com.crm.bean.OffTaskRelease;
@@ -22,6 +23,7 @@ import com.crm.bean.s;
 import com.crm.dao.OffTaskDetailsMapper;
 import com.crm.service.StaffInfoService;
 import com.crm.service.TaskService;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/task")
@@ -67,7 +69,6 @@ public class TaskDetilController {
 		return "forward:/task/updateDetTaskStatus?staskId="+staskId;
 	}
 	
-	
 	@RequestMapping("/selectStaff")
 	public String selectStaff(Map<String, Object> data,String staskId) {
 		List<SysStaffInfo> staffList = staffInfoService.getStaffList();
@@ -76,7 +77,6 @@ public class TaskDetilController {
 		return "forward:/UpdateNewTarget.jsp";
 	}
 
-	
 	@RequestMapping("/addTarget")
 	public String addTarget(String detTaskStatus) {//这里写添加的Bean内的字段,有几个传几个(逗号分隔),
 		OffTaskDetails offTaskDetails = new OffTaskDetails();
@@ -88,4 +88,47 @@ public class TaskDetilController {
 			return "失败";
 		}
 	}
+	
+	@RequestMapping("/selUpdateContent")
+	public String selUpdateContent(Map<String, Object> selUp,String offId) {
+		OffTaskDetails selectByPrimaryKey = taskService.selectByPrimaryKey(Integer.valueOf(offId));
+		selUp.put("selectByPrimaryKey", selectByPrimaryKey);
+		return "forward:/updateContent.jsp";
+	}
+	
+	@RequestMapping("/updateContent")
+	public String updateContent(String offId,String content) {
+		OffTaskDetails offTaskDetails = new OffTaskDetails();
+		offTaskDetails.setOffContent(content);
+		offTaskDetails.setOffId(Integer.valueOf(offId));
+		taskService.updateByPrimaryKeySelective(offTaskDetails);
+		return "redirect:/task/getAllTaskDetails";
+	}
+	
+	//查已发布任务
+	@RequestMapping("/selectPublishedTask")
+	public String selectPublishedTask(Map<String, Object> data,String staskId) {
+		System.out.println(staskId);
+		List<OffTaskRelease> list = taskService.selectPublishedTask(Integer.valueOf(staskId));
+		data.put("staffList", list);
+		System.out.println();
+		return "forward:/publishedTask.jsp";
+	}
+	
+	//目标列表
+	//分页：int一个页码pn，如果不传值默认为1也就是首页，
+	@RequestMapping("/getAllOldTaskDetails")
+	public String getAllOldTaskDetl(@RequestParam(defaultValue="1")int pn,Integer year,Integer month,Map<String, Object > Old) {
+		//PageInfo<OffTaskDetails>拥有查询方法返回的list
+		PageInfo<OffTaskDetails> allOldTaskDetails = taskService.getAllOldTaskDetails(pn,year,month);
+		Old.put("allOldTaskDetails", allOldTaskDetails);
+		Old.put("month", month);
+		Old.put("year", year);
+		return "forward:/OldTarget.jsp";
+	}
+	
+	
+	
+	
+	
 }

@@ -9,7 +9,7 @@
 <head>
 	<base href="<%=basepath %>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>新建目标</title>
+	<title>目标列表</title>
 	
 	<!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -21,6 +21,21 @@
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    
+    <script type="text/javascript">
+    	function getData(pn)
+    	{
+    		//发送请求
+    		if(pn == undefined)
+    		{
+    			pn = 1;
+    		}
+    		var year = $('#test2').val();
+    		var month = $('#test3').val();
+    		location.href = "task/getAllOldTaskDetails?year="+year+"&month="+month+"&pn="+pn;
+    	}
+    </script>
 </head>
 <body>
 <div class="wangid_conbox">
@@ -32,22 +47,19 @@
             <span>目标列表</span>
         </div>
         <!-- 筛选 --> 
-        <div class="shuaix">
-             <div class="left"  style="margin-right:10px;">
-                <select>   
-                    <option value="按年份时间查询">按年份时间查询</option>   
-                    <option value="其他">其他</option>    
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="test2" placeholder="开始时间"> 
-            </div>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="test3" placeholder="结束时间">
-            </div>
-            <div class="right"  style="margin-right:30px;"> 
-                    <a href="#">查询</a>
-            </div>
+    	<div id="app" class="shuaix">
+	         <div class="layui-input-inline">
+	             <input type="text"  placeholder="请输入年月查询：" disabled style="border:1px solid white;width:110px"> 
+	         </div>
+	         <div class="layui-input-inline">
+	             <input type="text"  name="year" value="${year }" class="layui-input" id="test2" placeholder="请输入年"> 
+	         </div>
+	         <div class="layui-input-inline">
+	             <input type="text"  name="month" value="${month }" class="layui-input" id="test3" placeholder="请输入月">
+	         </div>
+	         <div class="selec"  style="margin-right:30px;"> 
+	             <input type="button" value="查询" onclick="getData()">
+	         </div>
         </div>
         <!-- 下面写内容 -->
         <table class="layui-table" lay-filter="mylist" lay-size="lg">
@@ -60,21 +72,36 @@
                 </tr> 
             </thead>
             <tbody>
-            <c:forEach items="${allTaskDetails }" var="task" >
+            <c:forEach items="${allOldTaskDetails.list }" var="old" >
                 <tr> 
                     <td>
-	                    <c:if test="${task.detTaskStatus == 0 }"></c:if>
-		             	<c:if test="${task.detTaskStatus == 1 }"><a href="" class="btn btn-primary">查看</a></c:if>
+	                    <c:if test="${old.detTaskStatus == 0 }"></c:if>
+		             	<c:if test="${old.detTaskStatus == 1 }"><a href="" class="btn btn-primary">查看</a></c:if>
 					</td>
                     <td>
-						<c:if test="${task.detTaskStatus == 0 }">未发布</c:if>
-	             		<c:if test="${task.detTaskStatus == 1 }">已发布</c:if>
+						<c:if test="${old.detTaskStatus == 0 }">未发布</c:if>
+	             		<c:if test="${old.detTaskStatus == 1 }">已发布</c:if>
 					</td>
-                    <td>${task.offContent }</td>
-                    <td><fmt:formatDate value="${task.detTime }" pattern="yyyy-MM-dd" /></td>
+                    <td>${old.offContent }</td>
+                    <td><fmt:formatDate value="${old.detTime }" pattern="yyyy-MM-dd" /></td>
                 </tr>
             </c:forEach>
             </tbody>  
+            <tfoot>
+            	<tr>
+            		<td colspan="4">
+            			<a href="javascript:getData(1)">首页</a>
+            			<!-- hasPreviousPage没有上一页生效，hasNextPage没有下一页生效 -->
+            			<c:if test="${allOldTaskDetails.hasPreviousPage }">
+            				<a href="javascript:getData(${allOldTaskDetails.prePage })">上一页</a>
+            			</c:if>
+            			<c:if test="${allOldTaskDetails.hasNextPage }">
+            				<a href="javascript:getData(${allOldTaskDetails.nextPage })">下一页</a>
+            			</c:if>
+            			<a href="javascript:getData(${allOldTaskDetails.pages })">尾页</a>
+            		</td>
+            	</tr>
+            </tfoot>
         </table>
     </div> 
     
@@ -88,81 +115,3 @@
 </body>
 </html>
 
-<script type="text/javascript">
-	//静态表格
-    layui.use('table',function(){
-            var table = layui.table;
-            //转换静态表格
-            table.init('mylist', {
-                height: 'full-130' //高度最大化减去差值,也可以自己设置高度值：如 height:300
-                ,count: 50 //数据总数 服务端获得
-                ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
-                ,page:true //开启分页 
-                ,toolbar: '#toolbarDemo' //指向自定义工具栏模板选择器 
-                ,defaultToolbar:['filter', 'exports']
-                ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
-                ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
-            }); 
-            //监听头工具栏事件
-            table.on('toolbar(mylist)', function(obj){
-                var checkStatus = table.checkStatus(obj.config.id)
-                ,data = checkStatus.data; //获取选中的数据 
-                switch(obj.event){  
-                case 'getCheckLength':
-                    if(data.length === 0){
-                    layer.msg('请选择一行');
-                    } else {
-                    layer.msg('删除');
-                    }
-                break;
-                };
-            }); 
-        }); 
-        layui.use('laydate', function(){
-        var laydate = layui.laydate; 
-        //年选择器
-        laydate.render({
-            elem: '#test2'
-            ,type: 'month'
-        });
-        //年月选择器
-        laydate.render({
-            elem: '#test3'
-            ,type: 'month'
-        });
-    });
-    //  iframe层  详情信息
-    function Vip_xq(){
-        //iframe层 
-        layer.open({
-            type: 2,//层类型
-            title: "详情信息",//标题
-            closeBtn: 1, //不显示关闭按钮
-            shade: [0.3],//遮罩
-            skin: 'demo_class_color',//iframe皮肤
-            shadeClose:Boolean,//点击遮罩关闭
-            area: ['800px', '460px'],
-            // offset: 'rb', //右下角弹出
-            // time: 2000, //2秒后自动关闭
-            anim: 5,//动画
-            content: ['caigouxq.html', 'no'], //iframe的url，no代表不显示滚动条 
-        }); 
-    }
-    //  iframe层  回访记录
-    function Vip_hf(){
-        //iframe层 
-        layer.open({
-            type: 2,//层类型
-            title: "详情信息",//标题
-            closeBtn: 1, //不显示关闭按钮
-            shade: [0.3],//遮罩
-            skin: 'demo_class_color',//iframe皮肤
-            shadeClose:Boolean,//点击遮罩关闭
-            area: ['800px', '460px'],
-            // offset: 'rb', //右下角弹出
-            // time: 2000, //2秒后自动关闭
-            anim: 5,//动画
-            content: ['caigouxq.html', 'no'], //iframe的url，no代表不显示滚动条 
-        }); 
-    }
-</script> 

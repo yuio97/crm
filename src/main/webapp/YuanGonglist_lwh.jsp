@@ -80,7 +80,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>{{pro.customer.copanyAdress}}</td>
 				<td>{{pro.customer.copanyCode}}</td>
                 <td>{{pro.sysAccountName}}</td>
-				<td><a style="font-size:15px" :href="'/order/getOrderOne?id='+pro.procurementId">详情</a>  <a style="font-size:15px">删除</a></td>                
+				<td><a style="font-size:15px" :href="'/order/getOrderOne?id='+pro.procurementId">详情</a>  <a style="font-size:15px" href="javascript:;" @click="del(pro.procurementId)">删除</a></td>                
 			</tr> 
 		</tbody>  
 	</table>
@@ -119,13 +119,22 @@ var v = new Vue({
 				success: function (response) {
 					console.log(response);
 					_this.prolist_num = response
-					
-			
 				}
 			});
-
-			
         },
+        del:function(id)
+		{
+			var _this = this;
+			$.ajax({
+				type: "POST", 
+				url: "order/del",
+				data: {cId:id},
+				dataType: "json",
+				success: function (response) {
+					_this.prolist_num = response
+				}
+			});
+		}
 		
     },
     created:function(){

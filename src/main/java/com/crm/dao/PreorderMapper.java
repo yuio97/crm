@@ -1,5 +1,9 @@
 package com.crm.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.crm.bean.Preorder;
 
 public interface PreorderMapper {
@@ -14,4 +18,6 @@ public interface PreorderMapper {
     int updateByPrimaryKeySelective(Preorder record);
 
     int updateByPrimaryKey(Preorder record);
+    
+    List<Preorder> selectPre(@Param("preId") Integer preId);
 }

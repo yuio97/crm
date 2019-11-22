@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.crm.bean.Customer;
 import com.crm.bean.Procurement;
+import com.crm.bean.ProcurementDetails;
 import com.crm.service.OrderService;
 
 @Controller
@@ -35,17 +36,20 @@ public class OrderController {
 	
 	
 	@RequestMapping("/getOrderOne")
-	public String getDeta(Integer id)
+	public String getDeta(Integer id,Map<String, Object> hashMap)
 	{
-		Procurement selectData = orderService.getProcurementById(id);
-		
-		HashMap<String, Object> hashMap = new HashMap<String, Object>();
-		
+		 Procurement selectData = orderService.getProcurementById(id);
 		 hashMap.put("data", selectData);
-		 
-		 
 		 return "forward:/dateils_lwh.jsp";
 	}
 	
-	
+	@RequestMapping("/del")
+	@ResponseBody
+	public List<Procurement> del(Integer cId)
+	{
+		
+		 orderService.update(cId);
+		 List<Procurement> selectData = orderService.selectData(Integer.valueOf("-1"));
+		 return selectData;
+	}
 }

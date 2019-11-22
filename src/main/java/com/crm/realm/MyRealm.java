@@ -81,7 +81,6 @@ public class MyRealm extends AuthorizingRealm{
 		else
 		{
 			SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(account, account.getSysAccountPass(), ByteSource.Util.bytes(account.getSysAccountSalt()),"myrealm");
-			
 			return info;
 		}
 			

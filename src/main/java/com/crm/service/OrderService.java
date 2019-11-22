@@ -8,5 +8,7 @@ public interface OrderService {
 
 	public List<Procurement> selectData(Integer clientId);
 	
-	Procurement getProcurementById(Integer id);
+	public Procurement getProcurementById(Integer id);
+	
+	public void update(Integer cId);
 }

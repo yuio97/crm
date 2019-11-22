@@ -45,15 +45,8 @@
 		</javaClientGenerator>
  
 		<!-- 配置表信息 -->
-		<table schema="customer_relationship" tableName="off_task_details"
-			domainObjectName="OffTaskDetails" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-			<property name="useActualColumnNames" value="false" />
-		</table>
-		
-		<table schema="customer_relationship" tableName="off_employee_monthly_attendance"
-			domainObjectName="OffEmployeeMonthlyAttendance" enableCountByExample="false"
+		<table schema="customer_relationship" tableName="sys_account"
+			domainObjectName="SysAccount" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="useActualColumnNames" value="false" />

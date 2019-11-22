@@ -1,6 +1,7 @@
 package com.crm.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Preorder {
     private Integer preorderId;
@@ -18,6 +19,10 @@ public class Preorder {
     private Integer sysAccountId;
 
     private Date preorderTme;
+    
+    private Customer customer;
+    
+    private List<PreorderDetails> proDetaList;
 
     public Integer getPreorderId() {
         return preorderId;
@@ -82,4 +87,23 @@ public class Preorder {
     public void setPreorderTme(Date preorderTme) {
         this.preorderTme = preorderTme;
     }
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public List<PreorderDetails> getProDetaList() {
+		return proDetaList;
+	}
+
+	public void setProDetaList(List<PreorderDetails> proDetaList) {
+		this.proDetaList = proDetaList;
+	}
+    
+    
+    
 }

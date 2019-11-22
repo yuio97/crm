@@ -12,6 +12,8 @@ public class PreorderDetails {
     private String sysAccountId;
 
     private Integer kcNumSell;
+    
+    private Kcgoods kcgoods;
 
     public Integer getPreorderDetailsId() {
         return preorderDetailsId;
@@ -60,4 +62,17 @@ public class PreorderDetails {
     public void setKcNumSell(Integer kcNumSell) {
         this.kcNumSell = kcNumSell;
     }
+
+	public Kcgoods getKcgoods() {
+		return kcgoods;
+	}
+
+	public void setKcgoods(Kcgoods kcgoods) {
+		this.kcgoods = kcgoods;
+	}
+
+	
+    
+    
+    
 }
