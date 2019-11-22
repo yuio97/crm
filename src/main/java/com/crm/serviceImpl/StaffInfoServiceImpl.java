@@ -22,4 +22,18 @@ public class StaffInfoServiceImpl implements StaffInfoService{
 		return sysStaffInfoMapper.getAllStaff();
 	}
 
+	@Override
+	public SysStaffInfo getStaffInfoByStaffId(int sysStaffId) {
+		
+		return sysStaffInfoMapper.selectByPrimaryKey(sysStaffId);
+	}
+
+	@Override
+	public int updateStaff(SysStaffInfo staff) {
+		
+		return sysStaffInfoMapper.updateByPrimaryKeySelective(staff);
+	}
+
+
+
 }

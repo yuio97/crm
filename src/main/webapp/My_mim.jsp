@@ -37,7 +37,7 @@
         </div>  
         <!-- 下面写内容 -->
         <div class="kehubh_tj_k">
-            <form onsubmit="return checkform()" id="checkformf" class="layui-form layui-form-pane" action="updateAccountPass">
+            <form  id="checkformf" class="layui-form layui-form-pane" >
             <ul> 
 <!--                 <li>
                     <div class="left">公司名称:</div>
@@ -67,8 +67,9 @@
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
-
-                        <input class="button_qr" type="submit" value="修改" >
+<!-- 
+                        <input class="button_qr" type="submit" value="修改" > -->
+                        <button class="button_qr" id="updateu">修改</button>
                     </div>
                 </li>
             </ul> 
@@ -77,31 +78,62 @@
     </div>
     
     <script>
-    	function checkform(){
-           var jPass = document.getElementById('jPass').value;
-           var newPass = document.getElementById('newPass').value;
-           var checkpass = document.getElementById('checkpass').value;
 
+
+    	$('#updateu').click(function () { 
+           
+      
+        //    var jPass = document.getElementById('jPass').value;
+        //    var newPass = document.getElementById('newPass').value;
+        //    var checkpass = document.getElementById('checkpass').value;
+
+           var jPass = $('#jPass').val();
+           var newPass =  $('#newPass').val();
+           var checkpass =  $('#checkpass').val();
+            // alert(jPass+''+newPass+''+checkpass)
             
            if(jPass == newPass){
     
                alert('不能修改为当前密码');
-               return false;
-           }
+              
+           }else
            if(newPass == checkpass)
            {
               
-              return true;
-              
+              updatePass();             
                
-           }
+           }else{
            alert('两次密码不一致')
-           
-           return false;
-           
-           
-        }
+           }
+                            
+        });
 
+
+        function updatePass() {
+           var jPass = $('#jPass').val();
+           var newPass =  $('#newPass').val();
+           var checkpass =  $('#checkpass').val();
+
+            
+           $.ajax({
+               type: "post",
+               url: "/updateAccountPass?pass="+jPass+"&sysAccountPass="+newPass,
+               data: {},
+               dataType: "json",
+               success: function (res) {
+                   console.log(res);
+                   
+                   if(res.sta == 0){
+                       alert('修改密码成功')
+                   }else if(res.sta == 2){
+                        alert('当前密码不正确！')
+                   }else{
+                    alert('修改失败，请联系管理员！')
+                   }
+                   
+               }
+           });
+        }
         
         
     </script>

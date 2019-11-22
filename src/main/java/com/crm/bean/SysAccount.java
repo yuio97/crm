@@ -2,6 +2,8 @@ package com.crm.bean;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class SysAccount {
     private Integer sysAccountId;
 
@@ -16,8 +18,12 @@ public class SysAccount {
     private Integer sysCompanyId;
 
     private String sysAccountSta;
-
+    
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date sysAccountTime;
+    
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    private Date sysLastlogin;
 
     public Integer getSysAccountId() {
         return sysAccountId;
@@ -81,5 +87,13 @@ public class SysAccount {
 
     public void setSysAccountTime(Date sysAccountTime) {
         this.sysAccountTime = sysAccountTime;
+    }
+
+    public Date getSysLastlogin() {
+        return sysLastlogin;
+    }
+
+    public void setSysLastlogin(Date sysLastlogin) {
+        this.sysLastlogin = sysLastlogin;
     }
 }

@@ -1,121 +1,133 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.crm.dao.SysAccountMapper" >
-  <resultMap id="BaseResultMap" type="com.crm.bean.SysAccount" >
-    <id column="sys_account_id" property="sysAccountId" jdbcType="INTEGER" />
-    <result column="sys_account_name" property="sysAccountName" jdbcType="VARCHAR" />
-    <result column="sys_account_pass" property="sysAccountPass" jdbcType="VARCHAR" />
-    <result column="sys_account_salt" property="sysAccountSalt" jdbcType="VARCHAR" />
-    <result column="sys_staff_id" property="sysStaffId" jdbcType="INTEGER" />
-    <result column="sys_company_id" property="sysCompanyId" jdbcType="INTEGER" />
-    <result column="sys_account_sta" property="sysAccountSta" jdbcType="VARCHAR" />
-    <result column="sys_account_time" property="sysAccountTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.SysAccountMapper">
+  <resultMap id="BaseResultMap" type="com.crm.bean.SysAccount">
+    <id column="sys_account_id" jdbcType="INTEGER" property="sysAccountId" />
+    <result column="sys_account_name" jdbcType="VARCHAR" property="sysAccountName" />
+    <result column="sys_account_pass" jdbcType="VARCHAR" property="sysAccountPass" />
+    <result column="sys_account_salt" jdbcType="VARCHAR" property="sysAccountSalt" />
+    <result column="sys_staff_id" jdbcType="INTEGER" property="sysStaffId" />
+    <result column="sys_company_id" jdbcType="INTEGER" property="sysCompanyId" />
+    <result column="sys_account_sta" jdbcType="VARCHAR" property="sysAccountSta" />
+    <result column="sys_account_time" jdbcType="TIMESTAMP" property="sysAccountTime" />
+    <result column="sys_lastlogin" jdbcType="TIMESTAMP" property="sysLastlogin" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     sys_account_id, sys_account_name, sys_account_pass, sys_account_salt, sys_staff_id, 
-    sys_company_id, sys_account_sta, sys_account_time
+    sys_company_id, sys_account_sta, sys_account_time, sys_lastlogin
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_account
     where sys_account_id = #{sysAccountId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_account
     where sys_account_id = #{sysAccountId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.crm.bean.SysAccount" >
+  <insert id="insert" parameterType="com.crm.bean.SysAccount">
     insert into sys_account (sys_account_id, sys_account_name, sys_account_pass, 
       sys_account_salt, sys_staff_id, sys_company_id, 
-      sys_account_sta, sys_account_time)
+      sys_account_sta, sys_account_time, sys_lastlogin
+      )
     values (#{sysAccountId,jdbcType=INTEGER}, #{sysAccountName,jdbcType=VARCHAR}, #{sysAccountPass,jdbcType=VARCHAR}, 
       #{sysAccountSalt,jdbcType=VARCHAR}, #{sysStaffId,jdbcType=INTEGER}, #{sysCompanyId,jdbcType=INTEGER}, 
-      #{sysAccountSta,jdbcType=VARCHAR}, #{sysAccountTime,jdbcType=TIMESTAMP})
+      #{sysAccountSta,jdbcType=VARCHAR}, #{sysAccountTime,jdbcType=TIMESTAMP}, #{sysLastlogin,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.crm.bean.SysAccount" >
+  <insert id="insertSelective" parameterType="com.crm.bean.SysAccount">
     insert into sys_account
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sysAccountId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysAccountId != null">
         sys_account_id,
       </if>
-      <if test="sysAccountName != null" >
+      <if test="sysAccountName != null">
         sys_account_name,
       </if>
-      <if test="sysAccountPass != null" >
+      <if test="sysAccountPass != null">
         sys_account_pass,
       </if>
-      <if test="sysAccountSalt != null" >
+      <if test="sysAccountSalt != null">
         sys_account_salt,
       </if>
-      <if test="sysStaffId != null" >
+      <if test="sysStaffId != null">
         sys_staff_id,
       </if>
-      <if test="sysCompanyId != null" >
+      <if test="sysCompanyId != null">
         sys_company_id,
       </if>
-      <if test="sysAccountSta != null" >
+      <if test="sysAccountSta != null">
         sys_account_sta,
       </if>
-      <if test="sysAccountTime != null" >
+      <if test="sysAccountTime != null">
         sys_account_time,
       </if>
+      <if test="sysLastlogin != null">
+        sys_lastlogin,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sysAccountId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysAccountId != null">
         #{sysAccountId,jdbcType=INTEGER},
       </if>
-      <if test="sysAccountName != null" >
+      <if test="sysAccountName != null">
         #{sysAccountName,jdbcType=VARCHAR},
       </if>
-      <if test="sysAccountPass != null" >
+      <if test="sysAccountPass != null">
         #{sysAccountPass,jdbcType=VARCHAR},
       </if>
-      <if test="sysAccountSalt != null" >
+      <if test="sysAccountSalt != null">
         #{sysAccountSalt,jdbcType=VARCHAR},
       </if>
-      <if test="sysStaffId != null" >
+      <if test="sysStaffId != null">
         #{sysStaffId,jdbcType=INTEGER},
       </if>
-      <if test="sysCompanyId != null" >
+      <if test="sysCompanyId != null">
         #{sysCompanyId,jdbcType=INTEGER},
       </if>
-      <if test="sysAccountSta != null" >
+      <if test="sysAccountSta != null">
         #{sysAccountSta,jdbcType=VARCHAR},
       </if>
-      <if test="sysAccountTime != null" >
+      <if test="sysAccountTime != null">
         #{sysAccountTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysLastlogin != null">
+        #{sysLastlogin,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysAccount" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysAccount">
     update sys_account
-    <set >
-      <if test="sysAccountName != null" >
+    <set>
+      <if test="sysAccountName != null">
         sys_account_name = #{sysAccountName,jdbcType=VARCHAR},
       </if>
-      <if test="sysAccountPass != null" >
+      <if test="sysAccountPass != null">
         sys_account_pass = #{sysAccountPass,jdbcType=VARCHAR},
       </if>
-      <if test="sysAccountSalt != null" >
+      <if test="sysAccountSalt != null">
         sys_account_salt = #{sysAccountSalt,jdbcType=VARCHAR},
       </if>
-      <if test="sysStaffId != null" >
+      <if test="sysStaffId != null">
         sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
       </if>
-      <if test="sysCompanyId != null" >
+      <if test="sysCompanyId != null">
         sys_company_id = #{sysCompanyId,jdbcType=INTEGER},
       </if>
-      <if test="sysAccountSta != null" >
+      <if test="sysAccountSta != null">
         sys_account_sta = #{sysAccountSta,jdbcType=VARCHAR},
       </if>
-      <if test="sysAccountTime != null" >
+      <if test="sysAccountTime != null">
         sys_account_time = #{sysAccountTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysLastlogin != null">
+        sys_lastlogin = #{sysLastlogin,jdbcType=TIMESTAMP},
       </if>
     </set>
     where sys_account_id = #{sysAccountId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysAccount" >
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysAccount">
     update sys_account
     set sys_account_name = #{sysAccountName,jdbcType=VARCHAR},
       sys_account_pass = #{sysAccountPass,jdbcType=VARCHAR},
@@ -123,10 +135,14 @@
       sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
       sys_company_id = #{sysCompanyId,jdbcType=INTEGER},
       sys_account_sta = #{sysAccountSta,jdbcType=VARCHAR},
-      sys_account_time = #{sysAccountTime,jdbcType=TIMESTAMP}
+      sys_account_time = #{sysAccountTime,jdbcType=TIMESTAMP},
+      sys_lastlogin = #{sysLastlogin,jdbcType=TIMESTAMP}
     where sys_account_id = #{sysAccountId,jdbcType=INTEGER}
   </update>
-  <select id="getAccountByUserName" resultMap="BaseResultMap">
+    <select id="getAccountByUserName" resultMap="BaseResultMap">
   	select * from sys_account where sys_account_name = #{name}  
+  </select>
+  <select id="getAccountList" resultMap="BaseResultMap">
+  	select * from  sys_account
   </select>
 </mapper>

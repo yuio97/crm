@@ -1,5 +1,7 @@
 package com.crm.serviceImpl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -7,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.crm.bean.SysAccount;
 import com.crm.dao.SysAccountMapper;
 import com.crm.service.AccountService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 public class AccountServiceImpl implements AccountService{
@@ -17,7 +21,7 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	public boolean updateByPrimaryKeySelective(SysAccount account) {
 		
-		if(sysAccountMapper.updateByPrimaryKey(account) == 0) {
+		if(sysAccountMapper.updateByPrimaryKeySelective(account) == 0) {
 			return false;
 		}else {
 			return true;
@@ -40,5 +44,25 @@ public class AccountServiceImpl implements AccountService{
 		}
 		
 	}
+
+	@Override
+	public PageInfo<SysAccount> getAccountList(int pn) {
+		
+		PageHelper.startPage(pn, 10);
+		List<SysAccount> accountList = sysAccountMapper.getAccountList();
+		PageInfo<SysAccount> info = new PageInfo<SysAccount>(accountList);
+		return info;
+	}
+
+	@Override
+	public boolean delAccountByAccountId(int id) {
+		if(sysAccountMapper.deleteByPrimaryKey(id) == 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
 
 }
