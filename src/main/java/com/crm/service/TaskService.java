@@ -26,12 +26,11 @@ public interface TaskService {
 	//修改内容
 	int updateByPrimaryKeySelective(OffTaskDetails record);
 	
-	//查已发布任务
+	//查任务发布详情
 	public List<OffTaskRelease> selectPublishedTask(Integer offId);
 	
 	//目标列表
 	//参数：页码。PageInfo<OffTaskDetails>与Controller中返回的类型对应
 	PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn,Integer year, Integer month);
-	
 	
 }

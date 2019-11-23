@@ -103,9 +103,9 @@
       off_time = #{offTime,jdbcType=TIMESTAMP}
     where mission_id = #{missionId,jdbcType=INTEGER}
   </update>
- 
- 	<select id="publicTaskByOffId" resultMap="BaseResultMap"  >
- 		    select * from off_task_release
-	    where off_id = #{offId}
- 	</select>
+ 	
+ 	<!-- 查任务发布详情 -->
+	<select id="publicTaskByOffId" resultMap="BaseResultMap"  >
+		select * from off_task_release where off_id = #{offId}
+	</select>
 </mapper>
