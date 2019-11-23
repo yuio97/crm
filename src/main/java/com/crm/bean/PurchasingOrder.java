@@ -18,11 +18,11 @@ public class PurchasingOrder {
     private String porderJz;
     
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     private Date porderTime;
     
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     private Date jhTime;
 
     private String jhAddress;
@@ -34,7 +34,6 @@ public class PurchasingOrder {
     private Integer gsId;
     
     @DateTimeFormat(pattern="yy-mm-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
     private Date pLastTime;
 
     public Integer getPorderId() {

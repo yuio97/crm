@@ -40,77 +40,67 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a>采购管理</a>
-            <span>采购信息添加</span>
+            <a>仓库管理</a>
+            <span>商品信息添加</span>
         </div>
         <!-- 内容 -->    
         <div class="wenxts_ke">
            
         </div>
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="/purchasingOrder/addpo"  method="post">
+            <form class="layui-form layui-form-pane" action="kc/addgoods" enctype="multipart/form-data" method="post">
             <ul> 
                   
                 <li>
-                    <div class="left">采购地点：</div>
+                    <div class="left">仓库编号：</div>
                     <div class="right"> 
-                        <input type="text" name="jhAddress" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                        <input type="text" name="warehouseId" required lay-verify="required"  autocomplete="off" class="layui-input">   
                     </div>
                 </li>
+                <li>
+                    <div class="left">商品名称：</div>
+                    <div class="right"> 
+                        <input type="text" name="kgoodsName" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
+                <li>
+                    <div class="left">商品说明：</div>
+                    <div class="right"> 
+                        <input type="text" name="kgoodsSm" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
+                <li>
+                    <div class="left">商品数量：</div>
+                    <div class="right"> 
+                        <input type="text" name="kgoodsNum" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
+                <li>
+                    <div class="left">单位：</div>
+                    <div class="right"> 
+                        <input type="text" name="danwei" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
+                
                  <li>
-                    <div class="left">采购时间：</div>
+                    <div class="left">商品价格：</div>
                     <div class="right"> 
-                       <input type="text" class="layui-input" name="porderTime" id="test3" placeholder="yyyy-MM-dd">   
+                        <input type="text" name="jxj" required lay-verify="required"  autocomplete="off" class="layui-input">   
                     </div>
                 </li>
-                <li>
-                    <div class="left">进货时间：</div>
-                    <div class="right"> 
-                       <input type="text"  class="layui-input" name="jhTime" id="test2" placeholder="yyyy-MM-dd">   
-                    </div>
-                </li>
-                 <li style="height: 38px; overflow:initial;">
-                    <div class="left">采购进展：</div>
-                    <div class="right">
-                   		 <select name="porderJz" lay-verify="">
-                                <option value="1">待采购</option>
-                                <option value="2">已采购</option>
-                            </select>
-                            </div> 
-                </li>
-               
+                 
                 
                 <li>
-                    <div class="left">操作人员：</div>
-                    
-                    <div class="right"> 
-                        <input type="text" name="sysStaffId" required lay-verify="required" autocomplete="off" class="layui-input">
-                    </div>
-                </li>
-               
-                <li style="height: 38px; overflow:initial;">
-                  <div class="left">支付方式：</div>
-                  
-	                 <div class="right"> 
-                            <select name="payQk" lay-verify="">
-                                <option value="1">现金</option>
-                                <option value="2">银行卡</option>
-                               	<option value="3">支付宝</option>
-                            </select> 
-                        </div>
-					 </li> 
-                
-               <li>
                     <div class="left">备注：</div>
                     <div class="right"> 
-                        <input type="text" name="pMassage" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                        <input type="text" name="kcMassage" required lay-verify="required"  autocomplete="off" class="layui-input">
                     </div>
                 </li>
                
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right" id="tj"> 
-                        <button class="button_qr"  type="submit">  确定添加</button>
+                        <button class="button_qr" @click="add" type="submit">  确定添加</button>
                     </div>
                 </li>
             </ul> 
@@ -125,8 +115,22 @@
     </style>
 	
     <script src="layui/layui.js"></script>
+     <script >
+     var vm = new Vue({
+    	 el:'#tj',
+    	 data:{},
+    	 methods:{
+    		 add:function(){
+    			 
+    		 }
+    	 }
      
+    	 
+     })
+     </script>
+</body>
 
+</html>
 
 <script>
         layui.use(['form', 'layedit', 'laydate'], function(){
@@ -136,9 +140,6 @@
           ,laydate = layui.laydate;
           laydate.render({
         	    elem: '#test3'
-        	  });
-          laydate.render({
-        	    elem: '#test2'
         	  });
         });
         </script>
@@ -158,7 +159,6 @@ new Vue({
 
     },
     created:function(){
-    	console.log("sdfsd");
        this_a=this;
         $.ajax({
             type: "GET",

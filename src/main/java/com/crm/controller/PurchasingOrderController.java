@@ -2,6 +2,7 @@ package com.crm.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -33,6 +34,15 @@ public class PurchasingOrderController {
 		return "redirect:/caigou_add.jsp";
 		
 	}
+	
+	@RequestMapping("/getporderId")
+	public String selectByPrimaryKey(Integer porderId,Map<String,Object> data){
+		PurchasingOrder porder = purchasingOrderSerice.selectByPrimaryKey(porderId);
+	    data.put("porder", porder);
+		return "forward:/caigou_update.jsp";
+		
+	}
+	
 	
 	/*@RequestMapping("getpurchasingxqList")
 	@ResponseBody  

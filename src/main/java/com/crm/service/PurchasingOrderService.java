@@ -11,6 +11,7 @@ public interface PurchasingOrderService {
 	int insertSelective(PurchasingOrder record);
 	
 	int updateByPrimaryKeySelective(PurchasingOrder record);
+	
 	PurchasingOrder selectByPrimaryKey(Integer porderId);
 
 }
