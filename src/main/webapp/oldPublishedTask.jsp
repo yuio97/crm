@@ -31,11 +31,11 @@
 		<i class="fa fa-home fa-3x"></i>
 		<a>首页</a>
 		<a href="task/getAllTaskDetails">目标管理</a>
-		<a href="task/getAllTaskDetails">新建目标</a>
+		<a href="task/getAllOldTaskDetails">目标列表</a>
 		<span>任务查询</span>
 	</div>
 	<!-- 下面写内容 -->
-	<form action="task/selectPublishedTask" >
+	<form action="task/selectOldPublishedTask" >
 	<table class="layui-table" lay-filter="mylist" lay-size="lg">
 		<thead>
            <tr>
@@ -46,17 +46,17 @@
            </tr>
          </thead>
          <tbody>
-         	<c:forEach items="${staffList }" var="pub" >
+         	<c:forEach items="${oldPublishedTask }" var="oldpub" >
            	<tr>
-	             <td>${pub.sysDeptId }</td>
-	             <td>${pub.offContent }</td>
-	             <td><fmt:formatDate value="${pub.offTime }" pattern="yyyy-MM-dd" /> </td>
+	             <td>${oldpub.sysDeptId }</td>
+	             <td>${oldpub.offContent }</td>
+	             <td><fmt:formatDate value="${oldpub.offTime }" pattern="yyyy-MM-dd" /> </td>
 	             <td>
-	             	<c:if test="${pub.offReceiveStatus == 0 }">未接收</c:if>
-	             	<c:if test="${pub.offReceiveStatus == 1 }">已接收</c:if>
+	             	<c:if test="${oldpub.offReceiveStatus == 0 }">未接收</c:if>
+	             	<c:if test="${oldpub.offReceiveStatus == 1 }">已接收</c:if>
 	             </td>
            	</tr>
-        	<input type="hidden" name="offId" value="${pub.offId }" >
+        	<input type="hidden" name="offId" value="${oldpub.offId }" >
            	</c:forEach>
         </tbody>
 	</table>

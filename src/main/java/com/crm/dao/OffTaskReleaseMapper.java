@@ -2,6 +2,8 @@ package com.crm.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.crm.bean.OffTaskRelease;
 
 public interface OffTaskReleaseMapper {
@@ -17,5 +19,6 @@ public interface OffTaskReleaseMapper {
 
     int updateByPrimaryKey(OffTaskRelease record);
     
-    List<OffTaskRelease> publicTaskByOffId (Integer offId);
+    //查任务发布详情
+    List<OffTaskRelease> publicTaskByOffId(Integer offId);
 }

@@ -92,8 +92,5 @@ public class TaskServiceImpl implements TaskService{
 		PageInfo<OffTaskDetails> pageInfo = new PageInfo<OffTaskDetails>(allOldTaskDetails);
 		return pageInfo;
 	}
-
-	
-	
 	
 }
