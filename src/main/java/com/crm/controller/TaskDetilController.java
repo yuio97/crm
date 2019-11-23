@@ -105,7 +105,7 @@ public class TaskDetilController {
 		return "redirect:/task/getAllTaskDetails";
 	}
 	
-	//查已发布任务
+	//查新建目标任务
 	@RequestMapping("/selectPublishedTask")
 	public String selectPublishedTask(Map<String, Object> data,String staskId) {
 		System.out.println(staskId);
@@ -127,8 +127,12 @@ public class TaskDetilController {
 		return "forward:/OldTarget.jsp";
 	}
 	
-	
-	
-	
+	//查目标列表任务
+	@RequestMapping("/selectOldPublishedTask")
+	public String selectOldPublishedTask(Integer offId,Map<String, Object > oldPub) {
+		List<OffTaskRelease> oldPublishedTask = taskService.selectPublishedTask(offId);
+		oldPub.put("oldPublishedTask", oldPublishedTask);
+		return "forward:/oldPublishedTask.jsp";
+	}
 	
 }
