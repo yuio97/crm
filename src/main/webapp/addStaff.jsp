@@ -7,7 +7,7 @@
 <head>
 	<base href="<%=basepath %>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>WangID办公管理系统</title>
+   <title>WangID办公管理系统</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -19,7 +19,26 @@
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-    
+    <style type="text/css">
+    	.out
+		{
+			width:100px;
+			height: 100px;
+			position: relative;
+		}
+		
+		.out img,.out input
+		{
+			width:100px;
+			height: 100px;
+			position: absolute;
+		}
+		
+		.out input
+		{
+			opacity:0;
+		}
+    </style>
 </head>
 
 <body>
@@ -37,9 +56,14 @@
         </div>
         
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="addStaff" method="post">
+            <form class="layui-form layui-form-pane" enctype="multipart/form-data"  action="addStaff" method="post">
             <ul>
-
+				<li>
+                    <div class="left">用户名:</div>
+                    <div class="right"> 
+                        <input type="text"  name="sysAccountName" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
                 <li>
                     <div class="left">员工姓名:</div>
                     <div class="right"> 
@@ -49,8 +73,8 @@
                 <li>
                     <div class="left">性别:</div>
                     <div class="right">
-                                    <input type="radio" name="sysStaffSex" value="男" title="男">
-                                    <input type="radio" name="sysStaffSex" value="女" title="女" checked>
+                                    <input type="radio" name="sysStaffSex" value="1" title="男">
+                                    <input type="radio" name="sysStaffSex" value="0" title="女" checked>
   
                     </div>
                 </li>
@@ -61,7 +85,7 @@
                     </div>
                 </li>
                 <li>
-                    <div class="left">地址</div>
+                    <div class="left">地址:</div>
                     
                     <div class="right"> 
                         <input type="text"  name="sysStaffAddress" required lay-verify="required"  autocomplete="off" class="layui-input">
@@ -74,30 +98,43 @@
                     </div>
                 </li>
                 <li>
-                    <div class="left">政治面貌</div>
+                    <div class="left">政治面貌:</div>
                     <div class="right"> 
                             <input type="text"  name="sysStaffPol" required lay-verify="required"  autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
-                    <div class="left">联系方式</div>
+                    <div class="left">联系方式:</div>
                     <div class="right">
                             <input type="text"  name="sysStaffTel" required lay-verify="required"  autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
-                        <div class="left">毕业学校</div>
+                        <div class="left">毕业学校:</div>
                         <div class="right">
                                 <input type="text"  name="sysStaffSchool" required lay-verify="required"  autocomplete="off" class="layui-input">
                         </div>
                 </li>
-
+                <li>
+                        <div class="left">照片:</div>
+                        <div class="right out">
+                           	<img id="img" src="" >
+							<input type="file" onchange="showImg(this)" name="img">
+                        </div>
+                </li>
                 <li>
                     <div class="left">备注:</div>
                     <div class="right"> 
                         <textarea name="sysStaffRemark"  required lay-verify="required"  class="layui-textarea"></textarea>
                     </div>
                 </li>
+                <!-- <li>
+                    <div class="left"> 是否锁定</div>
+                    <div class="right"> 
+                        <input class="button_qr" id="chekk" type="checkbox" >
+                        <input type="hidden" id="sysAccountSta" name="sssysAccountSta" value="1">
+                    </div>
+                </li> -->
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
@@ -125,4 +162,16 @@
           ,layedit = layui.layedit
           ,laydate = layui.laydate;
         });
+    	function showImg(obj)
+    	{
+    		var file = obj.files[0];
+    		var reader = new FileReader();
+    		reader.readAsDataURL(file);
+    		reader.onload = function()
+    		{
+    			var result =  reader.result;
+    			document.getElementById('img').src = result;
+    		}
+    		
+    	}
         </script>
