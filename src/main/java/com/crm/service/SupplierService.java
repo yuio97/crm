@@ -15,6 +15,8 @@ public interface SupplierService {
 	 
 	 public List<Supplier> getSupplierList();
 	 
+	 Supplier selectByPrimaryKey(Integer supplierId);
+	 
 	 public PageInfo<Supplier> getSupplierList(int pn,int size); 
 
 }

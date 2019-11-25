@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import com.crm.bean.WareHouse;
 
 public interface WareHouseMapper {
@@ -14,4 +16,6 @@ public interface WareHouseMapper {
     int updateByPrimaryKeySelective(WareHouse record);
 
     int updateByPrimaryKey(WareHouse record);
+    
+    List<WareHouse> getWareHouseList();
 }
