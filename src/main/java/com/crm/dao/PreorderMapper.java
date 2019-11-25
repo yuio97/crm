@@ -19,5 +19,5 @@ public interface PreorderMapper {
 
     int updateByPrimaryKey(Preorder record);
     
-    List<Preorder> selectPre(@Param("preId") Integer preId);
+    List<Preorder> selectPre();
 }
