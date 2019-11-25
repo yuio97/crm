@@ -1,10 +1,14 @@
 package com.crm.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.crm.Util.CharUtil;
 import com.crm.bean.SysAccount;
@@ -113,8 +118,34 @@ public class AccountController {
 	
 	//修改员工信息
 	@RequestMapping("/updateStaff")
-	public String updateStaff(SysStaffInfo info) {
+	public String updateStaff(@RequestParam("img")MultipartFile img,HttpServletRequest req,
+			SysStaffInfo info) throws IllegalStateException, IOException {
+		String showPath = null;
+		//判断文件是否存在
+		if(img != null&&!img.isEmpty()) {
+			String realPath = req.getServletContext().getRealPath("/image");
+			System.out.println(realPath);
+			File dir = new File(realPath);
+			if(!dir.exists()) {
+				dir.mkdirs();
+			}
+			//获得原始文件
+			String originalFilename = img.getOriginalFilename();
+			
+			//截取出后缀名
+			String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+			
+			String fileName = System.currentTimeMillis() + ext;
+			String savePath = realPath + "/" + fileName;
+			
+			//存储到服务器
+			img.transferTo(new File(savePath));
+			showPath = "image/" + fileName;
+		}
 		
+		System.out.println(showPath);
+		info.setSysStaffPhoto(showPath);
+		info.setSysStaffTime(new Date());
 		staffInfoService.updateStaff(info);
 		return "forward:staffList.jsp";
 		
@@ -129,20 +160,64 @@ public class AccountController {
 		return "forward:updateStaff.jsp";		
 	}
 	
+	
+	//删除员工账号及个人信息
 	@RequestMapping("/delAccount")
 	@ResponseBody
 	public String delAccount(int[] accountId) {
 		for (int i = 0; i < accountId.length; i++) {
+			SysAccount account = accountServiceImpl.getAccountByAccountId(accountId[i]);
 			accountServiceImpl.delAccountByAccountId(accountId[i]);
+			staffInfoService.delStaff(account.getSysStaffId());
 		}
 		return null;
 		
 	}
 	
 	@RequestMapping("/addStaff")
-	public String AddStaff(SysStaffInfo info) {
+	public String AddStaff(@RequestParam("img")MultipartFile img,HttpServletRequest req,
+			SysStaffInfo info,SysAccount account) throws IllegalStateException, IOException {
 		
-		return null;
+		String showPath = null;
+		//判断文件是否存在
+		if(img != null&&!img.isEmpty()) {
+			String realPath = req.getServletContext().getRealPath("/image");
+			System.out.println(realPath);
+			File dir = new File(realPath);
+			if(!dir.exists()) {
+				dir.mkdirs();
+			}
+			//获得原始文件
+			String originalFilename = img.getOriginalFilename();
+			
+			//截取出后缀名
+			String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+			
+			String fileName = System.currentTimeMillis() + ext;
+			String savePath = realPath + "/" + fileName;
+			
+			//存储到服务器
+			img.transferTo(new File(savePath));
+			showPath = "image/" + fileName;
+		}
+		
+		System.out.println(showPath);
+		
+		//设置员工状态为未审核
+		info.setSysStaffSta("2");
+		
+		info.setSysStaffPhoto(showPath);
+		int staffId = staffInfoService.insertStaff(info);
+		
+		account.setSysAccountSta("1");
+		account.setSysStaffId(staffId);
+		account.setSysAccountSalt("asdf");
+		account.setSysAccountPass(CharUtil.passwordMd5("000000", "asdf"));
+		account.setSysAccountTime(new Date());
+		
+		accountServiceImpl.addAccount(account);
+
+		return "forward:/staffList.jsp";
 		
 	}
 	

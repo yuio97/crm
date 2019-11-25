@@ -29,6 +29,13 @@ public class SupplierController {
 		return supplierList;
 		
 	}
+	@RequestMapping("/SupplierList")
+	public List<Supplier> getSupplierList(){
+		List<Supplier> supplierList = supplierService.getSupplierList();
+		
+		return supplierList;
+		
+	}
 	
 	@RequestMapping("/addSupplier")
 	public String addSupplier(Supplier supplier){

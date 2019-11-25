@@ -63,6 +63,12 @@ public class AccountServiceImpl implements AccountService{
 			return true;
 		}
 	}
+
+	@Override
+	public int addAccount(SysAccount account) {
+		
+		return sysAccountMapper.insertSelective(account);
+	}
 	
 
 }

@@ -41,7 +41,7 @@
 					<span><img src="images/head.jpg" /></span>
 					<dl>
 						<dt>{{user.sysAccountName}}（营销总监）</dt>
-						<dd>级别：普通账户 上次登录时间：{{user.sysAccountTime}}</dd>
+						<dd>部门：普通账户 上次登录时间：{{user.sysAccountTime}}</dd>
 					</dl>
 				</div>
 

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -89,7 +90,7 @@
                 <tr v-for="PurchasingOrder in POrder" > 
                     
                     <td></td>
-                    <td > <a>修改</a>丨<a href="">删除</a>丨<a href="javascript:;" style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
+                    <td > <a href="/purchasingOrder/getporderId?porderId=${porder.porderId}">修改</a>丨<a href="">删除</a>丨<a href="javascript:;" style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
                     <td>{{PurchasingOrder.porderId}}</td>
                 
                     <td>{{PurchasingOrder.payQk}}</td>

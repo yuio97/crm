@@ -17,6 +17,6 @@ public interface AccountService {
 	
 	public boolean delAccountByAccountId(int id);
 	
-
+	public int addAccount(SysAccount account);
 		
 }

@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.crm.bean.Goods;
+import com.crm.bean.Supplier;
 import com.crm.service.GoodsService;
+import com.crm.service.SupplierService;
 
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
 	@Resource
 	private GoodsService goodsService;
+	
+	@Resource
+	private SupplierService supplierService;
 	
 	@RequestMapping("/goodsList")
 	public String getGoodsList(Map<String,Object> data){
@@ -81,7 +86,8 @@ public class GoodsController {
 	public String selectBygoodsId(Goods goodsId,Map<String,Object> data){
 		Goods select = goodsService.select(goodsId);
 		data.put("goodslist", select); 
-		
+		List<Supplier> supplierList = supplierService.getSupplierList();
+		data.put("supplierList", supplierList);
 		return "forward:/goods_update.jsp";
 		
 	}

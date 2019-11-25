@@ -62,7 +62,6 @@ public class GoodsController2 {
 	public String selectBygoodsId1(Goods goodsId,Map<String,Object> data){
 		Goods select = goodsService.select(goodsId);
 		data.put("goodslist", select); 
-		
 		return "redirect:/goods/delectgoods";
 		
 	}

@@ -23,7 +23,7 @@
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/vue.min.js"></script>
     
-    <script type="text/javascript">
+    <script >
     	function getData(pn)
     	{
     		//发送请求
@@ -43,7 +43,7 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a>目标管理</a>
+            <a href="task/getAllTaskDetails">目标管理</a>
             <span>目标列表</span>
         </div>
         <!-- 筛选 --> 
@@ -76,7 +76,9 @@
                 <tr> 
                     <td>
 	                    <c:if test="${old.detTaskStatus == 0 }"></c:if>
-		             	<c:if test="${old.detTaskStatus == 1 }"><a href="" class="btn btn-primary">查看</a></c:if>
+		             	<c:if test="${old.detTaskStatus == 1 }">
+		             		<a href="task/selectOldPublishedTask?offId=${old.offId }" class="btn btn-primary">查看</a>
+		             	</c:if>
 					</td>
                     <td>
 						<c:if test="${old.detTaskStatus == 0 }">未发布</c:if>

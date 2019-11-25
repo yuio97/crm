@@ -30,8 +30,8 @@
 	<div class="zy_weizhi bord_b">
 		<i class="fa fa-home fa-3x"></i>
 		<a>首页</a>
-		<a>目标管理</a>
-		<a>新建目标</a>
+		<a href="task/getAllTaskDetails">目标管理</a>
+		<a href="task/getAllTaskDetails">新建目标</a>
 		<span>发布任务</span>
 	</div>
 	<!-- 下面写内容 -->
