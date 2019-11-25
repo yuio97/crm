@@ -14,6 +14,8 @@ public class OffTaskRelease {
     private String offReceiveStatus;
 
     private Date offTime;
+    
+    private String staffName;
 
     public Integer getMissionId() {
         return missionId;
@@ -62,4 +64,13 @@ public class OffTaskRelease {
     public void setOffTime(Date offTime) {
         this.offTime = offTime;
     }
+
+	public String getStaffName() {
+		return staffName;
+	}
+
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
+	}
+    
 }

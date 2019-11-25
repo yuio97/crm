@@ -33,7 +33,7 @@
     		}
     		var year = $('#test2').val();
     		var month = $('#test3').val();
-    		location.href = "task/getAllOldTaskDetails?year="+year+"&month="+month+"&pn="+pn;
+    		location.href = "task/selectAllOldTask?year="+year+"&month="+month+"&pn="+pn;
     	}
     </script>
 </head>
@@ -43,8 +43,8 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a href="task/getAllTaskDetails">目标管理</a>
-            <span>目标列表</span>
+            <a href="task/selectAllTask">任务管理</a>
+            <span>历史任务</span>
         </div>
         <!-- 筛选 --> 
     	<div id="app" class="shuaix">
@@ -64,43 +64,48 @@
         <!-- 下面写内容 -->
         <table class="layui-table" lay-filter="mylist" lay-size="lg">
             <thead>
-                <tr> 
-                    <th lay-data="{field:'yx', align:'center',width:280}">操作</th>
-                    <th lay-data="{field:'time',align:'center', minWidth:120}">状态</th>
-                    <th lay-data="{field:'www',align:'center',minWidth:260}">内容</th>
-                    <th lay-data="{field:'company',align:'center',minWidth:110}">时间</th>
+                <tr>
+                     <th>员工编号</th>
+		             <th>员工姓名</th>
+		             <th>任务内容</th>
+		             <th>任务发布时间</th>
+		             <th>任务接收状态</th>
                 </tr> 
             </thead>
             <tbody>
-            <c:forEach items="${allOldTaskDetails.list }" var="old" >
+            <c:forEach items="${allOldTask.list }" var="oldTask" >
                 <tr> 
-                    <td>
-	                    <c:if test="${old.detTaskStatus == 0 }"></c:if>
-		             	<c:if test="${old.detTaskStatus == 1 }">
-		             		<a href="task/selectOldPublishedTask?offId=${old.offId }" class="btn btn-primary">查看</a>
-		             	</c:if>
+                	<td>
+                    	${oldTask.sysDeptId }
 					</td>
                     <td>
-						<c:if test="${old.detTaskStatus == 0 }">未发布</c:if>
-	             		<c:if test="${old.detTaskStatus == 1 }">已发布</c:if>
+                    	${oldTask.staffName }
 					</td>
-                    <td>${old.offContent }</td>
-                    <td><fmt:formatDate value="${old.detTime }" pattern="yyyy-MM-dd" /></td>
+                    <td>
+                    	${oldTask.offContent }
+                    </td>
+                    <td>
+                    	<fmt:formatDate value="${oldTask.offTime }" pattern="yyyy-MM-dd" />
+                    </td>
+                    <td>
+						<c:if test="${oldTask.offReceiveStatus == 0 }">未发布</c:if>
+	             		<c:if test="${oldTask.offReceiveStatus == 1 }">已发布</c:if>
+					</td>
                 </tr>
             </c:forEach>
             </tbody>  
             <tfoot>
             	<tr>
-            		<td colspan="4">
+            		<td colspan="5">
             			<a href="javascript:getData(1)">首页</a>
             			<!-- hasPreviousPage没有上一页生效，hasNextPage没有下一页生效 -->
-            			<c:if test="${allOldTaskDetails.hasPreviousPage }">
-            				<a href="javascript:getData(${allOldTaskDetails.prePage })">上一页</a>
+            			<c:if test="${allOldTask.hasPreviousPage }">
+            				<a href="javascript:getData(${allOldTask.prePage })">上一页</a>
             			</c:if>
-            			<c:if test="${allOldTaskDetails.hasNextPage }">
-            				<a href="javascript:getData(${allOldTaskDetails.nextPage })">下一页</a>
+            			<c:if test="${allOldTask.hasNextPage }">
+            				<a href="javascript:getData(${allOldTask.nextPage })">下一页</a>
             			</c:if>
-            			<a href="javascript:getData(${allOldTaskDetails.pages })">尾页</a>
+            			<a href="javascript:getData(${allOldTask.pages })">尾页</a>
             		</td>
             	</tr>
             </tfoot>

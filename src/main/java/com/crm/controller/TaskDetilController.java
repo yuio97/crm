@@ -36,6 +36,8 @@ public class TaskDetilController {
 	private StaffInfoService staffInfoService;
 	
 	
+	
+//目标管理
 	@RequestMapping("/getAllTaskDetails")
 	public String getAllTaskDetl(Map<String, Object > data) {
 		List<OffTaskDetails> allTaskDetails = taskService.getAllTaskDetails();
@@ -133,6 +135,30 @@ public class TaskDetilController {
 		List<OffTaskRelease> oldPublishedTask = taskService.selectPublishedTask(offId);
 		oldPub.put("oldPublishedTask", oldPublishedTask);
 		return "forward:/oldPublishedTask.jsp";
+	}
+	
+	
+	
+//任务管理
+	@RequestMapping("/selectAllTask")
+	public String selectAllTask(Integer sysDeptId,Map<String, Object > task) {
+		List<OffTaskRelease> selectAllTask = taskService.selectAllTask();
+		//循环selectAllTask这个list，类型是OffTaskRelease，offTaskRelease是自己取的名字
+		for (OffTaskRelease offTaskRelease : selectAllTask) {
+			SysStaffInfo staffInfoByStaffId = staffInfoService.getStaffInfoByStaffId(offTaskRelease.getSysDeptId());
+			offTaskRelease.setStaffName(staffInfoByStaffId.getSysStaffName());
+		}
+		task.put("selectAllTask", selectAllTask);
+		return "forward:/newTask.jsp";
+	}
+	
+	@RequestMapping("/selectAllOldTask")
+	public String selectAllOldTask(@RequestParam(defaultValue="1")int pn,Integer year,Integer month,Map<String, Object > oldTask) {
+		PageInfo<OffTaskRelease> allOldTask = taskService.getAllOldTask(pn, year, month);
+		oldTask.put("allOldTask", allOldTask);
+		oldTask.put("year", year);
+		oldTask.put("month", month);
+		return "forward:/oldTask.jsp";
 	}
 	
 }

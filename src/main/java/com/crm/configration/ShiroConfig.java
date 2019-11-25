@@ -114,19 +114,6 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/register.jsp", "anon");
 		filterChainDefinitionMap.put("/favicon.ico", "anon");
 
-//		filterChainDefinitionMap.put("/**", "anon");
-		
-<<<<<<< HEAD
-//		filterChainDefinitionMap.put("/logout", "logout");
-//		filterChainDefinitionMap.put("/**", "authc");
-		
-=======
-
-		filterChainDefinitionMap.put("/logout", "logout");
-//		filterChainDefinitionMap.put("/**", "authc");
-
-	
->>>>>>> branch 'master' of https://github.com/yuio97/crm.git
 		return shiroFilterFactoryBean;
 	}
 	
