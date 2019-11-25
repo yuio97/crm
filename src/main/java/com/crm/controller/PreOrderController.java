@@ -20,9 +20,9 @@ public class PreOrderController {
 	
 	@RequestMapping("/select")
 	@ResponseBody
-	public List<Preorder> selectPre(Integer preId)
+	public List<Preorder> selectPre()
 	{
-		List<Preorder> selectPre = preOrderService.selectPre(preId);
+		List<Preorder> selectPre = preOrderService.selectPre();
 		return selectPre;
 	}
 }

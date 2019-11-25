@@ -17,10 +17,10 @@ public class PreOrderServiceImpl implements PreOrderService{
 	private PreorderMapper preorderMapper;
 	
 	@Override
-	public List<Preorder> selectPre(Integer preId) {
+	public List<Preorder> selectPre() {
 
-		
-		return null;
+		List<Preorder> selectPre = preorderMapper.selectPre();
+		return selectPre;
 	}
 
 }

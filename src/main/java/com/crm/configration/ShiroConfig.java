@@ -114,13 +114,6 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/register.jsp", "anon");
 		filterChainDefinitionMap.put("/favicon.ico", "anon");
 
-//		filterChainDefinitionMap.put("/**", "anon");
-		
-
-		filterChainDefinitionMap.put("/logout", "logout");
-//		filterChainDefinitionMap.put("/**", "authc");
-
-	
 		return shiroFilterFactoryBean;
 	}
 	

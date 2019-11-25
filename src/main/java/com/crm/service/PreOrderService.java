@@ -6,5 +6,5 @@ import com.crm.bean.Preorder;
 
 public interface PreOrderService {
 
-	public List<Preorder> selectPre(Integer preId);
+	public List<Preorder> selectPre();
 }

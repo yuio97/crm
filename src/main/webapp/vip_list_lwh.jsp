@@ -24,6 +24,8 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
 	<div class="wangid_conbox" id="v">
@@ -33,14 +35,16 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <a>首页</a>
             <a>供应商信息管理</a>
             <span>供应商信息列表</span>
+        
         </div>
+        
         <!-- 筛选 --> 
         
         <!-- 下面写内容 -->
         <table class="layui-table" lay-filter="mylist" lay-size="lg">
             <thead>
                 <tr> 
-                    <th lay-data="{type:'checkbox',fixed:'left'}"></th>
+                    <th lay-data="{type:'checkbox',fixed:'left'}"><button class="layui-btn layui-btn-sm" lay-event="getCheckLength">删除</button></th>
                     <th lay-data="{field:'yx', align:'center',width:280}">操作</th>
                     <th lay-data="{field:'time',align:'center', minWidth:120}">预购表编号</th>
                     <th lay-data="{field:'www',align:'center',minWidth:260}">客户公司名称</th>
@@ -52,33 +56,54 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </tr> 
             </thead>
             <tbody>
-                <tr> 
-                    <td></td>
-                    <td> <a>修改</a>丨<a>添加</a>丨<a href="javascript:;" style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
-                    <td>190507004</td>
-                    <td>美容服务有限公司</td>
-                   
-                    <td>域名：cgqyzx.com</td>
-                    <td>81048555555</td>
-                    <td>2019-05-08</td>
-                    <td>gzwagnid666com</td>
+                <tr v-for="(pre,j) in prelist" :key=j> 
+                    <td><input type="checkbox"></td>
+                    <td> <a>提交</a>丨<a>修改</a>丨<a href="javascript:;" style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
+                    <td>{{pre.preorderId}}</td>
+                    <td>{{pre.customer.copanyName}}</td>
+                    <td>{{pre.customer.customerName}}</td>
+                    <td>{{pre.customer.customerIphone}}</td>
+                    <td>{{pre.customer.customerEmal}}</td>
+                    <td>{{pre.customer.copanyAdress}}</td>
             </tbody>  
         </table>
     </div> 
 <!-- 自定义头部工具栏 -->
     <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container"> 
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">删除</button> 
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">删除预定单</button> 
+			<a class="layui-btn layui-btn-sm" style="margin-left:10px;" href="vip_list_xq_lwh.jsp">添加预定单</a>
         </div>
     </script> 
     <!-- layui js -->
     <script src="layui/layui.js"></script>
 	
+	<script>
+    var s = new Vue({
+        el:'#v',
+        data:{
+            prelist:[]
+        },
+        created:function(){
+            var _this = this
+            $.ajax({
+                type: "GET",
+                url: "preorder/select",
+                data: null,
+                dataType: "json",
+                success: function (response) {
+                    _this.prelist = response;
+                }
+            });
+        }
+        
+    });
+    </script>
 	
 	
-</body>
-</html>
-<script type="text/javascript">
+	
+	
+	<script type="text/javascript">
 	//静态表格
     layui.use('table',function(){
             var table = layui.table;
@@ -136,7 +161,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             // offset: 'rb', //右下角弹出
             // time: 2000, //2秒后自动关闭
             anim: 5,//动画
-            content: ['vip_list_xq.html', 'no'], //iframe的url，no代表不显示滚动条 
+            content: ['vip_list_xq_lwh.jsp', 'no'], //iframe的url，no代表不显示滚动条 
         }); 
         
     }
@@ -159,4 +184,14 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
     }
  
-</script> 
+</script>
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>
