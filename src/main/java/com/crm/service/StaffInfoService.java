@@ -11,4 +11,8 @@ public interface StaffInfoService {
 	public SysStaffInfo getStaffInfoByStaffId(int sysStaffId);
 	
 	public int updateStaff(SysStaffInfo staff);
+	
+	public int  insertStaff(SysStaffInfo info);
+	
+	public int delStaff(int staffId);
 }

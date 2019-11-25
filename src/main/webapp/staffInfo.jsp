@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,12 +24,28 @@
     <script src="layui/layui.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="js/vue.min.js"></script>
+    
+    <style>
+    	.out
+		{
+			width:100px;
+			height: 100px;
+		}
+    </style>
 </head>
 
 <body style="background: #fff;">
 <div class="tianjia_xx" id="staffinfo">
     <table class="if_tianjiatext layui-table" lay-size="lg"> 
     <tbody>
+    	<tr>
+            <td class="td_1">员工图片</td> 
+            <td>
+            	<div class="out">
+            		<img src="${info.sysStaffPhoto }">
+            	</div>
+            </td>
+        </tr>
          <tr>
             <td class="td_1">员工姓名</td> 
             <td>${info.sysStaffName}</td>
@@ -64,7 +81,8 @@
 
         <tr>
             <td  class="td_1">最后修改时间</td> 
-            <td>${info.sysStaffTime}</td>
+            <td><fmt:formatDate value="${info.sysStaffTime}" pattern="yyyy-MM-dd" /></td>
+            
         </tr>
         <tr>
             <td  class="td_1">备注</td> 

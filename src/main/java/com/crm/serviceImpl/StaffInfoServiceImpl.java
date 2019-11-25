@@ -34,6 +34,18 @@ public class StaffInfoServiceImpl implements StaffInfoService{
 		return sysStaffInfoMapper.updateByPrimaryKeySelective(staff);
 	}
 
+	@Override
+	public int insertStaff(SysStaffInfo info) {
+		// TODO Auto-generated method stub
+		return sysStaffInfoMapper.insertAndGetId(info);
+	}
+
+	@Override
+	public int delStaff(int staffId) {
+		
+		return sysStaffInfoMapper.deleteByPrimaryKey(staffId);
+	}
+
 
 
 }

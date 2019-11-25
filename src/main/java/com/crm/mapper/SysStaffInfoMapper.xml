@@ -254,4 +254,22 @@
   <select id="getAllStaff" resultMap="BaseResultMap">
   	select * from sys_staff_info
   </select>
+  
+
+	<insert id="insertAndGetId"  useGeneratedKeys="true" keyProperty="sysStaffId" keyColumn="sys_staff_id" parameterType="com.crm.bean.SysStaffInfo" >
+    insert into sys_staff_info (sys_staff_id, sys_staff_name, sys_staff_sex, 
+      sys_staff_photo, sys_staff_identity, sys_staff_address, 
+      sys_staff_naddress, sys_staff_edu, sys_staff_pol, 
+      sys_staff_school, sys_staff_tel, sys_staff_ontel, 
+      sys_staff_check, sys_duty_id, sys_staff_sta, 
+      sys_staff_remark, sys_company_id, sys_staff_time
+      )
+    values (#{sysStaffId,jdbcType=INTEGER}, #{sysStaffName,jdbcType=VARCHAR}, #{sysStaffSex,jdbcType=VARCHAR}, 
+      #{sysStaffPhoto,jdbcType=VARCHAR}, #{sysStaffIdentity,jdbcType=VARCHAR}, #{sysStaffAddress,jdbcType=VARCHAR}, 
+      #{sysStaffNaddress,jdbcType=VARCHAR}, #{sysStaffEdu,jdbcType=VARCHAR}, #{sysStaffPol,jdbcType=VARCHAR}, 
+      #{sysStaffSchool,jdbcType=VARCHAR}, #{sysStaffTel,jdbcType=VARCHAR}, #{sysStaffOntel,jdbcType=VARCHAR}, 
+      #{sysStaffCheck,jdbcType=VARCHAR}, #{sysDutyId,jdbcType=VARCHAR}, #{sysStaffSta,jdbcType=VARCHAR}, 
+      #{sysStaffRemark,jdbcType=VARCHAR}, #{sysCompanyId,jdbcType=VARCHAR}, #{sysStaffTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
 </mapper>

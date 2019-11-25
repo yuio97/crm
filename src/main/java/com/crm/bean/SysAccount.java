@@ -2,6 +2,8 @@ package com.crm.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class SysAccount {
@@ -19,6 +21,7 @@ public class SysAccount {
 
     private String sysAccountSta;
     
+    @DateTimeFormat(pattern = "yy-mm-dd")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date sysAccountTime;
     

@@ -21,4 +21,6 @@ public interface SysStaffInfoMapper {
     SysStaffInfo getInfoByStaffName(String name);
     
     List<SysStaffInfo> getAllStaff();
+    
+    int insertAndGetId(SysStaffInfo info);
 }

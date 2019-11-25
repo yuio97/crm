@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="layui/css/layui.css">
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
     <script src="js/vue.min.js"></script>
-    <script src="js/axios.min.js"></script>
-    
+    <script src="js/axios.min.js"></script>    
 </head>
 
 <body>
@@ -34,33 +33,34 @@
             <span>供应商信息列表</span>
         </div>
         <!-- 筛选 --> 
-        <div class="shuaix">
+        
+        <div class="shuaix ">
+            <div>
+                <a  href="addStaff.jsp" class="layui-btn layui-btn-sm" style="margin-right: 50px; margin-left: 25px;">添加员工</a>
+            </div>
              <div class="left"  style="margin-right:10px;">
-               
+                
                 <select>   
-                    <option value="按年份时间查询">按年份时间查询</option>   
-                    <option value="其他">其他</option>    
+                    <option value="按注册时间查询">按注册时间查询</option>                      
                 </select>
             </div>
             <div class="layui-input-inline">
                 <input type="text" class="layui-input" id="test2" placeholder="开始时间"> 
             </div>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="test3" placeholder="结束时间">
+                <input type="text" class="layui-input"  id="test3" placeholder="结束时间">
             </div>
-            <div class="right"  style="margin-right:30px;"> 
-                    <a href="#">查询</a>
-                </div>
-            <div class="left"   style="margin-right:10px;">
-               
-                <select>   
-                    <option value="公司名称">公司名称</option>                    
-                </select>
-            </div>   
+            <div class="right"  style="margin-right:30px;" > 
+                    <a href="javascript:;" >查询</a>
+            </div>
+  
             <!-- <div class="center">统计：【大：20 中：30 小：60】</div> -->
             <div class="right">
-                <input type="text" >
-                <a href="#">查询</a>
+                <input type="text" id="test4" placeholder="按用户名进行检索" >
+                
+            </div>
+            <div class="right"  style="margin-right:30px;" @click="seach()" > 
+                    <a href="javascript:;" >查询</a>
             </div>
         </div>
         <!-- 下面写内容 -->
@@ -84,7 +84,7 @@
             </thead>
             <tbody>
                 <tr v-for="s in accountList.list"> 
-                    <td><input type="checkbox" :value="s.sysStaffId" name="chec" ></td>
+                    <td><input type="checkbox" :value="s.sysAccountId" name="chec" ></td>
                     <td style="text-align:center"> <a style="color:#205b9e;" :href="'goUpdateStaff?staffId=' + s.sysAccountId" >修改</a>
                         丨<a style="color:#205b9e;" href="javascript:;"  @click="lockk(s.sysAccountId,s.sysAccountSta)">{{s.sysAccountSta == 1?'解锁':'锁定'}}</a>
                         丨<a style="color:#205b9e;" href="javascript:;"  @click="checkk(s.sysStaffId)">详情</a> 
@@ -209,10 +209,31 @@
                     .catch(err => {
                         console.error(err); 
                     });
+                },
+                seach:function(){
+                    var start = $('#test2').val();
+                    var end = $('#test').val();
+                    var name = $('#test4').val();
+
+                    var _this = this;
+                    axios.post('')
+                    .then(function(res){
+                        _this.loadData();
+                    })
+                    .catch(err => {
+                        console.error(err); 
+                    });
                 }
+
+
             }
             
         })
+
+        function checcc(obj){
+            console.log(obj.value);
+            
+        }
     </script>
 
     <script type="text/html" id="toolbarDemo">
