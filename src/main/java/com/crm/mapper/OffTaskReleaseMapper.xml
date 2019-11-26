@@ -1,124 +1,93 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.crm.dao.OffTaskReleaseMapper" >
-  <resultMap id="BaseResultMap" type="com.crm.bean.OffTaskRelease" >
-    <id column="mission_id" property="missionId" jdbcType="INTEGER" />
-    <result column="off_id" property="offId" jdbcType="INTEGER" />
-    <result column="off_content" property="offContent" jdbcType="VARCHAR" />
-    <result column="sys_dept_id" property="sysDeptId" jdbcType="INTEGER" />
-    <result column="off_receive_status" property="offReceiveStatus" jdbcType="VARCHAR" />
-    <result column="off_time" property="offTime" jdbcType="TIMESTAMP" />
-    <result column="sys_staff_name" property="staffName" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.OffTaskReleaseMapper">
+  <resultMap id="BaseResultMap" type="com.crm.bean.OffTaskRelease">
+    <id column="mission_id" jdbcType="INTEGER" property="missionId" />
+    <result column="off_id" jdbcType="INTEGER" property="offId" />
+    <result column="sys_dept_id" jdbcType="INTEGER" property="sysDeptId" />
+    <result column="release_state" jdbcType="VARCHAR" property="releaseState" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    mission_id, off_id, off_content, sys_dept_id, off_receive_status, off_time
+  <sql id="Base_Column_List">
+    mission_id, off_id, sys_dept_id, release_state, operate_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from off_task_release
     where mission_id = #{missionId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from off_task_release
     where mission_id = #{missionId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.crm.bean.OffTaskRelease" >
-    insert into off_task_release (mission_id, off_id, off_content, 
-      sys_dept_id, off_receive_status, off_time
-      )
-    values (#{missionId,jdbcType=INTEGER}, #{offId,jdbcType=INTEGER}, #{offContent,jdbcType=VARCHAR}, 
-      #{sysDeptId,jdbcType=INTEGER}, #{offReceiveStatus,jdbcType=VARCHAR}, #{offTime,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="com.crm.bean.OffTaskRelease">
+    insert into off_task_release (mission_id, off_id, sys_dept_id, 
+      release_state, operate_time)
+    values (#{missionId,jdbcType=INTEGER}, #{offId,jdbcType=INTEGER}, #{sysDeptId,jdbcType=INTEGER}, 
+      #{releaseState,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.crm.bean.OffTaskRelease" >
+  <insert id="insertSelective" parameterType="com.crm.bean.OffTaskRelease">
     insert into off_task_release
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="missionId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="missionId != null">
         mission_id,
       </if>
-      <if test="offId != null" >
+      <if test="offId != null">
         off_id,
       </if>
-      <if test="offContent != null" >
-        off_content,
-      </if>
-      <if test="sysDeptId != null" >
+      <if test="sysDeptId != null">
         sys_dept_id,
       </if>
-      <if test="offReceiveStatus != null" >
-        off_receive_status,
+      <if test="releaseState != null">
+        release_state,
       </if>
-      <if test="offTime != null" >
-        off_time,
+      <if test="operateTime != null">
+        operate_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="missionId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="missionId != null">
         #{missionId,jdbcType=INTEGER},
       </if>
-      <if test="offId != null" >
+      <if test="offId != null">
         #{offId,jdbcType=INTEGER},
       </if>
-      <if test="offContent != null" >
-        #{offContent,jdbcType=VARCHAR},
-      </if>
-      <if test="sysDeptId != null" >
+      <if test="sysDeptId != null">
         #{sysDeptId,jdbcType=INTEGER},
       </if>
-      <if test="offReceiveStatus != null" >
-        #{offReceiveStatus,jdbcType=VARCHAR},
+      <if test="releaseState != null">
+        #{releaseState,jdbcType=VARCHAR},
       </if>
-      <if test="offTime != null" >
-        #{offTime,jdbcType=TIMESTAMP},
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.OffTaskRelease" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.OffTaskRelease">
     update off_task_release
-    <set >
-      <if test="offId != null" >
+    <set>
+      <if test="offId != null">
         off_id = #{offId,jdbcType=INTEGER},
       </if>
-      <if test="offContent != null" >
-        off_content = #{offContent,jdbcType=VARCHAR},
-      </if>
-      <if test="sysDeptId != null" >
+      <if test="sysDeptId != null">
         sys_dept_id = #{sysDeptId,jdbcType=INTEGER},
       </if>
-      <if test="offReceiveStatus != null" >
-        off_receive_status = #{offReceiveStatus,jdbcType=VARCHAR},
+      <if test="releaseState != null">
+        release_state = #{releaseState,jdbcType=VARCHAR},
       </if>
-      <if test="offTime != null" >
-        off_time = #{offTime,jdbcType=TIMESTAMP},
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where mission_id = #{missionId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.crm.bean.OffTaskRelease" >
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.OffTaskRelease">
     update off_task_release
     set off_id = #{offId,jdbcType=INTEGER},
-      off_content = #{offContent,jdbcType=VARCHAR},
       sys_dept_id = #{sysDeptId,jdbcType=INTEGER},
-      off_receive_status = #{offReceiveStatus,jdbcType=VARCHAR},
-      off_time = #{offTime,jdbcType=TIMESTAMP}
+      release_state = #{releaseState,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP}
     where mission_id = #{missionId,jdbcType=INTEGER}
   </update>
- 	
- 	<!-- 查任务发布详情 -->
-	<select id="publicTaskByOffId" resultMap="BaseResultMap"  >
-		select * from off_task_release where off_id = #{offId}
-	</select>
-	<!-- 任务管理 -->
-  	<select id="getAllTask" resultMap="BaseResultMap" >
-	  	select * from off_task_release 
-	  	<where>
-		  	<if test="month != null">
-		  		and month(off_time) = #{month} 
-		  	</if> 
-		 	<if test="year != null">
-		  		AND year(off_time)  = #{year}
-		  	</if> 
-	  	</where>
-  </select>
 </mapper>

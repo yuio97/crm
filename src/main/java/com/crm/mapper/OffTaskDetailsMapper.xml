@@ -102,6 +102,9 @@
  	<if test="year != null">
   		AND year(det_time)  = #{year}
   	</if> 
+  	<if test="isSend != null and isSend == true">
+  		and det_task_status = 1
+  	</if>
   </select>
   
   

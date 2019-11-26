@@ -7,15 +7,11 @@ public class OffTaskRelease {
 
     private Integer offId;
 
-    private String offContent;
-
     private Integer sysDeptId;
 
-    private String offReceiveStatus;
+    private String releaseState;
 
-    private Date offTime;
-    
-    private String staffName;
+    private Date operateTime;
 
     public Integer getMissionId() {
         return missionId;
@@ -33,14 +29,6 @@ public class OffTaskRelease {
         this.offId = offId;
     }
 
-    public String getOffContent() {
-        return offContent;
-    }
-
-    public void setOffContent(String offContent) {
-        this.offContent = offContent == null ? null : offContent.trim();
-    }
-
     public Integer getSysDeptId() {
         return sysDeptId;
     }
@@ -49,28 +37,19 @@ public class OffTaskRelease {
         this.sysDeptId = sysDeptId;
     }
 
-    public String getOffReceiveStatus() {
-        return offReceiveStatus;
+    public String getReleaseState() {
+        return releaseState;
     }
 
-    public void setOffReceiveStatus(String offReceiveStatus) {
-        this.offReceiveStatus = offReceiveStatus == null ? null : offReceiveStatus.trim();
+    public void setReleaseState(String releaseState) {
+        this.releaseState = releaseState == null ? null : releaseState.trim();
     }
 
-    public Date getOffTime() {
-        return offTime;
+    public Date getOperateTime() {
+        return operateTime;
     }
 
-    public void setOffTime(Date offTime) {
-        this.offTime = offTime;
+    public void setOperateTime(Date operateTime) {
+        this.operateTime = operateTime;
     }
-
-	public String getStaffName() {
-		return staffName;
-	}
-
-	public void setStaffName(String staffName) {
-		this.staffName = staffName;
-	}
-    
 }

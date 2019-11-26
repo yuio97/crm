@@ -27,9 +27,8 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a href="task/getAllTaskDetails">目标管理</a>
-			<a href="task/getAllTaskDetails">新建目标</a>
-			<span>添加目标</span>
+            <a>任务管理</a>
+			<span>添加内容</span>
         </div>
         <!-- 内容 -->    
         <div class="wenxts_ke">
@@ -39,7 +38,7 @@
             <form action="task/addTarget" class="layui-form layui-form-pane" >
             <ul>   
                 <li>
-                    <div class="left">添加目标：</div>
+                    <div class="left">添加内容：</div>
                     <div class="right"> 
                         <textarea name="detTaskStatus" required lay-verify="required" placeholder="请输入内容" class="layui-textarea"></textarea>
                     </div>
