@@ -12,6 +12,38 @@
     <result column="gs_id" property="gsId" jdbcType="INTEGER" />
     <result column="px_last_time" property="pxLastTime" jdbcType="TIMESTAMP" />
   </resultMap>
+   <resultMap id="px_goods_supplier" type="com.crm.bean.PurchasingXq" >
+    <id column="px_id" property="pxId" jdbcType="INTEGER" />
+    <result column="porder_id" property="porderId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+    <result column="goods_price" property="goodsPrice" jdbcType="REAL" />
+    <result column="sys_staff_id" property="sysStaffId" jdbcType="INTEGER" />
+    <result column="px_massage" property="pxMassage" jdbcType="VARCHAR" />
+    <result column="gs_id" property="gsId" jdbcType="INTEGER" />
+    <result column="px_last_time" property="pxLastTime" jdbcType="TIMESTAMP" />
+   <association property="goods" column="goods_id" javaType="com.crm.bean.Goods">
+    	<id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_date" property="goodsDate" jdbcType="TIMESTAMP" />
+    <result column="goods_sm" property="goodsSm" jdbcType="VARCHAR" />
+    <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
+    <result column="goods_price" property="goodsPrice" jdbcType="REAL" />
+    <result column="goods_state" property="goodsState" jdbcType="VARCHAR" />
+    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+    <result column="goods_min" property="goodsMin" jdbcType="INTEGER" />
+    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <association property="supplier" column="supplier_id" javaType="com.crm.bean.Supplier">
+    <id column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="supeople" property="supeople" jdbcType="VARCHAR" />
+    <result column="supplier_tel" property="supplierTel" jdbcType="VARCHAR" />
+    <result column="supplier_address" property="supplierAddress" jdbcType="VARCHAR" />
+    <result column="supplier_email" property="supplierEmail" jdbcType="VARCHAR" />
+    </association>
+    </association>
+  
+  </resultMap>
   <sql id="Base_Column_List" >
     px_id, porder_id, goods_id, goods_num, goods_price, sys_staff_id, px_massage, gs_id, 
     px_last_time
@@ -139,7 +171,10 @@
       px_last_time = #{pxLastTime,jdbcType=TIMESTAMP}
     where px_id = #{pxId,jdbcType=INTEGER}
   </update>
-  <select id="getPurchasingXqList" resultMap="BaseResultMap">
-  select * from purchasing_xq
+  <select id="getPurchasingXqList" resultMap="px_goods_supplier">
+	  select * FROM purchasing_xq px
+	INNER JOIN goods g ON px.goods_id=g.goods_id
+	INNER JOIN supplier s ON g.supplier_id= s.supplier_id
+  	where  porder_id=#{porderId,jdbcType=INTEGER},
   </select>
 </mapper>

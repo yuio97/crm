@@ -65,7 +65,7 @@
             </div>   -->
             <!-- <div class="center">统计：【大：20 中：30 小：60】</div> -->
             <div class="right">
-                <input type="text" placeholder="请输入供应商的名称">
+                <input type="text" placeholder="请输入关键字">
                 <a href="#">查询</a>
             </div>
         </div>
@@ -81,21 +81,20 @@
 			</tr> 
 		</thead>
 		<tbody >
-			<c:forEach items="${wareHouseList}" var="w">
+			
+		
+		
+			 <c:forEach items="${wareHouseList}" var="w">
 			<tr >
 				<td></td>
 				<td>${w.warehouseId}</td>
 				<td>${w.warehouseName}</td>
 				<td>${w.warehouseType}</td>
-				
-				
 				<td>
 					<a href="/house/selectById?warehouseId=${w.warehouseId}" class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
-					
 				</td>
-				
 			</tr>
-			</c:forEach>
+			</c:forEach> 
 		
 		
 		</tbody>  
@@ -164,7 +163,7 @@
 
 <script>
  var vue = new Vue({
-    el:'#wh',
+    el:'#ware',
     data:{
     	wareHouse:[]
     },

@@ -44,15 +44,6 @@ public class PurchasingOrderController {
 	}
 	
 	
-	/*@RequestMapping("getpurchasingxqList")
-	@ResponseBody  
-	public HashMap<String,Object> selectById(Integer porderId){
-		
-		PurchasingOrder selectByPrimaryKey = purchasingOrderSerice.selectByPrimaryKey(porderId);
-		HashMap<String, Object> hashMap = new HashMap<>();
-		hashMap.put("selectByPrimaryKey", selectByPrimaryKey);
-		return hashMap;
-		
-	}*/
+	
 	 
 }

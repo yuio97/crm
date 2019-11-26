@@ -77,10 +77,12 @@
                 <tr> 
                     <th lay-data="{type:'checkbox',fixed:'left'}"></th>
                     <th lay-data="{field:'yx', align:'center',width:160}">操作</th>
-                    <th lay-data="{field:'time',align:'center', minWidth:108}">采购单编号</th>
-                    <th lay-data="{field:'company',align:'center',minWidth:160}">商品编号</th>
+                    <th lay-data="{field:'time',align:'center', minWidth:80}">采购详情编号</th>
+                    <th lay-data="{field:'company',align:'center',minWidth:120}">原材料名称</th>
                     <th lay-data="{field:'tel',align:'center',width:150}">采购商品的数量</th>
-                    <th lay-data="{field:'user',align:'center',width:180}">采购员编号</th>
+                    <th lay-data="{field:'tel1',align:'center',width:150}">原材料的单价</th>
+                    <th lay-data="{field:'tel2',align:'center',width:150}">供货商名称</th>
+                    <th lay-data="{field:'user',align:'center',width:150}">采购员编号</th>
                     <th lay-data="{field:'addr',align:'center',minWidth:120}">操做时间</th> 
                     <th lay-data="{field:'addr4',align:'center',minWidth:110}">备注</th>  
                     
@@ -91,10 +93,12 @@
                     
                     <td></td>
                     <td > <a href="">修改</a> </td>
-                    <td>{{PurchasingXq.porderId}}</td>
+                    <td>{{PurchasingXq.pxId}}</td>
                 
-                    <td>{{PurchasingXq.goodsId}}</td>
+                    <td>{{PurchasingXq.goods.goodsName}}</td>
                     <td>{{PurchasingXq.goodsNum}}</td>
+                    <td>{{PurchasingXq.goods.goodsPrice}}</td>
+                    <td>{{PurchasingXq.goods.supplier.supplierName}}</td>
                     <td>{{PurchasingXq.sysStaffId}}</td>
                     <td>{{PurchasingXq.pxLastTime}}</td>
                     <td>{{PurchasingXq.pxMassage}}</td>
@@ -142,3 +146,68 @@
 
 </html>
     
+<script type="text/javascript"> 
+	//静态表格
+    layui.use('table',function(){
+            var table = layui.table;
+            //转换静态表格
+            table.init('mylist', {
+                height: 'full-130', //高度最大化减去差值,也可以自己设置高度值：如 height:300
+                count: 50 //数据总数 服务端获得
+                ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+                ,page:true //开启分页 
+                ,
+                defaultToolbar:['filter', 'exports']
+                ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
+                ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
+            }); 
+            //监听头工具栏事件
+            table.on('toolbar(mylist)', function(obj){
+                var checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data; //获取选中的数据 
+                switch(obj.event){  
+                case 'getCheckLength':
+                    if(data.length === 0){
+                    layer.msg('请选择一行');
+                    } else {
+                    layer.msg('删除');
+                    }
+                break;
+                };
+            }); 
+        }); 
+        layui.use('laydate', function(){
+        var laydate = layui.laydate; 
+        //年选择器
+        laydate.render({
+            elem: '#test2'
+            ,type: 'month'
+        });
+        
+        //年月选择器
+        laydate.render({
+            elem: '#test3'
+            ,type: 'month'
+        });
+    });
+    //  iframe层  详情信息
+    function Vip_xq(){
+        //iframe层 
+        layer.open({
+            type: 2,//层类型
+            title: "详情信息",//标题
+            closeBtn: 1, //不显示关闭按钮
+            shade: [0.3],//遮罩
+            skin: 'demo_class_color',//iframe皮肤
+            shadeClose:Boolean,//点击遮罩关闭
+            area: ['800px', '460px'],
+            // offset: 'rb', //右下角弹出
+            // time: 2000, //2秒后自动关闭
+            anim: 5,//动画
+            content: ['caigou_xq.jsp', 'no'], //iframe的url，no代表不显示滚动条 
+        }); 
+        
+    }
+    
+ 
+</script> 

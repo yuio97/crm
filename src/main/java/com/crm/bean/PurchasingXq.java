@@ -20,14 +20,15 @@ public class PurchasingXq {
 
     private String pxMassage;
     
-    private List<Goods> goodsList;
+    private Goods  goods;
 
-    public List<Goods> getGoodsList() {
-		return goodsList;
+   
+	public Goods getGoods() {
+		return goods;
 	}
 
-	public void setGoodsList(List<Goods> goodsList) {
-		this.goodsList = goodsList;
+	public void setGoods(Goods goods) {
+		this.goods = goods;
 	}
 
 	private Integer gsId;

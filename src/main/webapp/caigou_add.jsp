@@ -73,8 +73,8 @@
                     <div class="left">采购进展：</div>
                     <div class="right">
                    		 <select name="porderJz" lay-verify="">
-                                <option value="1">待采购</option>
-                                <option value="2">已采购</option>
+                                <option value="待采购">待采购</option>
+                                <option value="已采购">已采购</option>
                             </select>
                             </div> 
                 </li>
@@ -93,9 +93,9 @@
                   
 	                 <div class="right"> 
                             <select name="payQk" lay-verify="">
-                                <option value="1">现金</option>
-                                <option value="2">银行卡</option>
-                               	<option value="3">支付宝</option>
+                                <option value="现金">现金</option>
+                                <option value="银行">银行卡</option>
+                               	<option value="支付宝">支付宝</option>
                             </select> 
                         </div>
 					 </li> 

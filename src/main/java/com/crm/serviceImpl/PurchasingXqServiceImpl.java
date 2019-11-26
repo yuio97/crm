@@ -42,5 +42,10 @@ public class PurchasingXqServiceImpl implements PurchasingXqService{
 		return  PurchasingXqMapper.deleteByPrimaryKey(pxId);
 		
 	}
+	@Override
+	public List<PurchasingXq> getPurchasingXqList(Integer porderId) {
+		return  PurchasingXqMapper.getPurchasingXqList(porderId);
+		
+	}
 
 }

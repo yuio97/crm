@@ -43,7 +43,7 @@
            
         </div>
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="update/updatePurchasingOrder" enctype="multipart/from-data" mothed="post">
+            <form class="layui-form layui-form-pane" action="update/updatePurchasingOrder"  mothed="post">
             <ul> 
                   <input type="hidden" name="porderId" value="${porder.porderId}">
                    <li>

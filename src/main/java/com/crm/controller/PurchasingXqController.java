@@ -19,11 +19,13 @@ public class PurchasingXqController {
 	
 	@RequestMapping("/purchasingXqlist")
 	@ResponseBody
-	public List<PurchasingXq> getpurchasingXqList(){
-		List<PurchasingXq> purchasingXqList = purchasingXqService.getPurchasingXqList();
+	public List<PurchasingXq> getpurchasingXqList(Integer porderId){
+		List<PurchasingXq> purchasingXqList = purchasingXqService.getPurchasingXqList(porderId);
 		return purchasingXqList;
 		
 	}
+	
+	
 	
 	
 

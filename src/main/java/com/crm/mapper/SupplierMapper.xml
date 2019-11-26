@@ -106,4 +106,9 @@
   <select id="getSupplierList" resultMap="BaseResultMap">
   select * from supplier
   </select>
+  
+  <select id="chaSupplierList" resultMap="BaseResultMap">
+  	select * from supplier s WHERE s.supplier_name LIKE  concat('%',#{supplierName},'%') or
+  	 s.supeople LIKE concat('%',#{supeople},'%')
+  </select>
 </mapper>

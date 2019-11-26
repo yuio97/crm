@@ -25,7 +25,7 @@ public class SupplierServiceImpl implements SupplierService{
 	}
 	@Override
 	public int updateSupplier(Supplier supplier) {
-		return supplierMapper.updateByPrimaryKey(supplier);
+		return supplierMapper.updateByPrimaryKeySelective(supplier);
 		
 	}
 	@Override
@@ -49,6 +49,11 @@ public class SupplierServiceImpl implements SupplierService{
 	public Supplier selectByPrimaryKey(Integer supplierId) {
 		Supplier selectByPrimaryKey = supplierMapper.selectByPrimaryKey(supplierId);
 		return selectByPrimaryKey;
+	}
+	@Override
+	public List<Supplier> chaSupplierList(Supplier supplier) {
+		return  supplierMapper.chaSupplierList(supplier);
+		
 	}
 
 }

@@ -37,7 +37,7 @@
 		<i class="fa fa-home fa-3x"></i>
 		<a>首页</a>
 		<a>原材料管理</a>
-		<span>补货列表</span>
+		<span>需补货列表</span>
 	</div>
 	<!-- 筛选 --> 
 	<div class="shuaix">
@@ -63,31 +63,57 @@
 				<th lay-data="{field:'option',align:'center',width:130,toolbar:'#barDemo',fixed: 'right'}">操作</th>
 			</tr> 
 		</thead>
-		<tbody>
-	
-			<tr>
-			
-				<td></td>
-				<td>${g.goodsId }</td>
-				<td>${g.goodsName }</td>
-				<td>${g.goodsImg}</td>
-				<td>${g.goodsNum}</td>
-				<td>${g.goodsSm}</td>
-				<td>${g.goodsPrice }</td>
-				<td>${g.goodsMin}</td>
-				<td>${g.supplierId }</td>
-				
-			</tr>
-			
-		
-		
-		</tbody>  
+		<tbody id="xbh">
+                <tr v-for="PurchasingOrder in addgoods" > 
+                    
+                    <td></td>
+                    <td > <a href="/purchasingOrder/getporderId?porderId=${porder.porderId}">修改</a>丨<a href="">删除</a>丨<a href="javascript:;" style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
+                    <td>{{PurchasingOrder.porderId}}</td>
+                
+                    <td>{{PurchasingOrder.payQk}}</td>
+                    <td>{{PurchasingOrder.porderJz}}</td>
+                    <td>{{PurchasingOrder.porderTime}}</td>
+                    <td>{{PurchasingOrder.jhAddress}}</td>
+                    <td>{{PurchasingOrder.pMassage}}</td>
+                    
+                   
+                </tr> 
+                
+              
+                
+            </tbody>  
 	</table>
 	<script type="text/html" id="barDemo">
 		<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
 		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script> 
 </div> 
+
+<script >
+new Vue({
+	 el:"#xbh",
+	data:{	
+		addgoods:[]		
+	},
+	methods:{	 
+	},
+    created:function(){
+        this_a=this
+        $.ajax({
+            type: "GET",
+            url: "/xbugoods/addgoodslist",
+            data: null,
+            dataType: "json",
+            success: function (response) {
+            	this_a.addgoods=response;
+            	console.log(response);
+            }
+        });
+    }
+
+
+	  })
+</script>
 <script type="text/javascript">
 	//静态表格
     layui.use('table',function(){
@@ -98,8 +124,8 @@
 		  ,count: 50 //数据总数 服务端获得
 		  ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
 		  ,page:true //开启分页
-		  ,toolbar: 'default'//工具栏
-		  ,defaultToolbar:['filter', 'exports']
+		  ,
+		  defaultToolbar:['filter', 'exports']
 		  ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
 		  ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
 		}); 

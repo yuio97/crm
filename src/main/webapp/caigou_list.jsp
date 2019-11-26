@@ -90,7 +90,7 @@
                 <tr v-for="PurchasingOrder in POrder" > 
                     
                     <td></td>
-                    <td > <a href="/purchasingOrder/getporderId?porderId=${porder.porderId}">修改</a>丨<a href="">删除</a>丨<a href="javascript:;" style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
+                    <td > <a :href='"/purchasingOrder/getporderId?porderId="+PurchasingOrder.porderId'>修改</a>丨<a href="">删除</a>丨<a :href='"/purchasingOrder/getporderId?porderId="+PurchasingOrder.porderId' style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
                     <td>{{PurchasingOrder.porderId}}</td>
                 
                     <td>{{PurchasingOrder.payQk}}</td>
@@ -197,13 +197,13 @@
         layer.open({
             type: 2,//层类型
             title: "详情信息",//标题
-            closeBtn: 1, //不显示关闭按钮
+            
             shade: [0.3],//遮罩
             skin: 'demo_class_color',//iframe皮肤
             shadeClose:Boolean,//点击遮罩关闭
-            area: ['800px', '460px'],
-            // offset: 'rb', //右下角弹出
-            // time: 2000, //2秒后自动关闭
+            area: ['800px', '960px'],
+             offset: 'rb', //右下角弹出
+             time: 2000, //2秒后自动关闭
             anim: 5,//动画
             content: ['caigou_xq.jsp', 'no'], //iframe的url，no代表不显示滚动条 
         }); 

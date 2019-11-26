@@ -26,8 +26,8 @@ public class UpdateController {
 	
 	@RequestMapping("/updatePurchasingOrder")
 	public String updateById(PurchasingOrder porderId){
-		int updateByPrimaryKeySelective = purchasingOrderSerice.updateByPrimaryKeySelective(porderId);
-		return null;
+		 purchasingOrderSerice.updateByPrimaryKeySelective(porderId);
+		return "forward:/caigou_list.jsp";
 		
 	}
 	
@@ -39,8 +39,10 @@ public class UpdateController {
 	}
 	@RequestMapping("/updateSupplier")
 	public String updateById(Supplier supplier){
+		System.out.println(supplier.getSupplierId());
 		supplierService.updateSupplier(supplier);
 		return "redirect:/supplier/SupplierList";
+		
 		
 	}
 	

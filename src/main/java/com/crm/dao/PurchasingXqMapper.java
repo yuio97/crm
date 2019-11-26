@@ -18,4 +18,6 @@ public interface PurchasingXqMapper {
     int updateByPrimaryKey(PurchasingXq record);
     
     List<PurchasingXq> getPurchasingXqList();
+    
+    List<PurchasingXq> getPurchasingXqList(Integer porderId);
 }

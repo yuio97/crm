@@ -18,4 +18,6 @@ public interface PurchasingXqService {
 	
 	 List<PurchasingXq> getPurchasingXqList();
 	 
+	 List<PurchasingXq> getPurchasingXqList(Integer porderId);
+	 
 }

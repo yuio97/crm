@@ -24,6 +24,7 @@ public class PurchasingOrder {
     
 
     @DateTimeFormat(pattern="yyyy-mm-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date jhTime;
 
     private String jhAddress;
@@ -34,7 +35,7 @@ public class PurchasingOrder {
 
     private Integer gsId;
     
-    @DateTimeFormat(pattern="yy-mm-dd")
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     private Date pLastTime;
 
     public Integer getPorderId() {
