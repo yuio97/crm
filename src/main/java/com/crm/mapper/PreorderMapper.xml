@@ -136,6 +136,36 @@
 	ON p.sys_account_id = s.sys_account_id
   </select>
   
+  <select id="selectGoodsNum" resultMap="kcgoodsMap">
+  select kcgoods_id,kgoods_name,kc_num,jxj FROM kc_goods
+  </select>
+  
+  
+  <resultMap id="kcgoodsMap" type="com.crm.bean.Kcgoods" >
+    <id column="kcgoods_id" property="kcgoodsId" jdbcType="INTEGER" />
+    <result column="kgoods_name" property="kgoodsName" jdbcType="VARCHAR" />
+    <result column="kc_num" property="kcNum" jdbcType="INTEGER" />
+    <result column="jxj" property="jxj" jdbcType="REAL" />
+  </resultMap>
+  
+  
+  
+  <select id="selectCus" resultMap="customerMap">
+  SELECT * FROM customer
+  </select>
+  
+  <resultMap id="customerMap" type="com.crm.bean.Customer" >
+    <id column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="copany_name" property="copanyName" jdbcType="VARCHAR" />
+    <result column="copany_adress" property="copanyAdress" jdbcType="VARCHAR" />
+    <result column="copany_code" property="copanyCode" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_emal" property="customerEmal" jdbcType="VARCHAR" />
+    <result column="customer_iphone" property="customerIphone" jdbcType="VARCHAR" />
+    <result column="customer_state" property="customerState" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
 <resultMap id="PreorderMap" type="com.crm.bean.Preorder" >
     <id column="preorder_id" property="preorderId" jdbcType="INTEGER" />
     <result column="customer_id" property="customerId" jdbcType="INTEGER" />

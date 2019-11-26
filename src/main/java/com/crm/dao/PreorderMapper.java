@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.crm.bean.Customer;
+import com.crm.bean.Kcgoods;
 import com.crm.bean.Preorder;
 
 public interface PreorderMapper {
@@ -20,4 +22,9 @@ public interface PreorderMapper {
     int updateByPrimaryKey(Preorder record);
     
     List<Preorder> selectPre();
+    
+    List<Kcgoods> selectGoodsNum();
+    
+    List<Customer> selectCus();
+    
 }

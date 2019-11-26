@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.crm.bean.Customer;
+import com.crm.bean.Kcgoods;
 import com.crm.bean.Preorder;
 import com.crm.dao.PreorderMapper;
 
@@ -21,6 +23,20 @@ public class PreOrderServiceImpl implements PreOrderService{
 
 		List<Preorder> selectPre = preorderMapper.selectPre();
 		return selectPre;
+	}
+
+	@Override
+	public List<Kcgoods> selectGoodsNum() {
+		
+		List<Kcgoods> selectGoodsNum = preorderMapper.selectGoodsNum();
+		return selectGoodsNum;
+	}
+
+	@Override
+	public List<Customer> selectCus() {
+
+		List<Customer> selectCus = preorderMapper.selectCus();
+		return selectCus;
 	}
 
 }
