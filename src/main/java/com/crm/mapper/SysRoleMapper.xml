@@ -133,4 +133,25 @@
 		    <result column="sys_permission_time" property="sysPermissionTime" jdbcType="TIMESTAMP" />
 	    </collection>
 	</resultMap>
+	
+	<select id="getRoleDept" resultMap="dept_role"  >
+	  	select * from    sys_role  sr
+		INNER JOIN  sys_dept sd on sr.sys_role_oper = sd.sys_dept_id
+  </select>
+  
+  <resultMap type="com.crm.bean.SysRole" id="dept_role">
+  	<id column="sys_role_id" property="sysRoleId" jdbcType="INTEGER" />
+    <result column="sys_role_name" property="sysRoleName" jdbcType="VARCHAR" />
+    <result column="sys_role_del" property="sysRoleDel" jdbcType="VARCHAR" />
+    <result column="sys_role_last" property="sysRoleLast" jdbcType="VARCHAR" />
+    <result column="sys_role_oper" property="sysRoleOper" jdbcType="VARCHAR" />
+    <result column="sys_role_time" property="sysRoleTime" jdbcType="TIMESTAMP" />
+    <association property="dept" column="sys_role_oper" javaType="com.crm.bean.SysDept">
+    	<id column="sys_dept_id" property="sysDeptId" jdbcType="INTEGER" />
+	    <result column="sys_dept_name" property="sysDeptName" jdbcType="VARCHAR" />
+	    <result column="sys_dept_remark" property="sysDeptRemark" jdbcType="VARCHAR" />
+	    <result column="sys_company_id" property="sysCompanyId" jdbcType="INTEGER" />
+	    <result column="sys_dept_time" property="sysDeptTime" jdbcType="TIMESTAMP" />
+    </association>
+  </resultMap>
 </mapper>

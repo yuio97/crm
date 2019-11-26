@@ -1,6 +1,7 @@
 package com.crm.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysDept {
     private Integer sysDeptId;
@@ -12,6 +13,7 @@ public class SysDept {
     private Integer sysCompanyId;
 
     private Date sysDeptTime;
+    
 
     public Integer getSysDeptId() {
         return sysDeptId;
@@ -52,4 +54,7 @@ public class SysDept {
     public void setSysDeptTime(Date sysDeptTime) {
         this.sysDeptTime = sysDeptTime;
     }
+
+
+    
 }

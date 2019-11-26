@@ -74,7 +74,8 @@ public class AccountController {
 	@RequestMapping("/getAccountList")
 	@ResponseBody
 	public PageInfo<SysAccount> getAccountList(@RequestParam(defaultValue="1") int pn) {
-		PageInfo<SysAccount> accountList = accountServiceImpl.getAccountList(pn);		
+
+		PageInfo<SysAccount> accountList = accountServiceImpl.getAccountList(pn);	
 		return accountList;
 		
 	}
@@ -174,6 +175,7 @@ public class AccountController {
 		
 	}
 	
+	//添加员工账号及员工信息
 	@RequestMapping("/addStaff")
 	public String AddStaff(@RequestParam("img")MultipartFile img,HttpServletRequest req,
 			SysStaffInfo info,SysAccount account) throws IllegalStateException, IOException {
@@ -221,4 +223,23 @@ public class AccountController {
 		
 	}
 	
+	//按时间或员工名查找
+	@RequestMapping("/getListByConditions")
+	@ResponseBody
+	public PageInfo<SysAccount> getListByConditions(@RequestParam(defaultValue="1") int pn,
+			String name,String start,String end) {
+		System.out.println(start);
+		System.out.println(end);
+		if(start != null && start != "") {
+			start = start + "-01 00:00:00";
+		}
+		if(end != null && end != "") {
+			end = end + "-01 00:00:00";
+		}
+		//System.out.println(start);
+		PageInfo<SysAccount> accountList = accountServiceImpl.getListByConditions(pn, name, start, end);
+		return accountList;
+		
+	}
+
 }

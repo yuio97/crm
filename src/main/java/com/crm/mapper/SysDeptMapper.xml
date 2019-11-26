@@ -90,4 +90,10 @@
       sys_dept_time = #{sysDeptTime,jdbcType=TIMESTAMP}
     where sys_dept_id = #{sysDeptId,jdbcType=INTEGER}
   </update>
+  <select id="getDeptList" resultMap="BaseResultMap">
+  	select * from sys_dept
+  </select>
+
+  
+
 </mapper>
