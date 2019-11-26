@@ -7,7 +7,8 @@ import com.crm.bean.OffTaskRelease;
 import com.github.pagehelper.PageInfo;
 
 public interface TaskService {
-	
+
+//目标管理
 	//查所有
 	List<OffTaskDetails> getAllTaskDetails();
 	
@@ -33,4 +34,9 @@ public interface TaskService {
 	//参数：页码。PageInfo<OffTaskDetails>与Controller中返回的类型对应
 	PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn,Integer year, Integer month);
 	
+	
+//任务管理
+	List<OffTaskRelease> selectAllTask();
+	
+	PageInfo<OffTaskRelease> getAllOldTask(int pn,Integer year, Integer month);
 }

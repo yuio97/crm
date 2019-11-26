@@ -9,6 +9,7 @@
   <sql id="Base_Column_List" >
     warehouse_id, warehouse_name, warehouse_type
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -68,4 +69,7 @@
       warehouse_type = #{warehouseType,jdbcType=VARCHAR}
     where warehouse_id = #{warehouseId,jdbcType=INTEGER}
   </update>
+  <select id="getWareHouseList" resultMap="BaseResultMap">
+  select * from warehouse
+  </select>
 </mapper>

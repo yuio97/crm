@@ -8,6 +8,7 @@
     <result column="sys_dept_id" property="sysDeptId" jdbcType="INTEGER" />
     <result column="off_receive_status" property="offReceiveStatus" jdbcType="VARCHAR" />
     <result column="off_time" property="offTime" jdbcType="TIMESTAMP" />
+    <result column="sys_staff_name" property="staffName" />
   </resultMap>
   <sql id="Base_Column_List" >
     mission_id, off_id, off_content, sys_dept_id, off_receive_status, off_time
@@ -108,4 +109,16 @@
 	<select id="publicTaskByOffId" resultMap="BaseResultMap"  >
 		select * from off_task_release where off_id = #{offId}
 	</select>
+	<!-- 任务管理 -->
+  	<select id="getAllTask" resultMap="BaseResultMap" >
+	  	select * from off_task_release 
+	  	<where>
+		  	<if test="month != null">
+		  		and month(off_time) = #{month} 
+		  	</if> 
+		 	<if test="year != null">
+		  		AND year(off_time)  = #{year}
+		  	</if> 
+	  	</where>
+  </select>
 </mapper>

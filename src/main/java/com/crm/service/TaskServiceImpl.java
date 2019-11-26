@@ -29,6 +29,8 @@ public class TaskServiceImpl implements TaskService{
 	private OffTaskReleaseMapper offTaskReleaseMapper;
 
 	
+	
+	//目标管理
 	@Override
 	public void updateDetTaskStatus(int id) {
 		//逻辑
@@ -81,7 +83,6 @@ public class TaskServiceImpl implements TaskService{
 		List<OffTaskRelease> publicTaskByOffId = offTaskReleaseMapper.publicTaskByOffId(Integer.valueOf(offId));
 		return publicTaskByOffId;
 	}
-	
 
 	@Override
 	public PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn,Integer year, Integer month) {
@@ -92,5 +93,25 @@ public class TaskServiceImpl implements TaskService{
 		PageInfo<OffTaskDetails> pageInfo = new PageInfo<OffTaskDetails>(allOldTaskDetails);
 		return pageInfo;
 	}
+	
+	
+	//任务管理
+	@Override
+	public List<OffTaskRelease> selectAllTask() {
+		Date date = new Date();
+		int month = date.getMonth()+1;
+		int year = date.getYear()+1900;
+		List<OffTaskRelease> allTask = offTaskReleaseMapper.getAllTask(month, year);
+		return allTask;
+	}
+
+	@Override
+	public PageInfo<OffTaskRelease> getAllOldTask(int pn,Integer year, Integer month) {
+		PageHelper.startPage(pn, 10);
+		List<OffTaskRelease> allTask = offTaskReleaseMapper.getAllTask(month, year);
+		PageInfo<OffTaskRelease> pageInfo = new PageInfo<OffTaskRelease>(allTask);
+		return pageInfo;
+	}
+	
 	
 }

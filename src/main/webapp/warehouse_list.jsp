@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="名榜,wangid">
-    <title>supplier</title>
+    <title>仓库</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -26,7 +26,7 @@
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-    
+    <script type="text/javascript" src="js/vue.min.js"></script>
 </head>
 
 <body>
@@ -35,19 +35,34 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a>供应商信息管理</a>
-            <span>供应商信息列表</span>
+            <a>仓库信息管理</a>
+            <span>仓库信息列表</span>
         </div>
         <!-- 筛选 --> 
         <div class="shuaix">
-         
+            <!-- <div class="left"  style="margin-right:10px;">
+               
+                <select>   
+                    <option value="按年份时间查询">按年份时间查询</option>   
+                    <option value="其他">其他</option>    
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="test2" placeholder="开始时间"> 
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="test3" placeholder="结束时间">
+            </div>
+            <div class="right"  style="margin-right:30px;"> 
+                    <a href="#">查询</a>
+                </div>
             <div class="left"   style="margin-right:10px;">
                
                 <select>   
                     <option value="公司名称">公司名称</option>   
                     <option value="其他">其他</option>   
                 </select>
-            </div>   
+            </div>   -->
             <!-- <div class="center">统计：【大：20 中：30 小：60】</div> -->
             <div class="right">
                 <input type="text" placeholder="请输入供应商的名称">
@@ -55,39 +70,36 @@
             </div>
         </div>
         <!-- 下面写内容 -->
-        <table class="layui-table" lay-filter="mylist" lay-size="lg">
-            <thead>
-                <tr> 
-                    <th lay-data="{type:'checkbox',fixed:'left'}"></th>
-                    <th lay-data="{field:'yx', align:'center',width:280}">操作</th>
-                    <th lay-data="{field:'time',align:'center', minWidth:120}">供应商编号</th>
-                    <th lay-data="{field:'www',align:'center',minWidth:260}">供应商名称</th>
-                    <th lay-data="{field:'company',align:'center',minWidth:110}">联系人</th>
-                    <th lay-data="{field:'user',align:'center',width:180}">电话</th>
-                    <th lay-data="{field:'tel',align:'center',width:150}">email</th>
-                    <th lay-data="{field:'result',align:'center',minWidth:180}">地址</th>
-                    
-                </tr> 
-            </thead>
-            <tbody>
-            <c:forEach items="${supplierList }" var="s">
-                <tr> 
-                    <td></td>
-                    <td> <a href="/supplier/selectById?supplierId=${s.supplierId}" style="color:#205b9e; font-size:18px">修改</a><a style="color:#205b9e;font-size:18px"></a></td>
-                    <td>${s.supplierId }</td>
-                    <td>${s.supplierName }</td>
-                    <td>${s.supeople }</td>
-                    <td>${s.supplierTel}</td>
-                    <td>${s.supplierEmail }</td>
-                    <td>${s.supplierAddress }</td>
-                    
-                   </tr>
-               </c:forEach>
-                
-                
-            </tbody>  
-        </table>
-
+      <table class="layui-table" lay-filter="mylist" lay-size="lg">
+		<thead>
+			<tr>
+				<th lay-data="{type:'checkbox',fixed:'left'}"></th>
+				<th lay-data="{field:'yx', align:'center',width:130}">仓库编号</th>
+				<th lay-data="{field:'time',align:'center', minWidth:170}">仓库名称</th>
+				<th lay-data="{field:'trit',align:'center',width:170}">仓库类型</th>
+				<th lay-data="{field:'addt',align:'center',minWidth:260}">操作</th>
+			</tr> 
+		</thead>
+		<tbody >
+			<c:forEach items="${wareHouseList}" var="w">
+			<tr >
+				<td></td>
+				<td>${w.warehouseId}</td>
+				<td>${w.warehouseName}</td>
+				<td>${w.warehouseType}</td>
+				
+				
+				<td>
+					<a href="/house/selectById?warehouseId=${w.warehouseId}" class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+					
+				</td>
+				
+			</tr>
+			</c:forEach>
+		
+		
+		</tbody>  
+	</table>
     </div> 
 <!-- 自定义头部工具栏 -->
     <script type="text/html" id="toolbarDemo">
@@ -101,6 +113,7 @@
 </body>
 
 </html>
+
 <script type="text/javascript">
 	//静态表格
     layui.use('table',function(){
@@ -144,46 +157,38 @@
             ,type: 'month'
         });
     });
-    //  iframe层  详情信息
-    function Vip_xq(){
-        //iframe层 
-        layer.open({
-            type: 2,//层类型
-            title: "详情信息",//标题
-            closeBtn: 1, //不显示关闭按钮
-            shade: [0.3],//遮罩
-            skin: 'demo_class_color',//iframe皮肤
-            shadeClose:Boolean,//点击遮罩关闭
-            area: ['800px', '460px'],
-            // offset: 'rb', //右下角弹出
-            // time: 2000, //2秒后自动关闭
-            anim: 5,//动画
-            content: ['vip_list_xq.html', 'no'], //iframe的url，no代表不显示滚动条 
-        }); 
-        
-    }
-    //  iframe层  回访记录
-    function Vip_hf(){
-        //iframe层 
-        layer.open({
-            type: 2,//层类型
-            title: "详情信息",//标题
-            closeBtn: 1, //不显示关闭按钮
-            shade: [0.3],//遮罩
-            skin: 'demo_class_color',//iframe皮肤
-            shadeClose:Boolean,//点击遮罩关闭
-            area: ['800px', '460px'],
-            // offset: 'rb', //右下角弹出
-            // time: 2000, //2秒后自动关闭
-            anim: 5,//动画
-            content: ['vip_list_hf.html', 'no'], //iframe的url，no代表不显示滚动条 
-        }); 
-        
-    }
+   
+   
  
 </script> 
 
+<script>
+ var vue = new Vue({
+    el:'#wh',
+    data:{
+    	wareHouse:[]
+    },
+    methods:{
 
+    },
+    created:function(){
+    	
+       this_a=this;
+        $.ajax({
+            type: "GET",
+            url: "house/getwareHouseList",
+            data: null,
+            dataType: "json",
+            success: function (response) {
+            	this_a.wareHouse=response.wareHouseList;
+            	console.log(response.wareHouseList);
+            }
+        });
+    }
+
+
+  })
+</script>
 
 </body>
 </html>

@@ -20,28 +20,33 @@ public class SupplierController {
 	private SupplierService supplierService;
 	
 	
-	@RequestMapping("/getSupplierList")
-	@ResponseBody
-	public List<Supplier> getSupplierList(Map<String,Object> data){
+	@RequestMapping("/SupplierList")
+	public String getSupplierList(Map<String,Object> data){
 		List<Supplier> supplierList = supplierService.getSupplierList();
 		data.put("supplierList", supplierList);
-		
-		return supplierList;
+		return "forward:/supplier_list.jsp";
 		
 	}
-	@RequestMapping("/SupplierList")
+	@RequestMapping("/getSupplierList")
+	@ResponseBody
 	public List<Supplier> getSupplierList(){
 		List<Supplier> supplierList = supplierService.getSupplierList();
-		
-		return supplierList;
+		return supplierList ;
 		
 	}
 	
 	@RequestMapping("/addSupplier")
 	public String addSupplier(Supplier supplier){
 		supplierService.addSupplier(supplier);
-		return "";
+		return "forward:/supplier_add.jsp";
 		
-	}       
+	}  
+	@RequestMapping("/selectById")
+	public String selectById(Integer supplierId,Map<String,Object> data){
+		Supplier supplierList = supplierService.selectByPrimaryKey(supplierId);
+		data.put("supplierList", supplierList);
+		return "forward:/supplier_update.jsp";
+		
+	}
 
 }

@@ -45,5 +45,10 @@ public class SupplierServiceImpl implements SupplierService{
 		PageInfo<Supplier> pageInfo = new PageInfo<Supplier>(supplierList);
 		return pageInfo;
 	}
+	@Override
+	public Supplier selectByPrimaryKey(Integer supplierId) {
+		Supplier selectByPrimaryKey = supplierMapper.selectByPrimaryKey(supplierId);
+		return selectByPrimaryKey;
+	}
 
 }

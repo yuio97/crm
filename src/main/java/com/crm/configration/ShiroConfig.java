@@ -115,6 +115,9 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/favicon.ico", "anon");
 
 
+
+		//branch 'master' of https://github.com/yuio97/crm.git
+
 		return shiroFilterFactoryBean;
 	}
 	

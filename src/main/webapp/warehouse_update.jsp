@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="名榜,wangid">
-    <title>supplier</title>
+    <title>ck</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -35,58 +35,76 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a>供应商信息管理</a>
-            <span>供应商信息列表</span>
+            <a>仓库管理</a>
+            <span>仓库信息修改</span>
         </div>
         <!-- 筛选 --> 
         <div class="shuaix">
-         
+            <!-- <div class="left"  style="margin-right:10px;">
+               
+                <select>   
+                    <option value="按年份时间查询">按年份时间查询</option>   
+                    <option value="其他">其他</option>    
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="test2" placeholder="开始时间"> 
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="test3" placeholder="结束时间">
+            </div>
+            <div class="right"  style="margin-right:30px;"> 
+                    <a href="#">查询</a>
+                </div>
             <div class="left"   style="margin-right:10px;">
                
                 <select>   
                     <option value="公司名称">公司名称</option>   
                     <option value="其他">其他</option>   
                 </select>
-            </div>   
+            </div>   -->
             <!-- <div class="center">统计：【大：20 中：30 小：60】</div> -->
-            <div class="right">
+            <!-- <div class="right">
                 <input type="text" placeholder="请输入供应商的名称">
                 <a href="#">查询</a>
-            </div>
+            </div> -->
         </div>
         <!-- 下面写内容 -->
-        <table class="layui-table" lay-filter="mylist" lay-size="lg">
-            <thead>
-                <tr> 
-                    <th lay-data="{type:'checkbox',fixed:'left'}"></th>
-                    <th lay-data="{field:'yx', align:'center',width:280}">操作</th>
-                    <th lay-data="{field:'time',align:'center', minWidth:120}">供应商编号</th>
-                    <th lay-data="{field:'www',align:'center',minWidth:260}">供应商名称</th>
-                    <th lay-data="{field:'company',align:'center',minWidth:110}">联系人</th>
-                    <th lay-data="{field:'user',align:'center',width:180}">电话</th>
-                    <th lay-data="{field:'tel',align:'center',width:150}">email</th>
-                    <th lay-data="{field:'result',align:'center',minWidth:180}">地址</th>
-                    
-                </tr> 
-            </thead>
-            <tbody>
-            <c:forEach items="${supplierList }" var="s">
-                <tr> 
-                    <td></td>
-                    <td> <a href="/supplier/selectById?supplierId=${s.supplierId}" style="color:#205b9e; font-size:18px">修改</a><a style="color:#205b9e;font-size:18px"></a></td>
-                    <td>${s.supplierId }</td>
-                    <td>${s.supplierName }</td>
-                    <td>${s.supeople }</td>
-                    <td>${s.supplierTel}</td>
-                    <td>${s.supplierEmail }</td>
-                    <td>${s.supplierAddress }</td>
-                    
-                   </tr>
-               </c:forEach>
-                
-                
-            </tbody>  
-        </table>
+      <div class="kehubh_tj_k">
+            <form class="layui-form layui-form-pane" action="update/updateWarehouse" enctype="multipart/form-data" method="post">
+            <ul> 
+             <input type="hidden" name="warehouseId" value="${selectById.warehouseId}">
+                 
+                <li>
+                    <div class="left">仓库名称：</div>
+                    <div class="right"> 
+                        <input type="text" value="${selectById.warehouseName}" name="warehouseName"  required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
+               
+                 <li>
+                    <div class="left">仓库类型：</div>
+                    <div class="right"> 
+                        <input type="text" name="warehouseType" value="${selectById.warehouseType}" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
+                 
+               
+                <li>
+                    <div class="left"> &nbsp;</div>
+                    <div class="right" > 
+                        <button class="button_qr" type="submit">  确定修改</button>
+                        
+                    </div>
+                </li>
+            </ul> 
+            </form>
+              
+                         
+                        
+                  
+           
+        </div>
 
     </div> 
 <!-- 自定义头部工具栏 -->
