@@ -19,18 +19,18 @@ public class SupplierServiceImpl implements SupplierService{
 	private SupplierMapper  supplierMapper;
 	
 	@Override
-	public void addSupplier(Supplier supplier) {
-		supplierMapper.insertSelective(supplier);
+	public int addSupplier(Supplier supplier) {
+		return supplierMapper.insertSelective(supplier);
 		
 	}
 	@Override
-	public void updateSupplier(Supplier supplier) {
-		supplierMapper.updateByPrimaryKey(supplier);
+	public int updateSupplier(Supplier supplier) {
+		return supplierMapper.updateByPrimaryKey(supplier);
 		
 	}
 	@Override
-	public void deleteSupplier(Integer supplierId) {
-		supplierMapper.deleteByPrimaryKey(supplierId);
+	public int deleteSupplier(Integer supplierId) {
+		return supplierMapper.deleteByPrimaryKey(supplierId);
 		
 	}
 	@Override

@@ -19,6 +19,7 @@ public class PurchasingOrder {
     
 
     @DateTimeFormat(pattern="yyyy-mm-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date porderTime;
     
 

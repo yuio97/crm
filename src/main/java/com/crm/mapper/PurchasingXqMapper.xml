@@ -139,4 +139,7 @@
       px_last_time = #{pxLastTime,jdbcType=TIMESTAMP}
     where px_id = #{pxId,jdbcType=INTEGER}
   </update>
+  <select id="getPurchasingXqList" resultMap="BaseResultMap">
+  select * from purchasing_xq
+  </select>
 </mapper>

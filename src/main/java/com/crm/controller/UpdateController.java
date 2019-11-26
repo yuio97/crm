@@ -40,7 +40,7 @@ public class UpdateController {
 	@RequestMapping("/updateSupplier")
 	public String updateById(Supplier supplier){
 		supplierService.updateSupplier(supplier);
-		return "forward:/supplier/SupplierList";
+		return "redirect:/supplier/SupplierList";
 		
 	}
 	

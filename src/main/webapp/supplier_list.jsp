@@ -50,7 +50,7 @@
             </div>   
             <!-- <div class="center">统计：【大：20 中：30 小：60】</div> -->
             <div class="right">
-                <input type="text" placeholder="请输入供应商的名称">
+                <input type="text" placeholder="请输入关键字">
                 <a href="#">查询</a>
             </div>
         </div>

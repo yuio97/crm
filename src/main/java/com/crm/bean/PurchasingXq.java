@@ -1,6 +1,9 @@
 package com.crm.bean;
 
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PurchasingXq {
     private Integer pxId;
@@ -16,9 +19,20 @@ public class PurchasingXq {
     private Integer sysStaffId;
 
     private String pxMassage;
+    
+    private List<Goods> goodsList;
 
-    private Integer gsId;
+    public List<Goods> getGoodsList() {
+		return goodsList;
+	}
 
+	public void setGoodsList(List<Goods> goodsList) {
+		this.goodsList = goodsList;
+	}
+
+	private Integer gsId;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date pxLastTime;
 
     public Integer getPxId() {
