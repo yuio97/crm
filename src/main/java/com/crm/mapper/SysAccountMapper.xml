@@ -145,4 +145,21 @@
   <select id="getAccountList" resultMap="BaseResultMap">
   	select * from  sys_account
   </select>
+  <select id="getListConditions" resultMap="BaseResultMap">
+  	select * from  sys_account
+  	<where>
+  		<if test="name != '' and name != null">
+  			and sys_account_name like concat('%',#{name},'%')
+  		</if>
+  		<if test="start != '' and end == ''">
+  			and sys_account_time &gt; #{start}
+  		</if>
+  		<if test="end != '' and start == ''">
+  			and sys_account_time &lt; #{end}
+  		</if>
+  		<if test="start != null and start != '' and end != null and end != ''">
+  			and sys_account_time &gt; #{start} and sys_account_time &lt; #{end}
+  		</if>
+  	</where>
+  </select>
 </mapper>

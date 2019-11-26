@@ -69,6 +69,14 @@ public class AccountServiceImpl implements AccountService{
 		
 		return sysAccountMapper.insertSelective(account);
 	}
+
+	@Override
+	public PageInfo<SysAccount> getListByConditions(int id, String name, String start, String end) {
+		PageHelper.startPage(id, 10);
+		List<SysAccount> accountList = sysAccountMapper.getListConditions(name, start, end);
+		PageInfo<SysAccount> info = new PageInfo<SysAccount>(accountList);
+		return info;
+	}
 	
 
 }

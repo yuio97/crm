@@ -2,6 +2,7 @@ package com.crm.dao;
 
 import java.util.List;
 import com.crm.bean.SysRole;
+import com.github.pagehelper.PageInfo;
 
 public interface SysRoleMapper {
     int deleteByPrimaryKey(Integer sysRoleId);
@@ -17,4 +18,6 @@ public interface SysRoleMapper {
     int updateByPrimaryKey(SysRole record);
        
     SysRole getPerByStaffId(int id);
+    
+	public List<SysRole> getRoleDept();
 }
