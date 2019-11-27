@@ -145,7 +145,6 @@ var v = new Vue({
 				this.predata.proDetaList.push(goodData);
 			}
 			var _this = this;
-			console.log(this.predata.deliveryTime);
 			$.ajax({
 	            type: "POST",
 	            url: "preorder/addPreOrder",

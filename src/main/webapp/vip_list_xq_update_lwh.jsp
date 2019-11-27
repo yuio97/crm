@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 String path = request.getContextPath();
@@ -9,15 +9,8 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basepath %>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta charset="utf-8">
-	<meta name="renderer" content="webkit"/>
-	<meta name="force-rendering" content="webkit"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="名榜,wangid">
-	<title>CRM系统</title>
-
-	<!-- CSS -->
+<title>Insert title here</title>
+<!-- CSS -->
 	<link rel="stylesheet" href="css/style.css">
 	 <link rel="stylesheet" href="css/children.css">
 
@@ -31,10 +24,9 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="layui/layui.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
-<body>
-	<body style="background: #fff;">
+<body style="background: #fff;">
 <div class="tianjia_xx" id="cc">
-<c:forEach items="${date }" var="i">
+	<c:forEach items="${date }" var="i">
     <table class="if_tianjiatext layui-table" lay-size="lg"> 
     <tbody>
         <tr>
@@ -65,15 +57,15 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         <tr>
             <td  class="td_1">截至时间</td> 
-            <td><fmt:formatDate value="${i.deliveryTime }" pattern="yyyy-MM-dd" /></td>
+            <td><input type="text" class="layui-input"  id="test3"  placeholder="请输入截止时间" value="<fmt:formatDate value="${i.deliveryTime }" pattern="yyyy-MM-dd" />"></td>
         </tr>
         <tr>
             <td  class="td_1">预购单说明</td> 
-            <td>${i.preorderNote }</td>
+            <td><textarea rows="5" cols="45"  placeholder="请输入预购单说明" value="${i.preorderNote }">${i.preorderNote }</textarea></td>
         </tr>
         <tr>
             <td  class="td_1">预付定金</td> 
-            <td>${i.payCase }</td>
+            <td><input type="text" placeholder="请登记预付定金(可为空)" v-model="predata.payCase" value="${i.payCase }"></td>
         </tr>
         <tr>
             <td  class="td_1">商品选择</td> 
@@ -83,28 +75,58 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             			<td>商品</td>
             			<td>价格</td>
             			<td>预购数量</td>
-            			<td>当前库存量</td>
+            			<td>库存数量</td>
             		</tr>
-            		<c:forEach items="${i.proDetaList }" var="j">
-            		<tr>
-            			<td>${j.kcgoods.kgoodsName }</td>
-            			<td>${j.kcgoods.jxj }</td>
-            			<td>${j.kcNumSell }</td>
-            			<td>${j.kcgoods.kcNum }</td>
+            		<c:forEach items="${i.proDetaList }" var="d">
+            		<tr >
+            			<td>${d.kcgoods.kgoodsName }</td>
+            			<td>${d.kcgoods.jxj }</td>
+            			<td><input type="text" value="${d.kcNumSell }" ></td>
+            			<td>${d.kcgoods.kcNum }</td>
             		</tr>
             		</c:forEach>
             	</table>
-            	</c:forEach>
+            	
 			</td>
         </tr>
        
-       
+        <tr >
+        	<td colspan="2">
+        	<button class="layui-btn layui-btn-sm" >确定</button>
+        	<button class="layui-btn layui-btn-sm" >取消</button>
+        	</td>
+        </tr>
     </tbody>
     </table>
+    </c:forEach>
 </div>
 
 <script src="layui/layui.js"></script>
 
 
+
 </body>
 </html>
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate; 
+  //常规用法
+  laydate.render({
+    elem: '#test1'
+  });
+   //常规用法
+   laydate.render({
+    elem: '#test2',
+    done: function(value, date, endDate){
+       v.predata.preorderTme = value;
+     }
+  });
+   //常规用法
+   laydate.render({
+    elem: '#test3',
+    done: function(value, date, endDate){
+        v.predata.deliveryTime = value;
+      }
+  });
+});
+</script>

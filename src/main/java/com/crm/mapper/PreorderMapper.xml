@@ -165,6 +165,54 @@
     <result column="customer_state" property="customerState" jdbcType="VARCHAR" />
   </resultMap>
   
+  <select id="selectPreById" resultMap="PreorderMapById">
+  		SELECT p.*,c.*,pd.kc_num_sell,s.sys_account_name,kc.jxj,kc.kc_num,kc.kgoods_name
+		FROM preorder p INNER JOIN preorder_details pd 
+		ON p.preorder_id = pd.preorder_id INNER JOIN kc_goods kc
+		ON pd.kgoods_id = kc.kcgoods_id INNER JOIN customer c
+		ON p.customer_id = c.customer_id INNER JOIN sys_account s
+		ON p.sys_account_id = s.sys_account_id
+		where p.preorder_id = #{preorderId}
+  </select>
+  
+  <resultMap id="PreorderMapById" type="com.crm.bean.Preorder" >
+  	<id column="preorder_id" property="preorderId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="preorder_note" property="preorderNote" jdbcType="VARCHAR" />
+    <result column="pay_case" property="payCase" jdbcType="VARCHAR" />
+    <result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP" />
+    <result column="delivery_place" property="deliveryPlace" jdbcType="VARCHAR" />
+    <result column="sys_account_id" property="sysAccountId" jdbcType="INTEGER" />
+    <result column="preorder_tme" property="preorderTme" jdbcType="TIMESTAMP" />
+    
+    <association property="customer" column="customer_id" javaType="com.crm.bean.Customer">
+    <id column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="copany_name" property="copanyName" jdbcType="VARCHAR" />
+    <result column="copany_adress" property="copanyAdress" jdbcType="VARCHAR" />
+    <result column="copany_code" property="copanyCode" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_emal" property="customerEmal" jdbcType="VARCHAR" />
+    <result column="customer_iphone" property="customerIphone" jdbcType="VARCHAR" />
+    <result column="customer_state" property="customerState" jdbcType="VARCHAR" />
+    </association>
+    
+    <collection property="proDetaList" column="procurement_id" ofType="com.crm.bean.PreorderDetails" >
+    	<id column="preorder_details_id" property="preorderDetailsId" jdbcType="INTEGER" />
+    	<result column="kc_num_sell" property="kcNumSell" jdbcType="INTEGER" />
+	    <association property="kcgoods" column="kgoods_id" javaType="com.crm.bean.Kcgoods" >
+	    	<id column="kgoods_id" property="kcgoodsId" jdbcType="INTEGER" />
+		    <result column="kgoods_name" property="kgoodsName" jdbcType="VARCHAR" />
+		    <result column="jxj" property="jxj" jdbcType="REAL" />
+		    <result column="kc_num" property="kcNum" jdbcType="INTEGER" />
+	    </association>
+    </collection>
+  </resultMap>
+  
+  
+  
+  
+  
+
   
 <resultMap id="PreorderMap" type="com.crm.bean.Preorder" >
     <id column="preorder_id" property="preorderId" jdbcType="INTEGER" />
