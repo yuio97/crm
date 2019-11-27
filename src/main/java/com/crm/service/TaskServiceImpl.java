@@ -27,7 +27,6 @@ public class TaskServiceImpl implements TaskService{
 	
 	@Resource
 	private OffTaskReleaseMapper offTaskReleaseMapper;
-
 	
 	
 	//目标管理
@@ -40,18 +39,6 @@ public class TaskServiceImpl implements TaskService{
 		offTaskDetails.setDetTaskStatus("1");//根据set到的当前id设置发布状态默认值为1
 		offTaskDetailsMapper.updateByPrimaryKeySelective(offTaskDetails);
 	}
-
-/*	@Override
-	public List<OffTaskDetails> getAllTaskDetails() {
-//		Subject subject = SecurityUtils.getSubject();
-//		SysAccount sysAccount = (SysAccount)subject.getPrincipal();
-		Date date = new Date();
-		int month = date.getMonth()+1;//月份从0开始
-		int year = date.getYear()+1900;//默认从1900年开始计年
-		//设置默认发布者编号为1,时间为当前年月
-		List<OffTaskDetails> allTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year);
-		return allTaskDetails;
-	}*/
 
 	@Override
 	public int insert(OffTaskDetails record) {
@@ -79,11 +66,11 @@ public class TaskServiceImpl implements TaskService{
 		return offTaskDetailsMapper.updateByPrimaryKeySelective(record);
 	}
 	
-	/*@Override
+	@Override
 	public List<OffTaskRelease> selectPublishedTask(Integer offId) {
-		List<OffTaskRelease> publicTaskByOffId = offTaskReleaseMapper.publicTaskByOffId(Integer.valueOf(offId));
+		List<OffTaskRelease> publicTaskByOffId = offTaskReleaseMapper.publicTaskByOffId(offId);
 		return publicTaskByOffId;
-	}*/
+	}
 
 	@Override
 	public PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn,Integer year, Integer month,boolean isSend,boolean isNowMonth) {
@@ -99,6 +86,30 @@ public class TaskServiceImpl implements TaskService{
 		//new一个PageInfo<>的方法、类型为list的类型OffTaskDetails、参数为查询的list
 		PageInfo<OffTaskDetails> pageInfo = new PageInfo<OffTaskDetails>(allOldTaskDetails);
 		return pageInfo;
+	}
+
+	//接收任务
+	@Override
+	public List<OffTaskRelease> selectAllTaskReception(Integer sysDeptId) {
+		return offTaskReleaseMapper.taskReception(sysDeptId);
+	}
+
+	@Override
+	public int updateReceiveStatus(Integer missionId) {
+		OffTaskRelease offTaskRelease = new OffTaskRelease();
+		offTaskRelease.setMissionId(missionId);
+		offTaskRelease.setReleaseState("2");
+		offTaskRelease.setOperateTime(new Date());
+		return offTaskReleaseMapper.updateByPrimaryKeySelective(offTaskRelease);
+	}
+
+	@Override
+	public int updateCompletionStatus(Integer missionId) {
+		OffTaskRelease offTaskRelease = new OffTaskRelease();
+		offTaskRelease.setMissionId(missionId);
+		offTaskRelease.setReleaseState("3");
+		offTaskRelease.setOperateTime(new Date());
+		return offTaskReleaseMapper.updateByPrimaryKeySelective(offTaskRelease);
 	}
 
 	

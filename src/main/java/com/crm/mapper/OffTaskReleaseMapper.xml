@@ -7,6 +7,8 @@
     <result column="sys_dept_id" jdbcType="INTEGER" property="sysDeptId" />
     <result column="release_state" jdbcType="VARCHAR" property="releaseState" />
     <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="sys_staff_name" property="sysStaffName" />
+    <result column="off_content" property="offContent" />
   </resultMap>
   <sql id="Base_Column_List">
     mission_id, off_id, sys_dept_id, release_state, operate_time
@@ -90,4 +92,20 @@
       operate_time = #{operateTime,jdbcType=TIMESTAMP}
     where mission_id = #{missionId,jdbcType=INTEGER}
   </update>
+  
+  	<!-- 查任务发布详情 -->
+	<select id="publicTaskByOffId" resultMap="BaseResultMap"  >
+		select r.*,s.sys_staff_name,d.off_content 
+		FROM off_task_release r INNER JOIN sys_staff_info s INNER JOIN off_task_details d
+		on r.off_id=d.off_id AND r.sys_dept_id=s.sys_staff_id
+		where d.off_id = #{offId}
+	</select>
+	
+	<select id="taskReception" resultMap="BaseResultMap"  >
+		select r.*,s.sys_staff_name,d.off_content 
+		FROM off_task_release r INNER JOIN sys_staff_info s INNER JOIN off_task_details d
+		on r.off_id=d.off_id AND r.sys_dept_id=s.sys_staff_id
+		where s.sys_staff_id = #{sysDeptId}
+	</select>
+	
 </mapper>

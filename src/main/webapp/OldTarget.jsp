@@ -91,13 +91,13 @@
 	         
 	         <div class="layui-input-inline ">&emsp;</div>
 	         <div class="layui-input-inline ">
-	         	<input type="checkbox" id="isNowMonth" ${isNowMonth == true?'checked':''}  name="isNowMonth" value="true" title="只查当月" lay-skin="primary" style="width:20px" >
+	         	<input type="checkbox" id="isNowMonth"  ${isNowMonth == true?'checked':''}  name="isNowMonth" value="true" title="只查当月" lay-skin="primary" style="width:20px" >
 	         </div>
 	         <div class="layui-input-inline">
-	         	<input type="text"  placeholder="只查当月"  disabled style="border:1px solid white;width:60px"> 
+	         	<input type="text"  placeholder="只查当月"   disabled style="border:1px solid white;width:60px"> 
 	         </div>
 	         <div class="layui-input-inline">
-	         	<input type="checkbox" id="isSend" name="isSend" value="true" title="只查已发布" lay-skin="primary" style="width:20px" >
+	         	<input type="checkbox" id="isSend"  ${isSend == true?'checked':''}  name="isSend" value="true" title="只查已发布" lay-skin="primary" style="width:20px" >
 	         </div>
 	         <div class="layui-input-inline">
 	         	<input type="text"  placeholder="只查已发布" disabled style="border:1px solid white;width:76px">
@@ -135,8 +135,6 @@
                     <td>
 						<c:if test="${old.detTaskStatus == 0 }">未发布</c:if>
 	             		<c:if test="${old.detTaskStatus == 1 }">已发布</c:if>
-	             		<c:if test="${old.detTaskStatus == 2 }">已接收</c:if>
-	             		<c:if test="${old.detTaskStatus == 3 }">已完成</c:if>
 					</td>
                     <td>${old.offContent }</td>
                     <td><fmt:formatDate value="${old.detTime }" pattern="yyyy-MM-dd" /></td>
