@@ -12,6 +12,27 @@ public class OffTaskRelease {
     private String releaseState;
 
     private Date operateTime;
+    
+    private String sysStaffName;
+    
+    private String offContent;
+    
+    
+    public String getSysStaffName() {
+		return sysStaffName;
+	}
+
+	public void setSysStaffName(String sysStaffName) {
+		this.sysStaffName = sysStaffName;
+	}
+
+	public String getOffContent() {
+		return offContent;
+	}
+
+	public void setOffContent(String offContent) {
+		this.offContent = offContent;
+	}
 
     public Integer getMissionId() {
         return missionId;
