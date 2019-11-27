@@ -18,4 +18,7 @@ public interface SupplierMapper {
     int updateByPrimaryKey(Supplier record);
     
     List<Supplier> getSupplierList();
+    
+    List<Supplier> chaSupplierList(Supplier supplier);
+    
 }

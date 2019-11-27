@@ -21,7 +21,7 @@ public class SysAccount {
 
     private String sysAccountSta;
     
-    @DateTimeFormat(pattern = "yy-mm-dd")
+    @DateTimeFormat(pattern = "yy-mm-dd HH:mm:ss")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date sysAccountTime;
     

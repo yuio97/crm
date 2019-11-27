@@ -7,15 +7,17 @@ import com.github.pagehelper.PageInfo;
 
 public interface SupplierService {
 	
-	 public void addSupplier(Supplier supplier);
+	 public int addSupplier(Supplier supplier);
 	 
-	 public void updateSupplier(Supplier supplier);
+	 public int updateSupplier(Supplier supplier);
 	 
-	 public void deleteSupplier(Integer supplierId);
+	 public int deleteSupplier(Integer supplierId);
 	 
 	 public List<Supplier> getSupplierList();
 	 
 	 Supplier selectByPrimaryKey(Integer supplierId);
+	
+	 List<Supplier> chaSupplierList(Supplier supplier);
 	 
 	 public PageInfo<Supplier> getSupplierList(int pn,int size); 
 

@@ -31,11 +31,41 @@
     		{
     			pn = 1;
     		}
+    		var url = "task/getAllOldTaskDetails?pn="+pn;
+    		
     		var year = $('#test2').val();
+    		if(year != '')
+    		{
+    			url += "&year="+year;
+    		}
+    		
     		var month = $('#test3').val();
-    		location.href = "task/getAllOldTaskDetails?year="+year+"&month="+month+"&pn="+pn;
+    		if(month != '')
+    		{
+    			url += '&month='+month;
+    		}
+    		
+    		var isNowMonth = $('#isNowMonth').prop('checked');
+    		if(isNowMonth)
+    		{
+    			url += '&isNowMonth='+true;
+    		}
+    		
+    		var isSend = $('#isSend').prop('checked');
+    		if(isSend)
+    		{
+    			url += '&isSend='+true;
+    		}
+    		
+    		location.href = url;
     	}
     </script>
+        <style>
+     
+ .layui-form-pane .layui-form-checkbox {
+    margin: 12px 0 4px 10px!important;
+}
+    </style>
 </head>
 <body>
 <div class="wangid_conbox">
@@ -43,8 +73,9 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a href="task/getAllTaskDetails">目标管理</a>
-            <span>目标列表</span>
+            <a>任务管理</a>
+            <span>任务列表</span>
+            <a href="AddNewTarget.jsp" style="float:right;color:white;margin-top:12px" class="layui-btn layui-btn-sm">添加任务</a>
         </div>
         <!-- 筛选 --> 
     	<div id="app" class="shuaix">
@@ -57,6 +88,21 @@
 	         <div class="layui-input-inline">
 	             <input type="text"  name="month" value="${month }" class="layui-input" id="test3" placeholder="请输入月">
 	         </div>
+	         
+	         <div class="layui-input-inline ">&emsp;</div>
+	         <div class="layui-input-inline ">
+	         	<input type="checkbox" id="isNowMonth" ${isNowMonth == true?'checked':''}  name="isNowMonth" value="true" title="只查当月" lay-skin="primary" style="width:20px" >
+	         </div>
+	         <div class="layui-input-inline">
+	         	<input type="text"  placeholder="只查当月"  disabled style="border:1px solid white;width:60px"> 
+	         </div>
+	         <div class="layui-input-inline">
+	         	<input type="checkbox" id="isSend" name="isSend" value="true" title="只查已发布" lay-skin="primary" style="width:20px" >
+	         </div>
+	         <div class="layui-input-inline">
+	         	<input type="text"  placeholder="只查已发布" disabled style="border:1px solid white;width:76px">
+	         </div>
+            
 	         <div class="selec"  style="margin-right:30px;"> 
 	             <input type="button" value="查询" onclick="getData()">
 	         </div>
@@ -75,14 +121,22 @@
             <c:forEach items="${allOldTaskDetails.list }" var="old" >
                 <tr> 
                     <td>
-	                    <c:if test="${old.detTaskStatus == 0 }"></c:if>
-		             	<c:if test="${old.detTaskStatus == 1 }">
+	                    <c:if test="${old.detTaskStatus == 0 }">
+		                    <a href="task/selectStaff?staskId=${old.offId }" class="btn btn-primary">
+		             			<input type="hidden" name="offId" value="${old.offId }">
+		             			发布
+		             		</a>
+	                    	<a href="task/selUpdateContent?offId=${old.offId }" class="btn btn-primary">修改</a>
+	                    </c:if>
+		             	<c:if test="${old.detTaskStatus != 0 }">
 		             		<a href="task/selectOldPublishedTask?offId=${old.offId }" class="btn btn-primary">查看</a>
 		             	</c:if>
 					</td>
                     <td>
 						<c:if test="${old.detTaskStatus == 0 }">未发布</c:if>
 	             		<c:if test="${old.detTaskStatus == 1 }">已发布</c:if>
+	             		<c:if test="${old.detTaskStatus == 2 }">已接收</c:if>
+	             		<c:if test="${old.detTaskStatus == 3 }">已完成</c:if>
 					</td>
                     <td>${old.offContent }</td>
                     <td><fmt:formatDate value="${old.detTime }" pattern="yyyy-MM-dd" /></td>

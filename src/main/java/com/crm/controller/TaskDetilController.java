@@ -37,35 +37,28 @@ public class TaskDetilController {
 	
 	
 	
-//目标管理
+/*	//当月所有
 	@RequestMapping("/getAllTaskDetails")
 	public String getAllTaskDetl(Map<String, Object > data) {
 		List<OffTaskDetails> allTaskDetails = taskService.getAllTaskDetails();
 		data.put("allTaskDetails", allTaskDetails);
 		return "forward:/NewTarget.jsp";
-	}
+	}*/
 	
 	@RequestMapping("/updateDetTaskStatus")
 	public String updateDetTaskStatus(int staskId) {
 		taskService.updateDetTaskStatus(staskId);
-		return "redirect:/task/getAllTaskDetails";
+		return "redirect:/task/getAllOldTaskDetails";
 	}
 	
 	@RequestMapping("/selectByPrimaryKey")
 	public String selectByPrimaryKey(String staskId,String sysStaffId[]) {
-		OffTaskDetails selectByPrimaryKey = taskService.selectByPrimaryKey(Integer.valueOf(staskId));
-		selectByPrimaryKey.getOffId();
-		selectByPrimaryKey.getOffPromulgatorId();
-		selectByPrimaryKey.getOffContent();
-		OffTaskRelease offTaskRelease = new OffTaskRelease();
-		//用来存sysStaffId[]中的多行数据
 		for(int i = 0;i < sysStaffId.length;i++) {
-			offTaskRelease.setOffId(selectByPrimaryKey.getOffId());
-			offTaskRelease.setSysDeptId(selectByPrimaryKey.getOffPromulgatorId());
-			offTaskRelease.setOffContent(selectByPrimaryKey.getOffContent());
-			offTaskRelease.setOffTime(new Date());
+			OffTaskRelease offTaskRelease = new OffTaskRelease();
+			offTaskRelease.setOffId(Integer.valueOf(staskId));
+			offTaskRelease.setOperateTime(new Date());
+			offTaskRelease.setReleaseState("0");
 			offTaskRelease.setSysDeptId(Integer.valueOf(sysStaffId[i]));
-			offTaskRelease.setOffReceiveStatus("0");
 			taskService.insert(offTaskRelease);
 		}
 		return "forward:/task/updateDetTaskStatus?staskId="+staskId;
@@ -85,7 +78,7 @@ public class TaskDetilController {
 		offTaskDetails.setOffContent(detTaskStatus);//jsp页面name名也是这个
 		int insert = taskService.insert(offTaskDetails);
 		if (insert == 1) {
-			return "redirect:/task/getAllTaskDetails";
+			return "redirect:/task/getAllOldTaskDetails";//add完跳查询Controller
 		}else {
 			return "失败";
 		}
@@ -104,10 +97,10 @@ public class TaskDetilController {
 		offTaskDetails.setOffContent(content);
 		offTaskDetails.setOffId(Integer.valueOf(offId));
 		taskService.updateByPrimaryKeySelective(offTaskDetails);
-		return "redirect:/task/getAllTaskDetails";
+		return "redirect:/task/getAllOldTaskDetails";
 	}
 	
-	//查新建目标任务
+/*	//查新建目标任务
 	@RequestMapping("/selectPublishedTask")
 	public String selectPublishedTask(Map<String, Object> data,String staskId) {
 		System.out.println(staskId);
@@ -116,18 +109,31 @@ public class TaskDetilController {
 		System.out.println();
 		return "forward:/publishedTask.jsp";
 	}
+	*/
+	
+	
 	
 	//目标列表
 	//分页：int一个页码pn，如果不传值默认为1也就是首页，
 	@RequestMapping("/getAllOldTaskDetails")
-	public String getAllOldTaskDetl(@RequestParam(defaultValue="1")int pn,Integer year,Integer month,Map<String, Object > Old) {
+	public String getAllOldTaskDetl(
+			@RequestParam(defaultValue="1")int pn,
+			Integer year,Integer month,
+			@RequestParam(defaultValue="false")boolean isSend,
+			@RequestParam(defaultValue="false")boolean isNowMonth,
+			Map<String, Object > Old) {
 		//PageInfo<OffTaskDetails>拥有查询方法返回的list
-		PageInfo<OffTaskDetails> allOldTaskDetails = taskService.getAllOldTaskDetails(pn,year,month);
+		PageInfo<OffTaskDetails> allOldTaskDetails = taskService.getAllOldTaskDetails(pn,year,month,isSend,isNowMonth);
 		Old.put("allOldTaskDetails", allOldTaskDetails);
 		Old.put("month", month);
 		Old.put("year", year);
+		Old.put("isSend", isSend);
+		Old.put("isNowMonth", isNowMonth);
 		return "forward:/OldTarget.jsp";
 	}
+	
+	
+	/*
 	
 	//查目标列表任务
 	@RequestMapping("/selectOldPublishedTask")
@@ -139,7 +145,7 @@ public class TaskDetilController {
 	
 	
 	
-//任务管理
+	//任务管理
 	@RequestMapping("/selectAllTask")
 	public String selectAllTask(Integer sysDeptId,Map<String, Object > task) {
 		List<OffTaskRelease> selectAllTask = taskService.selectAllTask();
@@ -160,5 +166,5 @@ public class TaskDetilController {
 		oldTask.put("month", month);
 		return "forward:/oldTask.jsp";
 	}
-	
+	*/
 }

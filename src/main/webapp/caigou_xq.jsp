@@ -6,6 +6,7 @@
 %>
 <html>
 <head>
+
 	<base href="<%=basepath %>" />
 
 	<meta charset="utf-8">
@@ -34,52 +35,71 @@
 <body style="background: #fff;">
 <div class="tianjia_xx">
     <table class="if_tianjiatext layui-table" lay-size="lg"> 
-    <tbody>
-        <tr>
-            <td class="td_1">原材料名称</td>
-            <td  class="td_1">购买的数量</td>  
-            <td  class="td_1">原材料的价格</td>
-            <td  class="td_1">供货商名称</td>
-           
-        </tr>
-        <tr id="xs">
-	   		 <td> </td>
-	       	 <td> </td>
-	       	 <td> </td>
-        </tr>
-       
-    </tbody>
-    </table>
+     <table class="layui-table" lay-filter="mylist" lay-size="lg">
+            <thead>
+                <tr> 
+                   
+                    <th lay-data="{field:'time',align:'center', minWidth:80}">采购详情编号</th>
+                    <th lay-data="{field:'company',align:'center',minWidth:80}">原材料名称</th>
+                    <th lay-data="{field:'tel',align:'center',width:80}">采购商品的数量</th>
+                    <th lay-data="{field:'tel1',align:'center',width:80}">原材料的单价</th>
+                    <th lay-data="{field:'tel2',align:'center',width:80}">供货商名称</th>
+                    <th lay-data="{field:'user',align:'center',width:80}">采购员编号</th>
+                    <th lay-data="{field:'addr',align:'center',minWidth:80}">操做时间</th> 
+                    <th lay-data="{field:'addr4',align:'center',minWidth:80}">备注</th>  
+                    
+                </tr> 
+            </thead>
+            <tbody id="xq">
+                <tr v-for="PurchasingXq in PXq" > 
+                    
+                   
+                    <td>{{PurchasingXq.pxId}}</td>
+                    <td>{{PurchasingXq.goods.goodsName}}</td>
+                    <td>{{PurchasingXq.goodsNum}}</td>
+                    <td>{{PurchasingXq.goods.goodsPrice}}</td>
+                    <td>{{PurchasingXq.goods.supplier.supplierName}}</td>
+                    <td>{{PurchasingXq.sysStaffId}}</td>
+                    <td>{{PurchasingXq.pxLastTime}}</td>
+                    <td>{{PurchasingXq.pxMassage}}</td>
+                    
+                   
+                </tr> 
+                
+              
+                
+            </tbody>  
+        </table>
 </div>
-<script type="text/javascript">
-	 new Vue({
-		 el:"#xs",
-	 	data:{
-	 		
-	 		
-	 			
-	 	},
-	 methods:{
-		 
-	 },
+<script >
+new Vue({
+	 el:"#xq",
+	data:{
+		
+		PXq:[]
+			
+	},
+methods:{
 	 
-		    created:function(){
-		    	console.log("sdfsd");
-		       this_a=this
-		        $.ajax({
-		            type: "GET",
-		            url: "/purchasingOrder/getpurchasingxqList",
-		            data: null,
-		            dataType: "json",
-		            success: function (response) {
-		            	this_a.supplier=response;
-		            	console.log(response);
-		            }
-		        });
-		    }
+},
+
+	    created:function(){
+	    	
+	        this_a=this
+	        $.ajax({
+	            type: "GET",
+	            url: "/purchasingXq/purchasingXqlist",
+	            data: null,
+	            dataType: "json",
+	            success: function (response) {
+	            	this_a.PXq=response;
+	            	console.log(response);
+	            }
+	        });
+	    }
 
 
-		  })
+	  })
 </script> 
 </body>
 

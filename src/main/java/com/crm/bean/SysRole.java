@@ -16,6 +16,8 @@ public class SysRole {
     private Date sysRoleTime;
     
     List<SysPermission> sysPerList;
+    
+    private SysDept dept;
 
     public Integer getSysRoleId() {
         return sysRoleId;
@@ -71,6 +73,14 @@ public class SysRole {
 
 	public void setSysPerList(List<SysPermission> sysPerList) {
 		this.sysPerList = sysPerList;
+	}
+
+	public SysDept getDept() {
+		return dept;
+	}
+
+	public void setDept(SysDept dept) {
+		this.dept = dept;
 	}
 
 

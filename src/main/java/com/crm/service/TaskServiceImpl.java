@@ -36,11 +36,12 @@ public class TaskServiceImpl implements TaskService{
 		//逻辑
 		OffTaskDetails offTaskDetails = new OffTaskDetails();
 		offTaskDetails.setOffId(id);
+		offTaskDetails.setDetTime(new Date());
 		offTaskDetails.setDetTaskStatus("1");//根据set到的当前id设置发布状态默认值为1
 		offTaskDetailsMapper.updateByPrimaryKeySelective(offTaskDetails);
 	}
 
-	@Override
+/*	@Override
 	public List<OffTaskDetails> getAllTaskDetails() {
 //		Subject subject = SecurityUtils.getSubject();
 //		SysAccount sysAccount = (SysAccount)subject.getPrincipal();
@@ -50,7 +51,7 @@ public class TaskServiceImpl implements TaskService{
 		//设置默认发布者编号为1,时间为当前年月
 		List<OffTaskDetails> allTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year);
 		return allTaskDetails;
-	}
+	}*/
 
 	@Override
 	public int insert(OffTaskDetails record) {
@@ -78,40 +79,27 @@ public class TaskServiceImpl implements TaskService{
 		return offTaskDetailsMapper.updateByPrimaryKeySelective(record);
 	}
 	
-	@Override
+	/*@Override
 	public List<OffTaskRelease> selectPublishedTask(Integer offId) {
 		List<OffTaskRelease> publicTaskByOffId = offTaskReleaseMapper.publicTaskByOffId(Integer.valueOf(offId));
 		return publicTaskByOffId;
-	}
+	}*/
 
 	@Override
-	public PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn,Integer year, Integer month) {
+	public PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn,Integer year, Integer month,boolean isSend,boolean isNowMonth) {
 		//PageInfo<OffTaskDetails>类中的PageHelper有个startPage方法，俩参数分别为(页码/每页多少条)
 		PageHelper.startPage(pn, 10);
-		List<OffTaskDetails> allOldTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year);
+		if(isNowMonth)
+		{
+			Date date = new Date();
+			month = date.getMonth()+1;//月份从0开始
+			year = date.getYear()+1900;//默认从1900年开始计年
+		}
+		List<OffTaskDetails> allOldTaskDetails = offTaskDetailsMapper.getAllTaskDetails(1,month,year,isSend);
 		//new一个PageInfo<>的方法、类型为list的类型OffTaskDetails、参数为查询的list
 		PageInfo<OffTaskDetails> pageInfo = new PageInfo<OffTaskDetails>(allOldTaskDetails);
 		return pageInfo;
 	}
-	
-	
-	//任务管理
-	@Override
-	public List<OffTaskRelease> selectAllTask() {
-		Date date = new Date();
-		int month = date.getMonth()+1;
-		int year = date.getYear()+1900;
-		List<OffTaskRelease> allTask = offTaskReleaseMapper.getAllTask(month, year);
-		return allTask;
-	}
 
-	@Override
-	public PageInfo<OffTaskRelease> getAllOldTask(int pn,Integer year, Integer month) {
-		PageHelper.startPage(pn, 10);
-		List<OffTaskRelease> allTask = offTaskReleaseMapper.getAllTask(month, year);
-		PageInfo<OffTaskRelease> pageInfo = new PageInfo<OffTaskRelease>(allTask);
-		return pageInfo;
-	}
-	
 	
 }

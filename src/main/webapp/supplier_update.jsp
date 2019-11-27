@@ -44,9 +44,9 @@
         </div>
         <!-- 下面写内容 -->
        <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="update/updateSupplier"  method="post">
+            <form class="layui-form layui-form-pane" action="/update/updateSupplier"  method="get">
             <ul> 
-                  <input type="hidden" value="${supplierList.supplierId}">
+                  <input type="hidden" name="supplierId" value="${supplierList.supplierId}">
                 <li>
                     <div class="left">供应商名称：</div>
                     <div class="right"> 

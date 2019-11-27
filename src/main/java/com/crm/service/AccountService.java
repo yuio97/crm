@@ -18,5 +18,8 @@ public interface AccountService {
 	public boolean delAccountByAccountId(int id);
 	
 	public int addAccount(SysAccount account);
+	
+	public PageInfo<SysAccount> getListByConditions(int id,String name,String start,String end);
+	
 		
 }

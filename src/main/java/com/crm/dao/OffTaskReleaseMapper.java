@@ -1,10 +1,5 @@
 package com.crm.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
-import com.crm.bean.OffTaskDetails;
 import com.crm.bean.OffTaskRelease;
 
 public interface OffTaskReleaseMapper {
@@ -19,10 +14,4 @@ public interface OffTaskReleaseMapper {
     int updateByPrimaryKeySelective(OffTaskRelease record);
 
     int updateByPrimaryKey(OffTaskRelease record);
-    
-    //查任务发布详情
-    List<OffTaskRelease> publicTaskByOffId(Integer offId);
-    
-    //任务管理
-    List<OffTaskRelease> getAllTask(@Param("month")Integer month,@Param("year")Integer year);
 }

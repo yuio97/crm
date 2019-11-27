@@ -50,7 +50,7 @@
             <div class="layui-input-inline">
                 <input type="text" class="layui-input"  id="test3" placeholder="结束时间">
             </div>
-            <div class="right"  style="margin-right:30px;" > 
+            <div class="right"  style="margin-right:30px;" @click="seach()"> 
                     <a href="javascript:;" >查询</a>
             </div>
   
@@ -61,6 +61,9 @@
             </div>
             <div class="right"  style="margin-right:30px;" @click="seach()" > 
                     <a href="javascript:;" >查询</a>
+            </div>
+            <div class="right"  style="margin-right:30px;" @click="reset()" > 
+                    <a href="javascript:;" >重置</a>
             </div>
         </div>
         <!-- 下面写内容 -->
@@ -78,8 +81,7 @@
                     <th lay-data="{field:'www',align:'center',minWidth:260}">上次登录时间</th>
                     <th lay-data="{field:'user',align:'center',width:180}">是否锁定</th>
 
-
-                    
+                   
                 </tr> 
             </thead>
             <tbody>
@@ -102,24 +104,24 @@
                 <tr>
                     <td colspan="6">
                         <div class="layui-box layui-laypage layui-laypage-default">
-                            <a href="javascript:;" class="layui-laypage-prev" v-show="accountList.hasPreviousPage" >
+                            <a href="javascript:;"  @click="jjj(accountList.prePage)" v-show="accountList.hasPreviousPage" >
                                     <i class="layui-icon"></i>
                             </a>
                             <span class="layui-laypage-curr" >
                                 <em class="layui-laypage-em"></em>
-                                <em>1</em>
+                                <em>{{accountList.pageNum}}</em>
                             </span>
-                            <a href="javascript:;" class="layui-laypage-prev" >
+                            <a href="javascript:;" @click="jjj(accountList.nextPage)" v-show="accountList.hasNextPage">
                                 <i class="layui-icon"></i>
                             </a>
                             <span>
                                 到第
-                                <input type="text" min="1" value="" class="layui-input">
+                                <input type="number" min="1" id="pagee" :max="accountList.pages" :value="accountList.pageNum" class="layui-input">
                                 页
-                                <button type="button" class="layui-laypage-btn">确定</button>
+                                <button type="button" @click="jump()" class="layui-laypage-btn">确定</button>
                             </span>
-                            <span class="layui-laypage-count">共18条</span>
-                            <span class="layui-laypage-limits">
+                            <span class="layui-laypage-count">共{{accountList.total}}条</span>
+                            <!-- <span class="layui-laypage-limits">
                                 <select lay-ignore>
                                     <option value="10" selected>10条/页</option>
                                     <option value="10" >20条/页</option>
@@ -127,7 +129,7 @@
                                     <option value="10" >40条/页</option>
                                     <option value="10" >50条/页</option>
                                 </select>
-                            </span>
+                            </span> -->
                             
                         </div>
                     </td>     
@@ -141,8 +143,10 @@
         new Vue({
             el:'#account',
             data:{
-                accountList:[]
+                accountList:[],
+                name: "张三",
             },
+            
             created() {
                 var _this = this;
                 axios.get('/getAccountList')
@@ -212,19 +216,46 @@
                 },
                 seach:function(){
                     var start = $('#test2').val();
-                    var end = $('#test').val();
+                    var end = $('#test3').val();
                     var name = $('#test4').val();
+                    // name=1
 
                     var _this = this;
-                    axios.post('')
+                    axios.post('/getListByConditions?start='+start+'&name='+name+'&end='+end)
                     .then(function(res){
-                        _this.loadData();
+                        _this.accountList = res.data;
+                    })
+                    .catch(err => {
+                        console.error(err); 
+                    });
+                },
+                reset:function(){
+                    var start = $('#test2').val("");
+                    var end = $('#test3').val("");
+                    var name = $('#test4').val("");
+                    this.loadData();
+                },
+                jump:function(){
+                    var pn = $('#pagee').val();
+                    var _this = this;
+                    axios.get('/getAccountList?pn='+pn)
+                    .then(function(res){
+                        _this.accountList = res.data;
+                    })
+                    .catch(err => {
+                        console.error(err); 
+                    });
+                },
+                jjj:function(pn){
+                    var _this = this;
+                    axios.get('/getAccountList?pn='+pn)
+                    .then(function(res){
+                        _this.accountList = res.data;
                     })
                     .catch(err => {
                         console.error(err); 
                     });
                 }
-
 
             }
             

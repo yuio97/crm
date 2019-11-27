@@ -26,8 +26,17 @@ public class Goods {
 
     private Integer supplierId;
     
+    private Supplier supplier;
 
-    public Integer getGoodsId() {
+    public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public Integer getGoodsId() {
         return goodsId;
     }
 

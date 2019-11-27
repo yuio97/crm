@@ -1,5 +1,7 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import com.crm.bean.PurchasingXq;
 
 public interface PurchasingXqMapper {
@@ -14,4 +16,8 @@ public interface PurchasingXqMapper {
     int updateByPrimaryKeySelective(PurchasingXq record);
 
     int updateByPrimaryKey(PurchasingXq record);
+    
+    List<PurchasingXq> getPurchasingXqList();
+    
+    List<PurchasingXq> getPurchasingXqList(Integer porderId);
 }
