@@ -48,7 +48,7 @@
            
         </div>
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="/purchasingOrder/addpo"  method="post">
+            <form class=" layui-form-pane" action="/purchasingOrder/addpo"  method="post">
             <ul> 
                   
                 <li>
@@ -60,19 +60,19 @@
                  <li>
                     <div class="left">采购时间：</div>
                     <div class="right"> 
-                       <input type="text" class="layui-input" name="porderTime" id="test3" placeholder="yyyy-MM-dd">   
+                       <input type="text" class="layui-input" name="porderTime" id="test3" placeholder="">   
                     </div>
                 </li>
                 <li>
                     <div class="left">进货时间：</div>
                     <div class="right"> 
-                       <input type="text"  class="layui-input" name="jhTime" id="test2" placeholder="yyyy-MM-dd">   
+                       <input type="text"  class="layui-input" name="jhTime" id="test2" placeholder="">   
                     </div>
                 </li>
                  <li style="height: 38px; overflow:initial;">
                     <div class="left">采购进展：</div>
                     <div class="right">
-                   		 <select name="porderJz" lay-verify="">
+                   		 <select name="porderJz" lay-verify="" style="height: 37.5px;">
                                 <option value="待采购">待采购</option>
                                 <option value="已采购">已采购</option>
                             </select>
@@ -80,19 +80,21 @@
                 </li>
                
                 
-                <li>
-                    <div class="left">操作人员：</div>
-                    
-                    <div class="right"> 
-                        <input type="text" name="sysStaffId" required lay-verify="required" autocomplete="off" class="layui-input">
-                    </div>
-                </li>
+                 <li style="height: 38px; overflow:initial;">
+                  <div class="left">操作人员：：</div>
+                  
+	                 <div class="right" id="yg"> 
+                            <select name="sysStaffId" lay-verify="" style="height: 37.5px;">
+                              <option v-for="sys in sysStaff" >{{sys.sysStaffId}}</option>
+                            </select> 
+                        </div>
+					 </li> 
                
                 <li style="height: 38px; overflow:initial;">
                   <div class="left">支付方式：</div>
                   
 	                 <div class="right"> 
-                            <select name="payQk" lay-verify="">
+                            <select name="payQk" lay-verify="" style="height: 37.5px;">
                                 <option value="现金">现金</option>
                                 <option value="银行">银行卡</option>
                                	<option value="支付宝">支付宝</option>
@@ -107,6 +109,35 @@
                     </div>
                 </li>
                
+                
+                <li>
+                    <table class="layui-table"  lay-size="xs">
+                     <thead>
+                	<tr> 
+                    
+                   <th><input type="checkbox" ></th>
+                    <th >原材料编号</th>
+                    <th >原材料名称</th>
+                    <th >原材料数量</th>
+                    <th >原材料警告数</th>
+                    <th >需采购的数量</th>
+                    
+       
+                </tr> 
+            </thead>
+            <tbody id="good">
+                     
+           			<tr v-for="g in goods">
+           			 <td><input type="checkbox" :value="g.goodsId" name="goodsIds"></td>
+                     <td>{{g.goodsId}}</td>
+                     <td>{{g.goodsName}}</td>
+                     <td>{{g.goodsNum}}</td>
+                     <td>{{g.goodsMin}}</td>
+                     <td><input type="text" ></td>
+                     </tr>
+                     </tbody>
+                    </table>
+                </li>
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right" id="tj"> 
@@ -150,23 +181,23 @@
 </script>
 <script>
 new Vue({
-    el:'#xz',
+    el:'#good',
     data:{
-        supplier:[]
+        goods:[]
     },
     methods:{
 
     },
     created:function(){
-    	console.log("sdfsd");
+    	
        this_a=this;
         $.ajax({
             type: "GET",
-            url: "/supplier/getSupplierList",
+            url: "addgoods/GoodsList",
             data: null,
             dataType: "json",
             success: function (response) {
-            	this_a.supplier=response;
+            	this_a.goods=response;
             	console.log(this_a.supplier);
             }
         });
@@ -175,6 +206,32 @@ new Vue({
 
   })
 </script>
-  
+  <script>
+new Vue({
+    el:'#yg',
+    data:{
+    	sysStaff:[]
+    },
+    methods:{
+
+    },
+    created:function(){
+    	
+       this_a=this;
+        $.ajax({
+            type: "GET",
+            url: "/supplier/getSupplierList",
+            data: null,
+            dataType: "json",
+            success: function (response) {
+            	this_a.sysStaff=response;
+            	
+            }
+        });
+    }
+
+
+  })
+</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.crm.bean;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,10 +34,20 @@ public class PurchasingOrder {
 
     private String pMassage;
 
-    private Integer gsId;
+    public List<PurchasingXq> getPurchasingXq() {
+		return purchasingXq;
+	}
+
+	public void setPurchasingXq(List<PurchasingXq> purchasingXq) {
+		this.purchasingXq = purchasingXq;
+	}
+
+	private Integer gsId;
     
     @DateTimeFormat(pattern="yyyy-mm-dd")
     private Date pLastTime;
+    
+    private List<PurchasingXq> purchasingXq;
 
     public Integer getPorderId() {
         return porderId;

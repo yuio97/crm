@@ -175,6 +175,6 @@
 	  select * FROM purchasing_xq px
 	INNER JOIN goods g ON px.goods_id=g.goods_id
 	INNER JOIN supplier s ON g.supplier_id= s.supplier_id
-  	where  porder_id=#{porderId,jdbcType=INTEGER},
+  
   </select>
 </mapper>
