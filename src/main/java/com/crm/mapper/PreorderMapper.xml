@@ -25,7 +25,7 @@
     delete from preorder
     where preorder_id = #{preorderId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.crm.bean.Preorder" >
+  <insert id="insert" parameterType="com.crm.bean.Preorder" useGeneratedKeys="true" keyProperty="preorderId" >
     insert into preorder (preorder_id, customer_id, preorder_note, 
       pay_case, delivery_time, delivery_place, 
       sys_account_id, preorder_tme)
@@ -198,7 +198,6 @@
     </collection>
     
   </resultMap>
-  
   
   
   

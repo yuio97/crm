@@ -13,4 +13,6 @@ public interface PreOrderService {
 	public List<Kcgoods> selectGoodsNum();
 	
 	public List<Customer> selectCus();
+	
+	public void insertPre( Preorder order);
 }

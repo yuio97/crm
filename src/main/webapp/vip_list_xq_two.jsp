@@ -29,17 +29,15 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="layui/layui.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
-<body style="background: #fff;">
+<body>
+	<body style="background: #fff;">
 <div class="tianjia_xx" id="cc">
     <table class="if_tianjiatext layui-table" lay-size="lg"> 
     <tbody>
         <tr>
-            <td  class="td_1">选择客户</td> 
+            <td  class="td_1">客户姓名</td> 
             <td>
-            <select @change="changecustomer()" v-model="predata.customerId" >
-            	<option value="-1">请选择</option>
-            	<option :value="customer.customerId" v-for="(customer,i) in cus" :key="i">{{customer.customerName}}</option>
-            </select>
+            	测试姓名
             </td>
         </tr>
         <tr>
@@ -79,14 +77,12 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td>
             	<table>
             		<tr>
-            			<td><input type="checkbox"></td>
             			<td>商品</td>
             			<td>价格</td>
-            			<td>请输入预购数量</td>
+            			<td>预购数量</td>
             		</tr>
             		
             		<tr v-for="(good,j) in goods" :key=j>
-            			<td><input type="checkbox" v-model="goodsId" :value="good.kcgoodsId"></td>
             			<td>{{good.kgoodsName}}</td>
             			<td>{{good.jxj}}</td>
             			<td><input type="text" :id="'kcNum'+good.kcgoodsId" :placeholder="'当前库存数量：'+good.kcNum"></td>
@@ -176,29 +172,5 @@ var v = new Vue({
 
 });
 </script>
-
 </body>
 </html>
-<script>
-layui.use('laydate', function(){
-  var laydate = layui.laydate; 
-  //常规用法
-  laydate.render({
-    elem: '#test1'
-  });
-   //常规用法
-   laydate.render({
-    elem: '#test2',
-    done: function(value, date, endDate){
-       v.predata.preorderTme = value;
-     }
-  });
-   //常规用法
-   laydate.render({
-    elem: '#test3',
-    done: function(value, date, endDate){
-        v.predata.deliveryTime = value;
-      }
-  });
-});
-</script>

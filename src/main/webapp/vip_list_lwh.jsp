@@ -161,7 +161,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             // offset: 'rb', //右下角弹出
             // time: 2000, //2秒后自动关闭
             anim: 5,//动画
-            content: ['vip_list_xq_lwh.jsp', 'no'], //iframe的url，no代表不显示滚动条 
+            content: ['vip_list_xq_two.jsp', 'no'], //iframe的url，no代表不显示滚动条 
         }); 
         
     }

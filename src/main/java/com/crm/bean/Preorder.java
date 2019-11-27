@@ -103,7 +103,8 @@ public class Preorder {
 	public void setProDetaList(List<PreorderDetails> proDetaList) {
 		this.proDetaList = proDetaList;
 	}
-    
+
+
     
     
 }

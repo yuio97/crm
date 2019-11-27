@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.crm.bean.Customer;
 import com.crm.bean.Kcgoods;
 import com.crm.bean.Preorder;
+import com.crm.bean.PreorderDetails;
+import com.crm.dao.PreorderDetailsMapper;
 import com.crm.dao.PreorderMapper;
 
 
@@ -17,6 +19,9 @@ public class PreOrderServiceImpl implements PreOrderService{
 
 	@Resource
 	private PreorderMapper preorderMapper;
+	
+	@Resource
+	private PreorderDetailsMapper preorderDetailsMapper;
 	
 	@Override
 	public List<Preorder> selectPre() {
@@ -38,5 +43,24 @@ public class PreOrderServiceImpl implements PreOrderService{
 		List<Customer> selectCus = preorderMapper.selectCus();
 		return selectCus;
 	}
+
+	@Override
+	public void insertPre(Preorder order) {
+		
+		
+
+		order.setSysAccountId(1);
+		int insertPre = preorderMapper.insert(order);
+		
+		
+		List<PreorderDetails> proDetaList = order.getProDetaList();
+		for (PreorderDetails preorderDetails : proDetaList) {
+			preorderDetails.setPreorderId(order.getPreorderId());
+			
+			int insertPreDetail = preorderDetailsMapper.insert(preorderDetails);
+		}
+	}
+
+
 
 }
