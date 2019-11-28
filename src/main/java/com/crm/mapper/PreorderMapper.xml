@@ -166,7 +166,7 @@
   </resultMap>
   
   <select id="selectPreById" resultMap="PreorderMapById">
-  		SELECT p.*,c.*,pd.kc_num_sell,s.sys_account_name,kc.jxj,kc.kc_num,kc.kgoods_name
+  		SELECT p.*,c.*,pd.kc_num_sell,s.sys_account_name,kc.jxj,kc.kc_num,kc.kgoods_name,kc.kcgoods_id
 		FROM preorder p INNER JOIN preorder_details pd 
 		ON p.preorder_id = pd.preorder_id INNER JOIN kc_goods kc
 		ON pd.kgoods_id = kc.kcgoods_id INNER JOIN customer c
@@ -199,8 +199,8 @@
     <collection property="proDetaList" column="procurement_id" ofType="com.crm.bean.PreorderDetails" >
     	<id column="preorder_details_id" property="preorderDetailsId" jdbcType="INTEGER" />
     	<result column="kc_num_sell" property="kcNumSell" jdbcType="INTEGER" />
-	    <association property="kcgoods" column="kgoods_id" javaType="com.crm.bean.Kcgoods" >
-	    	<id column="kgoods_id" property="kcgoodsId" jdbcType="INTEGER" />
+	    <association property="kcgoods" column="kcgoods_id" javaType="com.crm.bean.Kcgoods" >
+	    	<id column="kcgoods_id" property="kcgoodsId" jdbcType="INTEGER" />
 		    <result column="kgoods_name" property="kgoodsName" jdbcType="VARCHAR" />
 		    <result column="jxj" property="jxj" jdbcType="REAL" />
 		    <result column="kc_num" property="kcNum" jdbcType="INTEGER" />

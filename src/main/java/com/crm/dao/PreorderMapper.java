@@ -18,7 +18,7 @@ public interface PreorderMapper {
 
     Preorder selectByPrimaryKey(Integer preorderId);
 
-    int updateByPrimaryKeySelective(Preorder record);
+    int updateByPrimaryKeySelective(Preorder order);
 
     int updateByPrimaryKey(Preorder record);
     

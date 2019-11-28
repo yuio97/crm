@@ -14,4 +14,6 @@ public interface ProcurementDetailsMapper {
     int updateByPrimaryKeySelective(ProcurementDetails record);
 
     int updateByPrimaryKey(ProcurementDetails record);
+    
+    
 }
