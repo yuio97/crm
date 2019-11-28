@@ -25,6 +25,17 @@ public class PurchasingXqController {
 		
 	}
 	
+	@RequestMapping("/Xqlist")
+	@ResponseBody
+	public List<PurchasingXq> getpurchasingXqList1(Integer porderId ){
+		List<PurchasingXq> purchasingXqList1 = purchasingXqService.getPurchasingXqList1(porderId);
+		System.out.println(purchasingXqList1);
+		return purchasingXqList1;
+		
+		
+		
+	}
+	
 	
 	
 	

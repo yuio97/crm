@@ -19,5 +19,7 @@ public interface PurchasingXqMapper {
     
     List<PurchasingXq> getPurchasingXqList();
     
-    List<PurchasingXq> getPurchasingXqList(Integer porderId);
+    List<PurchasingXq> getPurchasingXqList1(Integer porderId);
+    
+    List<PurchasingXq> update(Integer porderId);
 }

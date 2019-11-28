@@ -102,6 +102,40 @@
                     </div>
                 </li>
                
+                 <li>
+                    <table class="layui-table"  lay-size="xs">
+                     <thead>
+                	<tr> 
+                    
+                   
+                    <th >原材料编号</th>
+                    <th >原材料名称</th>
+                    <th >原材料单价</th>
+                    <th >原材料数量</th>
+                    <th >原材料警告数</th>
+                    <th >需采购的数量</th>
+                     <th >采购金额</th>
+                     <th >采购的备注</th>
+                    
+       
+                </tr> 
+            </thead>
+            <tbody >
+                     <c:forEach items="${update}" var="g"></c:forEach>
+           			<tr >
+           			 
+                     <td>${g.goodsId}</td>
+                     <td>${g.goodsName}</td>
+                      <td>${g.goodsPrice}</td>
+                     <td>${g.goodsNum}</td>
+                     <td>${g.goodsMin}</td>
+                     <td><input type="text" :id="'goodsNum'+g.goodsId" value="${g.goodsId}" placeholder="请输入需要购买的数量："  :oninput="'showPrice(this,'+g.goodsId+','+g.goodsPrice+')'" ></td>
+                     <td><input type="text" :id="'goodsPrice'+g.goodsId" value="${g.goodsId}" readonly="readonly" placeholder=""></td>
+                     <td><input type="text" :id="'pxMassage'+g.goodsId" value="${g.goodsId}"  placeholder="备注"></td>
+                     </tr>
+                     </tbody>
+                    </table>
+                </li>
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right" id="tj"> 

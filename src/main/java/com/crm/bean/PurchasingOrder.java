@@ -144,4 +144,16 @@ public class PurchasingOrder {
     public void setpLastTime(Date pLastTime) {
         this.pLastTime = pLastTime;
     }
+
+	@Override
+	public String toString() {
+		return "PurchasingOrder [porderId=" + porderId + ", supplierId=" + supplierId + ", pay=" + pay + ", payQk="
+				+ payQk + ", porderJz=" + porderJz + ", porderTime=" + porderTime + ", jhTime=" + jhTime
+				+ ", jhAddress=" + jhAddress + ", sysStaffId=" + sysStaffId + ", pMassage=" + pMassage + ", gsId="
+				+ gsId + ", pLastTime=" + pLastTime + ", purchasingXq=" + purchasingXq + "]";
+	}
+    
+    
+    
+    
 }
