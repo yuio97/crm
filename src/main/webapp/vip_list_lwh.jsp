@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 String path = request.getContextPath();
 String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -49,22 +50,21 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <th lay-data="{field:'time',align:'center', minWidth:120}">预购表编号</th>
                     <th lay-data="{field:'www',align:'center',minWidth:260}">客户公司名称</th>
                     <th lay-data="{field:'company',align:'center',minWidth:110}">客户联系人</th>
-                    <th lay-data="{field:'user',align:'center',width:180}">客户电话</th>
-                    <th lay-data="{field:'tel',align:'center',width:150}">客户email</th>
-                    <th lay-data="{field:'result',align:'center',minWidth:180}">客户公司地址</th>
-                    
+                    <th lay-data="{field:'user',align:'center',width:180}">预定时间</th>
+                    <th lay-data="{field:'tel',align:'center',width:150}">截止时间</th>
+                    <th lay-data="{field:'result',align:'center',minWidth:180}">订单备注</th>
                 </tr> 
             </thead>
             <tbody>
                 <tr v-for="(pre,j) in prelist" :key=j> 
                     <td><input type="checkbox"></td>
-                    <td> <a>提交</a>丨<a>修改</a>丨<a href="javascript:;" style="color:#205b9e;" onclick="Vip_xq()">详情</a> </td>
-                    <td>{{pre.preorderId}}</td>
+                    <td> <a>提交</a>丨<a :href="'javascript:Vip_hf('+pre.preorderId+')'" style="color:#205b9e;">修改</a>丨<a :href="'javascript:Vip_xq('+pre.preorderId+')'" style="color:#205b9e;" >详情</a> </td>
+                    <td :pid="pre.preorderId">{{pre.preorderId}}</td>
                     <td>{{pre.customer.copanyName}}</td>
                     <td>{{pre.customer.customerName}}</td>
-                    <td>{{pre.customer.customerIphone}}</td>
-                    <td>{{pre.customer.customerEmal}}</td>
-                    <td>{{pre.customer.copanyAdress}}</td>
+                    <td>{{pre.preorderTme}}</td>
+                    <td>{{pre.deliveryTime}}</td>
+                    <td>{{pre.preorderNote}}</td>
             </tbody>  
         </table>
     </div> 
@@ -148,7 +148,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     });
     //  iframe层  详情信息
-    function Vip_xq(){
+    function Vip_xq(id){
         //iframe层 
         layer.open({
             type: 2,//层类型
@@ -161,12 +161,12 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             // offset: 'rb', //右下角弹出
             // time: 2000, //2秒后自动关闭
             anim: 5,//动画
-            content: ['vip_list_xq_two.jsp', 'no'], //iframe的url，no代表不显示滚动条 
+            content: ['/preorder/selectXq?id='+id, 'no'], //iframe的url，no代表不显示滚动条 
         }); 
         
     }
     //  iframe层  回访记录
-    function Vip_hf(){
+    function Vip_hf(id){
         //iframe层 
         layer.open({
             type: 2,//层类型
@@ -179,7 +179,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             // offset: 'rb', //右下角弹出
             // time: 2000, //2秒后自动关闭
             anim: 5,//动画
-            content: ['vip_list_hf.html', 'no'], //iframe的url，no代表不显示滚动条 
+            content: ['/preorder/selectXqUpdate?id='+id, 'no'], //iframe的url，no代表不显示滚动条 
         }); 
         
     }

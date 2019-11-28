@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.crm.bean.Customer;
 import com.crm.bean.Kcgoods;
 import com.crm.bean.Preorder;
+import com.crm.bean.PreorderDetails;
 
 public interface PreorderMapper {
     int deleteByPrimaryKey(Integer preorderId);
@@ -27,6 +28,6 @@ public interface PreorderMapper {
     
     List<Customer> selectCus();
     
-
+    List<Preorder> selectPreById(@Param("preorderId") Integer id);
     
 }

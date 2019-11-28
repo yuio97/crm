@@ -33,6 +33,7 @@
 		<a href="task/getAllTaskDetails">目标管理</a>
 		<a href="task/getAllOldTaskDetails">目标列表</a>
 		<span>任务查询</span>
+		<a href="AddNewTarget.jsp" style="float:right;color:white;margin-top:12px" class="layui-btn layui-btn-sm">点击签到</a>
 	</div>
 	<!-- 下面写内容 -->
 	<form action="task/selectOldPublishedTask" >
@@ -40,25 +41,31 @@
 		<thead>
            <tr>
              <th>姓名</th>
-             <th>任务编号</th>
              <th>任务内容</th>
              <th>任务状态</th>
              <th>更新时间</th>
+             <th>操作</th>
            </tr>
          </thead>
          <tbody>
-         	<c:forEach items="${oldPublishedTask }" var="oldpub" >
+         	<c:forEach items="${taskReception }" var="t" >
            	<tr>
-	             <td>${oldpub.sysStaffName }</td>
-	             <td>${oldpub.offId }</td>
-	             <td>${oldpub.offContent }</td>
+	             <td>${t.sysStaffName }</td>
+	             <td>${t.offContent }</td>
 	             <td>
-	             	<c:if test="${oldpub.releaseState == 1 }">未接收</c:if>
-	             	<c:if test="${oldpub.releaseState == 2 }">已接收</c:if>
-	             	<c:if test="${oldpub.releaseState == 3 }">已完成</c:if>
+	             	<c:if test="${t.releaseState == 1 }">未接收</c:if>
+	             	<c:if test="${t.releaseState == 2 }">已接收</c:if>
+	             	<c:if test="${t.releaseState == 3 }">已完成</c:if>
 	             </td>
-	             <!-- 时分秒：HHmmss -->
-	             <td><fmt:formatDate value="${oldpub.operateTime }" pattern="yyyy-MM-dd" /> </td>
+	             <td><fmt:formatDate value="${t.operateTime }" pattern="yyyy-MM-dd" /> </td>
+	             <td>
+	             	<c:if test="${t.releaseState == 1 }">
+	             		<a href="task/updateReceiveStatus?missionId=${t.missionId}" class="btn btn-primary">点击接收</a>
+	             	</c:if>
+	             	<c:if test="${t.releaseState == 2 }">
+	             		<a href="task/updateCompletionStatus?missionId=${t.missionId}" class="btn btn-primary">点击完成</a>
+	             	</c:if>
+	             </td>
            	</tr>
            	</c:forEach>
         </tbody>

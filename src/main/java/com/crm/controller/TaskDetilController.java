@@ -36,15 +36,6 @@ public class TaskDetilController {
 	private StaffInfoService staffInfoService;
 	
 	
-	
-/*	//当月所有
-	@RequestMapping("/getAllTaskDetails")
-	public String getAllTaskDetl(Map<String, Object > data) {
-		List<OffTaskDetails> allTaskDetails = taskService.getAllTaskDetails();
-		data.put("allTaskDetails", allTaskDetails);
-		return "forward:/NewTarget.jsp";
-	}*/
-	
 	@RequestMapping("/updateDetTaskStatus")
 	public String updateDetTaskStatus(int staskId) {
 		taskService.updateDetTaskStatus(staskId);
@@ -57,7 +48,7 @@ public class TaskDetilController {
 			OffTaskRelease offTaskRelease = new OffTaskRelease();
 			offTaskRelease.setOffId(Integer.valueOf(staskId));
 			offTaskRelease.setOperateTime(new Date());
-			offTaskRelease.setReleaseState("0");
+			offTaskRelease.setReleaseState("1");
 			offTaskRelease.setSysDeptId(Integer.valueOf(sysStaffId[i]));
 			taskService.insert(offTaskRelease);
 		}
@@ -100,20 +91,7 @@ public class TaskDetilController {
 		return "redirect:/task/getAllOldTaskDetails";
 	}
 	
-/*	//查新建目标任务
-	@RequestMapping("/selectPublishedTask")
-	public String selectPublishedTask(Map<String, Object> data,String staskId) {
-		System.out.println(staskId);
-		List<OffTaskRelease> list = taskService.selectPublishedTask(Integer.valueOf(staskId));
-		data.put("staffList", list);
-		System.out.println();
-		return "forward:/publishedTask.jsp";
-	}
-	*/
-	
-	
-	
-	//目标列表
+	//任务列表
 	//分页：int一个页码pn，如果不传值默认为1也就是首页，
 	@RequestMapping("/getAllOldTaskDetails")
 	public String getAllOldTaskDetl(
@@ -132,10 +110,7 @@ public class TaskDetilController {
 		return "forward:/OldTarget.jsp";
 	}
 	
-	
-	/*
-	
-	//查目标列表任务
+	//查任务详情
 	@RequestMapping("/selectOldPublishedTask")
 	public String selectOldPublishedTask(Integer offId,Map<String, Object > oldPub) {
 		List<OffTaskRelease> oldPublishedTask = taskService.selectPublishedTask(offId);
@@ -143,28 +118,26 @@ public class TaskDetilController {
 		return "forward:/oldPublishedTask.jsp";
 	}
 	
-	
-	
-	//任务管理
-	@RequestMapping("/selectAllTask")
-	public String selectAllTask(Integer sysDeptId,Map<String, Object > task) {
-		List<OffTaskRelease> selectAllTask = taskService.selectAllTask();
-		//循环selectAllTask这个list，类型是OffTaskRelease，offTaskRelease是自己取的名字
-		for (OffTaskRelease offTaskRelease : selectAllTask) {
-			SysStaffInfo staffInfoByStaffId = staffInfoService.getStaffInfoByStaffId(offTaskRelease.getSysDeptId());
-			offTaskRelease.setStaffName(staffInfoByStaffId.getSysStaffName());
-		}
-		task.put("selectAllTask", selectAllTask);
-		return "forward:/newTask.jsp";
+	//任务接收
+	@RequestMapping("/selectTaskReception")
+	public String selectTaskReception(Integer sysDeptId,Map<String, Object > oldPub) {
+		List<OffTaskRelease> taskReception = taskService.selectAllTaskReception(1);
+		oldPub.put("taskReception", taskReception);
+		return "forward:/taskReception.jsp";
 	}
 	
-	@RequestMapping("/selectAllOldTask")
-	public String selectAllOldTask(@RequestParam(defaultValue="1")int pn,Integer year,Integer month,Map<String, Object > oldTask) {
-		PageInfo<OffTaskRelease> allOldTask = taskService.getAllOldTask(pn, year, month);
-		oldTask.put("allOldTask", allOldTask);
-		oldTask.put("year", year);
-		oldTask.put("month", month);
-		return "forward:/oldTask.jsp";
+	//修改任务接收状态
+	@RequestMapping("/updateReceiveStatus")
+	public String updateReceiveStatus(Integer missionId) {
+		taskService.updateReceiveStatus(missionId);
+		return "redirect:/task/selectTaskReception";
 	}
-	*/
+	
+	//修改任务完成状态
+	@RequestMapping("/updateCompletionStatus")
+	public String updateCompletionStatus(Integer missionId) {
+		taskService.updateCompletionStatus(missionId);
+		return "redirect:/task/selectTaskReception";
+	}
+	
 }

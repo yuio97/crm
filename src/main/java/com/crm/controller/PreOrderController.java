@@ -57,4 +57,22 @@ public class PreOrderController {
 		
 		return order;
 	}
+	
+	
+	@RequestMapping("/selectXq")
+	public String selectPreXq(Integer id,Map<String, Object> map)
+	{
+		 List<Preorder> selectPreById = preOrderService.selectPreById(id);
+		 map.put("date", selectPreById);
+		return "forward:/vip_list_xq_two.jsp";
+	}
+	
+	
+	@RequestMapping("/selectXqUpdate")
+	public String selectPreXqUpdate(Integer id,Map<String, Object> map)
+	{
+		 List<Preorder> selectPreById = preOrderService.selectPreById(id);
+		 map.put("date", selectPreById);
+		return "forward:/vip_list_xq_update_lwh.jsp";
+	}
 }

@@ -3,6 +3,8 @@ package com.crm.bean;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Preorder {
     private Integer preorderId;
 
@@ -12,12 +14,14 @@ public class Preorder {
 
     private String payCase;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date deliveryTime;
 
     private String deliveryPlace;
 
     private Integer sysAccountId;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date preorderTme;
     
     private Customer customer;

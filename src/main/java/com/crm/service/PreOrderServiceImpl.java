@@ -61,6 +61,13 @@ public class PreOrderServiceImpl implements PreOrderService{
 		}
 	}
 
+	@Override
+	public List<Preorder> selectPreById(Integer id) {
+		
+		List<Preorder> selectPreById = preorderMapper.selectPreById(id);
+		return selectPreById;
+	}
+
 
 
 }
