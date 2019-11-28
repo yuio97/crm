@@ -15,6 +15,35 @@
     <result column="gs_id" property="gsId" jdbcType="INTEGER" />
     <result column="p_last_time" property="pLastTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+   <resultMap id="order_xq" type="com.crm.bean.PurchasingOrder" >
+    <id column="porder_id" property="porderId" jdbcType="INTEGER" />
+    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="pay" property="pay" jdbcType="REAL" />
+    <result column="pay_qk" property="payQk" jdbcType="VARCHAR" />
+    <result column="porder_jz" property="porderJz" jdbcType="VARCHAR" />
+    <result column="porder_time" property="porderTime" jdbcType="TIMESTAMP" />
+    <result column="jh_time" property="jhTime" jdbcType="TIMESTAMP" />
+    <result column="jh_address" property="jhAddress" jdbcType="VARCHAR" />
+    <result column="sys_staff_id" property="sysStaffId" jdbcType="INTEGER" />
+    <result column="p_massage" property="pMassage" jdbcType="VARCHAR" />
+    <result column="gs_id" property="gsId" jdbcType="INTEGER" />
+    <result column="p_last_time" property="pLastTime" jdbcType="TIMESTAMP" />
+    <collection property="purchasingXq" column="porder_id" ofType="com.crm.bean.PurchasingXq">
+	  	<id column="px_id" property="pxId" jdbcType="INTEGER" />
+	    <result column="porder_id" property="porderId" jdbcType="INTEGER" />
+	    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+	    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+	    <result column="goods_price" property="goodsPrice" jdbcType="REAL" />
+	    <result column="sys_staff_id" property="sysStaffId" jdbcType="INTEGER" />
+	    <result column="px_massage" property="pxMassage" jdbcType="VARCHAR" />
+	    <result column="gs_id" property="gsId" jdbcType="INTEGER" />
+	    <result column="px_last_time" property="pxLastTime" jdbcType="TIMESTAMP" />
+	 </collection>
+    
+  </resultMap>
+  
+  
   <sql id="Base_Column_List" >
     porder_id, supplier_id, pay, pay_qk, porder_jz, porder_time, jh_time, jh_address, 
     sys_staff_id, p_massage, gs_id, p_last_time
@@ -44,7 +73,7 @@
       #{pMassage,jdbcType=VARCHAR}, #{gsId,jdbcType=INTEGER}, #{pLastTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.crm.bean.PurchasingOrder" >
+  <insert id="insertSelective" parameterType="com.crm.bean.PurchasingOrder" useGeneratedKeys="true" keyProperty="porderId"  >
     insert into purchasing_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="porderId != null" >

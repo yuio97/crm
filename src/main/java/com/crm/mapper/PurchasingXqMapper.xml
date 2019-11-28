@@ -159,6 +159,36 @@
     </set>
     where px_id = #{pxId,jdbcType=INTEGER}
   </update>
+   <update id="update" parameterType="com.crm.bean.PurchasingXq" >
+    update purchasing_xq
+    <set >
+      <if test="porderId != null" >
+        porder_id = #{porderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNum != null" >
+        goods_num = #{goodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price = #{goodsPrice,jdbcType=REAL},
+      </if>
+      <if test="sysStaffId != null" >
+        sys_staff_id = #{sysStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="pxMassage != null" >
+        px_massage = #{pxMassage,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        gs_id = #{gsId,jdbcType=INTEGER},
+      </if>
+      <if test="pxLastTime != null" >
+        px_last_time = #{pxLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where porder_id = #{porderId,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.crm.bean.PurchasingXq" >
     update purchasing_xq
     set porder_id = #{porderId,jdbcType=INTEGER},
@@ -175,6 +205,39 @@
 	  select * FROM purchasing_xq px
 	INNER JOIN goods g ON px.goods_id=g.goods_id
 	INNER JOIN supplier s ON g.supplier_id= s.supplier_id
-  	where  porder_id=#{porderId,jdbcType=INTEGER},
+  
   </select>
+   <resultMap id="pgs" type="com.crm.bean.PurchasingXq" >
+    <id column="px_id" property="pxId" jdbcType="INTEGER" />
+    <result column="porder_id" property="porderId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="cgnum" property="goodsNum" jdbcType="INTEGER" />
+    <result column="cgmoney" property="goodsPrice" jdbcType="REAL" />
+   
+   <association property="goods" column="goods_id" javaType="com.crm.bean.Goods">
+    	<id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    
+    <result column="goods_price" property="goodsPrice" jdbcType="REAL" />
+    
+    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+    
+    <association property="supplier" column="supplier_id" javaType="com.crm.bean.Supplier">
+    <id column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    
+    <result column="supplier_tel" property="supplierTel" jdbcType="VARCHAR" />
+   
+    </association>
+    </association>
+  
+  </resultMap>
+   <select id="getPurchasingXqList1" resultMap="pgs">
+	  select px.px_id,g.goods_id ,g.goods_name,g.goods_name,g.goods_price,px.goods_num cgnum,px.goods_price cgmoney,s.supplier_name,s.supplier_tel FROM purchasing_xq px
+	INNER JOIN goods g ON px.goods_id=g.goods_id
+	INNER JOIN supplier s ON g.supplier_id= s.supplier_id
+	where porder_id=#{porderId,jdbcType=INTEGER}
+  
+  </select>
+  
 </mapper>

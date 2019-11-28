@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -41,67 +41,87 @@
                    
                     <th lay-data="{field:'time',align:'center', minWidth:80}">采购详情编号</th>
                     <th lay-data="{field:'company',align:'center',minWidth:80}">原材料名称</th>
-                    <th lay-data="{field:'tel',align:'center',width:80}">采购商品的数量</th>
+                    <th lay-data="{field:'tel3',align:'center',width:80}">原材料的数量</th>
                     <th lay-data="{field:'tel1',align:'center',width:80}">原材料的单价</th>
+                    <th lay-data="{field:'tel4',align:'center',width:80}">采购商品的数量</th>
+                    <th lay-data="{field:'user',align:'center',width:80}">采购金额</th>
                     <th lay-data="{field:'tel2',align:'center',width:80}">供货商名称</th>
-                    <th lay-data="{field:'user',align:'center',width:80}">采购员编号</th>
-                    <th lay-data="{field:'addr',align:'center',minWidth:80}">操做时间</th> 
-                    <th lay-data="{field:'addr4',align:'center',minWidth:80}">备注</th>  
+                    <th lay-data="{field:'tel5',align:'center',width:80}">供货商电话</th>
+              
                     
                 </tr> 
             </thead>
-            <tbody id="xq">
-                <tr v-for="PurchasingXq in PXq" > 
+            <tbody >
+            
+            <c:forEach items="${purchasingXqList1}" var="PurchasingXq">
+                <tr  > 
                     
                    
-                    <td>{{PurchasingXq.pxId}}</td>
-                    <td>{{PurchasingXq.goods.goodsName}}</td>
-                    <td>{{PurchasingXq.goodsNum}}</td>
-                    <td>{{PurchasingXq.goods.goodsPrice}}</td>
-                    <td>{{PurchasingXq.goods.supplier.supplierName}}</td>
-                    <td>{{PurchasingXq.sysStaffId}}</td>
-                    <td>{{PurchasingXq.pxLastTime}}</td>
-                    <td>{{PurchasingXq.pxMassage}}</td>
+                    <td>${PurchasingXq.pxId}</td>
+                    <td>${PurchasingXq.goods.goodsName}</td>
+                    <td>${PurchasingXq.goods.goodsNum}</td>
+                    <td>${PurchasingXq.goodsNum}</td>
+                    <td>${PurchasingXq.goods.goodsPrice}</td>
+                     <td>${PurchasingXq.goodsPrice}</td>
+                    <td>${PurchasingXq.goods.supplier.supplierName}</td>
+                     <td>${PurchasingXq.goods.supplier.supplierTel}</td>
+                   
                     
                    
                 </tr> 
-                
-              
-                
+                </c:forEach>
             </tbody>  
         </table>
 </div>
-<script >
-new Vue({
-	 el:"#xq",
-	data:{
-		
-		PXq:[]
-			
-	},
-methods:{
-	 
-},
-
-	    created:function(){
-	    	
-	        this_a=this
-	        $.ajax({
-	            type: "GET",
-	            url: "/purchasingXq/purchasingXqlist",
-	            data: null,
-	            dataType: "json",
-	            success: function (response) {
-	            	this_a.PXq=response;
-	            	console.log(response);
-	            }
-	        });
-	    }
-
-
-	  })
-</script> 
+ 
 </body>
 
 </html>
+    <script type="text/javascript"> 
+	//静态表格
+    layui.use('table',function(){
+            var table = layui.table;
+            //转换静态表格
+            table.init('mylist', {
+                height: 'full-130', //高度最大化减去差值,也可以自己设置高度值：如 height:300
+                count: 50 //数据总数 服务端获得
+                ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+                ,page:true //开启分页 
+                ,
+                defaultToolbar:['filter', 'exports']
+                ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
+                ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
+            }); 
+            //监听头工具栏事件
+            table.on('toolbar(mylist)', function(obj){
+                var checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data; //获取选中的数据 
+                switch(obj.event){  
+                case 'getCheckLength':
+                    if(data.length === 0){
+                    layer.msg('请选择一行');
+                    } else {
+                    layer.msg('删除');
+                    }
+                break;
+                };
+            }); 
+        }); 
+        layui.use('laydate', function(){
+        var laydate = layui.laydate; 
+        //年选择器
+        laydate.render({
+            elem: '#test2'
+            ,type: 'month'
+        });
+        
+        //年月选择器
+        laydate.render({
+            elem: '#test3'
+            ,type: 'month'
+        });
+    });
+  
     
+ 
+</script> 

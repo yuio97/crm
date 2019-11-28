@@ -9,7 +9,7 @@ public class Goods {
 
     private String goodsName;
 
-    @DateTimeFormat(pattern="yy-mm-dd")
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     private Date goodsDate;
 
     private String goodsSm;
