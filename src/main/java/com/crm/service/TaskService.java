@@ -2,6 +2,7 @@ package com.crm.service;
 
 import java.util.List;
 
+import com.crm.bean.OffEmployeeAttendance;
 import com.crm.bean.OffTaskDetails;
 import com.crm.bean.OffTaskRelease;
 import com.github.pagehelper.PageInfo;
@@ -27,7 +28,7 @@ public interface TaskService {
 	//查任务发布详情
 	public List<OffTaskRelease> selectPublishedTask(Integer offId);
 	
-	//目标列表
+	//任务列表
 	//参数：页码。PageInfo<OffTaskDetails>与Controller中返回的类型对应
 	PageInfo<OffTaskDetails> getAllOldTaskDetails(int pn,Integer year, Integer month,boolean isSend,boolean isNowMonth);
 	
@@ -39,5 +40,16 @@ public interface TaskService {
 	
 	//点击完成
 	int updateCompletionStatus(Integer missionId);
+	
+	
+	//考勤
+	int insertSelective();
+	
+	public List<OffEmployeeAttendance> selectBookMission(Integer month,Integer year);
+	
+	public Boolean selectDayBookMission();
+	
+	
+	
 	
 }

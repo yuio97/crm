@@ -1,5 +1,6 @@
 package com.crm.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +12,12 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crm.bean.OffEmployeeAttendance;
 import com.crm.bean.OffTaskDetails;
 import com.crm.bean.OffTaskRelease;
 import com.crm.bean.SysAccount;
+import com.crm.bean.s;
+import com.crm.dao.OffEmployeeAttendanceMapper;
 import com.crm.dao.OffTaskDetailsMapper;
 import com.crm.dao.OffTaskReleaseMapper;
 import com.github.pagehelper.PageHelper;
@@ -27,6 +31,9 @@ public class TaskServiceImpl implements TaskService{
 	
 	@Resource
 	private OffTaskReleaseMapper offTaskReleaseMapper;
+	
+	@Resource
+	private OffEmployeeAttendanceMapper offEmployeeAttendanceMapper;
 	
 	
 	//目标管理
@@ -110,6 +117,65 @@ public class TaskServiceImpl implements TaskService{
 		offTaskRelease.setReleaseState("3");
 		offTaskRelease.setOperateTime(new Date());
 		return offTaskReleaseMapper.updateByPrimaryKeySelective(offTaskRelease);
+	}
+
+	//考勤
+	@SuppressWarnings("deprecation")
+	@Override
+	public int insertSelective() {
+		OffEmployeeAttendance offEmployeeAttendance = new OffEmployeeAttendance();
+		Date date = new Date();
+		
+//		Subject subject = SecurityUtils.getSubject();
+//		SysAccount sysAccount = (SysAccount)subject.getPrincipal();
+		offEmployeeAttendance.setOffStaffId(2);//sysAccount.getSysAccountId()
+		
+		offEmployeeAttendance.setOffYear(date.getYear()+1900);
+		offEmployeeAttendance.setOffMon(date.getMonth()+1);
+		offEmployeeAttendance.setOffDay(date.getDate());
+		offEmployeeAttendance.setBookTime(date);
+		
+		//判断今天签没签到
+		OffEmployeeAttendance selectDayBookMission = offEmployeeAttendanceMapper.selectDayBookMission(2, date.getYear()+1900, date.getMonth()+1, date.getDate());
+		
+		if (selectDayBookMission == null) {
+			offEmployeeAttendanceMapper.insert(offEmployeeAttendance);
+		}
+		return 0;
+		
+	}
+
+	@Override
+	public List<OffEmployeeAttendance> selectBookMission(Integer month,Integer year) {
+		//Calendar：日历
+		Calendar instance = Calendar.getInstance();
+		if(month == null)
+		{
+			month = instance.get(Calendar.MONTH);
+		}
+		if(year == null)
+		{
+			year = instance.get(Calendar.YEAR);
+		}
+		List<OffEmployeeAttendance> bookMission = offEmployeeAttendanceMapper.selectBookMission(2, year, month+1);
+		return bookMission;
+	}
+
+	@Override
+	public Boolean selectDayBookMission() {
+		Calendar instance = Calendar.getInstance();
+		int years = instance.get(Calendar.YEAR);
+		int mon = instance.get(Calendar.MONTH);
+		int date = instance.get(Calendar.DATE);
+		OffEmployeeAttendance selectDayBookMission = offEmployeeAttendanceMapper.selectDayBookMission(2, years, mon+1, date);
+		if(selectDayBookMission == null)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 	

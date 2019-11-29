@@ -9,7 +9,7 @@
 <head>
 	<base href="<%=basepath %>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>添加目标</title>
+	<title>修改任务</title>
 	
 	<!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -28,8 +28,8 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a>任务管理</a>
-			<span>修改内容</span>
+            <a href="task/getAllOldTaskDetails">任务管理</a>
+			<span>修改任务</span>
         </div>
         <!-- 内容 -->    
         <div class="wenxts_ke">
