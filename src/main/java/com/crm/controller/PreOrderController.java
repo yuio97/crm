@@ -73,6 +73,29 @@ public class PreOrderController {
 	{
 		 List<Preorder> selectPreById = preOrderService.selectPreById(id);
 		 map.put("date", selectPreById);
-		return "forward:/vip_list_xq_update_lwh.jsp";
+		return "forward:/vip_list_xq_update.jsp";
 	}
+	
+	@RequestMapping("/updateOrder")
+	@ResponseBody
+	public Map<String, Object> updateOrder(@RequestBody Preorder preorder)
+	{
+		preOrderService.updateOrder(preorder);
+		 Map<String, Object> map = new HashMap<String, Object>();
+		return map;
+	}
+	
+	
+	@RequestMapping("/del")
+	public String del(Integer id)
+	{
+		
+		
+		return "forward:/vip_list_xq_update.jsp";
+	}
+	
+	
+	
+	
+	
 }

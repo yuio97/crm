@@ -256,7 +256,7 @@
   </select>
   
 
-	<insert id="insertAndGetId"  useGeneratedKeys="true" keyProperty="sysStaffId" keyColumn="sys_staff_id" parameterType="com.crm.bean.SysStaffInfo" >
+	<insert id="insertAndGetId"  useGeneratedKeys="true" keyProperty="sysStaffId" >
     insert into sys_staff_info (sys_staff_id, sys_staff_name, sys_staff_sex, 
       sys_staff_photo, sys_staff_identity, sys_staff_address, 
       sys_staff_naddress, sys_staff_edu, sys_staff_pol, 

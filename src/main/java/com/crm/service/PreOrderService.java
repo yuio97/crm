@@ -18,4 +18,6 @@ public interface PreOrderService {
 	public void insertPre( Preorder order);
 	
 	public List<Preorder> selectPreById(Integer id);
+	
+	public void updateOrder(Preorder order);
 }

@@ -25,12 +25,13 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body style="background: #fff;">
-<div class="tianjia_xx" id="cc">
+<div class="tianjia_xx" id="uu">
 	<c:forEach items="${date }" var="i">
     <table class="if_tianjiatext layui-table" lay-size="lg"> 
     <tbody>
         <tr>
-            <td  class="td_1">客户姓名</td> 
+        	
+            <td  class="td_1">客户姓名<input type="hidden" id="tt" value="${i.preorderId }"></td> 
             <td>
             	${i.customer.customerName }
             </td>
@@ -57,15 +58,15 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         <tr>
             <td  class="td_1">截至时间</td> 
-            <td><input type="text" class="layui-input"  id="test3"  placeholder="请输入截止时间" value="<fmt:formatDate value="${i.deliveryTime }" pattern="yyyy-MM-dd" />"></td>
+            <td><input type="text" class="layui-input"  id="test3"  placeholder="请输入截止时间"  value="<fmt:formatDate value="${i.deliveryTime }" pattern="yyyy-MM-dd" />"></td>
         </tr>
         <tr>
             <td  class="td_1">预购单说明</td> 
-            <td><textarea rows="5" cols="45"  placeholder="请输入预购单说明" value="${i.preorderNote }">${i.preorderNote }</textarea></td>
+            <td><textarea rows="5" cols="45"  placeholder="请输入预购单说明" id="sm"  value="${i.preorderNote }">${i.preorderNote }</textarea></td>
         </tr>
         <tr>
             <td  class="td_1">预付定金</td> 
-            <td><input type="text" placeholder="请登记预付定金(可为空)" v-model="predata.payCase" value="${i.payCase }"></td>
+            <td><input type="text" placeholder="请登记预付定金(可为空)"  id="yf" value="${i.payCase }"></td>
         </tr>
         <tr>
             <td  class="td_1">商品选择</td> 
@@ -81,7 +82,9 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             		<tr >
             			<td>${d.kcgoods.kgoodsName }</td>
             			<td>${d.kcgoods.jxj }</td>
-            			<td><input type="text" value="${d.kcNumSell }" ></td>
+            			<td>
+            			<input type="text" value="${d.kcNumSell }" id="${d.kcgoods.kcgoodsId }" name="sell">
+            			</td>
             			<td>${d.kcgoods.kcNum }</td>
             		</tr>
             		</c:forEach>
@@ -92,8 +95,8 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
         <tr >
         	<td colspan="2">
-        	<button class="layui-btn layui-btn-sm" >确定</button>
-        	<button class="layui-btn layui-btn-sm" >取消</button>
+        	<button class="layui-btn layui-btn-sm" @click="queding()">确定</button>
+        	<a class="layui-btn layui-btn-sm" href="vip_list_lwh.jsp">取消</a>
         	</td>
         </tr>
     </tbody>
@@ -103,7 +106,57 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script src="layui/layui.js"></script>
 
+<script>
 
+var v = new Vue({
+	el:'#uu',
+	data:{
+		preupdate:{
+			preorderId:'',
+			deliveryTime:'',
+			preorderNote:'',
+			payCase:'',
+			proDetaList:[]
+		}
+	},
+	methods:{
+		queding:function(){
+			
+			var preorderId = document.getElementById("tt").value;
+			var deliveryTime = document.getElementById("test3").value;
+			var preorderNote = document.getElementById("sm").value;
+			var payCase = document.getElementById("yf").value;
+			
+			this.preupdate.preorderId = preorderId;
+			this.preupdate.deliveryTime = deliveryTime;
+			this.preupdate.preorderNote = preorderNote;
+			this.preupdate.payCase = payCase;
+			
+			this.preupdate.proDetaList = [];
+			var sells = document.getElementsByName("sell");
+			for(var i = 0; i < sells.length; i++)
+			{
+				var goodNUm = sells[i].value;
+				var goodData = {kgoodsId:sells[i].id,kcNumSell:goodNUm};
+				this.preupdate.proDetaList.push(goodData);
+			}
+			
+			var _this = this;
+			$.ajax({
+	            type: "POST",
+	            url: "preorder/updateOrder",
+	            data: JSON.stringify(_this.preupdate),
+	            contentType:'application/json',
+	            dataType: "json",
+	            success: function (response) {
+					location.href="vip_list_lwh.jsp";
+	            }
+	            })
+		}
+	}
+});
+
+</script>
 
 </body>
 </html>

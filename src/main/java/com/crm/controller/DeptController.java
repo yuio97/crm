@@ -51,9 +51,9 @@ public class DeptController {
 	}
 	
 	@RequestMapping("/goUpdate")
-	public String goUpdate(int id,Map<String, Object> data) {
+	public String goUpdate(int sysDeptId,Map<String, Object> data) {
 		
-		SysDept deptByDeptId = deptServiceImpl.getDeptByDeptId(id);
+		SysDept deptByDeptId = deptServiceImpl.getDeptByDeptId(sysDeptId);
 		data.put("dept", deptByDeptId);
 						
 		return "forward:/updateDept.jsp";
@@ -61,13 +61,13 @@ public class DeptController {
 	}
 	
 	@RequestMapping("/update")
-	@ResponseBody
+
 	public String update(SysDept dept) {
 		
 		int updateDept = deptServiceImpl.updateDept(dept);
 		
 				
-		return null;
+		return "redirect:/deptList.jsp";
 		
 	}
 	

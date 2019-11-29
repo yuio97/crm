@@ -9,7 +9,7 @@
 <head>
 	<base href="<%=basepath %>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>目标列表</title>
+	<title>任务列表</title>
 	
 	<!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -73,8 +73,7 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a>任务管理</a>
-            <span>任务列表</span>
+            <a href="task/getAllOldTaskDetails"><span>任务管理</span></a>
             <a href="AddNewTarget.jsp" style="float:right;color:white;margin-top:12px" class="layui-btn layui-btn-sm">添加任务</a>
         </div>
         <!-- 筛选 --> 

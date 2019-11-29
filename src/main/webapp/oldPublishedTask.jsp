@@ -9,7 +9,7 @@
 <head>
 	<base href="<%=basepath %>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>新建目标</title>
+	<title>查看任务</title>
 	
 	<!-- CSS -->
 	<link rel="stylesheet" href="css/style.css">
@@ -30,9 +30,8 @@
 	<div class="zy_weizhi bord_b">
 		<i class="fa fa-home fa-3x"></i>
 		<a>首页</a>
-		<a href="task/getAllTaskDetails">目标管理</a>
-		<a href="task/getAllOldTaskDetails">目标列表</a>
-		<span>任务查询</span>
+		<a href="task/getAllOldTaskDetails">任务管理</a>
+		<span>查看任务</span>
 	</div>
 	<!-- 下面写内容 -->
 	<form action="task/selectOldPublishedTask" >

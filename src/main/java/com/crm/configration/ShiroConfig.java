@@ -86,10 +86,10 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized.jsp");
 		
 		//表单认证器
-		FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
-		formAuthenticationFilter.setLoginUrl("/login");
-		formAuthenticationFilter.setUsernameParam("name");
-		formAuthenticationFilter.setPasswordParam("password");
+//		FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
+//		formAuthenticationFilter.setLoginUrl("/login");
+//		formAuthenticationFilter.setUsernameParam("name");
+//		formAuthenticationFilter.setPasswordParam("password");
 		
 		//退出登录
 		LogoutFilter logoutFilter = new LogoutFilter();
@@ -97,8 +97,9 @@ public class ShiroConfig {
 		
 		
 		
+		
 		Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
-		filters.put("authc", formAuthenticationFilter);
+//		filters.put("authc", formAuthenticationFilter);
 		filters.put("logout", logoutFilter);
 		
 		//<!-- 配置请求的拦截或不拦截 -->
@@ -111,13 +112,17 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/fonts/**", "anon");
 		filterChainDefinitionMap.put("/layui/**", "anon");
 		filterChainDefinitionMap.put("/login.jsp", "anon");
+		filterChainDefinitionMap.put("/login", "anon");
 		filterChainDefinitionMap.put("/register.jsp", "anon");
 		filterChainDefinitionMap.put("/favicon.ico", "anon");
 
+//		filterChainDefinitionMap.put("/**", "anon");
+		
 
+		filterChainDefinitionMap.put("/logout", "logout");
+		filterChainDefinitionMap.put("/**", "authc");
 
-		//branch 'master' of https://github.com/yuio97/crm.git
-
+	
 		return shiroFilterFactoryBean;
 	}
 	

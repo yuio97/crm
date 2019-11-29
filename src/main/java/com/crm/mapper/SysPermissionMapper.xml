@@ -152,7 +152,16 @@
 	INNER JOIN sys_role_staff srs ON srs.sys_role_id = spr.role_id 
 	WHERE sp.sys_per_parentid = 1 AND srs.sys_staff_id = 1
   </select>
-  
+  <select id="getAllPer" resultMap="per">
+  	SELECT sp.*,spp.sys_permission_id per_id,
+	spp.sys_permission_name per_name,spp.sys_permission_percode percode,
+	spp.sys_permission_type type,spp.sys_permission_url url,
+	spp.sys_per_parentid parentid
+	FROM sys_permission sp INNER JOIN sys_permission spp
+	ON sp.sys_permission_id = spp.sys_per_parentid
+	WHERE sp.sys_per_parentid = 1
+  	
+  </select>
   <resultMap type="com.crm.bean.SysPermission" id="per">
   	<id column="sys_permission_id" property="sysPermissionId" jdbcType="INTEGER" />
     <result column="sys_permission_name" property="sysPermissionName" jdbcType="VARCHAR" />

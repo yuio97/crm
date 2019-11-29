@@ -44,23 +44,23 @@
 				<th lay-data="{field:'yx', align:'center',minWidth:260}">部门职位</th>
 				<th lay-data="{field:'time',align:'center', minWidth:260}">职位简介</th>
 				<th lay-data="{field:'company',align:'center',minWidth:260}">职位编号</th> 
-				<th lay-data="{field:'option',align:'center',width:130,toolbar:'#barDemo',fixed: 'right'}">操作</th>
+				<th lay-data="{field:'xg',align:'center',width:130}">操作</th>
 			</tr> 
 		</thead>
 		<tbody>
-			<tr v-for="s in roleList.list">
+			<tr v-for="s in roleList">
 				<td></td>
 				<td>{{s.dept.sysDeptName}}</td>
 				<td>{{s.sysRoleName}}</td>
 				<td>{{s.sysRoleDel}}</td>
 				<td>{{s.sysRoleId}}</td> 
-				<td><a href="#" class="jianl_list_img" onclick=" YuanG_IMG()"><img src="images/jl.jpg"></a></td>                
+				<td><a :href='"role/goUpdate?roleId="+s.sysRoleId' class="layui-btn layui-btn-xs" lay-event="edit">修改</a></td>                
             </tr> 
            
 		</tbody>  
 	</table>
 	<script type="text/html" id="barDemo">
-		<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+		<a href="" class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
 		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script> 
 </div> 
@@ -87,40 +87,34 @@
 		el:'#rolelist',
 		data() {
 			return {
-			roleList:{}
+			roleList:[]
 			}
 		},
 		created() {
-			var _this = this;
-			axios.get('/role/getRoleList')
-			.then(function(res){
-				_this.roleList = res.data;
-				console.log((res.data).list);
-				
-			})
-			.catch(err => {
-				console.error(err); 
-			});
+			this.loadData();
+			
 		},
 		methods: {
 			del:function(){
-			console.log(m);
-			
-			getCheckLength();
-			}
-		},
-		loadData:function(){
-			var _this = this;
-			axios.get('/role/getRoleList')
-			.then(function(res){
-				_this.roleList = res.data;
-				console.log((res.data).list);
+				console.log(m);
 				
-			})
-			.catch(err => {
-				console.error(err); 
-			});
-		}
+				getCheckLength();
+			},
+			loadData:function(){
+				var _this = this;
+				axios.get('/role/getRoleList')
+				.then(function(res){
+					// console.log(res.data.list);
+					_this.roleList = res.data.list;
+					
+				})
+				.catch(err => {
+					console.error(err); 
+				});
+			}
+
+		},
+
 	})
 
 
@@ -162,25 +156,32 @@
                     layer.msg('请选择一行');
                     } else {
 					
-					const id = [];
+					var id=[];
+					var url = "";
+					// const id = [];
 					for (let index = 0; index < data.length; index++) {
-						// id[index] = data[index];
-						id.push({id:data[index].company})					
+						url = url + '&id='+data[index].company;
+						// id.push({id:data[index].company})					
 					}
-					console.log(id);
+					url = '/role/del?' + url;
+					console.log(url);
 					
-					$.ajax({
-						type: "post",
-						url: "/role/del",
-						contentType:'application/json',
-						data: JSON.stringify(id),
-						dataType: "json",
-						success: function (response) {
-							v.loadData();
-						}
-					});
-					// console.log(data);
-					layer.msg('删除');
+					location.href=url;
+
+					// $.ajax({
+					// 	type: "post",
+					// 	url: "/role/del",
+					// 	contentType:'application/json',
+					// 	data: JSON.stringify(id),
+					// 	dataType: "json",
+					// 	success: function (response) {
+					// 		// console.log(v);
+							
+					// 		v.loadData();
+					// 	}
+					// });
+					// // console.log(data);
+					// layer.msg('删除');
                     }
                 break;
                 };

@@ -103,4 +103,15 @@
       kc_num_sell = #{kcNumSell,jdbcType=INTEGER}
     where preorder_details_id = #{preorderDetailsId,jdbcType=INTEGER}
   </update>
+  
+  <update id="update" parameterType="com.crm.bean.PreorderDetails">
+  	update preorder_details
+    set 
+    kc_num_sell = #{kcNumSell,jdbcType=INTEGER}
+    where preorder_id = #{preorderId,jdbcType=INTEGER} and kgoods_id = #{kgoodsId,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
 </mapper>

@@ -58,7 +58,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tbody>
                 <tr v-for="(pre,j) in prelist" :key=j> 
                     <td><input type="checkbox"></td>
-                    <td> <a>提交</a>丨<a :href="'javascript:Vip_hf('+pre.preorderId+')'" style="color:#205b9e;">修改</a>丨<a :href="'javascript:Vip_xq('+pre.preorderId+')'" style="color:#205b9e;" >详情</a> </td>
+                    <td> <a :href="'preorder/del?id='+pre.preorderId">提交</a>丨<a :href="'preorder/selectXqUpdate?id='+pre.preorderId" style="color:#205b9e;">修改</a>丨<a :href="'javascript:Vip_xq('+pre.preorderId+')'" style="color:#205b9e;" >详情</a> </td>
                     <td :pid="pre.preorderId">{{pre.preorderId}}</td>
                     <td>{{pre.customer.copanyName}}</td>
                     <td>{{pre.customer.customerName}}</td>
@@ -182,7 +182,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             content: ['/preorder/selectXqUpdate?id='+id, 'no'], //iframe的url，no代表不显示滚动条 
         }); 
         
-    }
+    } 
  
 </script>
 	

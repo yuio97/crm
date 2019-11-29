@@ -2,6 +2,8 @@ package com.crm.bean;
 
 import java.util.Date;
 import java.util.List;
+
+import com.crm.dao.SysPerRoleMapper;
 public class SysRole {
     private Integer sysRoleId;
 
@@ -16,6 +18,8 @@ public class SysRole {
     private Date sysRoleTime;
     
     List<SysPermission> sysPerList;
+    
+    List<SysPerRole> perRoleList;
     
     private SysDept dept;
 
@@ -82,6 +86,16 @@ public class SysRole {
 	public void setDept(SysDept dept) {
 		this.dept = dept;
 	}
+
+	public List<SysPerRole> getPerRoleList() {
+		return perRoleList;
+	}
+
+	public void setPerRoleList(List<SysPerRole> perRoleList) {
+		this.perRoleList = perRoleList;
+	}
+
+
 
 
     

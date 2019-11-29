@@ -37,11 +37,12 @@
             <p><i>温馨提示：</i>按需添加公司部门，注意数字值越小，部门就越靠前排</p>
         </div>
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="dept/add">
+            <form class="layui-form layui-form-pane" action="dept/update">
             <ul>  
                 <li>
                     <div class="left">部门名称：</div>
                     <div class="right"> 
+                    	<input type="hidden" name="sysDeptId" value="${dept.sysDeptId}">
                         <input type="text" name="sysDeptName" value="${dept.sysDeptName}" required lay-verify="required" placeholder="请输入部门名称" autocomplete="off" class="layui-input">
                     </div>
                 </li> 
@@ -54,7 +55,7 @@
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
-                        <button class="button_qr">确定添加</button>
+<!--                         <button class="button_qr">确定添加</button> -->
                         <input class="button_qr" type="submit" value="确定添加">
                     </div>
                 </li>

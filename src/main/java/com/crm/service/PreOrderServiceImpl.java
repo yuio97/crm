@@ -1,5 +1,6 @@
 package com.crm.service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -50,8 +51,9 @@ public class PreOrderServiceImpl implements PreOrderService{
 		
 
 		order.setSysAccountId(1);
-		int insertPre = preorderMapper.insert(order);
 		
+		
+		int insertPre = preorderMapper.insert(order);
 		
 		List<PreorderDetails> proDetaList = order.getProDetaList();
 		for (PreorderDetails preorderDetails : proDetaList) {
@@ -66,6 +68,23 @@ public class PreOrderServiceImpl implements PreOrderService{
 		
 		List<Preorder> selectPreById = preorderMapper.selectPreById(id);
 		return selectPreById;
+	}
+
+	@Override
+	public void updateOrder(Preorder order) {
+		
+		
+		
+		int updateByPrimaryKeySelective = preorderMapper.updateByPrimaryKeySelective(order);
+		
+		List<PreorderDetails> proDetaList = order.getProDetaList();
+		
+		for (PreorderDetails preorderDetails : proDetaList) {
+			preorderDetails.setPreorderId(order.getPreorderId());
+			preorderDetailsMapper.update(preorderDetails);
+		}
+		
+		
 	}
 
 

@@ -66,23 +66,19 @@
             <p><i>温馨提示：</i>按需添加部门职位，注意勾选用户权限确定无误后再添加</p>
         </div>
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" >
+            <form class="layui-form layui-form-pane" action="#">
             <ul> 
                 <li  style="height: 38px; overflow:initial;">
                     <div class="left">部门名称：</div>
                     <div class="right">  
-                        <select name="sysRoleOper" id="sysRoleOper" lay-verify="">
-                            <option value="">请选择部门</option>
-                         <c:forEach items="${dept}" var="g">   
-                            <option value="${g.sysDeptId}">${g.sysDeptName}</option>
-                          </c:forEach>  
-                        </select> 
+                        <input type="text"  value="${deptName}">
+                        <input type="hidden" id="sysRoleId" value="${role.sysRoleId}">
                     </div>
                 </li>
                 <li>
                     <div class="left">部门职位：</div>
                     <div class="right"> 
-                        <input type="text" id="sysRoleName"  required lay-verify="required" placeholder="请输入部门职位" autocomplete="off" class="layui-input">
+                        <input type="text" id="sysRoleName"  value="${role.sysRoleName}" required lay-verify="required" placeholder="请输入部门职位" autocomplete="off" class="layui-input">
                     </div>
                 </li> 
                 <li>
@@ -91,13 +87,13 @@
                             <c:forEach items="${per}" var="p">
                                 <div class="all">
                                     <div class="lll">
-                                        <input onclick="menu(${p.sysPermissionId})" type="checkbox" name="${p.sysPerParentid}" id="${p.sysPermissionId}"  value="${p.sysPermissionId}" >${p.sysPermissionName}
+                                        <input onclick="menu(${p.sysPermissionId})" ${p.sysPerParentids} type="checkbox" name="${p.sysPerParentid}" id="${p.sysPermissionId}"  value="${p.sysPermissionId}" >${p.sysPermissionName}
                                     </div>
                                     <div class="rrr">
                                     <ul>
                                         <c:forEach items="${p.sonPer}" var="s">
                                             <li>
-                                                <input onclick="son(${s.sysPerParentid})" type="checkbox" value="${s.sysPermissionId}" name="${s.sysPerParentid}" id="${s.sysPermissionId}">${s.sysPermissionName}                                     
+                                                <input onclick="son(${s.sysPerParentid})" ${s.sysPerParentids} type="checkbox" value="${s.sysPermissionId}" name="${s.sysPerParentid}" id="${s.sysPermissionId}">${s.sysPermissionName}                                     
                                             </li>
                                         </c:forEach>
                                     </ul>
@@ -109,14 +105,14 @@
                 <li>
                     <div class="left">职位简介：</div>
                     <div class="right"> 
-                        <textarea id="sysRoleDel" required   placeholder="请输入" ></textarea>
+                        <textarea id="sysRoleDel" required   placeholder="请输入" >${role.sysRoleDel}</textarea>
                     </div>
                 </li> 
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
                       <!--   <button class="button_qr">确定添加</button> -->
-                        <button id="sub" >确定添加</button>
+                        <button id="subt" >确认修改</button>
                     </div>
                 </li>
             </ul> 
@@ -144,6 +140,8 @@
         }else{
             s = 0;
         }
+        // alert(t.checked+""+s)
+        
         if(s == 1){
             $("input[name="+id+"]").prop("checked",true);
             s = 0;
@@ -161,7 +159,7 @@
                 count++;
             }
             }
-            if(count == 0){//全选checkbox不选中
+            if(count == 0){//如果都不选中，主菜单不选中
                 $("#"+id).removeAttr("checked");
                 s = 1;
             }else{
@@ -172,16 +170,13 @@
         
     }
 
-    $('#sub').click(function () { 
+    $('#subt').click(function () { 
         
-        var sysRoleOper = $('#sysRoleOper').val(); //部门编号
+        // var sysRoleOper = $('#sysRoleOper').val(); //部门编号
         var sysRoleDel = $('#sysRoleDel').val();    //职位简介
-        var sysRoleName = $('#sysRoleName').val(); //职位名称
+        // var sysRoleName = $('#sysRoleName').val(); //职位名称
+        var sysRoleId = $('#sysRoleId').val();
         
-        var data = {
-            
-        }
-
         var chk_value =[];//定义一个数组 
         $("input[type=checkbox]:checked").each(function(){
             chk_value.push({perId:$(this).val()}) 
@@ -189,49 +184,30 @@
             
         });
         var data = {
-            sysRoleOper:sysRoleOper,
+            sysRoleId:sysRoleId,
             sysRoleDel:sysRoleDel,
-            sysRoleName:sysRoleName,
-            perRoleList:chk_value 
+            // sysRoleName:sysRoleName,
+            perRoleList:chk_value
         }
         
         // console.log(JSON.stringify(data));
         $.ajax({
             type: "post",
-            url: "role/add",
+            url: "role/update",
             contentType:'application/json',
             data: JSON.stringify(data),
-            dataType: "json",
+            dataType: "text",
             success: function (response) {
+                // console.log(response);
                 
+                location.href = "/roleList.jsp"
             }
         });
-        
-        
+               
     });
-
-
 
 </script>
 <script>
-// layui.use(['form', 'layedit', 'laydate'], function(){
-//     var form = layui.form
-//     ,layer = layui.layer
-//     ,layedit = layui.layedit
-//     ,laydate = layui.laydate;
-// });
-// layui.use('laydate', function(){
-//   var laydate = layui.laydate; 
-//   //年选择器 
-//   laydate.render({
-//     elem: '#test2'
-//   });
-//    //时间选择器
-//    laydate.render({
-//     elem: '#test2_r'
-//     ,type: 'time'
-//   });
-// });
 
 
 </script>

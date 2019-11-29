@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.SysPerRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.SysPerRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="per_id" property="perId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="oper_id" property="operId" jdbcType="INTEGER" />
+    <result column="ltime" property="ltime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, per_id, role_id, oper_id, ltime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_per_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_per_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByRoleId" parameterType="java.lang.Integer" >
+    delete from sys_per_role
+    where role_id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SysPerRole" >
+    insert into sys_per_role (id, per_id, role_id, 
+      oper_id, ltime)
+    values (#{id,jdbcType=INTEGER}, #{perId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, 
+      #{operId,jdbcType=INTEGER}, #{ltime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SysPerRole" >
+    insert into sys_per_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="perId != null" >
+        per_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="operId != null" >
+        oper_id,
+      </if>
+      <if test="ltime != null" >
+        ltime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="perId != null" >
+        #{perId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="operId != null" >
+        #{operId,jdbcType=INTEGER},
+      </if>
+      <if test="ltime != null" >
+        #{ltime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysPerRole" >
+    update sys_per_role
+    <set >
+      <if test="perId != null" >
+        per_id = #{perId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="operId != null" >
+        oper_id = #{operId,jdbcType=INTEGER},
+      </if>
+      <if test="ltime != null" >
+        ltime = #{ltime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysPerRole" >
+    update sys_per_role
+    set per_id = #{perId,jdbcType=INTEGER},
+      role_id = #{roleId,jdbcType=INTEGER},
+      oper_id = #{operId,jdbcType=INTEGER},
+      ltime = #{ltime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

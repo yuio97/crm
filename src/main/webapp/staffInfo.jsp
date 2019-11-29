@@ -51,6 +51,14 @@
             <td>${info.sysStaffName}</td>
         </tr>
         <tr>
+            <td  class="td_1">所属部门</td> 
+            <td>${dept.sysDeptName}</td>
+        </tr>
+        <tr>
+            <td  class="td_1">部门职务</td> 
+            <td>${role.sysRoleName}</td>
+        </tr>
+        <tr>
             <td  class="td_1">性别</td> 
             <td>${info.sysStaffSex == 1?'男':'女'}</td>
         </tr>
