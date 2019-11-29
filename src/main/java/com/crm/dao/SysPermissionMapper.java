@@ -18,4 +18,6 @@ public interface SysPermissionMapper {
     int updateByPrimaryKey(SysPermission record);
     
     List<SysPermission> getMenuList(int id);
+    
+    List<SysPermission> getAllPer();
 }

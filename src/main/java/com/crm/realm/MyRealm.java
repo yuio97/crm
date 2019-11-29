@@ -1,5 +1,6 @@
 package com.crm.realm;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -63,7 +64,6 @@ public class MyRealm extends AuthorizingRealm{
 				authorizationInfo.addStringPermission(sysRole2.getSysPermissionPercode());
 			}
 		
-		
 	
 		
 		return authorizationInfo;
@@ -79,7 +79,8 @@ public class MyRealm extends AuthorizingRealm{
 			return null;
 		}
 		else
-		{
+		{	
+
 			SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(account, account.getSysAccountPass(), ByteSource.Util.bytes(account.getSysAccountSalt()),"myrealm");
 			return info;
 		}

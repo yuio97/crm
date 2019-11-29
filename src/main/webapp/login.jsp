@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,6 +10,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="./css/auth.css">
+	<style>
+		.ppp{
+			/* margin-bottom: 0xp !important; */
+		}
+	</style>
 </head>
 
 <body>
@@ -20,21 +26,29 @@
 
 			<div class="lowin-box lowin-register">
 				<div class="lowin-box-inner">
-					<form action="login" method="post">
+					<form action="login" method="post" target="_top" >
 						<p>Let's create your account</p>
 						<div class="lowin-group">
 							<label>Name</label>
 							<input type="text" name="name" autocomplete="name" class="lowin-input">
 						</div>
-						<div class="lowin-group">
+						<div class="lowin-group ppp" style="margin-bottom: 0px">
 							<label>Password</label>
 							<input type="password" name="password" autocomplete="current-password" class="lowin-input">
 						</div>
-
+						<c:if test="${empty sta}">
+							<div class="text-foot" style="margin-top: 0px; color: rgb(248, 16, 16); opacity: 0 " >
+								用户名未找到或密码错误 !
+							</div>
+						</c:if>
+						<c:if test="${sta eq '1'}">
+							<div class="text-foot" style="margin-top: 0px; color: rgb(248, 16, 16); dd" >
+								用户名未找到或密码错误 !
+							</div>
+						</c:if>
+						
 						<input class="lowin-btn" type="submit" value="Sign Up">
-						<div class="text-foot">
-							Already have an account? <a href="" class="login-link">Login</a>
-						</div>
+						
 					</form>
 				</div>
 			</div>
@@ -45,12 +59,5 @@
 		</footer>
 	</div>
 
-<!-- 	<script src="./js/auth.js"></script> -->
-<!-- 	<script>
-		Auth.init({
-			login_url: '#login',
-			forgot_url: '#forgot'
-		});
-	</script> -->
 </body>
 </html>

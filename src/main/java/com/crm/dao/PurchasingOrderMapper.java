@@ -17,5 +17,5 @@ public interface PurchasingOrderMapper {
 
     int updateByPrimaryKey(PurchasingOrder record);
     
-    List<PurchasingOrder> getPurchasingOrderList();
+    List<PurchasingOrder> getPurchasingOrderList(String state);
 }

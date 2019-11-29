@@ -43,7 +43,7 @@
            
         </div>
         <div class="kehubh_tj_k">
-            <form class="layui-form layui-form-pane" action="update/updatePurchasingOrder"  mothed="post">
+            <form  action="update/updatePurchasingOrder"  mothed="post">
             <ul> 
                   <input type="hidden" name="porderId" value="${porder.porderId}">
                    <li>
@@ -68,8 +68,8 @@
                     <div class="left">采购进展：</div>
                     <div class="right">
                    		 <select name="porderJz"  value="${porder.porderJz}"lay-verify="">
-                                <option value="1">待采购</option>
-                                <option value="2">已采购</option>
+                                <option value="1" ${porder.porderJz=='1'?'selected':''}>待采购</option>
+                                <option value="0" ${porder.porderJz=='0'?'selected':''}>已采购</option>
                             </select>
                             </div> 
                 </li>
@@ -88,9 +88,9 @@
                   
 	                 <div class="right"> 
                             <select name="payQk" lay-verify="" value="${porder.payQk}">
-                                <option value="1">现金</option>
-                                <option value="2">银行卡</option>
-                               	<option value="3">支付宝</option>
+                                <option value="1" ${porder.payQk=='1'?'selected':''}>现金</option>
+                                <option value="2" ${porder.payQk=='2'?'selected':''}>银行卡</option>
+                                	<option value="3" ${porder.payQk=='3'?'selected':''}>支付宝</option>
                             </select> 
                         </div>
 					 </li> 
@@ -114,25 +114,27 @@
                     <th >原材料数量</th>
                     <th >原材料警告数</th>
                     <th >需采购的数量</th>
-                     <th >采购金额</th>
-                     <th >采购的备注</th>
+                    <th >采购金额</th>
+                    <th >采购的备注</th>
                     
        
                 </tr> 
             </thead>
             <tbody >
-                     <c:forEach items="${update}" var="g"></c:forEach>
+                     <c:forEach items="${porder.purchasingXq}" var="PurchasingXq">
            			<tr >
            			 
-                     <td>${g.goodsId}</td>
-                     <td>${g.goodsName}</td>
-                      <td>${g.goodsPrice}</td>
-                     <td>${g.goodsNum}</td>
-                     <td>${g.goodsMin}</td>
-                     <td><input type="text" :id="'goodsNum'+g.goodsId" value="${g.goodsId}" placeholder="请输入需要购买的数量："  :oninput="'showPrice(this,'+g.goodsId+','+g.goodsPrice+')'" ></td>
-                     <td><input type="text" :id="'goodsPrice'+g.goodsId" value="${g.goodsId}" readonly="readonly" placeholder=""></td>
-                     <td><input type="text" :id="'pxMassage'+g.goodsId" value="${g.goodsId}"  placeholder="备注"></td>
+                    <td>${PurchasingXq.goodsId}</td>
+                    <td>${PurchasingXq.goods.goodsName}</td>
+                    <td>${PurchasingXq.goods.goodsPrice}</td>
+                    <td>${PurchasingXq.goods.goodsNum}</td>
+                    <td>${PurchasingXq.goods.goodsMin}</td>
+            
+                     <td><input type="text"  value="${PurchasingXq.goodsNum}" placeholder="请输入需要购买的数量："  oninput="showPrice(this,${PurchasingXq.goodsId},${PurchasingXq.goods.goodsPrice})" ></td>
+                     <td><input type="text" id="goodsPrice${PurchasingXq.goodsId }" value="${PurchasingXq.goodsPrice}" readonly="readonly" placeholder=""></td>
+                     <td><input type="text"  value="${PurchasingXq.pxMassage}"  placeholder="备注"></td>
                      </tr>
+                     </c:forEach>
                      </tbody>
                     </table>
                 </li>
@@ -167,32 +169,6 @@
         });
         </script>
 
-<script type="text/javascript">
-new Vue({
-    el:'#xz',
-    data:{
-        supplier:[]
-    },
-    methods:{
-
-    },
-    created:function(){
-       this_a=this
-        $.ajax({
-            type: "GET",
-            url: "/supplier/getSupplierList",
-            data: null,
-            dataType: "json",
-            success: function (response) {
-            	this_a.suppiler=response;
-            }
-        });
-    }
-
-
-  })
- 
-</script>
  <script>
 layui.use('laydate', function(){
   var laydate = layui.laydate; 
@@ -202,9 +178,18 @@ layui.use('laydate', function(){
   });
 });
 </script>
-<scirpt>
+<script>
 
+	function showPrice(inp,id,price)
+	{
+		console.log(inp,id,price);
+		var num = inp.value;
+		if(!isNaN(num))
+		{
+			document.getElementById("goodsPrice"+id).value = num * price;
+		}
+	}
 
-</scirpt>
+</script>
 </body>
 </html>

@@ -34,9 +34,25 @@ public class RoleServiceImpl implements RoleService{
 		return pageInfo;
 	}
 	@Override
-	public int del(int id) {
+	public int delByRoleId(int id) {
 		// TODO Auto-generated method stub
 		return sysRoleMapper.deleteByPrimaryKey(id);
+	}
+	@Override
+	public int addRole(SysRole record) {
+
+		return sysRoleMapper.insertSelective(record);
+	}
+	@Override
+	public SysRole getRolePerByRoleId(int roleId) {
+		// TODO Auto-generated method stub
+		return sysRoleMapper.getRolePerByRoleId(roleId);
+	}
+	
+	@Override
+	public List<SysRole> getRoleList() {
+		// TODO Auto-generated method stub
+		return sysRoleMapper.getRoleDept();
 	}
 	
 	

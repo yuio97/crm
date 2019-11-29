@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -73,11 +74,11 @@
                 <li>
                     <div class="left">性别:</div>
                     <div class="right">
-                                    <input type="radio" name="sysStaffSex" value="1" title="男">
-                                    <input type="radio" name="sysStaffSex" value="0" title="女" checked>
-  
+                        <input type="radio" name="sysStaffSex" value="1" title="男" checked>
+                        <input type="radio" name="sysStaffSex" value="0" title="女" > 
                     </div>
                 </li>
+                
                 <li>
                     <div class="left">身份证号:</div>
                     <div class="right"> 
@@ -128,13 +129,28 @@
                         <textarea name="sysStaffRemark"  required lay-verify="required"  class="layui-textarea"></textarea>
                     </div>
                 </li>
-                <!-- <li>
-                    <div class="left"> 是否锁定</div>
-                    <div class="right"> 
-                        <input class="button_qr" id="chekk" type="checkbox" >
-                        <input type="hidden" id="sysAccountSta" name="sssysAccountSta" value="1">
+                <li  style="height: 38px; overflow:initial;">
+                    <div class="left">部门：</div>
+                    <div class="right">  
+                        <select name="sysCompanyId" id="sysCompanyId" lay-verify="">
+                            <option value="">请选择部门</option>
+                         <c:forEach items="${dept}" var="g">   
+                            <option value="${g.sysDeptId}">${g.sysDeptName}</option>
+                          </c:forEach>  
+                        </select> 
                     </div>
-                </li> -->
+                </li> 
+                <li  style="height: 38px; overflow:initial;">
+                    <div class="left">职位：</div>
+                    <div class="right">  
+                        <select name="sysDutyId" id="sysDutyId" lay-verify="">
+                            <option value="">请选择职位</option>
+                         <c:forEach items="${role}" var="g">   
+                            <option value="${g.sysRoleId}">${g.sysRoleName}</option>
+                          </c:forEach>  
+                        </select> 
+                    </div>
+                </li>
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 

@@ -31,7 +31,7 @@
       #{sysRoleLast,jdbcType=VARCHAR}, #{sysRoleOper,jdbcType=VARCHAR}, #{sysRoleTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.crm.bean.SysRole" >
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="sysRoleId" parameterType="com.crm.bean.SysRole" >
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="sysRoleId != null" >
@@ -113,6 +113,36 @@
 		ON sp.sys_permission_id = spr.per_id
 		WHERE srt.sys_role_id = #{id}
 	</select>
+	<select id="getRoleDept" resultMap="dept_role"  >
+	  	select * from    sys_role  sr
+		INNER JOIN  sys_dept sd on sr.sys_role_oper = sd.sys_dept_id
+  </select>
+  <select id="getRolePerByRoleId" resultMap="role_per">
+  	select * from sys_role sr
+	inner join sys_per_role spr
+	ON sr.sys_role_id = spr.role_id
+	WHERE sr.sys_role_id = #{id}
+  </select>
+  
+  <resultMap type="com.crm.bean.SysRole" id="role_per">
+  	<id column="sys_role_id" property="sysRoleId" jdbcType="INTEGER" />
+    <result column="sys_role_name" property="sysRoleName" jdbcType="VARCHAR" />
+    <result column="sys_role_del" property="sysRoleDel" jdbcType="VARCHAR" />
+    <result column="sys_role_last" property="sysRoleLast" jdbcType="VARCHAR" />
+    <result column="sys_role_oper" property="sysRoleOper" jdbcType="VARCHAR" />
+    <result column="sys_role_time" property="sysRoleTime" jdbcType="TIMESTAMP" />
+    <collection property="perRoleList" ofType="com.crm.bean.SysPerRole">
+    	<id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="per_id" property="perId" jdbcType="INTEGER" />
+	    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+	    <result column="oper_id" property="operId" jdbcType="INTEGER" />
+	    <result column="ltime" property="ltime" jdbcType="TIMESTAMP" />
+    </collection>
+	    
+  </resultMap>
+	
+	
+	
 	
 	<resultMap type="com.crm.bean.SysRole" id="per_role">
 		<id column="sys_role_id" property="sysRoleId" jdbcType="INTEGER" />
@@ -134,10 +164,7 @@
 	    </collection>
 	</resultMap>
 	
-	<select id="getRoleDept" resultMap="dept_role"  >
-	  	select * from    sys_role  sr
-		INNER JOIN  sys_dept sd on sr.sys_role_oper = sd.sys_dept_id
-  </select>
+
   
   <resultMap type="com.crm.bean.SysRole" id="dept_role">
   	<id column="sys_role_id" property="sysRoleId" jdbcType="INTEGER" />

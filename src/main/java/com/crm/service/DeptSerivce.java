@@ -20,4 +20,5 @@ public interface DeptSerivce {
 	
 	public List<SysDept> getAllDept();
 
+
 }

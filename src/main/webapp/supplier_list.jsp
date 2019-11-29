@@ -26,6 +26,7 @@
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+      <script type="text/javascript" src="js/vue.min.js"></script>
     
 </head>
 
@@ -41,13 +42,7 @@
         <!-- 筛选 --> 
         <div class="shuaix">
          
-            <div class="left"   style="margin-right:10px;">
-               
-                <select>   
-                    <option value="公司名称">公司名称</option>   
-                    <option value="其他">其他</option>   
-                </select>
-            </div>   
+            
             <!-- <div class="center">统计：【大：20 中：30 小：60】</div> -->
             <div class="right">
                 <input type="text" placeholder="请输入关键字">
@@ -69,20 +64,31 @@
                     
                 </tr> 
             </thead>
-            <tbody>
-            <c:forEach items="${supplierList }" var="s">
+            <tbody id="supp">
+            <tr v-for="s in supplier"> 
+                    <td></td>
+                    <td> <a href='"/supplier/selectById?supplierId="+s.supplierId' style="color:#205b9e; font-size:18px">修改</a><a style="color:#205b9e;font-size:18px"></a></td>
+                    <td>{{s.supplierId}}</td>
+                    <td>{{s.supplierName}}</td>
+                    <td>{{s.supeople}}</td>
+                    <td>{{s.supplierTel}}</td>
+                    <td>{{s.supplierEmail}}</td>
+                    <td>{{s.supplierAddress}}</td>
+                    
+                   </tr>
+            <%-- <c:forEach items="${supplierList}" var="s">
                 <tr> 
                     <td></td>
                     <td> <a href="/supplier/selectById?supplierId=${s.supplierId}" style="color:#205b9e; font-size:18px">修改</a><a style="color:#205b9e;font-size:18px"></a></td>
-                    <td>${s.supplierId }</td>
-                    <td>${s.supplierName }</td>
-                    <td>${s.supeople }</td>
+                    <td>${s.supplierId}</td>
+                    <td>${s.supplierName}</td>
+                    <td>${s.supeople}</td>
                     <td>${s.supplierTel}</td>
-                    <td>${s.supplierEmail }</td>
-                    <td>${s.supplierAddress }</td>
+                    <td>${s.supplierEmail}</td>
+                    <td>${s.supplierAddress}</td>
                     
                    </tr>
-               </c:forEach>
+               </c:forEach> --%>
                 
                 
             </tbody>  
@@ -144,45 +150,36 @@
             ,type: 'month'
         });
     });
-    //  iframe层  详情信息
-    function Vip_xq(){
-        //iframe层 
-        layer.open({
-            type: 2,//层类型
-            title: "详情信息",//标题
-            closeBtn: 1, //不显示关闭按钮
-            shade: [0.3],//遮罩
-            skin: 'demo_class_color',//iframe皮肤
-            shadeClose:Boolean,//点击遮罩关闭
-            area: ['800px', '460px'],
-            // offset: 'rb', //右下角弹出
-            // time: 2000, //2秒后自动关闭
-            anim: 5,//动画
-            content: ['vip_list_xq.html', 'no'], //iframe的url，no代表不显示滚动条 
-        }); 
-        
-    }
-    //  iframe层  回访记录
-    function Vip_hf(){
-        //iframe层 
-        layer.open({
-            type: 2,//层类型
-            title: "详情信息",//标题
-            closeBtn: 1, //不显示关闭按钮
-            shade: [0.3],//遮罩
-            skin: 'demo_class_color',//iframe皮肤
-            shadeClose:Boolean,//点击遮罩关闭
-            area: ['800px', '460px'],
-            // offset: 'rb', //右下角弹出
-            // time: 2000, //2秒后自动关闭
-            anim: 5,//动画
-            content: ['vip_list_hf.html', 'no'], //iframe的url，no代表不显示滚动条 
-        }); 
-        
-    }
+    
  
 </script> 
+<script>
+  new Vue({
+    el:'#supp',
+    data:{
+        supplier:[]
+    },
+    methods:{
 
+    },
+    created:function(){
+    	console.log("sdfsd");
+       this_a=this;
+        $.ajax({
+            type: "GET",
+            url: "supplier/getSupplierList",
+            data: null,
+            dataType: "json",
+            success: function (response) {
+            	this_a.supplier=response;
+            	console.log(this_a.supplier);
+            }
+        });
+    }
+
+
+  })
+</script>
 
 
 </body>

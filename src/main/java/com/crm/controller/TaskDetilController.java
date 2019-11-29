@@ -3,6 +3,7 @@ package com.crm.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,9 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.crm.bean.OffEmployeeAttendance;
 import com.crm.bean.OffTaskDetails;
 import com.crm.bean.OffTaskRelease;
 import com.crm.bean.SysAccount;
@@ -139,5 +142,40 @@ public class TaskDetilController {
 		taskService.updateCompletionStatus(missionId);
 		return "redirect:/task/selectTaskReception";
 	}
+	
+	
+	//考勤
+	@RequestMapping("/addBookMission")
+	public String addBookMission() {
+		taskService.insertSelective();
+		return "redirect:selectDayBookMission";
+	}
+	
+	//异步请求，要加@ResponseBody转为json格式字符串，为HashMap类型数据，不需要Map
+	@RequestMapping("/selectBookMission")
+	@ResponseBody
+	public HashMap<Object, Object> selectBookMission(Integer year, Integer month) {
+		
+		List<OffEmployeeAttendance> selectBookMission = taskService.selectBookMission(month, year);
+		int size = selectBookMission.size();
+		int date[] = new int[size];
+		for (int i = 0; i < size; i++) {
+			OffEmployeeAttendance offEmployeeAttendance = selectBookMission.get(i);
+			date[i] = offEmployeeAttendance.getOffDay();
+		}
+		
+		HashMap<Object, Object> hashMap = new HashMap<>();
+		hashMap.put("date", date);
+		return hashMap;
+	}
+	
+	@RequestMapping("/selectDayBookMission")
+	public String selectDayBookMission(Map<String, Object> data) {
+		Boolean selectDayBookMission = taskService.selectDayBookMission();
+		data.put("isCheck", selectDayBookMission);
+		return "forward:/book.jsp";
+	}
+	
+	
 	
 }

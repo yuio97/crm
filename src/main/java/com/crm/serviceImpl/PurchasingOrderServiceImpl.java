@@ -21,14 +21,20 @@ public class PurchasingOrderServiceImpl implements PurchasingOrderService{
 	@Resource
 	private PurchasingXqMapper   PurchasingXqMapper; 
 	
+	
+	
 	@Override
-	public List<PurchasingOrder> getPurchasingOrderList() {
-		List<PurchasingOrder> purchasingOrderList = purchasingOrderMapper.getPurchasingOrderList();
+	public List<PurchasingOrder> getPurchasingOrderList(String state) {
+		
+		List<PurchasingOrder> purchasingOrderList = purchasingOrderMapper.getPurchasingOrderList(state);
 		return purchasingOrderList;
 	}
 	@Override
 	public PurchasingOrder selectByPrimaryKey(Integer porderId) {
 		PurchasingOrder selectByPrimaryKey = purchasingOrderMapper.selectByPrimaryKey(porderId);
+		List<PurchasingXq> purchasingXqList1 = PurchasingXqMapper.getPurchasingXqList1(porderId);
+		
+		selectByPrimaryKey.setPurchasingXq(purchasingXqList1);
 		return selectByPrimaryKey;
 	}
 	@Override
@@ -45,6 +51,11 @@ public class PurchasingOrderServiceImpl implements PurchasingOrderService{
 	@Override
 	public int updateByPrimaryKeySelective(PurchasingOrder record) {
 		int updateByPrimaryKeySelective = purchasingOrderMapper.updateByPrimaryKeySelective(record);
+		List<PurchasingXq> xq = record.getPurchasingXq();
+		for (PurchasingXq purchasingXq : xq) {
+			purchasingXq.setPorderId(record.getPorderId());
+			PurchasingXqMapper.updateByPrimaryKeySelective(purchasingXq);
+		}
 		return updateByPrimaryKeySelective;
 	}
 

@@ -40,15 +40,15 @@
 				<div class="top_user">
 					<span><img src="images/head.jpg" /></span>
 					<dl>
-						<dt>{{user.sysAccountName}}（营销总监）</dt>
-						<dd>部门：普通账户 上次登录时间：{{user.sysAccountTime}}</dd>
+						<dt>{{user.sysAccountName}}（{{role.sysRoleName}}）</dt>
+						<dd>部门：{{dept.sysDeptName}} 上次登录时间：{{user.sysLastlogin}}</dd>
 					</dl>
 				</div>
 
 		        <div class="top_icon">
 		        	<a href="index.html" title="首页"><img src="images/top_home.png"></a>
 		        	<a href="#" title="个人设置"><img src="images/top_person.png"></a>
-		        	<a href="logout" title="退出"><img src="images/top_exit.png"></a>
+		        	<a href="logou" title="退出"><img src="images/top_exit.png"></a>
 		        </div>
 		    </div>
 		</div> 
@@ -102,7 +102,9 @@
 			data:
 			{
 				menuList:[],
-				user:{}
+				user:{},
+				dept:{},
+				role:{}
 			},
 			created() {
 				//获取外部Vue对象
@@ -115,6 +117,8 @@
 					
 					_this.menuList = res.data.perList;
 					_this.user = res.data.user;
+					_this.role = res.data.role;
+					_this.dept = res.data.dept;
 				})
 				//请求失败会走的方法
 				.catch(err => {

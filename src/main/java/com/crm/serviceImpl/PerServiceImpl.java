@@ -21,6 +21,11 @@ public class PerServiceImpl implements PerService{
 		
 		return sysPermissionMapper.getMenuList(StaffId);
 	}
-	
+
+	@Override
+	public List<SysPermission> getPerList() {
+		// TODO Auto-generated method stub
+		return sysPermissionMapper.getAllPer();
+	}
 	
 }

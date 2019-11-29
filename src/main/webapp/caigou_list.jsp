@@ -134,7 +134,7 @@
        this_a=this;
         $.ajax({
             type: "GET",
-            url: "purchasingOrder/getpurchasingOrderList",
+            url: "purchasingOrder/getpurchasingOrderList?state=1",
             data: null,
             dataType: "json",
             success: function (response) {

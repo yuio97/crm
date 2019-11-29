@@ -36,7 +36,7 @@
 
 <body>
     <div class="wangid_conbox">
-        <!-- 当前位置 -->
+        
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
@@ -50,29 +50,35 @@
         <div class="kehubh_tj_k">
             <form class=" layui-form-pane" >
             <ul  id="caigougood" > 
-                  
+                <li>
+                    <div class="left">备注：</div>
+                    <div class="right"> 
+                        <input type="text" v-model="caigougood.pMassage"name="pMassage" required lay-verify="required"  autocomplete="off" class="layui-input">   
+                    </div>
+                </li>
                 <li>
                     <div class="left">采购地点：</div>
                     <div class="right"> 
                         <input type="text" v-model="caigougood.jhAddress"  required lay-verify="required"  autocomplete="off" class="layui-input">   
                     </div>
                 </li>
+                
                  <li>
                     <div class="left">采购时间：</div>
                     <div class="right"> 
-                       <input type="text" class="layui-input" v-model="caigougood.porderTime"   id="test3" placeholder="">   
+                       <input type="text" class="layui-input"   id="test3" placeholder="">   
                     </div>
                 </li>
                 <li>
                     <div class="left">进货时间：</div>
                     <div class="right"> 
-                       <input type="text" v-model="caigougood.jhTime" class="layui-input"  id="test2" placeholder="">   
+                       <input type="text"  class="layui-input"  id="test2" placeholder="">   
                     </div>
                 </li>
                  <li style="height: 38px; overflow:initial;">
                     <div class="left">采购进展：</div>
                     <div  class="right">
-                   		 <select v-model="caigougood.porderJz"    id="porderJz" style="height: 37.5px;">
+                   		 <select  v-model="caigougood.porderJz"    id="porderJz" style="height: 37.5px;">
                                 <option  value="1" selected>待采购</option>
                                 <option value="0">已采购</option>
                                 
@@ -104,12 +110,7 @@
                         </div>
 					 </li> 
                 
-               <li>
-                    <div class="left">备注：</div>
-                    <div class="right"> 
-                        <input type="text" v-model="caigougood.pMassage"name="pMassage" required lay-verify="required"  autocomplete="off" class="layui-input">   
-                    </div>
-                </li>
+
                
                 
                 <li>
@@ -168,7 +169,7 @@
 
 
 <script>
-    /*     layui.use(['laydate'], function(){
+        layui.use(['laydate'], function(){
           var laydate = layui.laydate;
           laydate.render({
         	    elem: '#test3'
@@ -176,7 +177,7 @@
           laydate.render({
         	    elem: '#test2'
         	  });
-        }); */
+        }); 
         </script>
 
 <script>
@@ -186,9 +187,9 @@ new Vue({
     	caigougood:{
     		jhAddress:'',
     		porderTime:'',
-    		jhTime:'',
-    		porderJz:'',
-    		payQk:'',
+     		jhTime:'',
+    		porderJz:'1',
+    		payQk:'现金',
     		pMassage:'',
     		purchasingXq:[]
     		
@@ -215,7 +216,8 @@ new Vue({
 					
 				}
 			}
-			
+			this.caigougood.jhTime = $('#test2').val();
+			this.caigougood.porderTime = $('#test3').val();
 			var _this = this;
 			console.log(this.caigougood);
 			$.ajax({

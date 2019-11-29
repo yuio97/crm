@@ -3,17 +3,25 @@ package com.crm.bean;
 import java.util.Date;
 
 public class OffEmployeeAttendance {
+    private Integer bookId;
+
     private Integer offStaffId;
 
-    private Integer sysDeptId;
+    private Integer offYear;
 
-    private String offTaskStatus;
+    private Integer offMon;
 
-    private Integer offPromulgatorId;
+    private Integer offDay;
 
-    private String offReleaseState;
+    private Date bookTime;
 
-    private Date bookinTime;
+    public Integer getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
+    }
 
     public Integer getOffStaffId() {
         return offStaffId;
@@ -23,43 +31,35 @@ public class OffEmployeeAttendance {
         this.offStaffId = offStaffId;
     }
 
-    public Integer getSysDeptId() {
-        return sysDeptId;
+    public Integer getOffYear() {
+        return offYear;
     }
 
-    public void setSysDeptId(Integer sysDeptId) {
-        this.sysDeptId = sysDeptId;
+    public void setOffYear(Integer offYear) {
+        this.offYear = offYear;
     }
 
-    public String getOffTaskStatus() {
-        return offTaskStatus;
+    public Integer getOffMon() {
+        return offMon;
     }
 
-    public void setOffTaskStatus(String offTaskStatus) {
-        this.offTaskStatus = offTaskStatus == null ? null : offTaskStatus.trim();
+    public void setOffMon(Integer offMon) {
+        this.offMon = offMon;
     }
 
-    public Integer getOffPromulgatorId() {
-        return offPromulgatorId;
+    public Integer getOffDay() {
+        return offDay;
     }
 
-    public void setOffPromulgatorId(Integer offPromulgatorId) {
-        this.offPromulgatorId = offPromulgatorId;
+    public void setOffDay(Integer offDay) {
+        this.offDay = offDay;
     }
 
-    public String getOffReleaseState() {
-        return offReleaseState;
+    public Date getBookTime() {
+        return bookTime;
     }
 
-    public void setOffReleaseState(String offReleaseState) {
-        this.offReleaseState = offReleaseState == null ? null : offReleaseState.trim();
-    }
-
-    public Date getBookinTime() {
-        return bookinTime;
-    }
-
-    public void setBookinTime(Date bookinTime) {
-        this.bookinTime = bookinTime;
+    public void setBookTime(Date bookTime) {
+        this.bookTime = bookTime;
     }
 }

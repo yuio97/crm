@@ -27,13 +27,18 @@ public class PurchasingOrderController {
 	
 	@RequestMapping("getpurchasingOrderList")
 	@ResponseBody
-	public HashMap<String, Object> getPurchasingOrderList(){
-		List<PurchasingOrder> purchasingOrderList = purchasingOrderSerice.getPurchasingOrderList();
+	public HashMap<String, Object> getPurchasingOrderList(String state){
+
+		List<PurchasingOrder> purchasingOrderList = purchasingOrderSerice.getPurchasingOrderList(state);
+
+		
 		HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("purchasingOrderList", purchasingOrderList);
-		return hashMap;
 		
+		return hashMap;
+//		
 	}
+	
 	@RequestMapping("/addpo")
 	public String insert(@RequestBody PurchasingOrder record){
 		System.out.println(record);
@@ -45,8 +50,7 @@ public class PurchasingOrderController {
 	@RequestMapping("/getporderId")
 	public String selectByPrimaryKey(Integer porderId,Map<String,Object> data){
 		PurchasingOrder porder = purchasingOrderSerice.selectByPrimaryKey(porderId);
-		List<PurchasingXq> update = purchasingXqService.update(porderId);
-	    data.put("update", update);
+	    data.put("porder", porder);
 		return "forward:/caigou_update.jsp";
 		
 	}
@@ -54,7 +58,6 @@ public class PurchasingOrderController {
 	
 	@RequestMapping("/getporderId1")
 	public String selectByPrimaryKey1(Integer porderId,Map<String,Object> data){
-		PurchasingOrder porder = purchasingOrderSerice.selectByPrimaryKey(porderId);
 		List<PurchasingXq> purchasingXqList1 = purchasingXqService.getPurchasingXqList1(porderId);
 		data.put("purchasingXqList1", purchasingXqList1);
 		return "forward:/caigou_xq.jsp";

@@ -20,4 +20,6 @@ public interface SysRoleMapper {
     SysRole getPerByStaffId(int id);
     
 	public List<SysRole> getRoleDept();
+	
+	public SysRole getRolePerByRoleId(int id);
 }

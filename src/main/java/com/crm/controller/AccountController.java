@@ -20,8 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.crm.Util.CharUtil;
 import com.crm.bean.SysAccount;
+import com.crm.bean.SysDept;
+import com.crm.bean.SysRole;
+import com.crm.bean.SysRoleStaff;
 import com.crm.bean.SysStaffInfo;
 import com.crm.service.AccountService;
+import com.crm.service.DeptSerivce;
+import com.crm.service.RoleService;
+import com.crm.service.RoleStaffService;
 import com.crm.service.StaffInfoService;
 import com.github.pagehelper.PageInfo;
 
@@ -34,19 +40,27 @@ public class AccountController {
 	@Resource
 	public StaffInfoService staffInfoService;
 	
+	@Resource
+	public DeptSerivce deptServiceImpl;
+	
+	@Resource
+	public RoleService roleService;
+	
+	@Resource
+	public RoleStaffService roleStaServiceImpl;
+	
 	//员工修改密码
 	@RequestMapping("/updateAccountPass")
 	@ResponseBody
-	public HashMap<String, String> updatePass(String pass,String sysAccountPass,Map<String, Object> data) {
+	public Map<String, Object> updatePass(String pass,String sysAccountPass) {
 		
-		HashMap<String, String> hashMap = new HashMap<>();
-		
-
+		HashMap<String, Object> hashMap = new HashMap<>();
 		Subject subject = SecurityUtils.getSubject();
 		SysAccount user = (SysAccount) subject.getPrincipal();
 		
+
 		SysAccount account = new SysAccount();
-		
+		hashMap.put("sta", 2);
 		if(CharUtil.passwordMd5(pass, user.getSysAccountSalt()).equals(user.getSysAccountPass()))
 		{
 			String  password= CharUtil.passwordMd5(sysAccountPass, user.getSysAccountSalt());
@@ -56,19 +70,29 @@ public class AccountController {
 			boolean r = accountServiceImpl.updataAccountPass(account);
 
 			if(r) {
-				hashMap.put("sta", "0");
+				hashMap.put("sta", 0);
 				subject.logout();
-				return hashMap;
+//				return data;
 			}else {
-				hashMap.put("sta", "1");
-				return hashMap;
+				hashMap.put("sta", 1);
+//				return data;
 			}
 		}	
-		System.out.println("密码错误");
-		hashMap.put("sta", "2");
+//		System.out.println("密码错误");
+//		hashMap.put("sta", 2);
 		return hashMap;
 	}
 	
+	@RequestMapping("/resett")
+	@ResponseBody
+	public String resetPass(int accountId) {
+		SysAccount account = new SysAccount();
+		String  password= CharUtil.passwordMd5("000000", "asdf");
+		account.setSysAccountId(accountId);
+		account.setSysAccountPass(password);
+		accountServiceImpl.updataAccountPass(account);
+		return  "true";
+	}
 	
 	//获得员工账号信息
 	@RequestMapping("/getAccountList")
@@ -86,7 +110,12 @@ public class AccountController {
 	public String getStaffInfo(String id,Map<String , Object> data) {
 //		System.err.println(id);
 		SysStaffInfo info = staffInfoService.getStaffInfoByStaffId(Integer.valueOf(id));
+		SysDept dept = deptServiceImpl.getDeptByDeptId(Integer.valueOf(info.getSysCompanyId()));
+		SysRole role = roleService.getRolePerByRoleId(Integer.valueOf(info.getSysDutyId()));
+		
 		data.put("info", info);
+		data.put("dept", dept);
+		data.put("role", role);
 		return "forward:/staffInfo.jsp";
 	}
 	
@@ -158,7 +187,7 @@ public class AccountController {
 		
 		SysStaffInfo info = staffInfoService.getStaffInfoByStaffId(Integer.valueOf(staffId));
 		data.put("info", info);
-		return "forward:updateStaff.jsp";		
+		return "forward:/updateStaff.jsp";		
 	}
 	
 	
@@ -174,6 +203,20 @@ public class AccountController {
 		return null;
 		
 	}
+	
+	@RequestMapping("/goAddStaff")
+	public String goAddStaff(Map<String, Object> data)
+	{
+		List<SysDept> allDept = deptServiceImpl.getAllDept();
+		List<SysRole> roleList = roleService.getRoleList();
+//		System.out.println(allDept);
+//		System.out.println(roleList);
+		data.put("dept", allDept);
+		data.put("role", roleList);
+		return "forward:/addStaff.jsp";
+		
+	}
+	
 	
 	//添加员工账号及员工信息
 	@RequestMapping("/addStaff")
@@ -210,12 +253,18 @@ public class AccountController {
 		
 		info.setSysStaffPhoto(showPath);
 		int staffId = staffInfoService.insertStaff(info);
-		
+		System.out.println(staffId);
 		account.setSysAccountSta("1");
-		account.setSysStaffId(staffId);
+		account.setSysStaffId(info.getSysStaffId());
 		account.setSysAccountSalt("asdf");
 		account.setSysAccountPass(CharUtil.passwordMd5("000000", "asdf"));
 		account.setSysAccountTime(new Date());
+		
+		SysRoleStaff sysRoleStaff = new SysRoleStaff();
+		sysRoleStaff.setSysRoleId(Integer.valueOf(info.getSysDutyId()));
+		sysRoleStaff.setSysStaffId(info.getSysStaffId());
+		sysRoleStaff.setLtime(new Date());
+		roleStaServiceImpl.addRoleStaff(sysRoleStaff);
 		
 		accountServiceImpl.addAccount(account);
 
