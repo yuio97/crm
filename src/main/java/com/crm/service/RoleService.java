@@ -11,6 +11,13 @@ public interface RoleService {
 	
 	public PageInfo<SysRole> getRoleDept(int pn);
 	
-	public int del(int id);
+	public int delByRoleId(int id);
+	
+	public int addRole(SysRole record);
+	
+	public SysRole getRolePerByRoleId(int roleId);
+	
+	public List<SysRole> getRoleList();
+	
 	
 }

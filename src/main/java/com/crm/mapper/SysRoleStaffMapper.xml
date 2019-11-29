@@ -27,7 +27,7 @@
     values (#{srlId,jdbcType=INTEGER}, #{sysStaffId,jdbcType=INTEGER}, #{sysRoleId,jdbcType=INTEGER}, 
       #{operId,jdbcType=INTEGER}, #{ltime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.crm.bean.SysRoleStaff">
+  <insert id="insertSelective" >
     insert into sys_role_staff
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="srlId != null">

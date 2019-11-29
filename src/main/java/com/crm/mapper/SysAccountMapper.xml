@@ -140,7 +140,7 @@
     where sys_account_id = #{sysAccountId,jdbcType=INTEGER}
   </update>
     <select id="getAccountByUserName" resultMap="BaseResultMap">
-  	select * from sys_account where sys_account_name = #{name}  
+  	select * from sys_account where sys_account_name = #{name} and sys_account_sta = 0
   </select>
   <select id="getAccountList" resultMap="BaseResultMap">
   	select * from  sys_account

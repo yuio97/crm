@@ -36,7 +36,7 @@
         
         <div class="shuaix ">
             <div>
-                <a  href="addStaff.jsp" class="layui-btn layui-btn-sm" style="margin-right: 50px; margin-left: 25px;">添加员工</a>
+                <a  href="goAddStaff" class="layui-btn layui-btn-sm" style="margin-right: 50px; margin-left: 25px;">添加员工</a>
             </div>
              <div class="left"  style="margin-right:10px;">
                 
@@ -87,7 +87,9 @@
             <tbody>
                 <tr v-for="s in accountList.list"> 
                     <td><input type="checkbox" :value="s.sysAccountId" name="chec" ></td>
-                    <td style="text-align:center"> <a style="color:#205b9e;" :href="'goUpdateStaff?staffId=' + s.sysAccountId" >修改</a>
+                    <td style="text-align:center">
+                            <a style="color:#205b9e;" href="javascript:;"  @click="rese(s.sysAccountId)">重置密码</a>
+                        丨<a style="color:#205b9e;" :href="'goUpdateStaff?staffId=' + s.sysAccountId" >修改</a>
                         丨<a style="color:#205b9e;" href="javascript:;"  @click="lockk(s.sysAccountId,s.sysAccountSta)">{{s.sysAccountSta == 1?'解锁':'锁定'}}</a>
                         丨<a style="color:#205b9e;" href="javascript:;"  @click="checkk(s.sysStaffId)">详情</a> 
                     </td>
@@ -255,6 +257,22 @@
                     .catch(err => {
                         console.error(err); 
                     });
+                },
+                rese:function(id)
+                {
+                    console.log(id);
+                    
+                    
+                        var _this = this;
+                        axios.get('/resett?accountId='+id)
+                        .then(function(res){
+                            // _this.accountList = res.data;
+                            _this.loadData();
+                        })
+                        .catch(err => {
+                            console.error(err); 
+                        });
+                    
                 }
 
             }

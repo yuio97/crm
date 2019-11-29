@@ -58,7 +58,7 @@
 		</tbody>  
 	</table>
 	<script type="text/html" id="barDemo">
-		<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+		<a class="layui-btn layui-btn-xs" lay-event="edit" >修改</a>
 		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script> 
 </div> 
@@ -113,6 +113,8 @@
 				}	
 			},
 			loadData:function(){
+				
+				
 				var _this = this;
 				axios.get('/dept/getDepList')
 				.then(function(res){

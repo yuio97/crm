@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.crm.bean.SysAccount;
+import com.crm.bean.SysDept;
 import com.crm.bean.SysPermission;
 import com.crm.bean.SysRole;
+import com.crm.bean.SysStaffInfo;
+import com.crm.service.DeptSerivce;
 import com.crm.service.PerService;
 import com.crm.service.RoleService;
+import com.crm.service.StaffInfoService;
 import com.crm.serviceImpl.PerServiceImpl;
 
 @Controller
@@ -29,9 +33,15 @@ public class ListController {
 	@Resource
 	public PerService perServiceImpl;
 	
+	@Resource
+	public DeptSerivce deptServiceImpl;
+	
+	@Resource
+	public StaffInfoService staffInfoService;
+	
 	@RequestMapping("/getList")
 	@ResponseBody
-	public HashMap<Object, Object> getList(HttpServletRequest req) {
+	public HashMap<String, Object> getList(HttpServletRequest req) {
 		//获得登录用户bean
 		Subject subject = SecurityUtils.getSubject();
 		SysAccount user = (SysAccount) subject.getPrincipal();
@@ -54,13 +64,16 @@ public class ListController {
 //										
 //		};
 		
+		SysStaffInfo info = staffInfoService.getStaffInfoByStaffId(user.getSysStaffId());
 		List<SysPermission> menuList = perServiceImpl.getMenuList(user.getSysStaffId());
-		
+		SysRole role = roleService.getRolePerByRoleId(Integer.valueOf(user.getSysStaffId()));
+		SysDept dept = deptServiceImpl.getDeptByDeptId(Integer.valueOf(info.getSysCompanyId()));
 		//传递登录用户bean给页面
-		HashMap<Object, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("user", user);
 		map.put("perList",menuList);
-		
+		map.put("role", role);
+		map.put("dept", dept);
 		return map;
 	}
 }

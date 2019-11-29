@@ -48,20 +48,20 @@
                 <li>
                     <div class="left">原密码：</div>
                     <div class="right"> 
-                        <input type="text" name="pass" id="jPass" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                        <input type="password" name="pass" id="jPass" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
                     <div class="left">新密码：</div>
                     
                     <div class="right"> 
-                        <input type="text" name="sysAccountPass" id="newPass" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        <input type="password" name="sysAccountPass" id="newPass" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
                     <div class="left">确认新密码：</div>
                     <div class="right"> 
-                        <input type="text" name="checkPass" id="checkpass" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        <input type="password" name="checkPass" id="checkpass" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
@@ -69,7 +69,7 @@
                     <div class="right"> 
 <!-- 
                         <input class="button_qr" type="submit" value="修改" > -->
-                        <button class="button_qr" id="updateu">修改</button>
+                        <button type="button" class="button_qr" id="updateu">修改</button>
                     </div>
                 </li>
             </ul> 
@@ -121,10 +121,11 @@
                data: {},
                dataType: "json",
                success: function (res) {
-                   console.log(res);
+                  /*  alert(res.sta) */
                    
                    if(res.sta == 0){
                        alert('修改密码成功')
+                       location.href="/logou"
                    }else if(res.sta == 2){
                         alert('当前密码不正确！')
                    }else{

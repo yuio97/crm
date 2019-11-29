@@ -14,4 +14,6 @@ public interface SysPerRoleMapper {
     int updateByPrimaryKeySelective(SysPerRole record);
 
     int updateByPrimaryKey(SysPerRole record);
+    
+    int deleteByRoleId(Integer id);
 }
