@@ -35,7 +35,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
             <a>供应商信息管理</a>
-            <span>供应商信息列表</span>
+            <span >供应商信息列表</span>
         
         </div>
         
@@ -58,9 +58,13 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tbody>
                 <tr v-for="(pre,j) in prelist" :key=j> 
                     <td><input type="checkbox"></td>
-                    <td> <a :href="'preorder/del?id='+pre.preorderId">提交</a>丨<a :href="'preorder/selectXqUpdate?id='+pre.preorderId" style="color:#205b9e;">修改</a>丨<a :href="'javascript:Vip_xq('+pre.preorderId+')'" style="color:#205b9e;" >详情</a> </td>
+                    <td>
+                    	<button	 :onclick="'tijiao('+pre.preorderId+')'"  type="button" style="color:#205b9e;"  >提交</button>
+                    	丨<a :href="'preorder/selectXqUpdate?id='+pre.preorderId" style="color:#205b9e;">修改</a>
+                    	丨<a :href="'javascript:Vip_xq('+pre.preorderId+')'" style="color:#205b9e;" >详情</a>
+                    </td>
                     <td :pid="pre.preorderId">{{pre.preorderId}}</td>
-                    <td>{{pre.customer.copanyName}}</td>
+                    <td >{{pre.customer.copanyName}}</td>
                     <td>{{pre.customer.customerName}}</td>
                     <td>{{pre.preorderTme}}</td>
                     <td>{{pre.deliveryTime}}</td>
@@ -78,27 +82,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- layui js -->
     <script src="layui/layui.js"></script>
 	
-	<script>
-    var s = new Vue({
-        el:'#v',
-        data:{
-            prelist:[]
-        },
-        created:function(){
-            var _this = this
-            $.ajax({
-                type: "GET",
-                url: "preorder/select",
-                data: null,
-                dataType: "json",
-                success: function (response) {
-                    _this.prelist = response;
-                }
-            });
-        }
-        
-    });
-    </script>
+
 	
 	
 	
@@ -183,13 +167,60 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }); 
         
     } 
+    
+    
+    
  
 </script>
+		<script>
+    var s = new Vue({
+        el:'#v',
+        data:{
+            prelist:[]
+        },
+        
+        
+        created:function(){
+        	
+            var _this = this
+            $.ajax({
+                type: "GET",
+                url: "preorder/select",
+                data: null,
+                dataType: "json",
+                success: function (response) {
+                    _this.prelist = response;
+                }
+            });
+        }
+        
+    });
+    </script>
 	
 	
+	<script>
+	function  tijiao(id)
+	{
+		
+		 $.ajax({
+             type: "GET",
+             url: "preorder/tijiao",
+             data: {id:id},
+             dataType: "text",
+             success: function (response) {
+            	 console.log(response);
+            	 if(response == 'true'){
+						location.href="preorder/del?id="+id;
+					}else
+					{
+						alert("库存数量不足");
+					}
+             }
+         });
 	
+	}
 	
-	
+	</script>
 	
 	
 	

@@ -20,4 +20,10 @@ public interface PreOrderService {
 	public List<Preorder> selectPreById(Integer id);
 	
 	public void updateOrder(Preorder order);
+	
+	public void insertpro(Preorder order);
+	
+	public void updatekc(Integer kcid, Integer num);
+	
+	public void del(Integer kcid);
 }

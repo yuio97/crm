@@ -11,8 +11,13 @@ import com.crm.bean.Customer;
 import com.crm.bean.Kcgoods;
 import com.crm.bean.Preorder;
 import com.crm.bean.PreorderDetails;
+import com.crm.bean.Procurement;
+import com.crm.bean.ProcurementDetails;
+import com.crm.dao.KcgoodsMapper;
 import com.crm.dao.PreorderDetailsMapper;
 import com.crm.dao.PreorderMapper;
+import com.crm.dao.ProcurementDetailsMapper;
+import com.crm.dao.ProcurementMapper;
 
 
 @Service("preOrderService")
@@ -23,6 +28,15 @@ public class PreOrderServiceImpl implements PreOrderService{
 	
 	@Resource
 	private PreorderDetailsMapper preorderDetailsMapper;
+	
+	@Resource
+	private ProcurementMapper procurementMapper;
+	
+	@Resource
+	private ProcurementDetailsMapper procurementDetailsMapper;
+	
+	@Resource
+	private KcgoodsMapper kcgoodsMapper;
 	
 	@Override
 	public List<Preorder> selectPre() {
@@ -87,6 +101,39 @@ public class PreOrderServiceImpl implements PreOrderService{
 		
 	}
 
+	@Override
+	public void insertpro(Preorder order) {
+		
+		Procurement procurement = new Procurement();
+		procurement.setCustomerId(order.getCustomerId());
+		procurement.setProcurementCase(order.getPreorderNote());
+		procurement.setPreorderId(order.getPreorderId());
+		procurement.setSysAccountId(order.getSysAccountId());
+		procurementMapper.insert(procurement);
+		
+		Integer procurementId = procurement.getProcurementId();
+		 List<PreorderDetails> proDetaList = order.getProDetaList();
+		 for (PreorderDetails preorderDetails : proDetaList) {
+			 ProcurementDetails details = new ProcurementDetails();
+				details.setProcurementId(procurementId);
+				details.setCustomerId(order.getCustomerId());
+				details.setKgoodsId(preorderDetails.getKcgoods().getKcgoodsId());
+				details.setSysAccountId(preorderDetails.getKcNumSell());
+				procurementDetailsMapper.insert(details);
+		}
+		 
+	}
 
+	@Override
+	public void updatekc(Integer kcid, Integer num) {
+
+		kcgoodsMapper.updatekc(kcid, num);
+	}
+
+	@Override
+	public void del(Integer kcid) {
+
+		preorderMapper.deleteByPrimaryKey(kcid);
+	}
 
 }

@@ -21,13 +21,13 @@
     delete from procurement
     where procurement_id = #{procurementId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.crm.bean.Procurement" >
+  <insert id="insert" parameterType="com.crm.bean.Procurement" useGeneratedKeys="true" keyProperty="procurementId" >
     insert into procurement (procurement_id, customer_id, procurement_case, 
       preorder_id, sys_account_id)
     values (#{procurementId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{procurementCase,jdbcType=VARCHAR}, 
       #{preorderId,jdbcType=INTEGER}, #{sysAccountId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.crm.bean.Procurement" >
+  <insert id="insertSelective" parameterType="com.crm.bean.Procurement" useGeneratedKeys="true" keyProperty="procurementId">
     insert into procurement
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="procurementId != null" >

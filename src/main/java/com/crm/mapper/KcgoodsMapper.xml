@@ -189,4 +189,12 @@
   select * from kc_goods
   
   </select>
+  
+  
+  
+  
+  <update id="updatekc">
+  	update kc_goods set kc_num=#{num} where kcgoods_id=#{kcid}
+  </update>
+  
 </mapper>
