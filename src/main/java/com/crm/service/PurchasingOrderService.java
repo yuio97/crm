@@ -6,7 +6,7 @@ import com.crm.bean.PurchasingOrder;
 
 public interface PurchasingOrderService {
 	
-	List<PurchasingOrder> getPurchasingOrderList();
+	List<PurchasingOrder> getPurchasingOrderList(String state);
 	 
 	int insertSelective(PurchasingOrder record);
 	

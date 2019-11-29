@@ -24,6 +24,7 @@ public class UpdateController {
 	@Resource
 	private SupplierService supplierService;
 	
+	
 	@RequestMapping("/updatePurchasingOrder")
 	public String updateById(PurchasingOrder porderId){
 		 purchasingOrderSerice.updateByPrimaryKeySelective(porderId);
@@ -41,7 +42,7 @@ public class UpdateController {
 	public String updateById(Supplier supplier){
 		System.out.println(supplier.getSupplierId());
 		supplierService.updateSupplier(supplier);
-		return "redirect:/supplier/SupplierList";
+		return "redirect:/supplier_list.jsp";
 		
 		
 	}

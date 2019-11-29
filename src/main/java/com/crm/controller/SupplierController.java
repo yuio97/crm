@@ -27,6 +27,7 @@ public class SupplierController {
 		return "forward:/supplier_list.jsp";
 		
 	}
+	
 	@RequestMapping("/getSupplierList")
 	@ResponseBody
 	public List<Supplier> getSupplierList(){

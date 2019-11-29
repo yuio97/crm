@@ -31,6 +31,27 @@
     <link rel="stylesheet" href="layui/css/layui.css">
     <script type="text/javascript" src="js/vue.min.js"></script>
      <script src="js/jquery-1.11.0.min.js"></script>
+      <style type="text/css">
+    	.out
+		{
+			width:100px;
+			height: 100px;
+			position: relative;
+		}
+		
+		.out img,.out input
+		{
+			width:100px;
+			height: 100px;
+			position: absolute;
+		}
+		
+		.out input
+		{
+			opacity:0;
+		}
+		
+    </style>
     
 </head>
 
@@ -69,13 +90,13 @@
                         <input type="text" name="goodsSm" required lay-verify="required"  autocomplete="off" class="layui-input">   
                     </div>
                 </li>
-                 
-                <li>
+               <li>
                         <div class="left">图片：</div>
-                        <div class="right">
-                                <input style="margin-top: 8px;" type="file" name="gImg">
+                        <div class="right out">
+                                <img id="img" src="https://static.easyicon.net/preview/121/1215321.gif" >
+                                <input type="file" onchange="showImg(this)" style="margin-top: 8px;" type="file" id="img" name="gImg" value="">
                         </div>
-                    </li> 
+                    </li>  
                 <li>
                     <div class="left">数量：</div>
                     <div class="right"> 
@@ -140,17 +161,18 @@
 	
     <script src="layui/layui.js"></script>
      <script >
-     var vm = new Vue({
-    	 el:'#tj',
-    	 data:{},
-    	 methods:{
-    		 add:function(){
-    			 
-    		 }
-    	 }
-     
-    	 
-     })
+     function showImg(obj)
+ 	{
+ 		var file = obj.files[0];
+ 		var reader = new FileReader();
+ 		reader.readAsDataURL(file);
+ 		reader.onload = function()
+ 		{
+ 			var result =  reader.result;
+ 			document.getElementById('img').src = result;
+ 		}
+ 		
+ 	}
      </script>
 </body>
 
@@ -187,7 +209,7 @@ new Vue({
        this_a=this;
         $.ajax({
             type: "GET",
-            url: "/supplier/getSupplierList",
+            url: "supplier/getSupplierList",
             data: null,
             dataType: "json",
             success: function (response) {
