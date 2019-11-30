@@ -11,6 +11,9 @@ import com.crm.bean.PurchasingXq;
 import com.crm.dao.PurchasingOrderMapper;
 import com.crm.dao.PurchasingXqMapper;
 import com.crm.service.PurchasingOrderService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 
 @Service("purchasingOrderService")
 public class PurchasingOrderServiceImpl implements PurchasingOrderService{
@@ -24,10 +27,12 @@ public class PurchasingOrderServiceImpl implements PurchasingOrderService{
 	
 	
 	@Override
-	public List<PurchasingOrder> getPurchasingOrderList(String state) {
+	public PageInfo<PurchasingOrder> getPurchasingOrderList(String state,int pn) {
+		PageHelper.startPage(pn, 10);
 		
 		List<PurchasingOrder> purchasingOrderList = purchasingOrderMapper.getPurchasingOrderList(state);
-		return purchasingOrderList;
+		PageInfo<PurchasingOrder> pageInfo = new PageInfo<PurchasingOrder>(purchasingOrderList);
+		return pageInfo;
 	}
 	@Override
 	public PurchasingOrder selectByPrimaryKey(Integer porderId) {
@@ -51,12 +56,22 @@ public class PurchasingOrderServiceImpl implements PurchasingOrderService{
 	@Override
 	public int updateByPrimaryKeySelective(PurchasingOrder record) {
 		int updateByPrimaryKeySelective = purchasingOrderMapper.updateByPrimaryKeySelective(record);
-		List<PurchasingXq> xq = record.getPurchasingXq();
+		/*List<PurchasingXq> xq = record.getPurchasingXq();
 		for (PurchasingXq purchasingXq : xq) {
 			purchasingXq.setPorderId(record.getPorderId());
 			PurchasingXqMapper.updateByPrimaryKeySelective(purchasingXq);
 		}
+		*/
 		return updateByPrimaryKeySelective;
 	}
+	@Override
+	public PageInfo<PurchasingOrder> purchasingOrderList(int id, String state, String start, String end) {
+		PageHelper.startPage(id, 10);
+		List<PurchasingOrder> pList = purchasingOrderMapper.purchasingOrderList(state, start, end);
+		PageInfo<PurchasingOrder> pageInfo = new PageInfo(pList);
+		return pageInfo;
+	}
+	
+	
 
 }

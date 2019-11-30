@@ -119,8 +119,13 @@ public class ShiroConfig {
 //		filterChainDefinitionMap.put("/**", "anon");
 		
 
+
 //		filterChainDefinitionMap.put("/logout", "logout");
 //		filterChainDefinitionMap.put("/**", "authc");
+
+		filterChainDefinitionMap.put("/logout", "logout");
+		//filterChainDefinitionMap.put("/**", "authc");
+ //branch 'master' of https://github.com/yuio97/crm.git
 
 	
 		return shiroFilterFactoryBean;
