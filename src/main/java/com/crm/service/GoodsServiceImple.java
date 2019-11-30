@@ -27,11 +27,7 @@ public class GoodsServiceImple implements GoodsService{
 		 
 	}
 
-	@Override
-	public List<Goods> getGoodsList(Goods goods) {
-		return  goodsMapper.getGoodsList(goods);
-		
-	}
+	
 
 	@Override
 	public int deleteByPrimaryKey(Integer goodsId) {
@@ -55,6 +51,12 @@ public class GoodsServiceImple implements GoodsService{
 	@Override
 	public List<Goods> selectlike(String name) {
 		return goodsMapper.selectlike(name);
+		
+	}
+
+	@Override
+	public List<Goods> getGoodsList() {
+		return goodsMapper.getGoodsList();
 		
 	}
 

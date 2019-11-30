@@ -239,7 +239,7 @@ new Vue({
        this_a=this;
         $.ajax({
             type: "GET",
-            url: "addgoods/GoodsList",
+            url: "/goods/GoodsList",
             data: null,
             dataType: "json",
             success: function (response) {

@@ -15,7 +15,7 @@ public interface GoodsService {
 	
 	int deleteByPrimaryKey(Integer goodsId);
 	
-	List<Goods> getGoodsList(Goods goods);
+	List<Goods> getGoodsList();
 	
 	Goods selectByPrimaryKey(Integer goodsId);
 	

@@ -28,10 +28,20 @@ public class GoodsController {
 	private SupplierService supplierService;
 	
 	@RequestMapping("/goodsList")
-	public String getGoodsList(Map<String,Object> data,Goods goods){
-		List<Goods> goodsList = goodsService.getGoodsList(goods);
+	public String getGoodsList(Map<String,Object> data){
+		List<Goods> goodsList = goodsService.getGoodsList();
 		data.put("goodsList", goodsList);
 		return "forward:/goods_list.jsp";
+			
+		}
+	
+
+	@RequestMapping("/GoodsList")
+	@ResponseBody
+	public List<Goods> getGoods(){
+		List<Goods> goodsList = goodsService.getGoodsList();
+		
+		return goodsList;
 			
 		}
 	/*@RequestMapping("/gList")
