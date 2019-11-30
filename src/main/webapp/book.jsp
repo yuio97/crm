@@ -253,7 +253,7 @@
                     	</c:if>
                     </div>
                 </div>
-                <div style="padding:5px 0 10px 0;"><span style="color:white;">已经连续签到 <strong id="spSignDays">3</strong> 天</span></div>
+                <div style="padding:5px 0 10px 0;"><span style="color:white;">&emsp;<strong id="spSignDays">&emsp;</strong></span></div>
             </div>
         </div>
 
@@ -444,7 +444,7 @@
             days: 30,//当前月份共有多少天
             day: 0,//今天几号了
             isSigned: false,//今天是否已经签到
-            signLastDays: 3,//连续签到日子
+            signLastDays: "",//连续签到日子 */
 
             signToday: function () {
                 this.isSigned = true;
@@ -454,7 +454,8 @@
         var ds = [];
         //初始化日期数据
         var dt = new Date();
-        da.current = dt.getFullYear() + '年' + (dt.getMonth() + 1) + '月' + dt.getDay() + '日'; //dt.ToString('yyyy年M月d日');
+        /*   console.log(dt.getDay());  */
+        da.current = dt.getFullYear() + '年' + (dt.getMonth() + 1) + '月' + dt.getDate() + '日'; //dt.ToString('yyyy年M月d日');
         da.monthFirst = new Date(dt.getFullYear(), dt.getMonth(), 1).getDay();
         da.month = dt.getMonth() + 1;
         da.days = new Date(dt.getFullYear(), parseInt(da.month), 0).getDate();//获取当前月的天数

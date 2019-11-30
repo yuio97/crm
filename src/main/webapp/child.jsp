@@ -7,7 +7,7 @@
 <head>
 	<base href="<%=basepath %>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>WangID办公管理系统</title>
+    <title>CRM管理系统</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -31,14 +31,10 @@
 		<!-- top -->
 		<div class="layui-header">
 			<div class="top_box">
-		        <div class="logo">
-		        	<img src="images/logo_touming.gif">
-		        	<span></span>
-		        	<b><img src="images/word.png" /></b>
-		        </div>
 
-				<div class="top_user">
-					<span><img src="images/head.jpg" /></span>
+
+				<div class="top_user" style="margin-left: 30px">
+					<span><img :src="info.sysStaffPhoto" /></span>
 					<dl>
 						<dt>{{user.sysAccountName}}（{{role.sysRoleName}}）</dt>
 						<dd>部门：{{dept.sysDeptName}} 上次登录时间：{{user.sysLastlogin}}</dd>
@@ -46,8 +42,7 @@
 				</div>
 
 		        <div class="top_icon">
-		        	<a href="index.html" title="首页"><img src="images/top_home.png"></a>
-		        	<a href="#" title="个人设置"><img src="images/top_person.png"></a>
+
 		        	<a href="logou" title="退出"><img src="images/top_exit.png"></a>
 		        </div>
 		    </div>
@@ -92,7 +87,7 @@
 				})
 			</script>
 			<!-- iframe -->
-			<iframe src="daily_mykh.html" name="main_self_frame" frameborder="0" class="layadmin-iframe" scrolling="yes"></iframe>
+			<iframe src="shouye.html" name="main_self_frame" frameborder="0" class="layadmin-iframe" scrolling="yes"></iframe>
 		</div>
 	
 	<script>
@@ -104,7 +99,8 @@
 				menuList:[],
 				user:{},
 				dept:{},
-				role:{}
+				role:{},
+				info:{}
 			},
 			created() {
 				//获取外部Vue对象
@@ -119,6 +115,7 @@
 					_this.user = res.data.user;
 					_this.role = res.data.role;
 					_this.dept = res.data.dept;
+					_this.info = res.data.info;
 				})
 				//请求失败会走的方法
 				.catch(err => {

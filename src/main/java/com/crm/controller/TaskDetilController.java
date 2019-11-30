@@ -123,8 +123,10 @@ public class TaskDetilController {
 	
 	//任务接收
 	@RequestMapping("/selectTaskReception")
-	public String selectTaskReception(Integer sysDeptId,Map<String, Object > oldPub) {
-		List<OffTaskRelease> taskReception = taskService.selectAllTaskReception(1);
+	public String selectTaskReception(Map<String, Object > oldPub) {
+		Subject subject = SecurityUtils.getSubject();
+		SysAccount user = (SysAccount) subject.getPrincipal();
+		List<OffTaskRelease> taskReception = taskService.selectAllTaskReception(user.getSysStaffId());
 		oldPub.put("taskReception", taskReception);
 		return "forward:/taskReception.jsp";
 	}

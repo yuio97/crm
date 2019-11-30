@@ -48,8 +48,8 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a>客户保护</a>
-            <span>添加保护系统</span>
+            <a>用户管理</a>
+            <span>添加员工</span>
         </div>
         <!-- 内容 -->    
         <div class="wenxts_ke">

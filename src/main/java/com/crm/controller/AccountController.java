@@ -279,12 +279,12 @@ public class AccountController {
 			String name,String start,String end) {
 		System.out.println(start);
 		System.out.println(end);
-		if(start != null && start != "") {
-			start = start + "-01 00:00:00";
-		}
-		if(end != null && end != "") {
-			end = end + "-01 00:00:00";
-		}
+//		if(start != null && start != "") {
+//			start = start + "-01 00:00:00";
+//		}
+//		if(end != null && end != "") {
+//			end = end + "-01 00:00:00";
+//		}
 		//System.out.println(start);
 		PageInfo<SysAccount> accountList = accountServiceImpl.getListByConditions(pn, name, start, end);
 		return accountList;

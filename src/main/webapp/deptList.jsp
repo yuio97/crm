@@ -7,7 +7,7 @@
 <head>
 	<base href="<%=basepath %>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>WangID办公管理系统</title>
+	<title>CRM管理系统</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="css/style.css">
@@ -23,6 +23,7 @@
 	<script src="layui/layui.js"></script>
 	<script src="js/axios.min.js"></script>
 	<script src="js/vue.min.js"></script>
+
 
 </head>
 
@@ -48,13 +49,14 @@
 			</tr> 
 		</thead>
 		<tbody>
+
 			<tr v-for="s in deptList.list">
 				<td><input type="checkbox" name="chec" :value="s.sysDeptId"></td>
 				<td>{{s.sysDeptId}}</td>
 				<td>{{s.sysDeptName}}</td>
 				<td>{{s.sysDeptRemark}}</td> 
 				<td><a :href="'dept/goUpdate?sysDeptId='+s.sysDeptId" class="layui-btn layui-btn-xs" lay-event="edit">修改</a></td>                
-            </tr>         
+			</tr>         
 		</tbody>  
 	</table>
 	<script type="text/html" id="barDemo">
