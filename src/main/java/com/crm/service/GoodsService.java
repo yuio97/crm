@@ -2,6 +2,8 @@ package com.crm.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.crm.bean.Goods;
 
 public interface GoodsService {
@@ -13,10 +15,11 @@ public interface GoodsService {
 	
 	int deleteByPrimaryKey(Integer goodsId);
 	
-	List<Goods> getGoodsList();
+	List<Goods> getGoodsList(Goods goods);
 	
 	Goods selectByPrimaryKey(Integer goodsId);
 	
 	Goods select(Goods goodsId);
+	List<Goods> selectlike(@Param("name")String name);
 
 }

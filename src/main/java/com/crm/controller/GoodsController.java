@@ -28,12 +28,20 @@ public class GoodsController {
 	private SupplierService supplierService;
 	
 	@RequestMapping("/goodsList")
-	public String getGoodsList(Map<String,Object> data){
-		List<Goods> goodsList = goodsService.getGoodsList();
+	public String getGoodsList(Map<String,Object> data,Goods goods){
+		List<Goods> goodsList = goodsService.getGoodsList(goods);
 		data.put("goodsList", goodsList);
 		return "forward:/goods_list.jsp";
 			
 		}
+	/*@RequestMapping("/gList")
+	@ResponseBody
+	public String selectlike(String name){
+		
+		List<Goods> selectlike = goodsService.selectlike(name);
+		System.out.println(selectlike);
+		return "selectlike";
+	}*/
 	@RequestMapping("/addgoods")
 	public String upload(Goods goods,MultipartFile gImg,HttpServletRequest req) throws IllegalStateException, IOException
 	{

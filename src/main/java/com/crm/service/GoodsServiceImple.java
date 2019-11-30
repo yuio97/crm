@@ -28,8 +28,8 @@ public class GoodsServiceImple implements GoodsService{
 	}
 
 	@Override
-	public List<Goods> getGoodsList() {
-		return  goodsMapper.getGoodsList();
+	public List<Goods> getGoodsList(Goods goods) {
+		return  goodsMapper.getGoodsList(goods);
 		
 	}
 
@@ -50,6 +50,12 @@ public class GoodsServiceImple implements GoodsService{
 	public Goods select(Goods goodsId) {
 		 Goods select = goodsMapper.select(goodsId);
 		return select;
+	}
+
+	@Override
+	public List<Goods> selectlike(String name) {
+		return goodsMapper.selectlike(name);
+		
 	}
 
 

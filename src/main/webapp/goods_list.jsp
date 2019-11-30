@@ -29,6 +29,7 @@
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script> 
 	<!-- layui js -->
 	<script src="layui/layui.js"></script>
+		<script type="text/javascript" src="js/vue.min.js"></script> 
 </head> 
 	 
 <body>
@@ -43,9 +44,9 @@
 	<!-- 筛选 --> 
 	<div class="shuaix">
 		
-		<div class="right">
-			<input type="text" placeholder="请输入关键词查询">
-			<a href="#">查询</a>
+		<div class="right" id="p">
+			<input type="text" :name="goodsName" v-model="goodsName" placeholder="请输入关键词查询" >
+			<a href="javascript:;" @click="tijiao()">查询</a>
 		</div>
 	</div>
 	
@@ -170,7 +171,35 @@
 		});
 	}); 
 </script> 
+<script>
+new Vue({
+    el:'#p',
+    data:{
+    	goodsName:''
+    },
+    methods:{
+		 
+    	tijiao:function(){
+    		
+    		 var this_a = this;
+    		 //console.log(this_a.put);
+    	        $.ajax({
+    	            type: "GET",
+    	            url: "/goods/goodsList",
+    	            data: {goodsName:this_a.goodsName},
+    	            dataType: "json",
+    	            success: function (response) {
+    	            	
+    	            	//location.href="goods_list2.jsp";
+    	            }
+    	        });
+    	}
+    },
+    
 
+
+  })
+</script>
 
 </body>
 

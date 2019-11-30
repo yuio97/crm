@@ -151,7 +151,10 @@
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
   <select id="getGoodsList" resultMap="BaseResultMap">
-  select * from Goods 
+  select * from Goods where 1=1
+  <if test="goodsName != null" >
+     and goods_name like concat('%',#{goodsName},'%')
+   </if>
   
   </select>
   <select id="select" resultMap="BaseResultMap">
@@ -161,6 +164,6 @@
   
   <select id="selectlike" resultMap="BaseResultMap">
   
-   select * from Goods where goods_name like  %#{goodsName}%
+   select * from Goods where goods_name like concat('%',#{name},'%')
   </select>
 </mapper>
