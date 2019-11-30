@@ -2,6 +2,8 @@ package com.crm.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.crm.bean.Kcgoods;
 
 public interface KcgoodsMapper {
@@ -20,5 +22,6 @@ public interface KcgoodsMapper {
 
 	List<Kcgoods> getKcgoodsList();
 
+	int updatekc(@Param("kcid")Integer kcid, @Param("num")Integer num);
 	
 }
