@@ -141,7 +141,7 @@ var v = new Vue({
 			var	_this = this
              $.ajax({
 				 type: "GET",
-				 url: "/selectcus",
+				 url: "cus/selectcus",
 				 data: null,
 				 dataType: "json",
 				 success: function (response) {

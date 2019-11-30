@@ -20,4 +20,19 @@ public class CustomSelectImpl implements CustomSelectService{
 		return customerMapper.selectCusList();
 	}
 
+	@Override
+	public void insertcus(Customer cus) {
+
+		cus.setCustomerState("1");
+		customerMapper.insertSelective(cus);
+		
+	}
+
+	@Override
+	public void del(Integer id) {
+		customerMapper.deleteByPrimaryKey(id);
+	}
+
+	
+
 }

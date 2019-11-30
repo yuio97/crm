@@ -26,4 +26,6 @@ public interface PreOrderService {
 	public void updatekc(Integer kcid, Integer num);
 	
 	public void del(Integer kcid);
+	
+	public void realdel(Integer rid);
 }

@@ -23,97 +23,72 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- layui css -->
     <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-<div class="wangid_conbox">
+<div class="wangid_conbox" id="cc">
         <!-- 当前位置 -->
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
             <a>员工管理</a>
-            <span>公司员工添加</span>
+            <span>客户添加</span>
         </div>
         <!-- 内容 -->    
         <div class="wenxts_ke">
-            <p><i>温馨提示：</i>请认真核对员工信息正确无误后再确定添加，并上传员工的对应简历图片</p>
+            <p><i>用笑服务客户：</i>欢迎来到客户添加界面</p>
         </div>
         <div class="kehubh_tj_k">
             <form class="layui-form layui-form-pane" action="">
             <ul> 
+                
+                
                 <li>
-                    <div class="left">用户名：</div>
-                    <div class="right"> 
-                        <input type="text" name="title" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">   
-                    </div>
-                </li>
-                <li>
-                    <div class="left">密码：</div>
-                    <div class="right"> 
-                        <input type="text" name="title" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-                    </div>
-                </li>
-                <li>
-                    <div class="left">姓名：</div>
+                    <div class="left">客户姓名：</div>
                     
                     <div class="right"> 
-                        <input type="text" name="title" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                        <input type="text" name="title" required lay-verify="required" v-model="cuslist.customerName" id="customerName" placeholder="请输入客户姓名" autocomplete="off" class="layui-input">
                     </div>
                 </li>
+                
                 <li>
-                    <div class="left">性别：</div>
-                    <div class="right">
-                            <input type="radio" name="sex" value="nan" title="男">
-                            <input type="radio" name="sex" value="nv" title="女" checked>
-                    </div>
-                </li>
-                <li>
-                    <div class="left">工号：</div>
+                    <div class="left">客户公司：</div>
                     <div class="right"> 
-                        <input type="text" name="title" required lay-verify="required" placeholder="请输入工号" autocomplete="off" class="layui-input">
+                        <input type="text" name="title" required lay-verify="required" v-model="cuslist.copanyName" id="copanyName" placeholder="请输入客户公司的名称" autocomplete="off" class="layui-input">
                     </div>
                 </li>
-                <li style="height: 38px; overflow:initial;">
-                    <div class="left">部门：</div>
-                    <div class="right"> 
-                        <select name="city" lay-verify="">
-                            <option value="">请选择部门</option>
-                            <option value="010">技术部</option>
-                            <option value="021">人事部</option>
-                            <option value="0571">客服部</option>
-                            <option value="0571">营销部</option>
-                        </select> 
+                
+                <li>
+                    <div class="left">公司地址：</div>
+                    <div class="right">
+                            <input type="text" name="title" required lay-verify="required" v-model="cuslist.copanyAdress" id="copanyAdress" placeholder="请填写客户公司所在地址" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
-                    <div class="left">部门职位：</div>
+                    <div class="left">公司代码：</div>
                     <div class="right">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请填写部门职位" autocomplete="off" class="layui-input">
+                            <input type="text" name="title" required lay-verify="required" v-model="cuslist.copanyCode" id="copanyCode" placeholder="请填客户公司的公司代码" autocomplete="off" class="layui-input">
                     </div>
                 </li>
+               
                 <li>
-                    <div class="left">排序：</div>
+                    <div class="left">联系电话：</div>
                     <div class="right">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请填写部门职位" autocomplete="off" class="layui-input">
+                            <input type="text" name="title" required lay-verify="required" v-model="cuslist.customerIphone" id="customerIphone" placeholder="请填写客户的联系电话" autocomplete="off" class="layui-input">
                     </div>
                 </li>
+                
                 <li>
-                    <div class="left">排序：</div>
+                    <div class="left">电子邮件：</div>
                     <div class="right">
-                            <input style="margin-top: 8px;" type="file">
-                    </div>
-                </li>
-                <li>
-                    <div class="left"> 添加身份：</div>
-                    <div class="right">
-                            <input type="checkbox" name="" title="经理" lay-skin="primary" checked>
-                            <input type="checkbox" name="" title="管理员" lay-skin="primary"> 
+                            <input type="text" name="title" required lay-verify="required" v-model="cuslist.customerEmal" id="customerEmal" placeholder="请填写客户的电子邮件" autocomplete="off" class="layui-input">
                     </div>
                 </li>
                 <li>
                     <div class="left"> &nbsp;</div>
                     <div class="right"> 
-                        <button class="button_qr">确定添加</button>
+                        <button type="button" class="button_qr" @click="tianjia">确定添加</button>
                     </div>
                 </li>
             </ul> 
@@ -130,6 +105,48 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 结束 -->
     <!-- layui js -->
     <script src="layui/layui.js"></script>
+    
+    
+    
+    
+    <script>
+    var v = new Vue({
+    	el:'#cc',
+    	data:{
+    		cuslist:{
+    			customerName:'',
+    			copanyName:'',
+    			copanyAdress:'',
+    			copanyCode:'',
+    			customerIphone:'',
+    			customerEmal:'',
+    			customerState:''
+    		}
+    	},
+    	methods:{
+    		tianjia:function(){
+    			var _this = this;
+    			
+                $.ajax({
+    				type: "POST",
+    				url: "cus/addcus",
+    				data: _this.cuslist,
+    				dataType: "json",
+    				success: function (response) {
+							location.href="YuanGonglist_kehu.jsp"
+    				}
+    			});
+    		}
+    		
+    		
+    	}
+    });
+    
+    </script>
+    
+    
+    
+    
 </body>
 </html>
 

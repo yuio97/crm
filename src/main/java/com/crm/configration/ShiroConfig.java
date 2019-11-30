@@ -81,9 +81,9 @@ public class ShiroConfig {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager());
 		
-		shiroFilterFactoryBean.setLoginUrl("/login.jsp");
-		shiroFilterFactoryBean.setSuccessUrl("/child.jsp");
-		shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized.jsp");
+//		shiroFilterFactoryBean.setLoginUrl("/login.jsp");
+//		shiroFilterFactoryBean.setSuccessUrl("/child.jsp");
+//		shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized.jsp");
 		
 		//表单认证器
 //		FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
@@ -119,8 +119,8 @@ public class ShiroConfig {
 //		filterChainDefinitionMap.put("/**", "anon");
 		
 
-		filterChainDefinitionMap.put("/logout", "logout");
-		filterChainDefinitionMap.put("/**", "authc");
+//		filterChainDefinitionMap.put("/logout", "logout");
+//		filterChainDefinitionMap.put("/**", "authc");
 
 	
 		return shiroFilterFactoryBean;
