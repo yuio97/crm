@@ -48,11 +48,7 @@ public class PreOrderController {
 	@ResponseBody
 	public Preorder addPreOrder(@RequestBody Preorder order)
 	{
-//		List<PreorderDetails> proDetaList = order.getProDetaList();
-//		for (int i = 0; i < proDetaList.size(); i++) {
-//			PreorderDetails preorderDetails = proDetaList.get(i);
-//			System.out.println(preorderDetails.getKgoodsId());
-//		}
+
 		preOrderService.insertPre(order);
 		
 		return order;
@@ -145,6 +141,11 @@ public class PreOrderController {
 		return state;
 	}
 	
-	
+	@RequestMapping("/realdel")
+	public String realdel(Integer rid)
+	{
+		preOrderService.realdel(rid);
+		return "redirect:/vip_list_lwh.jsp";
+	}
 	
 }

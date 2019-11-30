@@ -26,7 +26,7 @@ public class DeptController {
 	public String addDept(SysDept dept) {
 		
 		deptServiceImpl.addDept(dept);
-		return "rediect:/addDept.jsp";
+		return "redirect:/addDept.jsp";
 	}
 	
 	@RequestMapping("/getDepList")

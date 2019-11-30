@@ -62,6 +62,7 @@ String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	<button	 :onclick="'tijiao('+pre.preorderId+')'"  type="button" style="color:#205b9e;"  >提交</button>
                     	丨<a :href="'preorder/selectXqUpdate?id='+pre.preorderId" style="color:#205b9e;">修改</a>
                     	丨<a :href="'javascript:Vip_xq('+pre.preorderId+')'" style="color:#205b9e;" >详情</a>
+                    	丨<a :href="'preorder/realdel?rid='+pre.preorderId" style="color:#205b9e;" >删除</a>
                     </td>
                     <td :pid="pre.preorderId">{{pre.preorderId}}</td>
                     <td >{{pre.customer.copanyName}}</td>

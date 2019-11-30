@@ -40,8 +40,8 @@
 		<thead>
 			<tr>
 				<th lay-data="{type:'checkbox', fixed:'left'}"></th>
-				<th lay-data="{field:'www',align:'center',minWidth:260}">部门名称</th>
 				<th lay-data="{field:'yx', align:'center',minWidth:260}">部门职位</th>
+				<th lay-data="{field:'www',align:'center',minWidth:260}">部门名称</th>
 				<th lay-data="{field:'time',align:'center', minWidth:260}">职位简介</th>
 				<th lay-data="{field:'company',align:'center',minWidth:260}">职位编号</th> 
 				<th lay-data="{field:'xg',align:'center',width:130}">操作</th>
@@ -50,8 +50,8 @@
 		<tbody>
 			<tr v-for="s in roleList">
 				<td></td>
-				<td>{{s.dept.sysDeptName}}</td>
 				<td>{{s.sysRoleName}}</td>
+				<td>{{s.dept.sysDeptName}}</td>
 				<td>{{s.sysRoleDel}}</td>
 				<td>{{s.sysRoleId}}</td> 
 				<td><a :href='"role/goUpdate?roleId="+s.sysRoleId' class="layui-btn layui-btn-xs" lay-event="edit">修改</a></td>                

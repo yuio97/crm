@@ -1,5 +1,6 @@
 package com.crm.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.crm.bean.Customer;
 import com.crm.service.CustomSelectService;
 
 @Controller
+@RequestMapping("/cus")
 public class CustomSelectController {
 
 	@Resource
@@ -24,6 +26,22 @@ public class CustomSelectController {
 		
 		List<Customer> selecctCusList = customSelectService.selecctCusList();
 		return selecctCusList;
+	}
+	
+	@RequestMapping("/addcus")
+	@ResponseBody
+	public Map<String, Object> addcus(Customer cus)
+	{
+		customSelectService.insertcus(cus);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		return map;
+	}
+	
+	@RequestMapping("/del")
+	public String del(Integer id) 
+	{
+		customSelectService.del(id);
+		return "redirect:/YuanGonglist_kehu.jsp";
 	}
 	
 	

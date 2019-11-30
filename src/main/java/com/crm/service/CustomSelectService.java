@@ -8,4 +8,9 @@ public interface CustomSelectService {
 
 	public List<Customer> selecctCusList();
 	
+	public void insertcus(Customer cus);
+	
+	public void del(Integer id);
+	
+
 }

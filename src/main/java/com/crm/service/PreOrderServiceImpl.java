@@ -136,4 +136,10 @@ public class PreOrderServiceImpl implements PreOrderService{
 		preorderMapper.deleteByPrimaryKey(kcid);
 	}
 
+	@Override
+	public void realdel(Integer rid) {
+
+		preorderMapper.deleteByPrimaryKey(rid);
+	}
+
 }

@@ -58,7 +58,7 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a>回访记录</a>
+            <a>部门管理</a>
             <span>部门职位添加</span>
         </div>
         <!-- 内容 -->    

@@ -66,11 +66,15 @@ public class ListController {
 		
 		SysStaffInfo info = staffInfoService.getStaffInfoByStaffId(user.getSysStaffId());
 		List<SysPermission> menuList = perServiceImpl.getMenuList(user.getSysStaffId());
-		SysRole role = roleService.getRolePerByRoleId(Integer.valueOf(user.getSysStaffId()));
+		SysRole role = roleService.getRolePerByRoleId(Integer.valueOf(info.getSysDutyId()));
 		SysDept dept = deptServiceImpl.getDeptByDeptId(Integer.valueOf(info.getSysCompanyId()));
+//		System.out.println(info.getSysStaffName());
+//		System.out.println(role.getSysRoleName());
+//		System.out.println(dept.getSysDeptName());
 		//传递登录用户bean给页面
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("user", user);
+		map.put("info", info);
 		map.put("perList",menuList);
 		map.put("role", role);
 		map.put("dept", dept);

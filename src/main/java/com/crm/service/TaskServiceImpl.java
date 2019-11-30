@@ -126,9 +126,11 @@ public class TaskServiceImpl implements TaskService{
 		OffEmployeeAttendance offEmployeeAttendance = new OffEmployeeAttendance();
 		Date date = new Date();
 		
-//		Subject subject = SecurityUtils.getSubject();
-//		SysAccount sysAccount = (SysAccount)subject.getPrincipal();
-		offEmployeeAttendance.setOffStaffId(2);//sysAccount.getSysAccountId()
+		Subject subject = SecurityUtils.getSubject();
+		SysAccount sysAccount = (SysAccount)subject.getPrincipal();
+		
+		offEmployeeAttendance.setOffStaffId(sysAccount.getSysStaffId());
+		
 		
 		offEmployeeAttendance.setOffYear(date.getYear()+1900);
 		offEmployeeAttendance.setOffMon(date.getMonth()+1);

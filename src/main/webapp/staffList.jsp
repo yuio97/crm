@@ -29,8 +29,8 @@
         <div class="zy_weizhi bord_b">
             <i class="fa fa-home fa-3x"></i>
             <a>首页</a>
-            <a>供应商信息管理</a>
-            <span>供应商信息列表</span>
+            <a>用户管理</a>
+            <span>用户管理</span>
         </div>
         <!-- 筛选 --> 
         
@@ -89,7 +89,7 @@
                     <td><input type="checkbox" :value="s.sysAccountId" name="chec" ></td>
                     <td style="text-align:center">
                             <a style="color:#205b9e;" href="javascript:;"  @click="rese(s.sysAccountId)">重置密码</a>
-                        丨<a style="color:#205b9e;" :href="'goUpdateStaff?staffId=' + s.sysAccountId" >修改</a>
+                        丨<a style="color:#205b9e;" :href="'goUpdateStaff?staffId=' + s.sysStaffId" >修改</a>
                         丨<a style="color:#205b9e;" href="javascript:;"  @click="lockk(s.sysAccountId,s.sysAccountSta)">{{s.sysAccountSta == 1?'解锁':'锁定'}}</a>
                         丨<a style="color:#205b9e;" href="javascript:;"  @click="checkk(s.sysStaffId)">详情</a> 
                     </td>
@@ -122,6 +122,7 @@
                                 页
                                 <button type="button" @click="jump()" class="layui-laypage-btn">确定</button>
                             </span>
+                            <span class="layui-laypage-count">共{{accountList.pages}}页</span>
                             <span class="layui-laypage-count">共{{accountList.total}}条</span>
                             <!-- <span class="layui-laypage-limits">
                                 <select lay-ignore>
@@ -333,14 +334,14 @@
         //年选择器
         laydate.render({
             elem: '#test2'
-            ,type: 'month'
+            ,type: 'date'
             
         });
         
         //年月选择器
         laydate.render({
             elem: '#test3'
-            ,type: 'month'
+            ,type: 'date'
         });
     });
     //  iframe层  详情信息
