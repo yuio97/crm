@@ -51,6 +51,22 @@
   <select id="getPurchasingOrderList" resultMap="BaseResultMap">
   	select * from purchasing_order where porder_jz=#{state}
   </select>
+  <select id="purchasingOrderList" resultMap="BaseResultMap">
+  	select * from purchasing_order  
+  	 <where>
+  		porder_jz=1
+  		<if test="start != '' and end == ''">
+  			and porder_time &gt; #{start}
+  		</if>
+  		<if test="end != '' and start == ''">
+  			and porder_time &lt; #{end}
+  		</if>
+  		<if test="start != null and start != '' and end != null and end != ''">
+  			and porder_time &gt; #{start} and porder_time &lt; #{end}
+  		</if>
+  	</where>
+  </select>
+  
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
